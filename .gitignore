@@ -6,3 +6,5 @@
 *.dvi
 *.log
 *.toc
+*.lof
+*.lot

@@ -1,0 +1,47 @@
+\documentclass[a4paper,10pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{apacite}
+ 
+\usepackage[nottoc]{tocbibind}
+
+\usepackage{etoc}
+\usepackage{blindtext}
+
+%Imagenes
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+
+%Espacio de interlineado
+\usepackage{setspace}
+\doublespacing
+
+\begin{document}
+
+
+\begin{center}
+\begin{Large}
+Universidad Nacional Autónoma de México\\
+Facultad de Ciencias\\
+\end{Large}
+\begin{LARGE}
+Proyecto para la Opción de Titulación por Reporte de Trabajo Profesional\\
+RobotSAI: Sistema para automatizar las órdenes de reposición en el portal SAI del IMSS\\*[1ex]
+\end{LARGE}
+
+Alumno: Ernesto Carrillo Espinosa - No. de cuenta: 300138647\\
+Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
+\today
+\end{center}
+
+\tableofcontents
+\listoffigures
+%\listoftables
+
+\include{capitulo1}
+
+\nocite{*} 
+% \bibliographystyle{unsrt}
+\bibliographystyle{apacite}
+\bibliography{bibliografia}
+\end{document}
