@@ -8,4 +8,4 @@ latex  $FILE_NAME.tex
 bibtex $FILE_NAME
 latex  $FILE_NAME.tex
 latex  $FILE_NAME.tex
-dvipdf $FILE_NAME.dvi
+dvipdfm $FILE_NAME.dvi
