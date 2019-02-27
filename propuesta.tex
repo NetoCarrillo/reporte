@@ -1,6 +1,9 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+
 \usepackage{apacite}
  
 \usepackage[nottoc]{tocbibind}
@@ -48,7 +51,7 @@ El Instituto Mexicano del Seguro Social (IMSS) cuenta con proveedores que se enc
 \item \textbf{Verificación órdenes de reposición canceladas}: dado que el IMSS tiene la facultad de cancelar las órdenes aún cuando ya hayan sido enviadas, es importante para el proveedor evitar el gasto extra que implica el envío de medicamento no solicitado por el IMSS ya que implica un gasto extra el retirarlo. El operador accede al portal de la misma manera dirigiéndose a la sección de \textit{Consulta de Órdenes} donde el operador provee información para realizar la búsqueda (rango de fechas de emisión\footnote{Fecha en que la orden fue realizada.}, el estado de la orden como ``cancelada'') y el resultado de esta búsqueda muestra un listado con las órdenes que cumplen con tal filtro, así el operador copia la lista en un documento local en su equipo personal, para posteriormente realizar de forma manual un filtro con el fin de obtener las órdenes de reposición que han sido canceladas de las cuales no se tenía conocimiento. En la Figura \ref{fig:flow-proc-verificar} se muestra el proceso para verificar las órdenes de reposición canceladas.
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{flujo-proceso-verificar} 
+\includegraphics[scale=0.3]{flujo-proceso-verificar} 
 \caption{Flujo del proceso para verificar órdenes de reposición canceladas.}
 \label{fig:flow-proc-verificar}
 \end{figure}
@@ -93,7 +96,7 @@ La definición estricta de arquitectura de software es:
 Tal definición lleva a pensar la arquitectura como el punto donde los requerimientos del cliente se traducen a especificaciones técnicas para los desarrolladores. En el caso del proyecto que se está presentando en este documento, la arquitectura está integrada por los siguientes componentes (ver Figura \ref{fig:dia-arq-comp}):
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{dia-arq-comp} 
+\includegraphics[scale=0.45]{dia-arq-comp} 
 \caption{Módulos de la arquitectura.}
 \label{fig:dia-arq-comp}
 \end{figure}
