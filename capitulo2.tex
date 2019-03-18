@@ -1,5 +1,6 @@
 \chapter{Análisis y alcance del proyecto}
 
+%===============================================================================
 \section{Análisis de requerimientos}
 En general, los requerimientos hablan de lo que se espera de una aplicación, tales requerimientos se clasifican en requerimientos funcionales y no funcionales:
 \begin{itemize}
@@ -56,9 +57,10 @@ El cliente ha solicitado que el proyecto se apegue a su infraestructura, para co
 \end{itemize}
 
 
+%===============================================================================
+
 \section{Casos de uso}
-Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}.\\
-En las siguientes descripciones de caso de uso no se hará referencia al contenido exacto de las páginas así como el nombre de los campos, únicamente se hará mención de los campos necesarios para dar una explicación clara del caso.
+Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. A continuación se muestra el diagrama de casos de uso del sistema AutoSAI.
 
 \begin{figure}[h]
 \centering
@@ -67,19 +69,79 @@ En las siguientes descripciones de caso de uso no se hará referencia al conteni
 \label{fig:dia-casos-uso}
 \end{figure}
 
+Con el fin de explicar mejor el flujo de atención de una orden de reposición es necesario mostrar el diagrama de estados de una orden de reposición durante el flujo de \textbf{envío de órdenes de reposición} (ver sección \ref{sec:intro-contexto}). Los estados que puede tomar una orden (ver figura \ref{fig:dia-estados-orden}) indican:
+\begin{itemize}
+  \item Si la solicitud está lista para ser procesada: \textbf{Nueva}, \textbf{Contestada}.
+  \item Si está siendo procesada: \textbf{Siendo Contestada}, \textbf{Siendo Enviada}.
+  \item Si ha terminado el ciclo correctamente: \textbf{Enviada}.
+  \item Si ha terminado el ciclo con errores: \textbf{Error}.
+\end{itemize} 
 
-\subsection{Contestar órdenes de reposición}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{dia-estados-orden} 
+\caption{Diagrama de estados de una orden de reposición durante la ruta de respuesta de órdenes de reposición.}
+\label{fig:dia-estados-orden}
+\end{figure}
+
+Es importante mencionar que en las siguientes descripciones de caso de uso no se hará referencia al contenido exacto de las páginas así como el nombre de los campos, únicamente se hará mención de los campos necesarios para dar una explicación clara del caso.
+
+\subsection{Contestar órdenes}
 \paragraph{Identificador}
-CU1
+CU-CONTESTAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
+El procedimiento completo para contestar las órdenes de reposición listadas en el portal SAI del IMSS.
 \paragraph{Precondiciones}
+\begin{enumerate}
+  \item El portal SAI se encuentra funcionando correctamente.
+  \item El usuario cuenta con las credenciales para ingresar al portal SAI.
+\end{enumerate}
 \paragraph{Secuencia normal}
 \begin{enumerate}
   \item Inicia sesión en portal SAI: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
   \item Dirige el explorador a la pantalla donde se encuentra el listado con las órdenes de reposición que no han sido contestadas.
-  \item Del listado de órdenes de reposición, ingresa al sistema las primeras 20 (procesamiento por lotes); cada solicitud es ingresada a la base de datos con estatus \textbf{Nueva} y datos provenientes del listado:
+  \item Para cada orden de reposición del listado que se muestra se aplica el caso de uso CU-GUARDAR-NUEVA.
+  \item Para cada solicitud en la base de datos con estado \textbf{Nueva} se aplican los casos de uso:
+  \begin{enumerate}
+    \item CU-RESPONDER-ORDEN.
+  \end{enumerate}
+  \item Para cada solicitud con estatus \textbf{Contestada}:
+  \begin{enumerate}
+    \item CU-ENVIAR-ORDEN
+    \item CU-GENERAR-ACUSE
+  \end{enumerate}
+  \item El programa se repite desde el paso 2 hasta terminar las solicitudes sin contar las marcadas con estatus \textbf{Error}.
+  \item Registra el fin del procedimiento en la base de datos.
+\end{enumerate}
+\paragraph{Postcondiciones}
+\begin{enumerate}
+  \item Todas las órdenes de reposición listadas han sido contestadas y enviadas.
+  \item Se han registrado todas las ordenes de reposición atendidas en la base de datos.
+  \item Los acuses de envió de las órdenes de reposición se encuentran en el sistema de archivos.
+\end{enumerate}
+\paragraph{Excepciones}
+\begin{enumerate}
+  \item Si en algún momento se detecta la pérdida de sesión en la página SAI, se reinicia el procedimiento desde el paso 1.
+  \item Cualquier error durante la ejecución de este caso de uso será registrado en la bitácora el sistema.
+\end{enumerate}
+
+
+\subsection{Guardar nueva orden}
+\paragraph{Identificador}
+CU-GUARDAR-NUEVA
+\paragraph{Actores}
+Robot
+\paragraph{Descripción}
+Una orden de reposición es almacenada por primera vez con la información que se muestra en el listado de órdenes de reposición.
+\paragraph{Precondiciones}
+\begin{enumerate}
+  \item Se tiene indicado un renglón del listado de órdenes de reposición sobre el cuál se realizará este caso de uso.
+\end{enumerate}
+\paragraph{Secuencia normal}
+\begin{enumerate}
+  \item Del listado de órdenes de reposición, cada solicitud es ingresada a la base de datos con estatus \textbf{Nueva} y datos provenientes del listado:
   \begin{enumerate}
     \item Contrato.
     \item Solicitud.
@@ -87,68 +149,188 @@ Usuario
     \item Fecha de expedición.
     \item Almacén destino.
     \item \textit{URL} de contestación.
-    \item \textit{URL} de envío:
-    \begin{enumerate}
-      \item Si el listado muestra este dato, entonces el estatus cambia a \textbf{Contestada} y se registra la \textbf{cantidad solicitada} en 0;
-      \item Si no se encuentra, entonces se genera reemplazando el parámetro en la \textit{URL} de contestación ``responde'' por ``envia''.
-    \end{enumerate}
+    \item \textit{URL} de envío: generada reemplazando el parámetro en la \textit{URL} de contestación ``responde'' por ``envia''.
   \end{enumerate}
-  \item Para cada solicitud con estatus \textbf{Nueva}:
-  \begin{enumerate}
-    \item Cambia el estatus a \textbf{Siendo Contestada}.
-    \item Dirige el explorador a la \textit{URL} de contestación obtenida en el paso 3-f.
-    \item Llena el formulario que se presenta en esta pantalla con las siguientes consideraciones:
-    \begin{enumerate}
-      \item Fecha de fabricación: primer día del año en curso si la fecha actual no es del mes de diciembre, en caso contrario se toma el año siguiente.
-      \item Fecha de caducidad: último día del año en curso si la fecha actual no es del mes de diciembre, en caso contrario se toma el año siguiente.
-    \end{enumerate}
-    \item En la base de datos se almacenan los datos de las tablas de la pantalla actual.
-    \item Si no ha ocurrido ningún error, el estatus cambia a \textbf{Contestada}; en caso contrario, el estatus cambia a \textbf{Error}.
-  \end{enumerate}
-  \item Para cada solicitud con estatus \textbf{Contestada}:
-  \begin{enumerate}
-  \item Cambia estatus a \textbf{Siendo Enviada}.
-  \item El explorador dirige a la \textit{URL de envío}.
-  \item Ejecutar caso de uso CU9.
-  \item Si no ha ocurrido ningún error, el estatus cambia a \textbf{Enviada}; en caso contrario, el estatus cambia a \textbf{Error}.
-  \item El programa se repite desde el paso 2 hasta terminar las solicitudes sin contar las marcadas con estatus \textbf{Error}.
-  \end{enumerate}
-  \item Registra el fin del procedimiento en la base de datos.
 \end{enumerate}
 \paragraph{Postcondiciones}
+\begin{enumerate}
+  \item La orden de reposición se encuentra almacenada en la base de datos.
+\end{enumerate}
 \paragraph{Excepciones}
+\begin{enumerate}
+  \item Si el listado muestra la URL de envío y la orden no ha sido almacenada, entonces la orden es almacenada con estado \textbf{Contestada} y se registra la \textbf{cantidad solicitada} en 0.
+  \item Si ocurre algún error la orden es almacenada con estado \textbf{Error}.
+\end{enumerate}
 
 
-\subsection{Verificar órdenes de reposición canceladas}
+\subsection{Responder orden}
 \paragraph{Identificador}
-CU2
+CU-RESPONDER-ORDEN
+\paragraph{Actores}
+Robot
+\paragraph{Descripción}
+En la pantalla para contestar una orden de reposición se llenan los formularios y se almacena la información de la pantalla en el registro de la base de datos que corresponde a la orden de reposición.
+\paragraph{Precondiciones}
+\begin{enumerate}
+  \item Se indica una orden de reposición almacenada en la base de datos sobre la cual se aplica este caso de uso.
+  \item La orden de reposición se encuentra almacenada en la base de datos.
+  \item La orden de reposición tiene estado \textbf{Nueva}.
+\end{enumerate}
+\paragraph{Secuencia normal}
+\begin{enumerate}
+  \item Cambia el estado de la orden a \textbf{Siendo Contestada}.
+  \item Dirige el explorador a la \textit{URL} de contestación (ver caso de uso CU-GUARDAR-NUEVA).
+  \item Llena el formulario que se presenta en esta pantalla con las siguientes consideraciones:
+  \begin{enumerate}
+    \item Fecha de fabricación: primer día del año en curso si la fecha actual no es del mes de diciembre, en caso contrario se toma el año siguiente.
+    \item Fecha de caducidad: último día del año en curso si la fecha actual no es del mes de diciembre, en caso contrario se toma el año siguiente.
+  \end{enumerate}
+  \item Activar el botón ``contestar'' del formulario de la orden de reposición.
+  \item Cambia el estado de la orden a \textbf{Contestada}.
+\end{enumerate}
+\paragraph{Postcondiciones}
+\begin{enumerate}
+  \item Los formularios de la pantalla han sido completados correctamente.
+  \item Los datos del formulario se encuentran almacenado en la base de datos.
+  \item El estado de la orden en la base de datos es \textbf{Contestada}.
+\end{enumerate}
+\paragraph{Excepciones}
+\begin{enumerate}
+  \item Si ocurre algún error la orden es almacenada con estado \textbf{Error}.
+\end{enumerate}
+
+
+\subsection{Enviar orden}
+\paragraph{Identificador}
+CU-ENVIAR-ORDEN
+\paragraph{Actores}
+Robot
+\paragraph{Descripción}
+Enviar la orden de reposición contestada de regreso al portal SAI.
+\paragraph{Precondiciones}
+\begin{enumerate}
+  \item Una orden de reposición registrada en la base de datos.
+  \item La orden de reposición tiene estado \textbf{Contestada}.
+\end{enumerate}
+\paragraph{Secuencia normal}
+\begin{enumerate}
+  \item Cambia estado de la orden a \textbf{Siendo Enviada}.
+  \item El explorador dirige a la \textit{URL de envío}.
+  \item Guardar el folio de envío en la base de datos.
+  \item Cambia estado de la orden a \textbf{Enviada}.
+\end{enumerate}
+\paragraph{Postcondiciones}
+\begin{enumerate}
+  \item El folio de envió de la orden de reposición se encuentra guardado en la base datos.
+  \item El estado de la orden en la base de datos es \textbf{Enviada}.
+\end{enumerate}
+\paragraph{Excepciones}
+\begin{enumerate}
+  \item Si ocurre algún error la orden es almacenada con estado \textbf{Error}.
+\end{enumerate}
+
+
+\subsection{Generar acuse de envío}
+\paragraph{Identificador}
+CU-GENERAR-ACUSE
+\paragraph{Actores}
+Robot
+\paragraph{Descripción}
+Generar el acuse de envío de la orden de reposición.
+\paragraph{Precondiciones}
+\begin{enumerate}
+  \item Una orden de reposición registrada en la base de datos.
+  \item La orden de reposición tiene estado \textbf{Enviada}.
+\end{enumerate}
+\paragraph{Secuencia normal}
+\begin{enumerate}
+  \item Extraer la información de la orden de reposición de la base de datos.
+  \item Mandar la generación del acuse de envío.
+  \item Colocar el documento generado en el sistema de archivos.
+\end{enumerate}
+\paragraph{Postcondiciones}
+\begin{enumerate}
+  \item Un documento en el sistema de archivos que contiene el acuse de envío.
+\end{enumerate}
+\paragraph{Excepciones}
+\begin{enumerate}
+  \item En caso de algún error se registra el error en la bitácora del sistema (el usuario posteriormente podrá volver a imprimir el acuse, ver caso de uso CU-VISUALIZAR).
+\end{enumerate}
+
+
+\subsection{Verificar órdenes}
+\paragraph{Identificador}
+CU-VERIFICAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
+Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas (ver figura 1.2), el alcance de este caso de uso comprende el acceso al portal SAI, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos. Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}; y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
 \paragraph{Precondiciones}
+\begin{enumerate}
+  \item El portal SAI se encuentra funcionando correctamente.
+  \item El usuario cuenta con las credenciales para ingresar al portal SAI.
+\end{enumerate}
 \paragraph{Secuencia normal}
 \begin{enumerate}
   \item Inicia sesión en portal SAI: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
   \item Dirige el explorador a la pantalla de búsqueda de órdenes de reposición.
   \item Llena el formulario para el filtro de búsqueda:
   \begin{enumerate}
-    \item Rango de fechas que comprende los últimos 3 días desde la fecha actual.
+    \item Rango de fechas que comprende los últimos siete días desde la fecha actual.
     \item Estado \textbf{Cancelada}.
   \end{enumerate}
   \item Del listado de órdenes de reposición resultantes genera una lista con el número de orden de cada renglón.
+  \item Con el listado del paso anterior se realiza el caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SAI}.
+\end{enumerate}
+\paragraph{Postcondiciones}
+\begin{enumerate}
+  \item Se cuenta con la relación de órdenes de reposición atendidas por el sistema que han sido canceladas en el portal SAI y no se tenía conocimiento previo.
+  \item Las órdenes de reposición publicadas en el portal SAI dentro de los últimos siete día a la fecha actual reflejan en la base de datos dentro del campo \textbf{Estado SAI} el estado de vigencia en el portal SAI.
+\end{enumerate}
+\paragraph{Excepciones}
+\begin{enumerate}
+  \item Cualquier error durante la ejecución de este caso de uso será registrado en la bitácora el sistema.
+\end{enumerate}
+
+
+\subsection{Actualizar estatus SAI}
+\paragraph{Identificador}
+CU-ACTUALIZAR-ESTATUS-SAI
+\paragraph{Actores}
+Robot
+\paragraph{Descripción}
+\paragraph{Precondiciones}
+\begin{enumerate}
+  \item Se cuenta con una lista de órdenes de reposición.
+  \item Las órdenes listadas tienen estado \textbf{Cancelada} en el portal SAI. 
+\end{enumerate}
+\paragraph{Secuencia normal}
+\begin{enumerate}
   \item Actualiza el estado SAI de las órdenes de reposición en la base de datos.
 \end{enumerate}
 \paragraph{Postcondiciones}
+\begin{enumerate}
+  \item Las órdenes de reposición recibidas tienen estado \textbf{Cancelada} en el campo \textbf{Estado SAI} dentro de la base de datos.
+\end{enumerate}
 \paragraph{Excepciones}
+\begin{enumerate}
+  \item Las órdenes de reposición que no estén registradas en la base de datos se registrarán con campos nulos a excepción del número de orden.
+  \item Cualquier error durante la ejecución de este caso de uso será registrado en la bitácora el sistema.
+\end{enumerate}
 
 
-\subsection{Acceso a interfaz Web}
+\subsection{Entrar en interfaz Web}
 \paragraph{Identificador}
-CU3
+CU-ENTRAR-WEB
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
+Explicar la función que autoriza la entrada a la interfaz Web del sistema (ver figura 2.1) donde los usuarios pueden hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
 \paragraph{Precondiciones}
+\begin{enumerate}
+  \item El usuario se encuentra previamente registrado en el sistema.
+  \item El usuario cuanta con credenciales vigentes para ingresar a la interfaz web.
+\end{enumerate}
 \paragraph{Secuencia normal}
 \begin{enumerate}
   \item El sistema muestra la pantalla de acceso.
@@ -158,10 +340,14 @@ Usuario
     \item Contraseña.
   \end{enumerate}
   \item El sistema busca el nombre de usuario en la base de datos
-  \item El sistema compara la contraseña provista en el paso 1.b con el valor almacenado en la base de datos.
+  \item El sistema compara la contraseña provista por el usuario con el valor almacenado en la base de datos.
   \item Muestra la pantalla de generación de reportes.
 \end{enumerate}
 \paragraph{Postcondiciones}
+\begin{enumerate}
+  \item El usuario cuenta con un código temporal de acceso a la interfaz web.
+  \item Se muestra la pantalla de generación de reportes.
+\end{enumerate}
 \paragraph{Excepciones}
 \begin{enumerate}
   \item En los siguientes esceneracios se concideran un error de autencación.
@@ -172,15 +358,20 @@ Usuario
   \end{itemize}
 \end{enumerate}
 
-\subsection{Generación de reportes}
+\subsection{Generar reporte}
 \paragraph{Identificador}
-CU4
+CU-GENERAR-REPORTE
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
+Este caso de uso ofrece al usuario la generación de reportes, es decir, ejecutar una consulta a la base de datos y vaciar el resultado en un archivo. La consulta puede ser ejecutada sobre una o más tablas, es importante mencionar que existen catálogos con claves de productos y clientes que cambian constantemente, ver caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
 \paragraph{Precondiciones}
+\begin{enumerate}
+  \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
+\end{enumerate}
 \paragraph{Secuencia normal}
 \begin{enumerate}
+  \item El usuario navega a la pantalla de generación de reportes.
   \item En la pantalla de generación de reportes el usuario realiza las siguientes acciones:
     \begin{enumerate}
     \item Llenar el formulario de la pantalla con los siguientes campos:
@@ -199,18 +390,31 @@ Usuario
   \end{enumerate}
 \end{enumerate}
 \paragraph{Postcondiciones}
+\begin{enumerate}
+  \item El reporte se encuentra en el sistema de archivos dentro un archivo con formato extendido de Excel.
+\end{enumerate}
 \paragraph{Excepciones}
+\begin{enumerate}
+  \item Si el reporte no cuenta con registros el archivo no se genera y se muestra un mensaje al usuario indicando la situación.
+\end{enumerate}
 
 
-\subsection{Actualización de catálogos}
+\subsection{Actualizar catálogo}
 \paragraph{Identificador}
-CU5
+CU-ACTUALIZAR-CATALOGO
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
+Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz Web.
 \paragraph{Precondiciones}
+\begin{enumerate}
+  \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
+  \item El archivo ingresado tiene formato extendido de Excel.
+  \item Los catálogos que pueden ser modificados por este caso de uso son aquellos que contienen códigos de medicamentos y lugares de entrega.
+\end{enumerate}
 \paragraph{Secuencia normal}
 \begin{enumerate}
+  \item El usuario navega a la pantalla de administración de catálogos.
   \item El usuario realiza las siguientes acciones en la pantalla de administración de catálogos:
   \begin{enumerate}
     \item Seleccionar el nombre del catálogo.
@@ -226,81 +430,104 @@ Usuario
   \end{enumerate}
 \end{enumerate}
 \paragraph{Postcondiciones}
+\begin{enumerate}
+  \item El catálogo ha sido actualizado al contenido del archivo proporcionado por el usuario.
+\end{enumerate}
 \paragraph{Excepciones}
+\begin{enumerate}
+  \item Si el archivo no cuanta con el formato solicitado, entonces se muestra un mensaje de error al usuario y se cancela la ejecución sin modificar el catálogo en la base de datos.
+  \item Si el archivo no contiene ningún registro para el catálogo, entonces se muestra un mensaje de error al usuario y se cancela la ejecución sin modificar el catálogo en la base de datos.
+\end{enumerate}
 
 
-\subsection{Búsqueda de órdenes de reposición}
+\subsection{Buscar órdenes}
 \paragraph{Identificador}
-CU6
+CU-BUSCAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
 \paragraph{Precondiciones}
+\begin{enumerate}
+  \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
+\end{enumerate}
 \paragraph{Secuencia normal}
 \begin{enumerate}
-  \item El usuario realiza los siguientes pasos:
+  \item El usuario navega a la pantalla de búsqueda de órdenes de reposición.
+  \item El usuario realiza ingresa los criterios para la búsqueda presentados en el filtro:
   \begin{enumerate}
-    \item Capturar los criterios para la búsqueda presentados en el filtro:
-    \begin{enumerate}
-      \item Número de orden.
-      \item Estatus de atención.
-      \item Rango de fechas en que fueron atendidas las órdenes de reposición.
-    \end{enumerate}
+    \item Número de orden.
+    \item Estatus de atención.
+    \item Rango de fechas en que fueron atendidas las órdenes de reposición.
   \end{enumerate}
-  \item El sistema muestra el resultado de la búsqueda, para cada orden de reposición listada se muestra un enlace que lleva a la visualización y edición de la orden (ver casos de uso Visualización y Edición de orden de reposición).
-
+  \item El sistema muestra el resultado de la búsqueda, para cada orden de reposición listada se muestra un enlace que lleva a la visualización de la orden (ver casos de uso \textbf{CU-VISUALIZAR}).
 \end{enumerate}
 \paragraph{Postcondiciones}
+\begin{enumerate}
+  \item Se muestra un listado con las órdenes de reposición que cumplen con el filtro definido por el usuario durante el caso de uso.
+\end{enumerate}
 \paragraph{Excepciones}
+\begin{enumerate}
+  \item En caso de no contar con conexión a la base de datos se muestra un mensaje de error informando al usuario.
+\end{enumerate}
 
 
-\subsection{Visualización de orden de reposición}
+\subsection{Visualizar orden}
 \paragraph{Identificador}
-CU7
+CU-VISUALIZAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
+La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, para llegar a esta página es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición y seleccionado la orden para visualizar, como se muestra en la figura 2.1 (ver caso de uso Búsqueda de órdenes de reposición).
 \paragraph{Precondiciones}
+\begin{enumerate}
+  \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
+  \item El usuario localiza la orden de reposición que desea visualizar (ver caso de uso \textbf{CU-BUSCAR})
+\end{enumerate}
 \paragraph{Secuencia normal}
 \begin{enumerate}
-  \item El usuario selecciona la orden reposición del listado de búsqueda (ver caso de uso búsqueda de órdenes de reposición).
-  \item Se muestra la pantalla con los datos de la orden.
+  \item El usuario navega a la pantalla de visualización de la orden de reposición seleccionada (ver caso de uso \textbf{CU-BUSCAR}).
+  \item Se muestra la pantalla con los datos de la orden:
   \begin{enumerate}
     \item Se muestran todos los datos capturados del portal SAI durante el procedimiento de atención.
     \item También se muestran los estados de atención, es decir el estado en el portal SAI  y el estado de atención.
   \end{enumerate}
+  \item Se muestran enlaces para que el usuario pueda editar los datos de la orden (ver caso de uso \textbf{CU-EDITAR}) y también para generar el acuse de envío (ver caso de uso \textbf{CU-GENERAR-ACUSE}).
+  \item En caso de seleccionar la generación del acuse de envío se ejecuta el caso de uso \textbf{CU-GENERAR-ACUSE}.
 \end{enumerate}
 \paragraph{Postcondiciones}
+\begin{enumerate}
+  \item Se muestra una pantalla al usuario con los datos de la orden de reposición solicitada, además las opciones para editar y generar el acuse de envío.
+\end{enumerate}
 \paragraph{Excepciones}
+\begin{enumerate}
+  \item En caso de no contar con conexión a la base de datos se muestra un mensaje de error informando al usuario.
+\end{enumerate}
 
 
-\subsection{Edición de orden de reposición}
+\subsection{Editar orden}
 \paragraph{Identificador}
-CU8
+CU-EDITAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
 \paragraph{Precondiciones}
+\begin{enumerate}
+  \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
+  \item El usuario visualiza la orden de reposición que desea editar (ver caso de uso \textbf{CU-VISUALIZAR}).
+  \item Los campos utilizados para identificar unívocamente la orden de reposición no podrán ser modificados. 
+\end{enumerate}
 \paragraph{Secuencia normal}
 \begin{enumerate}
-\item Modificar cualquiera de los campos editables (ver caso de uso visualización de orden de reposición).
-\item Seleccionar el botón Guardar.
-\item Opcionalmente se puede volver a general el documento PDF seleccionado en el botón PDF.
+  \item El usuario navega a la pantalla de edición con la orden de reposición visualizada (ver caso de uso \textbf{CU-VISUALIZAR}).
+  \item Modificar cualquiera de los campos editables.
+  \item Seleccionar el botón Guardar.
 \end{enumerate}
 \paragraph{Postcondiciones}
-\paragraph{Excepciones}
-
-
-\subsection{Generar captura de pantalla de envío}
-\paragraph{Identificador}
-CU9
-\paragraph{Actores}
-Usuario
-\paragraph{Descripción}
-\paragraph{Precondiciones}
-\paragraph{Secuencia normal}
 \begin{enumerate}
-\item 
+  \item Los datos modificados por el usuario en la interfaz web se encuentran almacenados en la base de datos.
 \end{enumerate}
-\paragraph{Postcondiciones}
 \paragraph{Excepciones}
+\begin{enumerate}
+  \item En caso de no contar con conexión a la base de datos se muestra un mensaje de error informando al usuario.
+\end{enumerate}
+
