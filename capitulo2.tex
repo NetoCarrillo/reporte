@@ -75,7 +75,7 @@ Un caso de uso es la representación de las posibles interacciones entre el sist
 \label{fig:dia-casos-uso}
 \end{figure}
 
-Con el fin de explicar mejor el flujo de atención de una orden de reposición es necesario mostrar el diagrama de estados de una orden de reposición durante el flujo de \textbf{envío de órdenes de reposición} (ver sección \ref{sec:intro-contexto}). Los estados que puede tomar una orden (ver figura \ref{fig:dia-estados-orden}) indican:
+Con el fin de explicar mejor el flujo de atención de una orden de reposición es necesario mostrar el diagrama de estados de una orden de reposición durante el flujo de \textbf{envío de órdenes de reposición} (ver sección \ref{sec:intro-contexto}). Los estados que puede tomar una orden (ver Figura \ref{fig:dia-estados-orden}) indican:
 \begin{itemize}
   \item Si la solicitud está lista para ser procesada: \textbf{Nueva}, \textbf{Contestada}.
   \item Si está siendo procesada: \textbf{Siendo Contestada}, \textbf{Siendo Enviada}.
@@ -98,7 +98,8 @@ CU-CONTESTAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
-El procedimiento completo para contestar las órdenes de reposición listadas en el portal SAI del IMSS.
+El procedimiento completo para contestar las órdenes de reposición listadas en el portal SAI del IMSS (ver Figura \ref{fig:flow-proc-contestar}), el alcance de este caso comprende el acceso al portal SAI, contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
+Queda fuera de alcance la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso Generación de Reportes.
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El portal SAI se encuentra funcionando correctamente.
@@ -270,7 +271,8 @@ CU-VERIFICAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
-Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas (ver figura 1.2), el alcance de este caso de uso comprende el acceso al portal SAI, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos. Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}; y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
+Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas (ver Figura \ref{fig:flow-proc-verificar}), el alcance de este caso de uso comprende el acceso al portal SAI, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
+Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}; y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El portal SAI se encuentra funcionando correctamente.
@@ -305,6 +307,7 @@ CU-ACTUALIZAR-ESTATUS-SAI
 \paragraph{Actores}
 Robot
 \paragraph{Descripción}
+Actualizar en forma masiva el estado de atención en el portal SAI dentro de la base de datos del sistema AutoSAI.
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item Se cuenta con una lista de órdenes de reposición.
@@ -331,7 +334,7 @@ CU-ENTRAR-WEB
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
-Explicar la función que autoriza la entrada a la interfaz Web del sistema (ver figura 2.1) donde los usuarios pueden hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
+Explicar la función que autoriza la entrada a la interfaz Web del sistema (ver Figura \ref{fig:dia-casos-uso}) donde los usuarios pueden hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El usuario se encuentra previamente registrado en el sistema.
@@ -483,7 +486,7 @@ CU-VISUALIZAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
-La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, para llegar a esta página es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición y seleccionado la orden para visualizar, como se muestra en la figura 2.1 (ver caso de uso Búsqueda de órdenes de reposición).
+La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, para llegar a esta página es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición y seleccionado la orden para visualizar, como se muestra en la Figura \ref{fig:dia-casos-uso} (ver caso de uso \textbf{CU-BUSCAR}).
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
