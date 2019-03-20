@@ -15,18 +15,62 @@ A modo de ejemplo se muestra el caso de la generación de reportes: un requerimi
 
 
 \subsection{Requerimientos funcionales}
-\begin{enumerate}
-\item \textbf{Automatizar el proceso para contestar órdenes de reposición}. Automatizar la interacción del operador de la farmacéutica que se realiza utilizando el portal SAI para contestar las órdenes de reposición, esto implica almacenar los datos de las órdenes de reposición que son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes.
-\item \textbf{Automatizar el proceso para cotejar órdenes de reposición canceladas}. Automatizar la interacción del operador de la farmacéutica que realizar para conocer las órdenes de reposición que han sido canceladas recientemente por el IMSS.
-\item \textbf{Interfaz WEB para la administración de órdenes de reposición contestadas}. Salvo lo referente a los procesos automatizados de los operadores de la farmacéutica, todos los requerimientos de administración de órdenes de reposición y generación de reportes deben ser accedidos mediante una interfaz web protegida por nombre de usuario y contraseña. 
-\item \textbf{Búsqueda de órdenes de reposición}. En la interfaz web debe existir la posibilidad de buscar entre las órdenes de reposición contestadas mediante el número de orden de reposición, esta opción entrega solo una orden de reposición, o por un intervalo de fechas entre las cuales fueron atendidas las órdenes de reposición y entrega el listado de todas las órdenes de reposición que fueron respondidas en dicho intervalo. Las órdenes resultantes de la búsqueda deben ofrecer la opción para visualizar la información almacenada durante el proceso de contestación.
-\item \textbf{Edición de órdenes de reposición}. En la interfaz web debe existir la posibilidad para la edición de la información almacenada durante el proceso de respuesta de órdenes de reposición, tal edición debe ser individual, es decir, no es posible modificar más de una orden de reposición en una misma operación. El único dato que no puede ser modificado es el número de orden de reposición.
-\item \textbf{Generación de reporte de órdenes de reposición contestadas}. El reporte con órdenes de reposición contestadas debe ser acotado entre fechas con precisión de horas, tal reporte, como su nombre lo indica, contiene los números de orden de reposición y datos definidos por la farmacéutica\footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en los reportes.} .
-\item \textbf{Generación de formato de salida}. Este formato contiene datos con las órdenes de reposición y relaciones con claves de producto y centros de salud. El reporte está acotado por un intervalo de fechas con precisión de horas\footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en el formato de salida así como el contenido de los catálogos de claves de producto y centros de salud.}.
-\item \textbf{Generación de reporte con las órdenes de reposición canceladas reciéntemente}. Genera un reporte con las órdenes de reposición canceladas recientemente, es decir, las órdenes de reposición que tienen el estado de “cancelada” y no se han marcado como canceladas en el proceso de respuesta.
-\item \textbf{Actualización de estatus de órdenes de reposición canceladas}. La actualización del estatus de las órdenes de reposición canceladas quiere decir que al sistema se le ``alimenta'' de forma masiva mediante un archivo con los números de las órdenes de reposición que han sido canceladas y se ha notificado al área correspondiente de la farmacéutica para cancelar la atención de dichas órdenes.
-\item \textbf{Actualización de catálogos de medicamentos}. Alimentar de forma masiva, mediante un archivo separado por comas, el catálogo con claves de medicamentos.
-\end{enumerate}
+\subsubsection{Automatizar el proceso para contestar órdenes de reposición}
+Automatizar la interacción del operador de la farmacéutica que se realiza utilizando el portal SAI para contestar las órdenes de reposición, esto implica almacenar los datos de las órdenes de reposición que son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes (ver Figura \ref{fig:flow-proc-contestar}).
+
+\subsubsection{Automatizar el proceso para cotejar órdenes de reposición canceladas}
+Automatizar la interacción del operador de la farmacéutica que realizar para conocer las órdenes de reposición que han sido canceladas recientemente por el IMSS (ver Figura \ref{fig:flow-proc-verificar}).
+
+\subsubsection{Interfaz WEB para la administración de órdenes de reposición contestadas}
+Salvo lo referente a los procesos automatizados de los operadores de la farmacéutica, todos los requerimientos de administración de órdenes de reposición y generación de reportes deben ser accedidos mediante una interfaz web protegida por nombre de usuario y contraseña, como se muestra en la Figura \ref{fig:maq-login}.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{maq-login} 
+  \caption{Maqueta del acceso a la interfaz web.}
+  \label{fig:maq-login}
+\end{figure} 
+
+\subsubsection{Búsqueda de órdenes de reposición}
+En la interfaz web debe existir la posibilidad de buscar entre las órdenes de reposición contestadas mediante el número de orden de reposición, esta opción entrega solo una orden de reposición, o por un intervalo de fechas entre las cuales fueron atendidas las órdenes de reposición y entrega el listado de todas las órdenes de reposición que fueron respondidas en dicho intervalo. Las órdenes resultantes de la búsqueda deben ofrecer la opción para visualizar la información almacenada durante el proceso de contestación, como se muestra en la Figura \ref{fig:maq-search}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{maq-search} 
+  \caption{Maqueta de la búsqueda de ordenes.}
+  \label{fig:maq-search}
+\end{figure} 
+
+\subsubsection{Visualización de orden de reposición}
+La interfaz WEB debe tener una sección donde se muestre el contenido de una orden de reposición almacenada en la base de datos (ver Figura \ref{fig:maq-crud}), esta vista es individual, (no es posible mostrar el contenido de más de una orden de reposición). Además debe ofrecer las opciones para modificar los datos de la orden (ver requerimiento \ref{req-edicion}) y para generar el acuse de envío.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{maq-crud} 
+  \caption{Maqueta del formulario para ver la información de una orden de reposición.}
+  \label{fig:maq-crud}
+\end{figure} 
+
+\subsubsection{Edición de órdenes de reposición}\label{req-edicion}
+Similar a la forma de mostrar la información de una orden de reposición, la interfaz web debe contar con una vista que permita la modificación de una orden de reposición (ver Figura \ref{fig:maq-crud}), esta vista debe ser única (no es posible modificar más de una orden de reposición), así mismo no será posible modificar datos como el número de orden y fecha de atención.
+
+\subsubsection{Generación de reporte de órdenes de reposición contestadas}
+El reporte con órdenes de reposición contestadas debe ser acotado entre fechas con precisión de horas (ver Figura \ref{fig:maq-report}), tal reporte, como su nombre lo indica, contiene los números de orden de reposición y datos definidos por la farmacéutica\footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en los reportes.}
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1.2]{maq-report} 
+  \caption{Maqueta de la generación de reportes.}
+  \label{fig:maq-report}
+\end{figure} 
+
+\subsubsection{Generación de formato de salida}
+Este formato contiene datos con las órdenes de reposición y relaciones con claves de producto y centros de salud. El reporte está acotado por un intervalo de fechas con precisión de horas (ver Figura \ref{fig:maq-report}) \footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en el formato de salida así como el contenido de los catálogos de claves de producto y centros de salud.}.
+
+\subsubsection{Generación de reporte con las órdenes de reposición canceladas reciéntemente}
+Genera un reporte con las órdenes de reposición canceladas recientemente (ver Figura \ref{fig:maq-report}), es decir, las órdenes de reposición que tienen el estado de “cancelada” y no se han marcado como canceladas en el proceso de respuesta.
+
+\subsubsection{Actualización de estatus de órdenes de reposición canceladas}
+La actualización del estatus de las órdenes de reposición canceladas quiere decir que al sistema se le ``alimenta'' de forma masiva mediante un archivo con los números de las órdenes de reposición que han sido canceladas y se ha notificado al área correspondiente de la farmacéutica para cancelar la atención de dichas órdenes.
+
+\subsubsection{Actualización de catálogos}
+Alimentar de forma masiva, mediante un archivo separado por comas, los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmaceútica. Los catálogos definidos para la operación del sistema AutoSAI no podrán ser actualizados, por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición cuando dentro del flujo de atención (ver Figura \ref{fig:dia-estados-orden}).
 
 
 \subsection{Requerimientos no funcionales}
@@ -69,10 +113,10 @@ El cliente ha solicitado que el proyecto se apegue a su infraestructura, para co
 Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. A continuación se muestra el diagrama de casos de uso del sistema AutoSAI.
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{dia-casos-uso} 
-\caption{Diagrama de casos de uso.}
-\label{fig:dia-casos-uso}
+  \centering
+  \includegraphics[width=\textwidth]{dia-casos-uso} 
+  \caption{Diagrama de casos de uso.}
+  \label{fig:dia-casos-uso}
 \end{figure}
 
 Con el fin de explicar mejor el flujo de atención de una orden de reposición es necesario mostrar el diagrama de estados de una orden de reposición durante el flujo de \textbf{envío de órdenes de reposición} (ver sección \ref{sec:intro-contexto}). Los estados que puede tomar una orden (ver Figura \ref{fig:dia-estados-orden}) indican:
@@ -84,10 +128,10 @@ Con el fin de explicar mejor el flujo de atención de una orden de reposición e
 \end{itemize} 
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{dia-estados-orden} 
-\caption{Diagrama de estados de una orden de reposición durante la ruta de respuesta de órdenes de reposición.}
-\label{fig:dia-estados-orden}
+  \centering
+  \includegraphics[width=\textwidth]{dia-estados-orden} 
+  \caption{Diagrama de estados de una orden de reposición durante la ruta de respuesta de órdenes de reposición.}
+  \label{fig:dia-estados-orden}
 \end{figure}
 
 Es importante mencionar que en las siguientes descripciones de caso de uso no se hará referencia al contenido exacto de las páginas así como el nombre de los campos, únicamente se hará mención de los campos necesarios para dar una explicación clara del caso.
