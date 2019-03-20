@@ -66,11 +66,31 @@ Este formato contiene datos con las órdenes de reposición y relaciones con cla
 \subsubsection{Generación de reporte con las órdenes de reposición canceladas reciéntemente}
 Genera un reporte con las órdenes de reposición canceladas recientemente (ver Figura \ref{fig:maq-report}), es decir, las órdenes de reposición que tienen el estado de “cancelada” y no se han marcado como canceladas en el proceso de respuesta.
 
-\subsubsection{Actualización de estatus de órdenes de reposición canceladas}
-La actualización del estatus de las órdenes de reposición canceladas quiere decir que al sistema se le ``alimenta'' de forma masiva mediante un archivo con los números de las órdenes de reposición que han sido canceladas y se ha notificado al área correspondiente de la farmacéutica para cancelar la atención de dichas órdenes.
-
 \subsubsection{Actualización de catálogos}
-Alimentar de forma masiva, mediante un archivo separado por comas, los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmaceútica. Los catálogos definidos para la operación del sistema AutoSAI no podrán ser actualizados, por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición cuando dentro del flujo de atención (ver Figura \ref{fig:dia-estados-orden}).
+Alimentar de forma masiva, mediante un archivo separado por comas (ver Figura \ref{fig:maq-upload}), los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmaceútica. Los catálogos definidos para la operación del sistema AutoSAI no podrán ser actualizados, por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición cuando dentro del flujo de atención (ver Figura \ref{fig:dia-estados-orden}).
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1.5]{maq-upload}
+  \caption{Maqueta para la actualización de catálogos}
+  \label{fig:maq-upload}
+\end{figure}
+
+\subsubsection{Actualización de estatus de órdenes de reposición canceladas}
+La actualización del estatus de las órdenes de reposición canceladas quiere decir que al sistema se le ``alimenta'' de forma masiva mediante un archivo, similar a la actualización de catálogos (ver Figura \ref{fig:dia-estados-orden}), con los números de las órdenes de reposición que han sido canceladas y se ha notificado al área correspondiente de la farmacéutica para cancelar la atención de dichas órdenes.
+
+\subsection{Navegación dentro de la interfaz web}
+La interfaz web debe mostrar en todo momento un menú que permita la navegación entre las siguientes secciones páginas (ver Figura \ref{fig:dia-nav-flow}):
+\begin{enumerate}
+  \item Generación de reportes
+  \item Actualización de catálogos (incluye la actualización de órdenes canceladas).
+  \item Búsqueda de órdenes de reposición
+\end{enumerate}
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{dia-nav-flow}
+  \caption{Mapa de navegación en la interfaz Web}
+  \label{fig:dia-nav-flow}
+\end{figure}
 
 
 \subsection{Requerimientos no funcionales}
