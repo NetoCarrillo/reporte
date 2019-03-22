@@ -35,11 +35,45 @@ En las últimas décadas la arquitectura de software ha profundizado en el estud
 
 Tomando como referencia el modelo ``4+1'' descrito anteriormente, a esta altura se han presentado los escenarios, capítulo \ref{cap2}, y la vista lógica, capítulo \ref{cap1}, a continuación se tratarán temas que conciernen a la vista de Proceso y la vista Física, tocando un poco la vista de Desarrollo, pero esta última será explorada a profundidad en el siguiente capítulo.\\
 
-\textcolor{red}{Esto sería una descripción brebe del contenido de cada vista}
+\textcolor{red}{Esto sería una descripción breve del contenido de cada vista}
+\textcolor{blue}{no estoy tan seguro... a ver que sale}
 
 Vista de Desarrollo:
 Vista de Proceso:
 Vista Física:
+
+\subsection{Diagrama de componentes}
+
+El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes, el la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSAI.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{dia-components}
+\caption{Diagrama de componentes.}
+\label{fig:dia-components}
+\end{figure}
+
+
+\subsubsection{Base de datos}
+\paragraph{Almacenamiento} Da las operaciones necesarias parara crear y almacenar datos de órdenes de reposición en la base de datos.
+\paragraph{Lectura} Provee consultas a la base de datos para obtener reportes.
+\paragraph{Administración} Son las operaciones que permiten modificar datos específicos de las órdenes de reposición contenidas en la base de datos, también ofrece la actualización masiva de catálogos.
+
+\subsubsection{Sistema de archivos}
+\paragraph{Configuración} Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos.
+\paragraph{Almacenamiento} Almacena los reportes y acuses de envío.
+
+\subsubsection{Lógica de automatización}
+\paragraph{Respuesta/Verificación}
+
+
+\subsubsection{Generador de reportes}
+\paragraph{Acuse}
+\paragraph{Generación}
+
+\subsubsection{Robot}
+
+\subsubsection{Portal Web}
+
 
 
 %===============================================================================
@@ -90,3 +124,6 @@ Tablas para automatización:
 
 
 \section{Diseño de interfaz de usuario}
+
+
+
