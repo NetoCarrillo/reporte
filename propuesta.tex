@@ -77,25 +77,25 @@ El uso del sistema evita el envío de medicamentos que ya no son solicitados, mi
 Por lo anterior los usuarios del IS se verán beneficiados de los cambios realizados con en el nuevo sistema, pues los medicamentos estarán disponibles con mayor frecuencia en las clínicas y hospitales.
 
 \section{Descripción general de trabajo}
-La farmacéutica dedica diariamente un equipo de trabajo de 2 a 4 personas durante toda la jornada laboral, dependiendo del volumen de órdenes de reposición emitidas por el IS, para completar las tareas de envío de órdenes de reposición y verificar las órdenes de reposición canceladas dentro del SA. A través del proyecto de automatización se pretenden optimizar los siguientes puntos:
+La farmacéutica dedica diariamente un equipo de tres personas durante toda la jornada laboral, dependiendo del volumen de órdenes de reposición emitidas por el IS se puede agregar una persona más al equipo, para completar las tareas de envío de órdenes de reposición y verificar las órdenes de reposición canceladas dentro del SA. A través del proyecto de automatización se pretenden optimizar los siguientes puntos:
 \begin{itemize}
 \item Reducción del esfuerzo de recursos humanos.
-\item Eliminar errores de captura.
-\item Reducción del tiempo dedicado a enviar las órdenes de reposición.
+\item Eliminar los errores de captura.
+\item Reducción del tiempo dedicado al envío de las órdenes de reposición.
 \item Detectar con rapidez las órdenes de reposición que hayan sido canceladas.
 \end{itemize}
 La necesidad de automatización de los procesos (ver Figuras \ref{fig:flow-proc-contestar} y \ref{fig:flow-proc-verificar}) antes mencionados pronostican una reducción de costos por devolución de medicamento no solicitado para el cliente y también la disminución de pérdidas en las ventas por solicitudes no atendidas en los rangos de tiempo acordados con el comprador. Dado lo anterior, se plantea un proyecto de software que cubra las necesidades de automatización y pueda ser administrado por usuarios no especializados en computación.\\
 Para resolver el desarrollo del proyecto, el sistema se se divide en módulos con funcionalidades específicas que se muestran a continuación:
 \begin{enumerate}
-\item \textbf{Automatización de interacción con el SA}. La automatización de la interacción con el SA consiste emular los pasos que sigue una persona de la farmacéutica (operador) encargada de llenar y extraer información de las órdenes de reposición del SA, es decir, listar los pasos que sigue el operador cuando contesta las órdenes de reposición, posteriormente describir las reglas de negocio necesarios para llenar los formularios que presenta el SA al responder una orden de reposición; por último, identificar las fuentes de los datos que se ocupan para llenar tales formularios y definir la forma de almacenar la información necesaria de cada formulario.
-\item \textbf{Generación de reportes}. La generación de reportes consiste en plasmar la información obtenida de las órdenes de reposición contestadas en el módulo anterior, la farmacéutica tiene ya una plantilla que se utiliza para pasar los pedidos a otras áreas con el fin de continuar la atención de las órdenes de reposición, además de tal plantilla, la farmacéutica ha expresado el deseo de obtener estadísticas de la cantidad de órdenes de reposición atendidas y canceladas.
+\item \textbf{Automatización de interacción con el SA}. La automatización de la interacción con el SA consiste en replicar los pasos que sigue una persona de la farmacéutica (operador) encargada de llenar y extraer información de las órdenes de reposición del SA, es decir, listar los pasos que sigue el operador cuando contesta las órdenes de reposición, posteriormente describir las reglas de negocio necesarios para llenar los formularios que presenta el SA al responder una orden de reposición. Por último se identifican las fuentes de los datos que se ocupan para llenar tales formularios y se define la forma de almacenamiento de la información necesaria de cada formulario.
+\item \textbf{Generación de reportes}. La generación de reportes consiste en plasmar la información obtenida de las órdenes de reposición contestadas en el módulo anterior. La farmacéutica tiene ya una plantilla que se utiliza para pasar los pedidos a otras áreas con el fin de continuar la atención de las órdenes de reposición, además de obtener estadísticas relacionadas con la cantidad de órdenes de reposición atendidas y canceladas.
 \item \textbf{Interfaz de usuario}. La interfaz de usuario se refiere a la aplicación que muestra una interfaz gráfica en la cual los operadores de la farmacéutica pueden solicitar la generación de reportes; hacer consultas y modificaciones a las órdenes de reposición atendidas por el primer módulo.
 \end{enumerate}
 
 
 \subsection{Arquitectura de la solución}
 Una definición de arquitectura de software es dada por Bourque\footnote{Bourque, P. et. al. (2014). SWEBOK Guide V3.0. 1st. IEEE Computer Society.}:\\
-\textit{``El conjunto de estructuras necesarias para la comprensión de un sistema en el cual se comprometen elementos de software, relaciones entre ellos y sus propiedades''}\\
+\textit{``El conjunto de estructuras necesarias para la comprensión de un sistema en el cual se comprometen elementos de software, relaciones entre ellos y sus propiedades''}.\\
 Esta definición expone que los requerimientos del cliente se traducen a especificaciones técnicas para los desarrolladores. Aplicando la definición anterior al presente proyecto donde tenemos los siguientes componentes(ver Figura \ref{fig:dia-arq-comp}):
 \begin{figure}[h]
 \centering
