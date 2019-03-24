@@ -7,7 +7,8 @@
 \selectlanguage{spanish}
 
 %formato de bibliografia y citas
-\usepackage{apacite}
+\usepackage{cite}
+%\usepackage{apacite}
  
 \usepackage[nottoc]{tocbibind}
 
@@ -32,20 +33,19 @@
 
 %\setcounter{secnumdepth}{3}
 %\setcounter{tocdepth}{4}
+%
 
 \begin{document}
-
 
 \begin{center}
 \begin{Large}
 Universidad Nacional Autónoma de México\\
-Facultad de Ciencias\\
+Facultad de Ciencias\\*[1ex]
 \end{Large}
 \begin{LARGE}
-Proyecto para la Opción de Titulación por Reporte de Trabajo Profesional\\
-AutoSAI: Sistema para automatizar las órdenes de reposición en el portal SAI del IMSS\\*[1ex]
+Proyecto para la Opción de Titulación por Reporte de Trabajo Profesional\\*[1ex]
+AutoSA: Sistema para automatizar las órdenes de reposición en el Sistema de Abastecimiento del Instituto de Salud\\*[2ex]
 \end{LARGE}
-
 Alumno: Ernesto Carrillo Espinosa - No. de cuenta: 300138647\\
 Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 \today
@@ -63,8 +63,10 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 \include{capitulo2}
 \include{capitulo3}
 
+%Bibliografia
+\renewcommand{\bibname}{Bibliografía}
 %\nocite{*} 
-% \bibliographystyle{unsrt}
-\bibliographystyle{apacite}
-\bibliography{bibliografia}
+%\bibliographystyle{apacite}
+\bibliographystyle{unsrt}
+\bibliography{Bibliografia}
 \end{document}
