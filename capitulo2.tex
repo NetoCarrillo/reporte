@@ -6,23 +6,23 @@
 
 
 \section{Análisis de requerimientos}
-En general, los requerimientos hablan de lo que se espera de una aplicación, tales requerimientos se clasifican en requerimientos funcionales y no funcionales:
+En general, los requerimientos deben reflejar lo que un usuario espera de una aplicación, tales requerimientos se clasifican en requerimientos funcionales y no funcionales:
 \begin{itemize}
-\item \textbf{Requerimientos funcionales}: descripciones detalladas de las funciones deseadas del proyecto. \cite{WileyBegSE}
-\item \textbf{Requerimientos no funcionales}: descripciones de la calidad y capacidades del comportamiento del proyecto. \cite{WileyBegSE}
+\item \textbf{Requerimientos funcionales}: descripciones detalladas de las funciones deseadas del proyecto \cite{WileyBegSE}.
+\item \textbf{Requerimientos no funcionales}: descripciones de la calidad y capacidades del comportamiento del proyecto. \cite{WileyBegSE}.
 \end{itemize}
-A modo de ejemplo se muestra el caso de la generación de reportes: un requerimiento funcional habla de los datos que debe capturar un usuario para obtener un reporte (fechas de inicio y término, número de orden, etcétera), mientras que un requerimiento no funcional habla sobre el formato de salida, verificación de permisos de usuario para generar el reporte,  capacidad del sistema para atender generación simultánea de varios reportes.
+A modo de ejemplo se muestra el caso de la generación de reportes: un requerimiento funcional necesita en general, de los datos que deben ser capturados por un usuario para obtener así un reporte (fechas de inicio y término, número de orden, etcétera), mientras que un requerimiento no funcional refleja el formato de salida, verificación de permisos de usuario para generar el reporte,  capacidad del sistema para atender generación simultánea de varios reportes.
 
 
 \subsection{Requerimientos funcionales}
 \subsubsection{Automatizar el proceso para contestar órdenes de reposición}
-Automatizar la interacción del operador de la farmacéutica que se realiza utilizando el portal SAI para contestar las órdenes de reposición, esto implica almacenar los datos de las órdenes de reposición que son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes (ver Figura \ref{fig:flow-proc-contestar}).
+Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza utilizando el SA} para contestar las órdenes de reposición, esto implica almacenar los datos de las órdenes de reposición los cuales son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes (ver Figura \ref{fig:flow-proc-contestar}).
 
 \subsubsection{Automatizar el proceso para cotejar órdenes de reposición canceladas}
-Automatizar la interacción del operador de la farmacéutica que realizar para conocer las órdenes de reposición que han sido canceladas recientemente por el IMSS (ver Figura \ref{fig:flow-proc-verificar}).
+Automatizar la interacción del operador de la farmacéutica para conocer las órdenes de reposición que han sido canceladas recientemente por el IS (ver Figura \ref{fig:flow-proc-verificar}).
 
 \subsubsection{Interfaz WEB para la administración de órdenes de reposición contestadas}
-Salvo lo referente a los procesos automatizados de los operadores de la farmacéutica, todos los requerimientos de administración de órdenes de reposición y generación de reportes deben ser accedidos mediante una interfaz web protegida por nombre de usuario y contraseña, como se muestra en la Figura \ref{fig:maq-login}.
+Todos los requerimientos de administración de órdenes de reposición y generación de reportes deben ser accedidos mediante una interfaz web protegida por nombre de usuario y contraseña\footnote{Excepto lo referente a los procesos automatizados de los operadores de la farmacéutica}, como se muestra en la Figura \ref{fig:maq-login}.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{maq-login} 
@@ -31,7 +31,7 @@ Salvo lo referente a los procesos automatizados de los operadores de la farmacé
 \end{figure} 
 
 \subsubsection{Búsqueda de órdenes de reposición}
-En la interfaz web debe existir la posibilidad de buscar entre las órdenes de reposición contestadas mediante el número de orden de reposición, esta opción entrega solo una orden de reposición, o por un intervalo de fechas entre las cuales fueron atendidas las órdenes de reposición y entrega el listado de todas las órdenes de reposición que fueron respondidas en dicho intervalo. Las órdenes resultantes de la búsqueda deben ofrecer la opción para visualizar la información almacenada durante el proceso de contestación, como se muestra en la Figura \ref{fig:maq-search}
+En la interfaz web existe la posibilidad de buscar entre las órdenes de reposición contestadas mediante el número de orden de reposición, esta opción entrega solo una orden de reposición, o bien se puede utilizar un intervalo de fechas entre las cuales fueron atendidas las órdenes de reposición y se entrega el listado de todas las órdenes de reposición que fueron respondidas en dicho intervalo. Las órdenes resultantes de la búsqueda deben ofrecer la opción para visualizar la información almacenada durante el proceso de respuesta, como se muestra en la Figura \ref{fig:maq-search}
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{maq-search} 
@@ -40,7 +40,7 @@ En la interfaz web debe existir la posibilidad de buscar entre las órdenes de r
 \end{figure} 
 
 \subsubsection{Visualización de orden de reposición}
-La interfaz WEB debe tener una sección donde se muestre el contenido de una orden de reposición almacenada en la base de datos (ver Figura \ref{fig:maq-crud}), esta vista es individual, (no es posible mostrar el contenido de más de una orden de reposición). Además debe ofrecer las opciones para modificar los datos de la orden (ver requerimiento \ref{req-edicion}) y para generar el acuse de envío.
+La interfaz WEB tiene una sección donde se muestra el contenido de una orden de reposición almacenada en la base de datos (ver Figura \ref{fig:maq-crud}), esta vista es individual, (no es posible mostrar el contenido de más de una orden de reposición), además ofrece las opciones para modificar los datos de la orden (ver requerimiento \ref{req-edicion}) y para generar el acuse de envío.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1]{maq-crud} 
@@ -49,10 +49,10 @@ La interfaz WEB debe tener una sección donde se muestre el contenido de una ord
 \end{figure} 
 
 \subsubsection{Edición de órdenes de reposición}\label{req-edicion}
-Similar a la forma de mostrar la información de una orden de reposición, la interfaz web debe contar con una vista que permita la modificación de una orden de reposición (ver Figura \ref{fig:maq-crud}), esta vista debe ser única (no es posible modificar más de una orden de reposición), así mismo no será posible modificar datos como el número de orden y fecha de atención.
+La interfaz web cuenta con una vista (similar a la forma de mostrar la información de una orden de reposición) que permite la modificación de una orden de reposición (ver Figura \ref{fig:maq-crud}), esta vista es única (no es posible modificar más de una orden de reposición), así mismo no es posible modificar datos el número de orden y fecha de atención.
 
 \subsubsection{Generación de reporte de órdenes de reposición contestadas}
-El reporte con órdenes de reposición contestadas debe ser acotado entre fechas con precisión de horas (ver Figura \ref{fig:maq-report}), tal reporte, como su nombre lo indica, contiene los números de orden de reposición y datos definidos por la farmacéutica\footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en los reportes.}
+El reporte con órdenes de reposición contestadas es acotado entre un par de fechas (con precisión de horas) (ver Figura \ref{fig:maq-report}), tal reporte, como su nombre lo indica, contiene los números de orden de reposición y datos definidos por la farmacéutica\footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en los reportes.}
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1.2]{maq-report} 
@@ -61,25 +61,25 @@ El reporte con órdenes de reposición contestadas debe ser acotado entre fechas
 \end{figure} 
 
 \subsubsection{Generación de formato de salida}
-Este formato contiene datos con las órdenes de reposición y relaciones con claves de producto y centros de salud. El reporte está acotado por un intervalo de fechas con precisión de horas (ver Figura \ref{fig:maq-report}) \footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en el formato de salida así como el contenido de los catálogos de claves de producto y centros de salud.}.
+Este formato contiene los datos de las órdenes de reposición, las claves de los productos, como los nombres de los centros de salud. El reporte está acotado entre un par de fechas (con precisión de horas) (ver Figura \ref{fig:maq-report}) \footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en el formato de salida así como el contenido de los catálogos de claves de producto y centros de salud.}.
 
-\subsubsection{Generación de reporte con las órdenes de reposición canceladas reciéntemente}
+\subsubsection{Generación de reporte con las órdenes de reposición canceladas recientemente}
 Genera un reporte con las órdenes de reposición canceladas recientemente (ver Figura \ref{fig:maq-report}), es decir, las órdenes de reposición que tienen el estado de “cancelada” y no se han marcado como canceladas en el proceso de respuesta.
 
 \subsubsection{Actualización de catálogos}
-Alimentar de forma masiva, mediante un archivo separado por comas (ver Figura \ref{fig:maq-upload}), los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmaceútica. Los catálogos definidos para la operación del sistema AutoSAI no podrán ser actualizados, por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición cuando dentro del flujo de atención (ver Figura \ref{fig:dia-estados-orden}).
+Cargar de forma masiva, mediante un archivo separado por comas (ver Figura \ref{fig:maq-upload}), los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmaceútica. Los catálogos definidos para la operación del sistema AutoSA no podrán ser actualizados, por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición cuando dentro del flujo de atención (ver Figura \ref{fig:dia-estados-orden}).
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1.5]{maq-upload}
+  \includegraphics[scale=1.3]{maq-upload}
   \caption{Maqueta para la actualización de catálogos}
   \label{fig:maq-upload}
 \end{figure}
 
 \subsubsection{Actualización de estatus de órdenes de reposición canceladas}
-La actualización del estatus de las órdenes de reposición canceladas quiere decir que al sistema se le ``alimenta'' de forma masiva mediante un archivo, similar a la actualización de catálogos (ver Figura \ref{fig:dia-estados-orden}), con los números de las órdenes de reposición que han sido canceladas y se ha notificado al área correspondiente de la farmacéutica para cancelar la atención de dichas órdenes.
+La actualización del estatus de las órdenes de reposición canceladas quiere decir el usuario carga al sistema un archivo de texto separado por comas, similar a la actualización de catálogos (ver Figura \ref{fig:dia-estados-orden}), con los números de las órdenes de reposición que han sido canceladas y se ha notificado al área correspondiente de la farmacéutica para cancelar la atención de dichas órdenes.
 
 \subsection{Navegación dentro de la interfaz web}
-La interfaz web debe mostrar en todo momento un menú que permita la navegación entre las siguientes secciones páginas (ver Figura \ref{fig:dia-nav-flow}):
+La interfaz web muestra en todo momento un menú que permite la navegación entre las siguientes secciones páginas (ver Figura \ref{fig:dia-nav-flow}):
 \begin{enumerate}
   \item Generación de reportes
   \item Actualización de catálogos (incluye la actualización de órdenes canceladas).
@@ -93,36 +93,42 @@ La interfaz web debe mostrar en todo momento un menú que permita la navegación
 \end{figure}
 
 
-\subsection{Requerimientos no funcionales}
-El cliente ha solicitado que el proyecto se apegue a su infraestructura, para conservar el acuerdo de confidencialidad y evitar exponer al cliente a riesgos de seguridad informática, no se enunciarán las versiones y tipo de infraestructura utilizada:
+\subsection{Requerimientos no funcionales}\label{sec:nonfunctional-req}
+El cliente ha solicitado que el proyecto se apegue a su infraestructura, para conservar el acuerdo de confidencialidad y evitar exponer al cliente a riesgos de seguridad informática\footnote{Por políticas de seguridad de la farmacéutica no se enunciarán las herramientas e infraestructura utilizada, así como las versiones de las mismas}:
 \begin{enumerate}
 \item Sistema operativo capaz de ejecutar el software Java Virtual Machine (JVM).
 \item Base de datos relacional SQL.
-\item Uso de la herramienta Sahi para automatizar interacción con portal web SAI.
-\item Las contraseñas de los usuarios para el acceso a la interfaz web deben ser almacenadas de forma segura, es decir, cifradas mediante una función hash.
+\item Uso de la herramienta Sahi para automatizar interacción con SA.
+\item Las contraseñas de los usuarios para el acceso a la interfaz web deben ser almacenadas utilizando un algoritmo de cifrado.
 \end{enumerate}
 
 
-\subsection{Alcance del Proyecto}
-%definir alcance
+\subsection{Alcance del proyecto}
+La definición de alcance del proyecto de software dada por Moustafaev:\\
+\textit{``Es el proceso de definir todo el trabajo necesario para entregar un producto o servicio con las funciones y características especificadas.''}\cite{ScopeManagement}.\\
+Para fines del sistema AutoSA, el alcance está acotado en los siguientes puntos:
 \begin{itemize}
-\item El desarrollo de automatizar el proceso para contestar órdenes de reposición inicia con la ejecución del agente.
+\item Automatizar el proceso para contestar órdenes de reposición en SA.
+\item Almacenamiento de los datos de las órdenes de reposición contestadas.
+\item Generación del formato de salida que se realiza al terminar de responder las órdenes de reposición (ver Figura \ref{fig:flow-proc-contestar})
+\item Automatizar el proceso para verificar las órdenes de reposición canceladas recientemente en SA.
+\item Actualización de catálogos propios del sistema AutoSA que contienen claves de medicamentos y centros de salud del IS.
+\item Actualización masiva de las órdenes de reposición que han sido canceladas y notificado al área correspondiente para detener el envío de medicamentos.
 \item Queda fuera de alcance la verificación de existencia del medicamento en bodega.
-\item Queda fuera de alcance la ejecución en paralelo de más de una instancia del proceso para contestar órdenes de reposición.
-\item Queda fuera de alcance la ejecución en paralelo de más de una instancia del proceso para cotejar órdenes de reposición canceladas.
-\item Queda fuera del desarrollo la administración de usuarios de la interfaz WEB mediante esta misma.
-\item Queda fuera de alcance la ejecución simultánea de los procesos para contestar órdenes de reposición y cotejar órdenes de reposición canceladas.
 \item Queda fuera de alcance la realización de respaldos de la información contenida en la base de datos o en el sistema de archivos.
+\item El sistema no emitirá notificaciones de las órdenes de reposición canceladas recientemente.
 \end{itemize}
 
 
 \subsection{Riesgos asociados al proyecto}
-%definir riesgos
-\begin{itemize}
-\item Al no contar con un ambiente de pruebas del portal SAI todos los datos alterados durante la programación de las rutinas de automatización podrían persistir información incorrecta, entonces es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
-\item La herramientas de automatización se sustentan en la estructura DOM de las páginas HTML por las que navegan, entonces si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
-\item El uso de software libre no tiene garantía por lo cual se reconoce como riesgo el fallo de software desarrollado por terceros.
-\end{itemize}
+La definición de riesgo asociados al proyecto dada por Moustafaev:\\
+\textit{``Riesgo es la incertidumbre sobre escenarios \footnote{\textcolor{red}{Karla, la traducción literal sería \textbf{cosas}, pero prefiero escribir \textbf{escenarios} ¿qué opinas?}} que pueden arriesgar el éxito del proyecto.''}\cite{ScopeManagement}.\\
+Los riesgos identificados para este proyecto se listan a continuación:
+\begin{enumerate}
+  \item Dado que no se cuenta con un ambiente de pruebas del SA todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
+  \item La herramienta de automatización Sahi se basa en la estructura de las páginas de el sistema SA. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
+  \item La herramienta Sahi en su versión libre\footnote{El uso de la versión libre de Sahi es requerido por la farmacéutica, ver sección \ref{sec:nonfunctional-req}} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSAI.
+\end{enumerate}
 
 
 %===============================================================================
@@ -130,7 +136,7 @@ El cliente ha solicitado que el proyecto se apegue a su infraestructura, para co
 
 
 \section{Casos de uso}
-Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. A continuación se muestra el diagrama de casos de uso del sistema AutoSAI.
+Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. A continuación se muestra el diagrama de casos de uso del sistema AutoSA.
 
 \begin{figure}[h]
   \centering
@@ -157,21 +163,21 @@ Con el fin de explicar mejor el flujo de atención de una orden de reposición e
 Es importante mencionar que en las siguientes descripciones de caso de uso no se hará referencia al contenido exacto de las páginas así como el nombre de los campos, únicamente se hará mención de los campos necesarios para dar una explicación clara del caso.
 
 \subsection{Contestar órdenes}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-CONTESTAR
-\paragraph{Actores}
+\paragraph*{Actores}
 Usuario
-\paragraph{Descripción}
-El procedimiento completo para contestar las órdenes de reposición listadas en el portal SAI del IMSS (ver Figura \ref{fig:flow-proc-contestar}), el alcance de este caso comprende el acceso al portal SAI, contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
+\paragraph*{Descripción}
+El procedimiento completo para contestar las órdenes de reposición listadas en el SA del IS (ver Figura \ref{fig:flow-proc-contestar}), el alcance de este caso comprende el acceso al SA, contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
 Queda fuera de alcance la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso Generación de Reportes.
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
-  \item El portal SAI se encuentra funcionando correctamente.
-  \item El usuario cuenta con las credenciales para ingresar al portal SAI.
+  \item El SA se encuentra funcionando correctamente.
+  \item El usuario cuenta con las credenciales para ingresar al SA.
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
-  \item Inicia sesión en portal SAI: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
+  \item Inicia sesión en SA: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
   \item Dirige el explorador a la pantalla donde se encuentra el listado con las órdenes de reposición que no han sido contestadas.
   \item Para cada orden de reposición del listado que se muestra se aplica el caso de uso CU-GUARDAR-NUEVA.
   \item Para cada solicitud en la base de datos con estado \textbf{Nueva} se aplican los casos de uso:
@@ -186,31 +192,31 @@ Queda fuera de alcance la obtención del reporte con las órdenes de reposición
   \item El programa se repite desde el paso 2 hasta terminar las solicitudes sin contar las marcadas con estatus \textbf{Error}.
   \item Registra el fin del procedimiento en la base de datos.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item Todas las órdenes de reposición listadas han sido contestadas y enviadas.
   \item Se han registrado todas las ordenes de reposición atendidas en la base de datos.
   \item Los acuses de envió de las órdenes de reposición se encuentran en el sistema de archivos.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
-  \item Si en algún momento se detecta la pérdida de sesión en la página SAI, se reinicia el procedimiento desde el paso 1.
+  \item Si en algún momento se detecta la pérdida de sesión en la página SA, se reinicia el procedimiento desde el paso 1.
   \item Cualquier error durante la ejecución de este caso de uso será registrado en la bitácora el sistema.
 \end{enumerate}
 
 
 \subsection{Guardar nueva orden}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-GUARDAR-NUEVA
-\paragraph{Actores}
+\paragraph*{Actores}
 Robot
-\paragraph{Descripción}
+\paragraph*{Descripción}
 Una orden de reposición es almacenada por primera vez con la información que se muestra en el listado de órdenes de reposición.
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item Se tiene indicado un renglón del listado de órdenes de reposición sobre el cuál se realizará este caso de uso.
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item Del listado de órdenes de reposición, cada solicitud es ingresada a la base de datos con estatus \textbf{Nueva} y datos provenientes del listado:
   \begin{enumerate}
@@ -219,15 +225,15 @@ Una orden de reposición es almacenada por primera vez con la información que s
     \item Número de orden.
     \item Fecha de expedición.
     \item Almacén destino.
-    \item \textit{URL} de contestación.
-    \item \textit{URL} de envío: generada reemplazando el parámetro en la \textit{URL} de contestación ``responde'' por ``envia''.
+    \item \textit{URL} de respuesta.
+    \item \textit{URL} de envío: generada reemplazando el parámetro en la \textit{URL} de respuesta ``responde'' por ``envia''.
   \end{enumerate}
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item La orden de reposición se encuentra almacenada en la base de datos.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item Si el listado muestra la URL de envío y la orden no ha sido almacenada, entonces la orden es almacenada con estado \textbf{Contestada} y se registra la \textbf{cantidad solicitada} en 0.
   \item Si ocurre algún error la orden es almacenada con estado \textbf{Error}.
@@ -235,22 +241,22 @@ Una orden de reposición es almacenada por primera vez con la información que s
 
 
 \subsection{Responder orden}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-RESPONDER-ORDEN
-\paragraph{Actores}
+\paragraph*{Actores}
 Robot
-\paragraph{Descripción}
+\paragraph*{Descripción}
 En la pantalla para contestar una orden de reposición se llenan los formularios y se almacena la información de la pantalla en el registro de la base de datos que corresponde a la orden de reposición.
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item Se indica una orden de reposición almacenada en la base de datos sobre la cual se aplica este caso de uso.
   \item La orden de reposición se encuentra almacenada en la base de datos.
   \item La orden de reposición tiene estado \textbf{Nueva}.
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item Cambia el estado de la orden a \textbf{Siendo Contestada}.
-  \item Dirige el explorador a la \textit{URL} de contestación (ver caso de uso CU-GUARDAR-NUEVA).
+  \item Dirige el explorador a la \textit{URL} de respuesta (ver caso de uso CU-GUARDAR-NUEVA).
   \item Llena el formulario que se presenta en esta pantalla con las siguientes consideraciones:
   \begin{enumerate}
     \item Fecha de fabricación: primer día del año en curso si la fecha actual no es del mes de diciembre, en caso contrario se toma el año siguiente.
@@ -259,92 +265,92 @@ En la pantalla para contestar una orden de reposición se llenan los formularios
   \item Activar el botón ``contestar'' del formulario de la orden de reposición.
   \item Cambia el estado de la orden a \textbf{Contestada}.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item Los formularios de la pantalla han sido completados correctamente.
   \item Los datos del formulario se encuentran almacenado en la base de datos.
   \item El estado de la orden en la base de datos es \textbf{Contestada}.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item Si ocurre algún error la orden es almacenada con estado \textbf{Error}.
 \end{enumerate}
 
 
 \subsection{Enviar orden}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-ENVIAR-ORDEN
-\paragraph{Actores}
+\paragraph*{Actores}
 Robot
-\paragraph{Descripción}
-Enviar la orden de reposición contestada de regreso al portal SAI.
-\paragraph{Precondiciones}
+\paragraph*{Descripción}
+Enviar la orden de reposición contestada de regreso al SA.
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item Una orden de reposición registrada en la base de datos.
   \item La orden de reposición tiene estado \textbf{Contestada}.
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item Cambia estado de la orden a \textbf{Siendo Enviada}.
   \item El explorador dirige a la \textit{URL de envío}.
   \item Guardar el folio de envío en la base de datos.
   \item Cambia estado de la orden a \textbf{Enviada}.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item El folio de envió de la orden de reposición se encuentra guardado en la base datos.
   \item El estado de la orden en la base de datos es \textbf{Enviada}.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item Si ocurre algún error la orden es almacenada con estado \textbf{Error}.
 \end{enumerate}
 
 
 \subsection{Generar acuse de envío}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-GENERAR-ACUSE
-\paragraph{Actores}
+\paragraph*{Actores}
 Robot
-\paragraph{Descripción}
+\paragraph*{Descripción}
 Generar el acuse de envío de la orden de reposición.
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item Una orden de reposición registrada en la base de datos.
   \item La orden de reposición tiene estado \textbf{Enviada}.
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item Extraer la información de la orden de reposición de la base de datos.
   \item Mandar la generación del acuse de envío.
   \item Colocar el documento generado en el sistema de archivos.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item Un documento en el sistema de archivos que contiene el acuse de envío.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item En caso de algún error se registra el error en la bitácora del sistema (el usuario posteriormente podrá volver a imprimir el acuse, ver caso de uso CU-VISUALIZAR).
 \end{enumerate}
 
 
 \subsection{Verificar órdenes}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-VERIFICAR
-\paragraph{Actores}
+\paragraph*{Actores}
 Usuario
-\paragraph{Descripción}
-Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas (ver Figura \ref{fig:flow-proc-verificar}), el alcance de este caso de uso comprende el acceso al portal SAI, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
+\paragraph*{Descripción}
+Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas (ver Figura \ref{fig:flow-proc-verificar}), el alcance de este caso de uso comprende el acceso al SA, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
 Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}; y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
-  \item El portal SAI se encuentra funcionando correctamente.
-  \item El usuario cuenta con las credenciales para ingresar al portal SAI.
+  \item El SA se encuentra funcionando correctamente.
+  \item El usuario cuenta con las credenciales para ingresar al SA.
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
-  \item Inicia sesión en portal SAI: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
+  \item Inicia sesión en SA: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
   \item Dirige el explorador a la pantalla de búsqueda de órdenes de reposición.
   \item Llena el formulario para el filtro de búsqueda:
   \begin{enumerate}
@@ -352,40 +358,40 @@ Queda fuera de alcance: la actualización masiva del estado de órdenes de repos
     \item Estado \textbf{Cancelada}.
   \end{enumerate}
   \item Del listado de órdenes de reposición resultantes genera una lista con el número de orden de cada renglón.
-  \item Con el listado del paso anterior se realiza el caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SAI}.
+  \item Con el listado del paso anterior se realiza el caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA}.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
-  \item Se cuenta con la relación de órdenes de reposición atendidas por el sistema que han sido canceladas en el portal SAI y no se tenía conocimiento previo.
-  \item Las órdenes de reposición publicadas en el portal SAI dentro de los últimos siete día a la fecha actual reflejan en la base de datos dentro del campo \textbf{Estado SAI} el estado de vigencia en el portal SAI.
+  \item Se cuenta con la relación de órdenes de reposición atendidas por el sistema que han sido canceladas en el SA y no se tenía conocimiento previo.
+  \item Las órdenes de reposición publicadas en el SA dentro de los últimos siete día a la fecha actual reflejan en la base de datos dentro del campo \textbf{Estado SA} el estado de vigencia en el SA.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item Cualquier error durante la ejecución de este caso de uso será registrado en la bitácora el sistema.
 \end{enumerate}
 
 
-\subsection{Actualizar estatus SAI}
-\paragraph{Identificador}
-CU-ACTUALIZAR-ESTATUS-SAI
-\paragraph{Actores}
+\subsection{Actualizar estatus SA}
+\paragraph*{Identificador}
+CU-ACTUALIZAR-ESTATUS-SA
+\paragraph*{Actores}
 Robot
-\paragraph{Descripción}
-Actualizar en forma masiva el estado de atención en el portal SAI dentro de la base de datos del sistema AutoSAI.
-\paragraph{Precondiciones}
+\paragraph*{Descripción}
+Actualizar en forma masiva el estado de atención en el SA dentro de la base de datos del sistema AutoSA.
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item Se cuenta con una lista de órdenes de reposición.
-  \item Las órdenes listadas tienen estado \textbf{Cancelada} en el portal SAI. 
+  \item Las órdenes listadas tienen estado \textbf{Cancelada} en el SA. 
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
-  \item Actualiza el estado SAI de las órdenes de reposición en la base de datos.
+  \item Actualiza el estado SA de las órdenes de reposición en la base de datos.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
-  \item Las órdenes de reposición recibidas tienen estado \textbf{Cancelada} en el campo \textbf{Estado SAI} dentro de la base de datos.
+  \item Las órdenes de reposición recibidas tienen estado \textbf{Cancelada} en el campo \textbf{Estado SA} dentro de la base de datos.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item Las órdenes de reposición que no estén registradas en la base de datos se registrarán con campos nulos a excepción del número de orden.
   \item Cualquier error durante la ejecución de este caso de uso será registrado en la bitácora el sistema.
@@ -393,18 +399,18 @@ Actualizar en forma masiva el estado de atención en el portal SAI dentro de la 
 
 
 \subsection{Entrar en interfaz Web}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-ENTRAR-WEB
-\paragraph{Actores}
+\paragraph*{Actores}
 Usuario
-\paragraph{Descripción}
+\paragraph*{Descripción}
 Explicar la función que autoriza la entrada a la interfaz Web del sistema (ver Figura \ref{fig:dia-casos-uso}) donde los usuarios pueden hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item El usuario se encuentra previamente registrado en el sistema.
   \item El usuario cuanta con credenciales vigentes para ingresar a la interfaz web.
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item El sistema muestra la pantalla de acceso.
   \item El usuario ingresa los campos:
@@ -416,12 +422,12 @@ Explicar la función que autoriza la entrada a la interfaz Web del sistema (ver 
   \item El sistema compara la contraseña provista por el usuario con el valor almacenado en la base de datos.
   \item Muestra la pantalla de generación de reportes.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item El usuario cuenta con un código temporal de acceso a la interfaz web.
   \item Se muestra la pantalla de generación de reportes.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item En los siguientes esceneracios se concideran un error de autencación.
   \begin{itemize}
@@ -432,17 +438,17 @@ Explicar la función que autoriza la entrada a la interfaz Web del sistema (ver 
 \end{enumerate}
 
 \subsection{Generar reporte}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-GENERAR-REPORTE
-\paragraph{Actores}
+\paragraph*{Actores}
 Usuario
-\paragraph{Descripción}
+\paragraph*{Descripción}
 Este caso de uso ofrece al usuario la generación de reportes, es decir, ejecutar una consulta a la base de datos y vaciar el resultado en un archivo. La consulta puede ser ejecutada sobre una o más tablas, es importante mencionar que existen catálogos con claves de productos y clientes que cambian constantemente, ver caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item El usuario navega a la pantalla de generación de reportes.
   \item En la pantalla de generación de reportes el usuario realiza las siguientes acciones:
@@ -462,30 +468,30 @@ Este caso de uso ofrece al usuario la generación de reportes, es decir, ejecuta
     \item Muestra al usuario la ruta en el sistema de archivos donde fue depositado el reporte.
   \end{enumerate}
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item El reporte se encuentra en el sistema de archivos dentro un archivo con formato extendido de Excel.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item Si el reporte no cuenta con registros el archivo no se genera y se muestra un mensaje al usuario indicando la situación.
 \end{enumerate}
 
 
 \subsection{Actualizar catálogo}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-ACTUALIZAR-CATALOGO
-\paragraph{Actores}
+\paragraph*{Actores}
 Usuario
-\paragraph{Descripción}
+\paragraph*{Descripción}
 Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz Web.
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
   \item El archivo ingresado tiene formato extendido de Excel.
   \item Los catálogos que pueden ser modificados por este caso de uso son aquellos que contienen códigos de medicamentos y lugares de entrega.
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item El usuario navega a la pantalla de administración de catálogos.
   \item El usuario realiza las siguientes acciones en la pantalla de administración de catálogos:
@@ -502,11 +508,11 @@ Define la actualización masiva de los catálogos en la base de datos mediante u
     \item Muestra al usuario el número de registros guardados en el catálogo después de la actualización.
   \end{enumerate}
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item El catálogo ha sido actualizado al contenido del archivo proporcionado por el usuario.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item Si el archivo no cuanta con el formato solicitado, entonces se muestra un mensaje de error al usuario y se cancela la ejecución sin modificar el catálogo en la base de datos.
   \item Si el archivo no contiene ningún registro para el catálogo, entonces se muestra un mensaje de error al usuario y se cancela la ejecución sin modificar el catálogo en la base de datos.
@@ -514,16 +520,16 @@ Define la actualización masiva de los catálogos en la base de datos mediante u
 
 
 \subsection{Buscar órdenes}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-BUSCAR
-\paragraph{Actores}
+\paragraph*{Actores}
 Usuario
-\paragraph{Descripción}
-\paragraph{Precondiciones}
+\paragraph*{Descripción}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item El usuario navega a la pantalla de búsqueda de órdenes de reposición.
   \item El usuario realiza ingresa los criterios para la búsqueda presentados en el filtro:
@@ -534,72 +540,72 @@ Usuario
   \end{enumerate}
   \item El sistema muestra el resultado de la búsqueda, para cada orden de reposición listada se muestra un enlace que lleva a la visualización de la orden (ver casos de uso \textbf{CU-VISUALIZAR}).
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item Se muestra un listado con las órdenes de reposición que cumplen con el filtro definido por el usuario durante el caso de uso.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item En caso de no contar con conexión a la base de datos se muestra un mensaje de error informando al usuario.
 \end{enumerate}
 
 
 \subsection{Visualizar orden}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-VISUALIZAR
-\paragraph{Actores}
+\paragraph*{Actores}
 Usuario
-\paragraph{Descripción}
+\paragraph*{Descripción}
 La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, para llegar a esta página es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición y seleccionado la orden para visualizar, como se muestra en la Figura \ref{fig:dia-casos-uso} (ver caso de uso \textbf{CU-BUSCAR}).
-\paragraph{Precondiciones}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
   \item El usuario localiza la orden de reposición que desea visualizar (ver caso de uso \textbf{CU-BUSCAR})
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item El usuario navega a la pantalla de visualización de la orden de reposición seleccionada (ver caso de uso \textbf{CU-BUSCAR}).
   \item Se muestra la pantalla con los datos de la orden:
   \begin{enumerate}
-    \item Se muestran todos los datos capturados del portal SAI durante el procedimiento de atención.
-    \item También se muestran los estados de atención, es decir el estado en el portal SAI  y el estado de atención.
+    \item Se muestran todos los datos capturados del SA durante el procedimiento de atención.
+    \item También se muestran los estados de atención, es decir el estado en el SA  y el estado de atención.
   \end{enumerate}
   \item Se muestran enlaces para que el usuario pueda editar los datos de la orden (ver caso de uso \textbf{CU-EDITAR}) y también para generar el acuse de envío (ver caso de uso \textbf{CU-GENERAR-ACUSE}).
   \item En caso de seleccionar la generación del acuse de envío se ejecuta el caso de uso \textbf{CU-GENERAR-ACUSE}.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item Se muestra una pantalla al usuario con los datos de la orden de reposición solicitada, además las opciones para editar y generar el acuse de envío.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item En caso de no contar con conexión a la base de datos se muestra un mensaje de error informando al usuario.
 \end{enumerate}
 
 
 \subsection{Editar orden}
-\paragraph{Identificador}
+\paragraph*{Identificador}
 CU-EDITAR
-\paragraph{Actores}
+\paragraph*{Actores}
 Usuario
-\paragraph{Descripción}
-\paragraph{Precondiciones}
+\paragraph*{Descripción}
+\paragraph*{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
   \item El usuario visualiza la orden de reposición que desea editar (ver caso de uso \textbf{CU-VISUALIZAR}).
   \item Los campos utilizados para identificar unívocamente la orden de reposición no podrán ser modificados. 
 \end{enumerate}
-\paragraph{Secuencia normal}
+\paragraph*{Secuencia normal}
 \begin{enumerate}
   \item El usuario navega a la pantalla de edición con la orden de reposición visualizada (ver caso de uso \textbf{CU-VISUALIZAR}).
   \item Modificar cualquiera de los campos editables.
   \item Seleccionar el botón Guardar.
 \end{enumerate}
-\paragraph{Postcondiciones}
+\paragraph*{Postcondiciones}
 \begin{enumerate}
   \item Los datos modificados por el usuario en la interfaz web se encuentran almacenados en la base de datos.
 \end{enumerate}
-\paragraph{Excepciones}
+\paragraph*{Excepciones}
 \begin{enumerate}
   \item En caso de no contar con conexión a la base de datos se muestra un mensaje de error informando al usuario.
 \end{enumerate}
