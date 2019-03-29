@@ -92,22 +92,44 @@ Es componente que ofrece al usuario las funcionalidades de una interfaz web.
 
 %===============================================================================
 %===============================================================================
-%
-%
-%\section{Diseño de la base de datos}
-%La base de datos tiene dos finalidades, guardar la información capturada de las órdenes de reposición atendidas así como los catálogos necesarios para los procesos automatizados y generación de reportes; la segunda es guardar la información de los usuarios autorizados para utilizar el portal web.\\
-%Tablas para automatización:
-%\begin{itemize}
-%	\item Órdenes de reposición: contiene la información capturada de las órdenes de reposición atendidas
-%	\item Catálogo de estados de atención: estados por lo que pasa una orden de reposición cuando es atendida, tal y como se mostró en el diagrama <<hacer cita al diagrama de estados>>.
-%	\item Catálogo de estados SAP: contiene los estados que puede tener una orden de reposición que ya ha sido contestada, es decir, vigente y cancelada.
-%	\item Catálogos con claves de medicamentos y centros de salud.
-%	\item Tablas para contener usuario del portal web:
-%	\item Información de usuario: 
-%	\item Credenciales de usuario
-%\end{itemize}
-%
-%
+
+
+\section{Diseño de la base de datos}
+La base de datos tiene dos finalidades, guardar la información capturada de las órdenes de reposición atendidas así como los catálogos necesarios para los procesos automatizados y generación de reportes; la segunda es guardar la información de los usuarios autorizados para utilizar el portal web.\\
+Tablas para automatización:
+\begin{itemize}
+	\item Órdenes de reposición: contiene la información capturada de las órdenes de reposición atendidas
+	\item Catálogo de estados de atención: estados por lo que pasa una orden de reposición cuando es atendida, tal y como se mostró en el diagrama <<hacer cita al diagrama de estados>>.
+	\item Catálogo de estados SAP: contiene los estados que puede tener una orden de reposición que ya ha sido contestada, es decir, vigente y cancelada.
+	\item Catálogos con claves de medicamentos y centros de salud.
+	\item Tablas para contener usuario del portal web:
+	\item Información de usuario: 
+	\item Credenciales de usuario
+\end{itemize}
+
+\subsection{Diccionario de Datos}
+\subsubsection{Tablas}
+\paragraph*{sesion} Define una sesión bajo la cual se ejecuta un script de automatización, la sesión puede definir implísitamente un usuario y un rol.
+
+\paragraph*{bitacora} Lleva el registro de eventos ocurridos durante la ejecución del script de automatización, el evento puede estar ligado a una sesión.
+
+\paragraph*{ordenes{\textunderscore}imss} Contiene el registro de las órdenes de reposición del portal SAI que han sido procesadas por el script de automatización.
+
+\paragraph*{cat{\textunderscore}estatus{\textunderscore}orden} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
+
+\paragraph*{cat{\textunderscore}estatus{\textunderscore}sai} Este catálogo contiene los estados definidos por el portal SAI para una orden de reposición.
+
+\paragraph*{cat{\textunderscore}clientes} Este catálogo refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja CLIENTES del archivo LICITACION  CARGA IMSS 2014.xlsx.
+
+\paragraph*{cat{\textunderscore}contratos} Este catálogo refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja CONTRATOS del archivo LICITACION  CARGA IMSS 2014.xlsx.
+
+
+\subsubsection{Vistas}
+\paragraph*{matriz{\textunderscore}imss} Esta vista refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja MATRIZ del archivo LICITACION  CARGA IMSS 2014.xlsx.
+
+\paragraph*{layout{\textunderscore}imss{\textunderscore}sap} Esta vista refleja el contenido de la hoja Formato de carga SAP del archivo CARGA MASIVA IMSS HECTOR.xlsm después de haber aplicado la macro que contiene sobre el archivo LICITACION  CARGA IMSS 2014.xlsx.
+
+
 %===============================================================================
 %===============================================================================
 %

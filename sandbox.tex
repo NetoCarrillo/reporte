@@ -1,10 +1,49 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[letterpaper,11pt]{report}
+
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage{apacite}
+
+%idioma
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+
+%formato de bibliografia y citas
+\usepackage{cite}
+%\usepackage{apacite}
  
 \usepackage[nottoc]{tocbibind}
- 
+
+\usepackage{etoc}
+\usepackage{blindtext}
+
+%Imagenes
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+%\usepackage[font=small,skip=20pt]{caption}
+\setlength{\abovecaptionskip}{15pt plus 5pt minus 2pt}
+
+%Espacio de interlineado
+\usepackage{setspace}
+\thispagestyle{empty}
+\doublespacing
+
+%Tamaño de márgenes
+\usepackage[left=1.25in, right=1.25in]{geometry}
+
+%Colores en el texto
+\usepackage{xcolor}
+
+% Incluir subsubsection en el índice
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{4}
+
+% Landscape pages on demand
+\usepackage{lscape}
+
+
+% tablas
+\usepackage{longtable} % Long tables
+\usepackage{rotating} % To display tables in landscape
+
 \begin{document}
  
 \tableofcontents
@@ -12,24 +51,259 @@
 \section{First Section}
 This document ...
 
-hash function, 256, 262–269
-	auxiliary, 272
-	collision-resistant, 964
-	division method for, 263, 268–269 ex.
-	\epsilon -universal, 269 ex.
-	multiplication method for, 263–264
-	universal, 265–268
-1267 \\
+
+\paragraph*{sesion} Define una sesión bajo la cual se ejecuta un script de automatización, la sesión puede definir implísitamente un usuario y un rol.
+\begin{longtable}{l|l|p{7cm}}
+\caption{Tabla sesion.}\label{tab:tab-sesion}\\
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline
+	{\fontfamily{pcr}\selectfont id}& number & Número identificador \\
+	\hline
+	{\fontfamily{pcr}\selectfont id{\textunderscore}usuario} & number & Identificador de usuario que creó la sesión \\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}creacion} & datetime & Hora y fecha en que se registró la sesión. Default: CURRENT{\textunderscore}TIMESTAMP \\ 
+	\hline
+	{\fontfamily{pcr}\selectfont id{\textunderscore}usuario{\textunderscore}fin} & number & Identificador de usuario que finalizó la sesión \\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}fin} & datetime & Hora y fecha en que se finalizó la sesión\\
+	\hline
+	{\fontfamily{pcr}\selectfont activa} & number & Indicador de actividad en la sesión. Default: 1\\
+	\hline
+	{\fontfamily{pcr}\selectfont rol} & number & Rol para el cuál fue creada la sesión.
+\end{longtable}
+
+\paragraph*{bitacora} Lleva el registro de eventos ocurridos durante la ejecución del script de automatización, el evento puede estar ligado a una sesión.
+\begin{longtable}{l|l|p{7cm}}
+\caption{Tabla bitacora.}\label{tab:tab-bitacora}\\
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline
+	{\fontfamily{pcr}\selectfont id} & number & Número identificador\\
+	\hline
+	{\fontfamily{pcr}\selectfont id{\textunderscore}sesion} & number & Identificador de sesión desde la cual se hizo el registro.\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha} & datetime & Hora y fecha en la que se realizó el registro Default: CURRENT{\textunderscore}TIMESTAMP\\
+	\hline
+	{\fontfamily{pcr}\selectfont descripcion} & text & Descripción del evento.
+\end{longtable}
+
+\paragraph*{ordenes{\textunderscore}imss} Contiene el registro de las órdenes de reposición del portal SAI que han sido procesadas por el script de automatización.
+%\begin{landscape}
+\begin{longtable}{l|l|p{7cm}}
+	\caption{Tabla ordenes{\textunderscore}imss.}\label{tab:tab-ordenes-imss}\\
+
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline
+	{\fontfamily{pcr}\selectfont id} & number & Número identificador\\
+	\hline
+	{\fontfamily{pcr}\selectfont contrato} & text & Cadena alfanumérica con el identificador de contrato\\
+	\hline
+	{\fontfamily{pcr}\selectfont solicitud} & number & Número de solicitud\\
+	\hline
+	{\fontfamily{pcr}\selectfont orden} & number & Número de orden de reposición\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}expedicion} & text & Fecha de expedición\\
+	\hline
+	{\fontfamily{pcr}\selectfont almacen{\textunderscore}destino} & number & Número identificador del almacén destino\\
+	\hline
+	{\fontfamily{pcr}\selectfont estatus} & number & Estatus en el proceso de atención Default: 1\\
+	\hline
+	{\fontfamily{pcr}\selectfont cbb} & number & Clave de Cuadro Básico\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}vencimiento} & text & Fecha de vencimiento\\
+	\hline
+	{\fontfamily{pcr}\selectfont cantidad} & number & Cantidad solicitada\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}insersion} & datetime & Fecha en la que fue registrada la orden en la base de datos. Default: CURRENT{\textunderscore}TIMESTAMP\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}estatus} & datetime & Fecha en la que se registró el último cambio de estatus Default: CURRENT{\textunderscore}TIMESTAMP\\
+	\hline
+	{\fontfamily{pcr}\selectfont id{\textunderscore}sesion{\textunderscore}insersion} & number & Identificador de la sesión que realizó el registro en la base de datos\\
+	\hline
+	{\fontfamily{pcr}\selectfont id{\textunderscore}sesion{\textunderscore}estatus} & number & Identificador de la sesión que realizó el último cambio de estatus\\
+	\hline
+	{\fontfamily{pcr}\selectfont url{\textunderscore}con} & text & URL de SAI para realizar la contestación\\
+	\hline
+	{\fontfamily{pcr}\selectfont url{\textunderscore}env} & text & URL de SAI para realizar el envío\\
+	\hline
+	{\fontfamily{pcr}\selectfont confirmacion} & number & Número de confirmación de envío\\
+	\hline
+	{\fontfamily{pcr}\selectfont articulo} & text & Artículo según la descripción del campo en la pantalla de finalización de SAI\\
+	\hline
+	{\fontfamily{pcr}\selectfont unidad} & text & Unidad a la que se refiere la cantidad solicitada según la pantalla de finalización de SAI\\
+	\hline
+	{\fontfamily{pcr}\selectfont precio} & number & Precio por unidad\\
+	\hline
+	{\fontfamily{pcr}\selectfont lugar{\textunderscore}entrega} & text & Lugar de entrega\\
+	\hline
+	{\fontfamily{pcr}\selectfont lote} & text & Identificador del lote\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}fabricacion} & text & Fecha de fabricación\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}caducidad} & text & Fecha de caducidad\\
+	\hline
+	{\fontfamily{pcr}\selectfont marca} & text & La marca del medicamento como se describe en la pantalla de contestación\\
+	\hline
+	{\fontfamily{pcr}\selectfont procedencia} & text & La procedencia del medicamento como se describe en la pantalla de contestación\\
+	\hline
+	{\fontfamily{pcr}\selectfont estatus{\textunderscore}sai} & number & Estatus de la orden de reposición en el portal SAI\\
+	\hline
+	{\fontfamily{pcr}\selectfont estatus{\textunderscore}sap} & number & Estatus de la orden de reposición en el sistema interno de MAYPO\\
+\end{longtable}
+%\end{landscape}
+
+\paragraph*{cat{\textunderscore}estatus{\textunderscore}orden} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
+\begin{longtable}{l|l|p{7cm}}
+\caption{Tabla cat{\textunderscore}estatus{\textunderscore}orden.}\label{tab:tab-cat-estatus-orden}\\
+
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline
+	{\fontfamily{pcr}\selectfont id} & number & Número identificador \\
+	\hline
+	{\fontfamily{pcr}\selectfont nombre} & text & Nombre corto del estatus
+\end{longtable}
+
+\paragraph*{cat{\textunderscore}estatus{\textunderscore}sai} Este catálogo contiene los estados definidos por el portal SAI para una orden de reposición.
+\begin{longtable}{l|l|p{7cm}}
+\caption{Tabla cat{\textunderscore}estatus{\textunderscore}sai.}\label{tab:tab-cat-estatus-sai}\\
+
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline	
+	{\fontfamily{pcr}\selectfont id} & number & Número identificador \\
+	\hline
+	{\fontfamily{pcr}\selectfont nombre} & text & Nombre corto del estatus
+\end{longtable}
+
+\paragraph*{cat{\textunderscore}clientes} Este catálogo refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja CLIENTES del archivo LICITACION  CARGA IMSS 2014.xlsx.
+\begin{longtable}{l|l|p{7cm}}
+\caption{Tabla cat{\textunderscore}clientes.}\label{tab:tab-cat-clientes}\\
+
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline	
+	{\fontfamily{pcr}\selectfont lugar{\textunderscore}entrega} & number & Columna A, LUGAR DE ENTREGA\\
+	\hline
+	{\fontfamily{pcr}\selectfont factura} & number & Columna B, FACTURA\\
+	\hline
+	{\fontfamily{pcr}\selectfont destino}  & number & Columna C, DESTINO\\
+	\hline
+	{\fontfamily{pcr}\selectfont consignado{\textunderscore}controlado}  & number & Columna D, CONSIGNADO CONTROLADO\\
+	\hline
+	{\fontfamily{pcr}\selectfont almacen} & text & Columna E, ALMACEN \\
+	\hline
+	{\fontfamily{pcr}\selectfont entrega} & text & Columna F, ENTREGA
+\end{longtable}
+
+\paragraph*{cat{\textunderscore}contratos} Este catálogo refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja CONTRATOS del archivo LICITACION  CARGA IMSS 2014.xlsx.
+\begin{longtable}{l|l|p{7cm}}
+\caption{Tabla cat{\textunderscore}contratos.}\label{tab:tab-cat-contratos}\\
+
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline	
+	{\fontfamily{pcr}\selectfont pedido} & text & Columna B, No PEDIDO\\
+	\hline
+	{\fontfamily{pcr}\selectfont documento{\textunderscore}comercial} & number & Columna C, DOCUMENTO  COMERCIAL\\
+	\hline
+	{\fontfamily{pcr}\selectfont cbb} & number & Columna F, CCB\\
+	\hline
+	{\fontfamily{pcr}\selectfont material} & number & Columna G, MATERIAL\\
+	\hline
+	{\fontfamily{pcr}\selectfont tipo} & text & Columna I, TIPO\\
+	\hline
+	{\fontfamily{pcr}\selectfont etiqueta} & text & Columna Q, ETIQUETA\\
+	\hline
+	{\fontfamily{pcr}\selectfont fianza} & number & Columna U, FIANZA
+\end{longtable}
 
 
-The first is as follows:
-\begin{quote}
-\cite{Scrum} Will this work
-\end{quote}
+\subsubsection{Vistas}
+\paragraph*{matriz{\textunderscore}imss} Esta vista refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja MATRIZ del archivo LICITACION  CARGA IMSS 2014.xlsx.
+\begin{longtable}{l|l|p{7cm}}
+\caption{Tabla matriz{\textunderscore}imss.}\label{tab:tab-matriz-imss}\\
 
-\nocite{*} 
-% \bibliographystyle{unsrt}
-\bibliographystyle{apacite}
-\bibliography{bibliografia}
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline
+	{\fontfamily{pcr}\selectfont documento{\textunderscore}comercial} & number & El máximo de la columna documento{\textunderscore}comercial de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales sean iguales a los de la orden de reposición.\\
+	\hline
+	{\fontfamily{pcr}\selectfont fianza} & number & El máximo de la columna fianza de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales sean iguales a los de la orden de reposición.\\
+	\hline
+	{\fontfamily{pcr}\selectfont solicitud} & number & Columna solicitud de la orden.\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}expedicion} & text & Columna fecha{\textunderscore}expedicion de la orden.\\
+	\hline
+	{\fontfamily{pcr}\selectfont orden} & number & Columna orden de la orden de reposición.\\
+	\hline
+	{\fontfamily{pcr}\selectfont factura} & number & El máximo de la columna factura de los renglones del catálogo de clientes cuyo almacén destino de la orden de reposición sea igual al lugar de entrega del catálogo.\\
+	\hline
+	{\fontfamily{pcr}\selectfont cte{\textunderscore}destino} & number & Sí el tipo del contrato de la orden de reposición es CONTROLADO, entonces se debe tomar el máximo valor de la columna consigando{\textunderscore}controlado del catálogo de clientes cuyo almacén destino de la orden de reposición sea igual al lugar de entrega del catálogo. En caso contrario se debe tomar el máximo de la columna destino con los mismos criterios del caso anterior.\\
+	\hline
+	{\fontfamily{pcr}\selectfont entrega} & text & El máximo de la columna entrega de los renglones del catálogo de clientes cuyo almacén destino de la orden de reposición sea igual al lugar de entrega del catálogo.\\
+	\hline
+	{\fontfamily{pcr}\selectfont material} & number & El máximo de la columna material de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales sean iguales a los de la orden de reposición.\\
+	\hline
+	{\fontfamily{pcr}\selectfont instrucciones{\textunderscore}etiquetado} & text & Columna U, INSTRUCCIONES DE ETIQUETADO  (archivo Excel)
+El máximo de la concatenación de las columnas etiqueta y cbb (separadas por un espacio) de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales a los de la orden de reposición.\\
+	\hline
+	{\fontfamily{pcr}\selectfont cantidad} & number & Cantidad solicitada de la orden de reposición\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}vencimiento} & text & Fecha de vencimiento de la orden de reposición\\
+	\hline
+	{\fontfamily{pcr}\selectfont sesion} & number & Sesión con la cual fue finalizada la orden de reposición, esta columna no está contenida en el archivo de Excel. Identificador de la sesión que realizó el último cambio de estatus.
+\end{longtable}
+
+\paragraph*{layout{\textunderscore}imss{\textunderscore}sap} Esta vista refleja el contenido de la hoja Formato de carga SAP del archivo CARGA MASIVA IMSS HECTOR.xlsm después de haber aplicado la macro que contiene sobre el archivo LICITACION  CARGA IMSS 2014.xlsx.
+\begin{longtable}{l|l|p{7cm}}
+\caption{Tabla layout{\textunderscore}imss{\textunderscore}sap.}\label{tab:tab-layout-imss-sap}\\
+
+	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
+	\hline
+	{\fontfamily{pcr}\selectfont documento{\textunderscore}comercial} & number & Columna A, DSADAS Columna documento{\textunderscore}comercial de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont solicitante} & number & Columna B, Solicitante Valor constante 100002\\
+	\hline
+	{\fontfamily{pcr}\selectfont solicitud} & number & Columna C, SOLICITUD Columna solicitud de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}expedicion} & text & Columna D, FECHA DE EXPEDICIÓN Columna fecha{\textunderscore}expedicion de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont orden} & number & Columna E, ORDEN REPOSICIÓN Columna orden de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont factura} & number & Columna F, CTE FACTURA Columna factura de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont cte{\textunderscore}destino} & number & Columna G, CTE DESTINO Columna cte{\textunderscore}destino de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont material} & number & Columna H, MATERIAL SAP Columna material de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont instrucciones{\textunderscore}etiquetado} & number & Columna I, INTRUCCIONES DE ETIQUETADO Columna instrucciones{\textunderscore}etiquetado de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont cantidad} & number & Columna J, CANTIDAD SOLICITADA Columna cantidad de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}limite} & text & Columna K, FECHA LÍMITE Columna fecha{\textunderscore}vencimiento de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont fianza} & number & Columna L, Número de fianza Columna fianza de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont fecha{\textunderscore}preferente} & text & Columna M, Fecha preferente de entrega Columna fecha{\textunderscore}vencimiento de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont entrega} & text & Columna N, Instrucciones para distribución Columna entrega de vista matriz{\textunderscore}imss\\
+	\hline
+	{\fontfamily{pcr}\selectfont sesion} & number & Sesión con la cual fue finalizada la orden de reposición, esta columna no está contenida en el archivo de Excel.
+\end{longtable}
+
+%hash function, 256, 262–269
+%	auxiliary, 272
+%	collision-resistant, 964
+%	division method for, 263, 268–269 ex.
+%	\epsilon -universal, 269 ex.
+%	multiplication method for, 263–264
+%	universal, 265–268
+%1267 \\
+%
+%
+%The first is as follows:
+%\begin{quote}
+%\cite{Scrum} Will this work
+%\end{quote}
+%
+%\nocite{*} 
+%% \bibliographystyle{unsrt}
+%\bibliographystyle{apacite}
+%\bibliography{bibliografia}
  
 \end{document}
