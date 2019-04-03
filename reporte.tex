@@ -6,6 +6,9 @@
 \usepackage[spanish]{babel}
 \selectlanguage{spanish}
 
+%Apendice
+\usepackage[toc,page]{appendix}
+
 %formato de bibliografia y citas
 \usepackage{cite}
 %\usepackage{apacite}
@@ -34,13 +37,14 @@
 
 % Incluir subsubsection en el índice
 \setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{4}
+\setcounter{tocdepth}{3}
 
 % Landscape pages on demand
 \usepackage{lscape}
 
 % tablas
 \usepackage{longtable} % Long tables
+\usepackage{multirow} % Multirows
 
 \begin{document}
 
@@ -74,6 +78,11 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 
 \include{capitulo4}
 
+\begin{appendices}
+\include{datadictionary}
+\include{uml}
+\include{designpatterns}
+\end{appendices}
 
 %Bibliografia
 \renewcommand{\bibname}{Bibliografía}
