@@ -455,7 +455,9 @@ El componente que contiene y ejecuta las rutinas de automatización, esto es med
 
 \subsubsection{Portal Web}
 Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de reportes y Sistema de archivos.\\
-No ofrece interfaces a los demás componentes, al igual que el componente Robot. 
+No ofrece interfaces a los demás componentes, al igual que el componente Robot.\\
+\textcolor{red}{mencionar el flujo de autenticar usuarios}.
+
 
 %===============================================================================
 %===============================================================================
@@ -463,79 +465,69 @@ No ofrece interfaces a los demás componentes, al igual que el componente Robot.
 
 \section{Diseño de la base de datos}
 La base de datos tiene dos finalidades, guardar la información capturada de las órdenes de reposición atendidas así como los catálogos necesarios para los procesos automatizados y generación de reportes; la segunda es guardar la información de los usuarios autorizados para utilizar el portal web.\\
-El diseño de la base de datos se centra en los siguientes grupos:
+El diseño de la base de datos se centra en los siguientes grupos\footnote{Los nombres de las tablas están escritos utilizando letras minúsculas de alfabeto inglés y guión bajo $([a-z]{\textunderscore})^+$}(ver Figura \ref{fig:dia-er-resumen}):
 \begin{enumerate}
+	\item Tablas del registro de eventos.
 	\item Tablas de las órdenes de reposición.
 	\item Tablas de los usuarios de la interfaz web.
-	\item Tablas del registro de eventos.
-	\item Vistas de las consultas para reportes.
+	\item Catálogos para generación de reportes.
 \end{enumerate}
-
-\section{Tablas de las órdenes de reposición}
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{dia-er-bitacora} 
-  \caption{\textcolor{red}{Diagrama Entidad Relación para el registro de ordenes de reposición. \newline insertar diagrama}}
-  \label{fig:dia-er-bitacora}
+  \includegraphics[width=\textwidth]{dia-er-resumen}
+  \caption{Diagrama Entidad Relación de el Sistema AutoSA.}
+  \label{fig:dia-er-resumen}
 \end{figure}
 
-
-\paragraph{ordenes{\textunderscore}imss} Contiene el registro de las órdenes de reposición del portal SAI que han sido procesadas por el script de automatización.
-
-\paragraph{cat{\textunderscore}estatus{\textunderscore}orden} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
-
-\paragraph{cat{\textunderscore}estatus{\textunderscore}sai} Este catálogo contiene los estados definidos por el portal SAI para una orden de reposición.
-
-\paragraph{cat{\textunderscore}clientes} Este catálogo refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja CLIENTES del archivo LICITACION  CARGA IMSS 2014.xlsx.
-
-\paragraph{cat{\textunderscore}contratos} Este catálogo refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja CONTRATOS del archivo LICITACION  CARGA IMSS 2014.xlsx.
-
-
-\section{Tablas de los usuarios de la interfaz web}
+\subsection{Tablas del registro de eventos}
+El registro de eventos es todo lo relacionado con actividad de los actores del sistema (robots de automatización y usuarios), como se muestra en la Figura \ref{fig:dia-er-bitacora}.
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{dia-er-bitacora} 
-  \caption{\textcolor{red}{Diagrama Entidad Relación para el manejo de usuarios. \newline insertar diagrama}}
-  \label{fig:dia-er-bitacora}
-\end{figure}
-
-\section{Tablas del registro de eventos}
-El registro de eventos es todo lo relacionado con actividad de los actores del sistema (robots de automatización y usuarios), a continuación se muestra el diagrama y propósito de las tablas y campos principales:
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{dia-er-bitacora} 
+  \includegraphics[scale=0.4]{dia-er-bitacora} 
   \caption{Diagrama Entidad Relación para el registro de eventos.}
   \label{fig:dia-er-bitacora}
 \end{figure}
-
-\paragraph{bitacora\\} Lleva el registro de eventos ocurridos durante la ejecución del script de automatización, el evento puede estar ligado a una sesión.
+\paragraph{bitacora\\} Lleva el registro de eventos ocurridos durante la ejecución de las rutinas de automatización, el evento puede estar ligado a una sesión.
 \paragraph{cat{\textunderscore}tipo{\textunderscore}evento\\} Catálogo con los tipos de eventos que pueden ser registrados en la bitácora.
-\paragraph{sesion\\} Define una sesión bajo la cual se ejecuta un script de automatización, la sesión puede definir implísitamente un usuario y un rol.
+\paragraph{sesion\\} Define una sesión bajo la cual se ejecuta una rutina de automatización, la sesión puede definir implícitamente un usuario y un rol.
 
-
-\section{Vistas de las consultas para reportes}
+\subsection{Tablas de las órdenes de reposición}
+En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes de reposición atendidas durante la rutina automatizada para responder órdenes de reposición en SA\footnote{Ver caso de uso \ref{cu-contestar}}, de igual manera también es utilizada en la verificación de órdenes de reposición canceladas\footnote{Ver caso de uso \ref{cu-verificar}}.
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{dia-er-bitacora} 
-  \caption{\textcolor{red}{Diagrama Entidad Relación para la generación de vistas.
-  \newline investigar si existe este tipo de diagramas o me lo estoy inventando... aunque pienso que debería existir.}}
-  \label{fig:dia-er-bitacora}
+  \includegraphics[scale=0.4]{dia-er-ordenes} 
+  \caption{Diagrama Entidad Relación para el registro de ordenes de reposición.}
+  \label{fig:dia-er-ordenes}
 \end{figure}
-\textcolor{red}{insertar diagrama}
-\paragraph{matriz{\textunderscore}imss} Esta vista refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja MATRIZ del archivo LICITACION  CARGA IMSS 2014.xlsx.
+\paragraph{ordenes{\textunderscore}is\\} Contiene el registro de las órdenes de reposición de SA que han sido atendidas por la rutina de automatización.
+\paragraph{cat{\textunderscore}estatus{\textunderscore}orden\\} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
+\paragraph{cat{\textunderscore}estatus{\textunderscore}sa\\} Este catálogo contiene los estados definidos por SA para una orden de reposición.
 
-\paragraph{layout{\textunderscore}imss{\textunderscore}sap} Esta vista refleja el contenido de la hoja Formato de carga SAP del archivo CARGA MASIVA IMSS HECTOR.xlsm después de haber aplicado la macro que contiene sobre el archivo LICITACION  CARGA IMSS 2014.xlsx.
 
-Tablas para automatización:
-\begin{itemize}
-	\item Órdenes de reposición: contiene la información capturada de las órdenes de reposición atendidas
-	\item Catálogo de estados de atención: estados por lo que pasa una orden de reposición cuando es atendida, tal y como se mostró en el diagrama <<hacer cita al diagrama de estados>>.
-	\item Catálogo de estados SAP: contiene los estados que puede tener una orden de reposición que ya ha sido contestada, es decir, vigente y cancelada.
-	\item Catálogos con claves de medicamentos y centros de salud.
-	\item Tablas para contener usuario del portal web:
-	\item Información de usuario: 
-	\item Credenciales de usuario
-\end{itemize}
+\subsection{Tablas de los usuarios de la interfaz web}
+Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz web\footnote{Ver caso de uso \ref{cu-entrar-web}} (ver Figura \ref{fig:dia-er-web}).
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{dia-er-web} 
+  \caption{Diagrama Entidad Relación para el manejo de usuarios.}
+  \label{fig:dia-er-web}
+\end{figure}
+\paragraph{roles\\}Contiene los roles (permisos) que los usuarios pueden tener en la interfaz web.
+\paragraph{sesion\\}Contiene información de las sesiones de los usuarios de la interfaz web.
+\paragraph{usuarios{\textunderscore}web\\} Contiene la información de los usuarios de la interfaz web.
+\paragraph{credenciales\\} Contiene la credenciales con las cuales los usuarios autentican su acceso a la interfaz web.
+
+
+\subsection{Catálogos para la generación de reportes}
+Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son necesarios para la generación de los reportes\footnote{Ver casos de uso \ref{cu-generar-reporte} y \ref{cu-actualizar-catalago}} que sirven que las siguientes áreas de la farmacéutica continúen con la atención de las órdenes de reposición.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{dia-er-reportes} 
+  \caption{Diagrama Entidad Relación de los catálogos para la generación de vistas.}
+  \label{fig:dia-er-reportes}
+\end{figure}
+\paragraph{cat{\textunderscore}clientes\\} Este catálogo contiene información sobre la localización física de los lugares donde deben ser entregados los productos.
+\paragraph{cat{\textunderscore}contratos\\} Este catálogo contiene información referente a acuerdos comerciales referentes a los productos requeridos en las órdenes de reposición.
 
 
 %===============================================================================
