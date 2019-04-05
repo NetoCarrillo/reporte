@@ -59,7 +59,7 @@ El diagrama de componentes sirve para visualizar los componentes en los que se d
 A continuación se muestran las interfaces mediante las cuales los componentes ofrecen conjuntos de operaciones.
 
 \subsubsection{Persistencia}
-El componente de persistencia está basado en el patrón de diseño \textit{Objeto de Acceso a Datos}\footnote{Ver apéndice \ref{sec-dao}} (DAO por sus siglas en inglés), este patrón de diseño encapsula el acceso a una fuente de datos para así acceder y manejar los datos además se encarga de manejar la conexión con la fuente de datos. Previene al consumidor del objeto DAO\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto).} de conocer el procedimiento para acceder y modificar los datos, este patrón da libertad de especificar en el diseño los parámetros y el tipo de cada operación\cite{OCPJavaSE7}.\\
+El componente de persistencia está basado en el patrón de diseño \textit{DAO}\footnote{Ver apéndice \ref{sec-dao}}\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.} para controlar el acceso a la base de datos.\\
 El componente de persistencia de el proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
 \paragraph{Almacenamiento\\}
 Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-guardar-nueva}, \ref{cu-responder-orden}, \ref{cu-enviar-orden} y \ref{cu-actualizar-estatus-sa}.}:

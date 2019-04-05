@@ -10,29 +10,33 @@
 \paragraph*{\textcolor{blue}{definición de patrones ``comportamientales''}}
 
 
+\section{Factory}\label{sec-factory}
+\textcolor{blue}{El patrón Factory delega la creación de la instancia de un objeto a una clase conocida como Factory, de esta forma el usuario no necesita saber cómo crear un nuevo objeto.}
+
 \section{Objeto de acceso a datos}\label{sec-dao}
-\textcolor{blue}{escribir las definiciones de Mala Gupta y Katy Sierra}\\
-\textcolor{red}{no te olvides de poner un diagrama bonito}\\
-Las operaciones más comunes de este patrón son:
+
+El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) es definido por Gupta\cite{OCPJavaSE7} como la abstracción y encapsulación de todo el acceso a la fuente de datos (bases de datos, archivos de texto plano, etc.). Maneja la conexión con la fuente de datos para las operaciones de lectura y escritura, previene al usuario de conocer cómo se hacen la lectura y escritura mientras que le permite al usuario especificar que datos obtener o escribir.
+El ocasiones el patrón DAO se presenta acompaño de algún patrón de creación (Factory, Singleton) para liberar al usuario de la necesidad de conocer la forma de crear el objeto DAO\cite{OCPJavaSE7}\cite{OCAPJavaSE7}.\\
+El patrón DAO comúnmente ofrece las siguientes:
 \begin{enumerate}
-	\item buscar por llave primaria \textcolor{red}{definir}
-	\item insertar \textcolor{red}{definir}
-	\item actualizar \textcolor{red}{definir}
-	\item borrar \textcolor{red}{definir} 
+	\item [] \textbf{buscar}: Realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
+	\item [] \textbf{listar}: Extrae todos los elementos, el resultado puede utilizar estrategias de paginación.
+	\item [] \textbf{insertar}: Guarda un nuevo elemento en la fuente de datos.
+	\item [] \textbf{actualizar}: Actualiza la información de un elemento existente en la fuente de datos.
+	\item [] \textbf{borrar}: Borra el registro de un elemento en la fuente de datos.
 \end{enumerate}
 
-\section{Patron MVC}\label{sec-mvc}
-\subsection{Definición}
-\paragraph*{\textcolor{blue}{definición de patrón MVC}}
-\subsubsection{Modelo}
-\paragraph*{\textcolor{blue}{definición de modelo}}
-\subsubsection{Vista}
-\paragraph*{\textcolor{blue}{definición de vista}}
-\subsubsection{Controlador}
-\paragraph*{\textcolor{blue}{definición de controlador}}
-\subsection{Variaciones}
-\subsubsection{Primera variación}
-\paragraph*{\textcolor{blue}{muchas vistas}}
-\subsubsection{Segunda variación}
-\paragraph*{\textcolor{blue}{acceso directo al control}}
 
+\section{Modelo-Vista-Controlador}\label{sec-mvc}
+Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador (MVC) es un patrón de arquitectura que consiste de tres grandes componentes: Modelo, Vista y Controlador. El Controlador conduce la comunicación entre la Vista y el Modelo, en la Figura \ref{fig:dia-mvc-simple} se muestra el flujo de comunicación entre los componentes MVC.
+\begin{enumerate}
+	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del patrón DAO\footnote{Ver sección \ref{sec-dao}} para el manejo de datos.
+	\item \textbf{Vista}: es la capa de presentación, es responsable de mostrar los datos al actor\footnote{Puede ser una persona u otro sistema} que use el sistema.
+	\item \textbf{Controlador}: es el intermediario entre la Vista y el Modelo: comunica las peticiones de la vista al modelo y los datos del modelo a la vista.
+\end{enumerate}
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{dia-mvc-simple}
+  \caption{Diagrama del patrón MVC.}
+  \label{fig:dia-mvc-simple}
+\end{figure}
