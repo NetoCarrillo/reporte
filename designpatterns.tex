@@ -10,13 +10,10 @@
 \paragraph*{\textcolor{blue}{definición de patrones ``comportamientales''}}
 
 
-\section{Factory}\label{sec-factory}
-\textcolor{blue}{El patrón Factory delega la creación de la instancia de un objeto a una clase conocida como Factory, de esta forma el usuario no necesita saber cómo crear un nuevo objeto.}
-
 \section{Objeto de acceso a datos}\label{sec-dao}
 
 El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) es definido por Gupta\cite{OCPJavaSE7} como la abstracción y encapsulación de todo el acceso a la fuente de datos (bases de datos, archivos de texto plano, etc.). Maneja la conexión con la fuente de datos para las operaciones de lectura y escritura, previene al usuario de conocer cómo se hacen la lectura y escritura mientras que le permite al usuario especificar que datos obtener o escribir.
-El ocasiones el patrón DAO se presenta acompaño de algún patrón de creación (Factory, Singleton) para liberar al usuario de la necesidad de conocer la forma de crear el objeto DAO\cite{OCPJavaSE7}\cite{OCAPJavaSE7}.\\
+El ocasiones el patrón DAO se presenta acompaño de algún patrón de creación para liberar al usuario de la necesidad de conocer la forma de crear el objeto DAO\cite{OCPJavaSE7}\cite{OCAPJavaSE7}.\\
 El patrón DAO comúnmente ofrece las siguientes:
 \begin{enumerate}
 	\item [] \textbf{buscar}: Realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
