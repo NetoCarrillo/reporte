@@ -45,22 +45,22 @@ Los riesgos identificados para este proyecto se listan a continuación:
 
 \subsection{Requerimientos funcionales}
 \subsubsection{Automatizar el proceso para contestar órdenes de reposición}
-Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza utilizando el SA} para contestar las órdenes de reposición, como se muestra en el diagrama de actividad en la Figura \ref{fig:dia-activity-contestar}\footnote{Ver también la Figura \ref{fig:flow-proc-contestar}}, esto implica almacenar los datos de las órdenes de reposición los cuales son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes.
+Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza utilizando el SA} para contestar las órdenes de reposición, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-contestar}\footnote{Ver también la Figura \ref{fig:flow-proc-contestar}}, esto implica almacenar los datos de las órdenes de reposición los cuales son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes.
 
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-activity-contestar}
-  \caption{Diagrama de actividad que sigue un operador de la farmacéutica para contestar órdenes de reposición.}
+  \caption{Diagrama de proceso de negocio que sigue un operador de la farmacéutica para contestar órdenes de reposición.}
   \label{fig:dia-activity-contestar}
 \end{figure}
 
 \subsubsection{Automatizar el proceso para cotejar órdenes de reposición canceladas}
-Automatizar la interacción del operador de la farmacéutica para conocer las órdenes de reposición que han sido canceladas recientemente por el IS, como se muestra en el diagrama de actividad en la Figura \ref{fig:dia-activity-verificar} \footnote{
+Automatizar la interacción del operador de la farmacéutica para conocer las órdenes de reposición que han sido canceladas recientemente por el IS, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-verificar} \footnote{
 Ver también la Figura \ref{fig:flow-proc-verificar}}.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-activity-verificar}
-  \caption{Diagrama de actividad que sigue un operador de la farmacéutica para verificar órdenes de reposición canceladas.}
+  \caption{Diagrama de proceso de negocio que sigue un operador de la farmacéutica para verificar órdenes de reposición canceladas.}
   \label{fig:dia-activity-verificar}
 \end{figure}
 
@@ -420,7 +420,13 @@ CU-ENTRAR-WEB
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
-Explicar la función que autoriza la entrada a la interfaz Web del sistema (ver Figura \ref{fig:dia-casos-uso}) donde los usuarios pueden hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
+Explicar el flujo para autorizar la entrada de un usuario a la interfaz Web del sistema, como se muestra en diagrama de actividad de la Figura \ref{fig:dia-activity-login}, este es el punto de acceso que tienen los usuarios para hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{dia-activity-login}
+  \caption{Diagrama de actividad del flujo de acceso al sistema.}
+  \label{fig:dia-activity-login}
+\end{figure}
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El usuario se encuentra previamente registrado en el sistema.
@@ -459,7 +465,13 @@ CU-GENERAR-REPORTE
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
-Este caso de uso ofrece al usuario la generación de reportes, es decir, ejecutar una consulta a la base de datos y vaciar el resultado en un archivo. La consulta puede ser ejecutada sobre una o más tablas, es importante mencionar que existen catálogos con claves de productos y clientes que cambian constantemente, ver caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
+Este caso de uso ofrece al usuario la generación de reportes, es decir, ejecutar una consulta a la base de datos y vaciar el resultado en un archivo, como se muestra en el diagrama de actividad de la Figura \ref{fig:dia-activity-reporter}. La consulta puede ser ejecutada sobre una o más tablas, es importante mencionar que existen catálogos con claves de productos y clientes que cambian constantemente, ver caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{dia-activity-reporter}
+  \caption{Diagrama de actividad del flujo para generación de reportes.}
+  \label{fig:dia-activity-reporter}
+\end{figure}
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
@@ -500,7 +512,13 @@ CU-ACTUALIZAR-CATALOGO
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
-Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz Web.
+Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz Web, la Figura \ref{fig:dia-activity-cat-update} muestra el diagrama de actividad para este caso de uso.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{dia-activity-cat-update}
+  \caption{Diagrama de actividad del flujo para la actualización de catálogos.}
+  \label{fig:dia-activity-cat-update}
+\end{figure}
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
@@ -541,6 +559,13 @@ CU-BUSCAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
+Define el flujo para la búsqueda de órdenes de reposición, la Figura \ref{fig:dia-activity-search} muestra el diagrama de actividad para este caso de uso.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{dia-activity-search}
+  \caption{Diagrama de actividad del flujo para la búsqueda de órdenes de reposición.}
+  \label{fig:dia-activity-search}
+\end{figure}
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
@@ -572,7 +597,13 @@ CU-VISUALIZAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
-La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, para llegar a esta página es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición y seleccionado la orden para visualizar, como se muestra en la Figura \ref{fig:dia-casos-uso} (ver caso de uso \textbf{CU-BUSCAR}).
+La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, en la Figura \ref{fig:dia-activity-view} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta página es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición y seleccionado la orden para visualizar como se muestra en la Figura \ref{fig:dia-casos-uso} (ver caso de uso \textbf{CU-BUSCAR}).
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{dia-activity-view}
+  \caption{Diagrama de actividad del flujo para la visualización de los datos de una orden de reposición.}
+  \label{fig:dia-activity-view}
+\end{figure}
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
@@ -605,6 +636,13 @@ CU-EDITAR
 \paragraph{Actores}
 Usuario
 \paragraph{Descripción}
+La forma en que el usuario de la interfaz web puede modificar los datos de una orden de reposición que está visualizando, en la Figura \ref{fig:dia-activity-edit} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta vista es necesario que el usuario haya ejecutado la visualización de la orden de reposición que desea modificar. La dependencia de este caso de uso se muestra en la Figura \ref{fig:dia-casos-uso} (ver caso de uso \textbf{CU-BUSCAR}).
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{dia-activity-edit}
+  \caption{Diagrama de actividad del flujo para la modificar de los datos de una orden de reposición.}
+  \label{fig:dia-activity-edit}
+\end{figure}
 \paragraph{Precondiciones}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
@@ -625,4 +663,3 @@ Usuario
 \begin{enumerate}
   \item En caso de no contar con conexión a la base de datos se muestra un mensaje de error informando al usuario.
 \end{enumerate}
-
