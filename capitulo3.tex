@@ -59,7 +59,7 @@ El diagrama de componentes sirve para visualizar los componentes en los que se d
 A continuación se muestran las interfaces mediante las cuales los componentes ofrecen conjuntos de operaciones.
 
 \subsubsection{Persistencia}
-El componente de persistencia está basado en el patrón de diseño \textit{Objeto de Acceso a Datos}\footnote{Ver apéndice \ref{sec-dao}} (DAO por sus siglas en inglés), este patrón de diseño encapsula el acceso a una fuente de datos para así acceder y manejar los datos además se encarga de manejar la conexión con la fuente de datos. Previene al consumidor del objeto DAO\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto).} de conocer el procedimiento para acceder y modificar los datos, este patrón da libertad de especificar en el diseño los parámetros y el tipo de cada operación\cite{OCPJavaSE7}.\\
+El componente de persistencia está basado en el patrón de diseño \textit{DAO}\footnote{Ver apéndice \ref{sec-dao}}\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.} para controlar el acceso a la base de datos.\\
 El componente de persistencia de el proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
 \paragraph{Almacenamiento\\}
 Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-guardar-nueva}, \ref{cu-responder-orden}, \ref{cu-enviar-orden} y \ref{cu-actualizar-estatus-sa}.}:
@@ -455,8 +455,41 @@ El componente que contiene y ejecuta las rutinas de automatización, esto es med
 
 \subsubsection{Portal Web}
 Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de reportes y Sistema de archivos.\\
-No ofrece interfaces a los demás componentes, al igual que el componente Robot.\\
-\textcolor{red}{mencionar el flujo de autenticar usuarios}.
+No ofrece interfaces a los demás componentes, al igual que el componente Robot.
+
+\subsection{Solución a casos de uso}
+A continuación se presentan las soluciones a los casos de uso utilizando los componentes descritos en la sección anterior, para este fin se utilizan diagramas de secuencia UML\footnote{Ver sección \ref{sec-uml-seq}.}
+\textcolor{red}{Describir los flujos entre componentes que solucionan cada caso de uso.}
+\textcolor{red}{Mencionar conceptos de arquitectura}
+\textcolor{red}{Mencionar conceptos de diseño de patrones}
+
+\subsubsection{Contestar órdenes}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Guardar nueva orden}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Responder orden}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Enviar orden}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Generar acuse de envío}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Verificar órdenes}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Actualizar estatus SA}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Entrar en interfaz Web}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Generar reporte}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Actualizar catálogo}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Buscar órdenes}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Visualizar orden}
+\textcolor{red}{insertar diagrama de secuencia}
+\subsubsection{Editar orden}
+\textcolor{red}{insertar diagrama de secuencia}
+
 
 
 %===============================================================================
@@ -519,7 +552,7 @@ Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz w
 
 
 \subsection{Catálogos para la generación de reportes}
-Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son necesarios para la generación de los reportes\footnote{Ver casos de uso \ref{cu-generar-reporte} y \ref{cu-actualizar-catalago}} que sirven que las siguientes áreas de la farmacéutica continúen con la atención de las órdenes de reposición.
+Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son necesarios para la generación de los reportes\footnote{Ver casos de uso \ref{cu-generar-reporte} y \ref{cu-actualizar-catalogo}} que sirven que las siguientes áreas de la farmacéutica continúen con la atención de las órdenes de reposición.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-er-reportes} 
