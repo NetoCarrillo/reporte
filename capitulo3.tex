@@ -77,6 +77,14 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\hline
 	\end{tabular}
 	\vspace{5mm}\\
+	\textcolor{red}{Karla, pienso que hacer diagramas de secuencia como el de la figura \ref{fig:dia-seq-store-save-new} es muy simple, pero no sé si aún así sea necesario ¿sería posible nada más incluir los diagramas de secuencia no triviales?}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{dia-seq-store-save-new}
+		\caption{Diagrama de secuencia de la operación guardar-nueva de la interfaz Almacenamiento.}
+		\label{fig:dia-seq-store-save-new}
+	\end{figure}
+%	\vspace{5mm}\\
 	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{cambiar-estado} \\
@@ -152,7 +160,7 @@ Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes d
 	\vspace{5mm}\\
 	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
-		\textbf{Identificador}	& \textbf{siguiente-orden-para-contestar}\\
+		\textbf{Identificador}	& \textbf{siguiente-orden-contestar}\\
 		\hline
 		\hline
 		\textbf{Descripción}	& Entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Nueva}.\\
@@ -165,7 +173,7 @@ Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes d
 	\vspace{5mm}\\
 	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
-		\textbf{Identificador}	& \textbf{siguiente-orden-para-enviar}\\
+		\textbf{Identificador}	& \textbf{siguiente-orden-enviar}\\
 		\hline
 		\hline
 		\textbf{Descripción}	& Entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Contestada}.\\
@@ -368,7 +376,7 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 	\vspace{5mm}\\
 	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
-		\textbf{Identificador}	& \textbf{obtener-datos-para-respuesta}\\
+		\textbf{Identificador}	& \textbf{obtener-datos-respuesta}\\
 		\hline
 		\hline
 		\textbf{Descripción}	& Da los datos necesarios para llenar los formularios para contestar una orden de reposición en SA.\\
@@ -464,31 +472,109 @@ A continuación se presentan las soluciones a los casos de uso utilizando los co
 \textcolor{red}{Mencionar conceptos de diseño de patrones}
 
 \subsubsection{Contestar órdenes}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Guardar nueva orden}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Responder orden}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Enviar orden}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Generar acuse de envío}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Verificar órdenes}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Actualizar estatus SA}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Entrar en interfaz Web}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Generar reporte}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Actualizar catálogo}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Buscar órdenes}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Visualizar orden}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 \subsubsection{Editar orden}
-\textcolor{red}{insertar diagrama de secuencia}
+Ver sección \ref{cu-contestar}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\label{fig:dia-seq-cu-contestar}
+\end{figure}
 
 
 
@@ -595,22 +681,3 @@ Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son
 %\section{Diseño de interfaz de usuario}
 %
 %
-
-
-
-\iffalse
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
-		\hline
-		\textbf{Identificador}	& \textbf{}\\
-		\hline
-		\hline
-		\textbf{Descripción}	& .\\
-		\hline
-		\multirow{2}{*}{\textbf{Parámetros}}	& \textbullet\, .\\
-												& \textbullet\, .\\
-		\hline
-		\textbf{Resultado}		& .\\
-		\hline
-	\end{tabular}
-\fi
