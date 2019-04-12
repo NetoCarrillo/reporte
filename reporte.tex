@@ -6,6 +6,9 @@
 \usepackage[spanish]{babel}
 \selectlanguage{spanish}
 
+%Apendice
+\usepackage[toc,page]{appendix}
+
 %formato de bibliografia y citas
 \usepackage{cite}
 %\usepackage{apacite}
@@ -25,6 +28,7 @@
 \usepackage{setspace}
 \thispagestyle{empty}
 \doublespacing
+%\onehalfspacing
 
 %Tamaño de márgenes
 \usepackage[left=1.25in, right=1.25in]{geometry}
@@ -34,7 +38,14 @@
 
 % Incluir subsubsection en el índice
 \setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{4}
+\setcounter{tocdepth}{3}
+
+% Landscape pages on demand
+\usepackage{lscape}
+
+% tablas
+\usepackage{longtable} % Long tables
+\usepackage{multirow} % Multirows
 
 \begin{document}
 
@@ -57,12 +68,22 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 
 \tableofcontents
 \listoffigures
-%\listoftables
+\listoftables
 
 
 \include{capitulo1}
+
 \include{capitulo2}
+
 \include{capitulo3}
+
+\include{capitulo4}
+
+\begin{appendices}
+%\include{datadictionary}
+\include{uml}
+\include{designpatterns}
+\end{appendices}
 
 %Bibliografia
 \renewcommand{\bibname}{Bibliografía}

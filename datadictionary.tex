@@ -1,61 +1,12 @@
-\documentclass[letterpaper,11pt]{report}
-
-\usepackage[utf8]{inputenc}
-
-%idioma
-\usepackage[spanish]{babel}
-\selectlanguage{spanish}
-
-%formato de bibliografia y citas
-\usepackage{cite}
-%\usepackage{apacite}
- 
-\usepackage[nottoc]{tocbibind}
-
-\usepackage{etoc}
-\usepackage{blindtext}
-
-%Imagenes
-\usepackage{graphicx}
-\graphicspath{{./images/}}
-%\usepackage[font=small,skip=20pt]{caption}
-\setlength{\abovecaptionskip}{15pt plus 5pt minus 2pt}
-
-%Espacio de interlineado
-\usepackage{setspace}
-\thispagestyle{empty}
-\doublespacing
-
-%Tamaño de márgenes
-\usepackage[left=1.25in, right=1.25in]{geometry}
-
-%Colores en el texto
-\usepackage{xcolor}
-
-% Incluir subsubsection en el índice
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{4}
-
-% Landscape pages on demand
-\usepackage{lscape}
+\chapter{Diccionario de Datos}
 
 
-% tablas
-\usepackage{longtable} % Long tables
-\usepackage{rotating} % To display tables in landscape
-
-\begin{document}
- 
-\tableofcontents
- 
-\section{First Section}
-This document ...
+\section{Tablas}
 
 \paragraph*{sesion} Define una sesión bajo la cual se ejecuta un script de automatización, la sesión puede definir implísitamente un usuario y un rol.
-\begin{longtable}{l|l|p{7cm}}
-\caption{Tabla sesion.}\label{tab:tab-sesion}\\
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline
+	\hline\hline
 	{\fontfamily{pcr}\selectfont id}& number & Número identificador \\
 	\hline
 	{\fontfamily{pcr}\selectfont id{\textunderscore}usuario} & number & Identificador de usuario que creó la sesión \\
@@ -68,30 +19,29 @@ This document ...
 	\hline
 	{\fontfamily{pcr}\selectfont activa} & number & Indicador de actividad en la sesión. Default: 1\\
 	\hline
-	{\fontfamily{pcr}\selectfont rol} & number & Rol para el cuál fue creada la sesión.
+	{\fontfamily{pcr}\selectfont rol} & number & Rol para el cuál fue creada la sesión.\\
+	\caption{Tabla sesion.}\label{tab:tab-sesion}
 \end{longtable}
 
 \paragraph*{bitacora} Lleva el registro de eventos ocurridos durante la ejecución del script de automatización, el evento puede estar ligado a una sesión.
-\begin{longtable}{l|l|p{7cm}}
-\caption{Tabla bitacora.}\label{tab:tab-bitacora}\\
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline
+	\hline\hline
 	{\fontfamily{pcr}\selectfont id} & number & Número identificador\\
 	\hline
 	{\fontfamily{pcr}\selectfont id{\textunderscore}sesion} & number & Identificador de sesión desde la cual se hizo el registro.\\
 	\hline
 	{\fontfamily{pcr}\selectfont fecha} & datetime & Hora y fecha en la que se realizó el registro Default: CURRENT{\textunderscore}TIMESTAMP\\
 	\hline
-	{\fontfamily{pcr}\selectfont descripcion} & text & Descripción del evento.
+	{\fontfamily{pcr}\selectfont descripcion} & text & Descripción del evento.\\
+\caption{Tabla bitacora.}\label{tab:tab-bitacora}
 \end{longtable}
 
 \paragraph*{ordenes{\textunderscore}imss} Contiene el registro de las órdenes de reposición del portal SAI que han sido procesadas por el script de automatización.
 %\begin{landscape}
-\begin{longtable}{l|l|p{7cm}}
-	\caption{Tabla ordenes{\textunderscore}imss.}\label{tab:tab-ordenes-imss}\\
-
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline
+	\hline\hline
 	{\fontfamily{pcr}\selectfont id} & number & Número identificador\\
 	\hline
 	{\fontfamily{pcr}\selectfont contrato} & text & Cadena alfanumérica con el identificador de contrato\\
@@ -116,7 +66,7 @@ This document ...
 	\hline
 	{\fontfamily{pcr}\selectfont fecha{\textunderscore}estatus} & datetime & Fecha en la que se registró el último cambio de estatus Default: CURRENT{\textunderscore}TIMESTAMP\\
 	\hline
-	{\fontfamily{pcr}\selectfont id{\textunderscore}sesion{\textunderscore}insersion} & number & Identificador de la sesión que realizó el registro en la base de datos\\
+	{\fontfamily{pcr}\selectfont id{\textunderscore}sesion{\textunderscore} insersion} & number & Identificador de la sesión que realizó el registro en la base de datos\\
 	\hline
 	{\fontfamily{pcr}\selectfont id{\textunderscore}sesion{\textunderscore}estatus} & number & Identificador de la sesión que realizó el último cambio de estatus\\
 	\hline
@@ -147,59 +97,56 @@ This document ...
 	{\fontfamily{pcr}\selectfont estatus{\textunderscore}sai} & number & Estatus de la orden de reposición en el portal SAI\\
 	\hline
 	{\fontfamily{pcr}\selectfont estatus{\textunderscore}sap} & number & Estatus de la orden de reposición en el sistema interno de MAYPO\\
+
+	\caption{Tabla ordenes{\textunderscore}imss.}\label{tab:tab-ordenes-imss}
 \end{longtable}
 %\end{landscape}
 
 \paragraph*{cat{\textunderscore}estatus{\textunderscore}orden} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
-\begin{longtable}{l|l|p{7cm}}
-\caption{Tabla cat{\textunderscore}estatus{\textunderscore}orden.}\label{tab:tab-cat-estatus-orden}\\
-
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline
+	\hline\hline
 	{\fontfamily{pcr}\selectfont id} & number & Número identificador \\
 	\hline
-	{\fontfamily{pcr}\selectfont nombre} & text & Nombre corto del estatus
+	{\fontfamily{pcr}\selectfont nombre} & text & Nombre corto del estatus\\
+	\caption{Tabla cat{\textunderscore}estatus{\textunderscore}orden.}\label{tab:tab-cat-estatus-orden}
 \end{longtable}
 
 \paragraph*{cat{\textunderscore}estatus{\textunderscore}sai} Este catálogo contiene los estados definidos por el portal SAI para una orden de reposición.
-\begin{longtable}{l|l|p{7cm}}
-\caption{Tabla cat{\textunderscore}estatus{\textunderscore}sai.}\label{tab:tab-cat-estatus-sai}\\
-
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline	
+	\hline\hline	
 	{\fontfamily{pcr}\selectfont id} & number & Número identificador \\
 	\hline
-	{\fontfamily{pcr}\selectfont nombre} & text & Nombre corto del estatus
+	{\fontfamily{pcr}\selectfont nombre} & text & Nombre corto del estatus\\
+	\caption{Tabla cat{\textunderscore}estatus{\textunderscore}sai.}\label{tab:tab-cat-estatus-sai}
 \end{longtable}
 
 \paragraph*{cat{\textunderscore}clientes} Este catálogo refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja CLIENTES del archivo LICITACION  CARGA IMSS 2014.xlsx.
-\begin{longtable}{l|l|p{7cm}}
-\caption{Tabla cat{\textunderscore}clientes.}\label{tab:tab-cat-clientes}\\
-
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline	
+	\hline\hline	
 	{\fontfamily{pcr}\selectfont lugar{\textunderscore}entrega} & number & Columna A, LUGAR DE ENTREGA\\
 	\hline
 	{\fontfamily{pcr}\selectfont factura} & number & Columna B, FACTURA\\
 	\hline
 	{\fontfamily{pcr}\selectfont destino}  & number & Columna C, DESTINO\\
 	\hline
-	{\fontfamily{pcr}\selectfont consignado{\textunderscore}controlado}  & number & Columna D, CONSIGNADO CONTROLADO\\
+	{\fontfamily{pcr}\selectfont consignado{\textunderscore} controlado}  & number & Columna D, CONSIGNADO CONTROLADO\\
 	\hline
 	{\fontfamily{pcr}\selectfont almacen} & text & Columna E, ALMACEN \\
 	\hline
-	{\fontfamily{pcr}\selectfont entrega} & text & Columna F, ENTREGA
+	{\fontfamily{pcr}\selectfont entrega} & text & Columna F, ENTREGA\\
+	\caption{Tabla cat{\textunderscore}clientes.}\label{tab:tab-cat-clientes}
 \end{longtable}
 
 \paragraph*{cat{\textunderscore}contratos} Este catálogo refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja CONTRATOS del archivo LICITACION  CARGA IMSS 2014.xlsx.
-\begin{longtable}{l|l|p{7cm}}
-\caption{Tabla cat{\textunderscore}contratos.}\label{tab:tab-cat-contratos}\\
-
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline	
+	\hline\hline	
 	{\fontfamily{pcr}\selectfont pedido} & text & Columna B, No PEDIDO\\
 	\hline
-	{\fontfamily{pcr}\selectfont documento{\textunderscore}comercial} & number & Columna C, DOCUMENTO  COMERCIAL\\
+	{\fontfamily{pcr}\selectfont documento{\textunderscore} comercial} & number & Columna C, DOCUMENTO  COMERCIAL\\
 	\hline
 	{\fontfamily{pcr}\selectfont cbb} & number & Columna F, CCB\\
 	\hline
@@ -209,18 +156,17 @@ This document ...
 	\hline
 	{\fontfamily{pcr}\selectfont etiqueta} & text & Columna Q, ETIQUETA\\
 	\hline
-	{\fontfamily{pcr}\selectfont fianza} & number & Columna U, FIANZA
+	{\fontfamily{pcr}\selectfont fianza} & number & Columna U, FIANZA\\
+	\caption{Tabla cat{\textunderscore}contratos.}\label{tab:tab-cat-contratos}
 \end{longtable}
 
 
-\subsubsection{Vistas}
+\section{Vistas}
 \paragraph*{matriz{\textunderscore}imss} Esta vista refleja el contenido necesario para la generación del layout de SAP ubicado en la hoja MATRIZ del archivo LICITACION  CARGA IMSS 2014.xlsx.
-\begin{longtable}{l|l|p{7cm}}
-\caption{Tabla matriz{\textunderscore}imss.}\label{tab:tab-matriz-imss}\\
-
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline
-	{\fontfamily{pcr}\selectfont documento{\textunderscore}comercial} & number & El máximo de la columna documento{\textunderscore}comercial de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales sean iguales a los de la orden de reposición.\\
+	\hline\hline
+	{\fontfamily{pcr}\selectfont documento{\textunderscore} comercial} & number & El máximo de la columna documento{\textunderscore}comercial de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales sean iguales a los de la orden de reposición.\\
 	\hline
 	{\fontfamily{pcr}\selectfont fianza} & number & El máximo de la columna fianza de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales sean iguales a los de la orden de reposición.\\
 	\hline
@@ -238,23 +184,22 @@ This document ...
 	\hline
 	{\fontfamily{pcr}\selectfont material} & number & El máximo de la columna material de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales sean iguales a los de la orden de reposición.\\
 	\hline
-	{\fontfamily{pcr}\selectfont instrucciones{\textunderscore}etiquetado} & text & Columna U, INSTRUCCIONES DE ETIQUETADO  (archivo Excel)
+	{\fontfamily{pcr}\selectfont instrucciones{\textunderscore} etiquetado} & text & Columna U, INSTRUCCIONES DE ETIQUETADO  (archivo Excel)
 El máximo de la concatenación de las columnas etiqueta y cbb (separadas por un espacio) de los renglones del catálogo de contratos cuyos contrato y CCB sean iguales a los de la orden de reposición.\\
 	\hline
 	{\fontfamily{pcr}\selectfont cantidad} & number & Cantidad solicitada de la orden de reposición\\
 	\hline
 	{\fontfamily{pcr}\selectfont fecha{\textunderscore}vencimiento} & text & Fecha de vencimiento de la orden de reposición\\
 	\hline
-	{\fontfamily{pcr}\selectfont sesion} & number & Sesión con la cual fue finalizada la orden de reposición, esta columna no está contenida en el archivo de Excel. Identificador de la sesión que realizó el último cambio de estatus.
+	{\fontfamily{pcr}\selectfont sesion} & number & Sesión con la cual fue finalizada la orden de reposición, esta columna no está contenida en el archivo de Excel. Identificador de la sesión que realizó el último cambio de estatus.\\
+	\caption{Tabla matriz{\textunderscore}imss.}\label{tab:tab-matriz-imss}
 \end{longtable}
 
 \paragraph*{layout{\textunderscore}imss{\textunderscore}sap} Esta vista refleja el contenido de la hoja Formato de carga SAP del archivo CARGA MASIVA IMSS HECTOR.xlsm después de haber aplicado la macro que contiene sobre el archivo LICITACION  CARGA IMSS 2014.xlsx.
-\begin{longtable}{l|l|p{7cm}}
-\caption{Tabla layout{\textunderscore}imss{\textunderscore}sap.}\label{tab:tab-layout-imss-sap}\\
-
+\begin{longtable}{p{4cm}|l|p{8.5cm}}
 	\textbf{Columna} &	\textbf{Tipo} &	\textbf{Descripción} \\
-	\hline
-	{\fontfamily{pcr}\selectfont documento{\textunderscore}comercial} & number & Columna A, DSADAS Columna documento{\textunderscore}comercial de vista matriz{\textunderscore}imss\\
+	\hline\hline
+	{\fontfamily{pcr}\selectfont documento{\textunderscore} comercial} & number & Columna A, DSADAS Columna documento{\textunderscore}comercial de vista matriz{\textunderscore}imss\\
 	\hline
 	{\fontfamily{pcr}\selectfont solicitante} & number & Columna B, Solicitante Valor constante 100002\\
 	\hline
@@ -270,7 +215,7 @@ El máximo de la concatenación de las columnas etiqueta y cbb (separadas por un
 	\hline
 	{\fontfamily{pcr}\selectfont material} & number & Columna H, MATERIAL SAP Columna material de vista matriz{\textunderscore}imss\\
 	\hline
-	{\fontfamily{pcr}\selectfont instrucciones{\textunderscore}etiquetado} & number & Columna I, INTRUCCIONES DE ETIQUETADO Columna instrucciones{\textunderscore}etiquetado de vista matriz{\textunderscore}imss\\
+	{\fontfamily{pcr}\selectfont instrucciones{\textunderscore} etiquetado} & number & Columna I, INTRUCCIONES DE ETIQUETADO Columna instrucciones{\textunderscore}etiquetado de vista matriz{\textunderscore}imss\\
 	\hline
 	{\fontfamily{pcr}\selectfont cantidad} & number & Columna J, CANTIDAD SOLICITADA Columna cantidad de vista matriz{\textunderscore}imss\\
 	\hline
@@ -282,27 +227,6 @@ El máximo de la concatenación de las columnas etiqueta y cbb (separadas por un
 	\hline
 	{\fontfamily{pcr}\selectfont entrega} & text & Columna N, Instrucciones para distribución Columna entrega de vista matriz{\textunderscore}imss\\
 	\hline
-	{\fontfamily{pcr}\selectfont sesion} & number & Sesión con la cual fue finalizada la orden de reposición, esta columna no está contenida en el archivo de Excel.
+	{\fontfamily{pcr}\selectfont sesion} & number & Sesión con la cual fue finalizada la orden de reposición, esta columna no está contenida en el archivo de Excel.\\
+	\caption{Tabla layout{\textunderscore}imss{\textunderscore}sap.}\label{tab:tab-layout-imss-sap}
 \end{longtable}
-
-%hash function, 256, 262–269
-%	auxiliary, 272
-%	collision-resistant, 964
-%	division method for, 263, 268–269 ex.
-%	\epsilon -universal, 269 ex.
-%	multiplication method for, 263–264
-%	universal, 265–268
-%1267 \\
-%
-%
-%The first is as follows:
-%\begin{quote}
-%\cite{Scrum} Will this work
-%\end{quote}
-%
-%\nocite{*} 
-%% \bibliographystyle{unsrt}
-%\bibliographystyle{apacite}
-%\bibliography{bibliografia}
- 
-\end{document}
