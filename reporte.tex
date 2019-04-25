@@ -52,6 +52,29 @@
 \usepackage{longtable} % Long tables
 \usepackage{multirow} % Multirows
 
+% Code listing
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Índice de códigos}
+\lstset{ %Formatting for code in appendix
+%    language=Matlab,
+%    basicstyle=\footnotesize,
+	basicstyle = \small \ttfamily , %% Sets listing font and size.
+	breaklines=true,
+	breakatwhitespace=false,
+	frame = trBL,
+	numberstyle = \tiny,
+	numbers=left,
+	showstringspaces=false,
+	stepnumber=1,
+	tabsize=4,
+}
+\renewcommand{\lstlistoflistings}{
+	\begingroup
+		\tocfile{\lstlistlistingname}{lol}
+	\endgroup
+}
+
 \begin{document}
 %\layout
 
@@ -73,9 +96,18 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 \pagenumbering{arabic}
 
 \tableofcontents
+\clearpage
 \listoffigures
+<<<<<<< HEAD
 %\listoftables
 
+=======
+%\clearpage
+%\listoftables
+\clearpage
+%\addcontentsline{toc}{chapter}{\lstlistlistingname}
+\lstlistoflistings
+>>>>>>> Chapter 4: code listings
 
 \include{capitulo1}
 
@@ -83,7 +115,7 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 
 \include{capitulo3}
 
-%\include{capitulo4}
+\include{capitulo4}
 
 \renewcommand{\appendixname}{Apéndice}
 \renewcommand{\appendixtocname}{Apéndices}

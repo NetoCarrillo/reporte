@@ -1,13 +1,355 @@
 \chapter{Implementación}\label{cap4}
 
+\section{Aspectos generales del la implementación}
+\textcolor{red}{Esta sección contiene las tecnologías más relevantes para la implmentación del sistema}
+\paragraph{Lenguajes de programación}
+	\begin{itemize}
+		\item Java
+		\item Javascript
+		\item Sahiscript
+	\end{itemize}
+\paragraph{Base de datos}
+	\textcolor{red}{hacer nota: para respetar acuerdos de confidencialidad con el cliente no se mencionará de forma específica el sistema manejador de base de datos utilizado}
+	\begin{itemize}
+		\item SQL
+		\item Estándares
+	\end{itemize}
+
+\paragraph{Herramienta de automatización}
+	\begin{itemize}
+		\item Sahi\footnote{Esta herramienta fue utilizada para la automatización con SA a petición de la farmacéutica.}
+	\end{itemize}
+\paragraph{Spring}
+	\begin{itemize}
+		\item Spring core\cite{SpringInAction}
+		\item Spring data\cite{SpringInAction}
+		\item Spring boot\cite{SpringBootInAction}
+		\item Spring MVC\cite{SpringInAction}
+		\item Spring REST\cite{SpringInAction}
+		\item Spring security\cite{ProSpringSecurity}
+	\end{itemize}
+
+\paragraph{Mybatis}\cite{MyBatis}
+En la ``listing'' \ref{lst:mybatis-interface} se muestra la interfaz de Java y el ``listing'' \ref{lst:mybatis-mapping} se muestra el DML. 
+\begin{lstlisting}[language=Java, caption={Ejemplo de MyBatis}, label={lst:mybatis-interface}]
+public interface IDomainUser{
+	UsuarioDomain getUsuario(String name);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=XML, caption={Ejemplo de MyBatis}, label={lst:mybatis-mapping}]
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="IDomainUser">
+
+	<resultMap id="rol" autoMapping="true"
+			   type="RolDomain">
+		<id property="rol" column="rol"/>
+	</resultMap>
+
+	<resultMap id="usuario" autoMapping="true"
+			   type="UsuarioDomain">
+		<id property="usuario" column="usuario"/>
+		<collection property="roles"
+					resultMap="rol"
+					javaType="ArrayList"/>
+	</resultMap>
+	
+	<!-- UsuarioDomain getUsuario(final String name); -->
+	<select id="getUsuario" resultMap="usuario" useCache="false">
+		SELECT u.*, r.*
+		  FROM ralca.usuarios_domain u,
+		       ralca.roles_domain r,
+		       ralca.usuarios_roles ur
+		 WHERE u.usuario = ur.usuario
+		   AND r.rol = ur.rol
+		   AND u.usuario = #{0};
+	</select>
+</mapper>
+\end{lstlisting}
+
+
+
+\paragraph{Velocity}
+En el ``listing'' \ref{lst:velocity-template} se muestra un ejemplo de plantilla con Velocity.
+\begin{lstlisting}[language=HTML, caption={Ejemplo de plantilla de Velocity}, label={lst:velocity-template}]
+<tr>
+	<td width="160"><b>No. de Orden: </b></td>
+	<td>${numorden}</td>
+</tr>
+\end{lstlisting}
+
+\paragraph{POI}
+
+\paragraph{iTextPdf}\cite{iTextInAction}
+
+\paragraph{Maven}\cite{MasteringApacheMaven3}
+\begin{lstlisting}[language=XML, caption={Proyecto padre de Maven}, label={lst:maven-parent-project}]
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.meve</groupId>
+	<artifactId>surtimiento-project</artifactId>
+	<version>1</version>
+
+	<modules>
+		<module>surtimiento</module>
+		<module>surtimiento-domain</module>
+		<module>surtimiento-basic</module>
+		<module>surtimiento-api</module>
+		<module>surtimiento-dao-impl</module>
+		<module>surtimiento-dao-jpa</module>
+		<module>surtimiento-service-impl</module>
+		<module>surtimiento-excel-plugin</module>
+		<module>surtimiento-reporter</module>
+		<module>surtimiento-worker</module>
+	</modules>
+</project>
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=XML, caption={Configuración de la aplicación web}, label={lst:maven-spring-boot-webapp}]
+<project>
+	...
+	<artifactId>surtimiento-webapp</artifactId>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+	
+		<!-- Domain -->
+		<dependency>
+			<groupId>com.meve</groupId>
+			<artifactId>surtimiento-domain</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.meve</groupId>
+			<artifactId>surtimiento-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.meve</groupId>
+			<artifactId>surtimiento-dao-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.meve</groupId>
+			<artifactId>surtimiento-service-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.meve</groupId>
+			<artifactId>surtimiento-reporter</artifactId>
+		</dependency>
+		<!-- Domain -->
+		
+		<!-- Persistence -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
+	    <dependency>
+	    	<groupId>javax.persistence</groupId>
+	    	<artifactId>persistence-api</artifactId>
+	    	<version>1.0</version>
+	    </dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- Persistence -->
+	</dependencies>
+
+	<build>
+		<filters>
+			<filter>profiles/${build.profile.id}/config.properties</filter>
+		</filters>
+		
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${project.build.directory}/generated-resources</directory>
+			</resource>
+		</resources>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>${jar.file.name}</finalName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<!-- Serves *only* to filter the wro.xml so it can get an absolute path 
+							for the project -->
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/wro</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/wro</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+							<delimiters>
+								<delimiter>@</delimiter>
+							</delimiters>
+							<useDefaultDelimiters>false</useDefaultDelimiters>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>ro.isdc.wro4j</groupId>
+				<artifactId>wro4j-maven-plugin</artifactId>
+				<version>1.7.6</version>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+					<cssDestinationFolder>${project.build.directory}/generated-resources/static/css</cssDestinationFolder>
+					<jsDestinationFolder>${project.build.directory}/generated-resources/static/js</jsDestinationFolder>
+					<wroFile>${project.build.directory}/wro/wro.xml</wroFile>
+					<extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
+					<contextFolder>${basedir}/src/main/wro</contextFolder>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.webjars</groupId>
+						<artifactId>jquery</artifactId>
+						<version>2.1.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.webjars</groupId>
+						<artifactId>angularjs</artifactId>
+						<version>1.3.8</version>
+					</dependency>
+					<dependency>
+						<groupId>org.webjars</groupId>
+						<artifactId>bootstrap</artifactId>
+						<version>3.2.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<profiles>
+		<!-- Developing -->
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<build.profile.id>dev</build.profile.id>
+				<jar.file.name>webapp_${build.profile.id}</jar.file.name>
+			</properties>
+		</profile>
+		
+		<!-- Testing -->
+		<profile>
+			<id>test</id>
+			<properties>
+				<build.profile.id>test</build.profile.id>
+				<jar.file.name>webapp_${build.profile.id}</jar.file.name>
+			</properties>
+		</profile>
+		
+		<!-- Production -->
+		<profile>
+			<id>prod</id>
+			<properties>
+				<build.profile.id>prod</build.profile.id>
+				<jar.file.name>webapp</jar.file.name>
+			</properties>
+		</profile>
+	</profiles>
+</project>	
+\end{lstlisting}
+
 
 \section{Implementación de base de datos}
-\textcolor{blue}{Modelo relacional}\\
-\subsection{SQL}
-\textcolor{blue}{ANSII y cosas de esas}
-\subsection{Tablas de órdenes}
-\subsection{Catálogos}
-\subsection{Tablas de usuarios}
+\textcolor{blue}{La base de datos utilizada para el proyecto es una base de datos relacional compatible con el modelo ANSI}\\
+Mencionar: 
+\begin{itemize}
+	\item Concepto de índice.
+	\item Índices para búsquedas de órdenes.
+	\item Índices para reportes.
+	\item Concepto de vista.
+	\item Vistas para reportes.
+	\item Concepto de transacción.
+\end{itemize}
+
+
+\section{Implementación de los componentes}
+
+\subsection{Persistencia}
+\subsubsection{Tecnologías utilizadas}
+\begin{enumerate}
+	\item SQL 
+		\begin{enumerate}
+			\item DDL: CREATE TABLE, VIEW
+			\item DML: INSERT, UPDATE, DELETE, SELECT
+		\end{enumerate}
+	\item JDBC 			(Patrón factory)
+	\item JPA			(Patrón proxy)
+	\item SpringData	(Patrón proxy)
+\end{enumerate}
+
+\textcolor{blue}{
+	Acá un diagrama que muestra las partes importantes del componente
+}
+
+\subsection{Sistema de archivos}
+	\paragraph{Configuración\\}
+		\textbf{obtener-propiedad}
+	\paragraph{Almacenamiento\\}
+		\textbf{guardar-archivo}
+\subsection{Generador de reportes}
+	\paragraph{Acuse\\}
+		\textbf{generar-acuse-envio}
+	\paragraph{Generación\\}
+ 		\textbf{generar-reporte-ordenes}
+\subsection{Lógica de automatización}
+	\paragraph{Respuesta\\}
+		\textbf{guardar-orden-nueva}\\
+		\textbf{obtener-datos-respuesta}\\
+		\textbf{actualizar-orden-contestada}\\
+		\textbf{guardar-orden-enviada}\\
+		\textbf{obtener-acuse-envio}
+	\paragraph{Verificación\\}
+		\textbf{obtener-rango-fechas-verificar}\\
+		\textbf{actualizar-estado-sa}
+
 
 \section{Implmenetación de genración de reportes}
 
