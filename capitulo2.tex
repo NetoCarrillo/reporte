@@ -39,7 +39,7 @@ Los riesgos identificados para este proyecto se listan a continuación:
 \begin{enumerate}
   \item Dado que no se cuenta con un ambiente de pruebas del Sistema de Abastecimiento todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
   \item La herramienta de automatización Sahi está basada en la estructura de las páginas del sistema Sistema de Abastecimiento. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
-  \item La herramienta Sahi en su versión libre\footnote{El uso de la versión libre de Sahi es requerido por la farmacéutica, ver sección \ref{sec:nonfunctional-req}} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSAI.
+  \item La herramienta Sahi en su versión libre\footnote{El uso de la versión libre de Sahi es requerido por la farmacéutica, ver sección \ref{sec:nonfunctional-req}} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
 \end{enumerate}
 
 
@@ -274,8 +274,16 @@ En la pantalla para contestar una orden de reposición se llenan los formularios
   \item Dirige el explorador a la \textit{URL} de respuesta (ver caso de uso CU-GUARDAR-NUEVA).
   \item Llena el formulario que se presenta en esta pantalla con las siguientes consideraciones:
   \begin{enumerate}
-    \item Fecha de fabricación: primer día del año en curso si la fecha actual no es del mes de diciembre, en caso contrario se toma el año siguiente.
+    \item Fecha de fabricación:
+    \begin{itemize}
+      \item Sí el mes de la fecha actual es diciembre, entonces la fecha de fabricación es el 1 de enero del año siguiente.
+      \item En caso contrario (el mes de la fecha actual no es diciembre), entonces la fecha de fabricación es el 1 de enero del año actual.
+    \end{itemize}
     \item Fecha de caducidad: último día del año en curso si la fecha actual no es del mes de diciembre, en caso contrario se toma el año siguiente.
+    \begin{itemize}
+      \item Sí el mes de la fecha actual es diciembre, entonces la fecha de caducidad es el 31 de diciembre del año siguiente.
+      \item En caso contrario (el mes de la fecha actual no es diciembre), entonces la fecha de caducidad es el 31 de diciembre del año actual.
+    \end{itemize}
   \end{enumerate}
   \item Almacena en la base de datos los campos de los formularios.
   \item Activar el botón ``contestar'' del formulario de la orden de reposición.
@@ -358,7 +366,7 @@ CU-VERIFICAR
 Usuario
 \paragraph{Descripción:}
 Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas (ver Figura \ref{fig:dia-activity-verificar}), el alcance de este caso de uso comprende el acceso al Sistema de Abastecimiento, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
-Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}; y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
+Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}, y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item El Sistema de Abastecimiento se encuentra funcionando correctamente.
@@ -373,13 +381,13 @@ Queda fuera de alcance: la actualización masiva del estado de órdenes de repos
     \item Rango de fechas que comprende los últimos siete días desde la fecha actual.
     \item Estado \textbf{Cancelada}.
   \end{enumerate}
-  \item Del listado de órdenes de reposición resultantes genera una lista con el número de orden de cada renglón.
+  \item Del listado de órdenes de reposición resultantes se genera una lista con el número de orden de cada renglón.
   \item Con el listado del paso anterior se realiza el caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA}.
 \end{enumerate}
 \paragraph{Postcondiciones:}
 \begin{enumerate}
   \item Se cuenta con la relación de órdenes de reposición atendidas por el sistema que han sido canceladas en el Sistema de Abastecimiento y no se tenía conocimiento previo.
-  \item Las órdenes de reposición publicadas en el Sistema de Abastecimiento dentro de los últimos siete día a la fecha actual reflejan en la base de datos dentro del campo \textbf{Estado Sistema de Abastecimiento} el estado de vigencia en el Sistema de Abastecimiento.
+  \item Las órdenes de reposición publicadas en el Sistema de Abastecimiento dentro de los últimos siete día a la fecha actual reflejan en la base de datos dentro del campo \textbf{EstadoSA}\footnote{Este campo refleja el estado de atención registrado dentro del Sistema de Abastecimiento}.
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
@@ -387,7 +395,7 @@ Queda fuera de alcance: la actualización masiva del estado de órdenes de repos
 \end{enumerate}
 
 
-\subsection{Actualizar estatus Sistema de Abastecimiento}\label{cu-actualizar-estatus-sa}
+\subsection{Actualizar estatus de Sistema de Abastecimiento}\label{cu-actualizar-estatus-sa}
 \paragraph{Identificador:}
 CU-ACTUALIZAR-ESTATUS-SA
 \paragraph{Actores:}
@@ -405,7 +413,7 @@ Actualizar en forma masiva el estado de atención en el Sistema de Abastecimient
 \end{enumerate}
 \paragraph{Postcondiciones:}
 \begin{enumerate}
-  \item Las órdenes de reposición recibidas tienen estado \textbf{Cancelada} en el campo \textbf{Estado Sistema de Abastecimiento} dentro de la base de datos.
+  \item Las órdenes de reposición recibidas tienen estado \textbf{Cancelada} en el campo \textbf{EstadoSA} dentro de la base de datos.
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
