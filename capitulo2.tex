@@ -1,6 +1,6 @@
 \chapter{Análisis y alcance del proyecto}\label{cap2}
 
-
+En este capítulo se establecen los requerimientos que satisfacen las necesidades de la farmacéutica planteadas en al capítulo anterior, como se verá más adelante, los requerimientos se clasifican en funcionales y no funcionales, de igual forma se delimita el alcance y los riesgos del proyecto; con los elementos anteriores se redactan los casos de uso, los flujos lógicos que satisfacen los requerimientos dentro del alcance definido.
 %===============================================================================
 %===============================================================================
 
@@ -110,7 +110,7 @@ Este formato contiene los datos de las órdenes de reposición, las claves de lo
 Genera un reporte con las órdenes de reposición canceladas recientemente (ver Figura \ref{fig:maq-report}), es decir, las órdenes de reposición que tienen el estado de “cancelada” y no se han marcado como canceladas en el proceso de respuesta.
 
 \subsubsection{Actualización de catálogos}
-Cargar de forma masiva, mediante un archivo separado por comas (ver Figura \ref{fig:maq-upload}), los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmaceútica. Los catálogos definidos para la operación del sistema AutoSA no podrán ser actualizados, por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición cuando dentro del flujo de atención (ver Figura \ref{fig:dia-estados-orden}).
+Cargar de forma masiva, mediante un archivo separado por comas (ver Figura \ref{fig:maq-upload}), los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmacéutica. Los catálogos definidos para la operación del sistema AutoSA no podrán ser actualizados, por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición cuando dentro del flujo de atención (ver Figura \ref{fig:dia-estados-orden}).
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1.3]{maq-upload}
@@ -670,3 +670,4 @@ La forma en que el usuario de la interfaz web puede modificar los datos de una o
 \begin{enumerate}
   \item En caso de no contar con una conexión a la base de datos se muestra un mensaje de error informando al usuario.
 \end{enumerate}
+
