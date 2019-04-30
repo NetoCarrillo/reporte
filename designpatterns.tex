@@ -1,7 +1,7 @@
 \chapter{Patrones de Diseño}
 
 \section{Definición}
-\paragraph{Patrones de Diseño:} ``Un patrón describe un problema recurrente sobre un ambiente, y entonces describe la técnica que soluciona el problema de forma tal que puede ser utilizado sobre cualquier instancia del problema.''\cite{DesignPatterns}. Esto quiere decir que dados los requerimientos funcionales del sistema es posible analizar la comunicación entre sus distintas partes y de esta forma saber lo patrones que son útiles para dar solución. Los patrones son organizados en tres categorías:
+``Un patrón describe un problema recurrente sobre un ambiente, y entonces describe la técnica que soluciona el problema de forma tal que puede ser utilizado sobre cualquier instancia del problema''\cite{DesignPatterns}, es decir, que dados los requerimientos funcionales del sistema es posible analizar la comunicación entre sus distintas partes y de esta forma saber lo patrones que son útiles para dar solución. Los patrones son organizados en tres categorías\cite{DesignPatterns}:
 \begin{itemize}
 	\item \textbf{Creacionales}: describen la forma en que las entidades (objetos si se utiliza el paradigma orientado a objetos) del sistema son creadas.
 	\item \textbf{Estructurales}: describen la organización entre las entidades del sistema.
@@ -10,9 +10,9 @@
 
 \section{Objeto de acceso a datos}\label{sec-dao}
 
-El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) es definido por Gupta\cite{OCPJavaSE7} como la abstracción y encapsulación de todo el acceso a la fuente de datos (bases de datos, archivos de texto plano, etc.). Maneja la conexión con la fuente de datos para las operaciones de lectura y escritura, previene al usuario de conocer cómo se hacen la lectura y escritura mientras que le permite al usuario especificar que datos obtener o escribir.
-El ocasiones el patrón DAO se presenta acompaño de algún patrón de creación para liberar al usuario de la necesidad de conocer la forma de crear el objeto DAO\cite{OCPJavaSE7}\cite{OCAPJavaSE7}.\\
-El patrón DAO comúnmente ofrece las siguientes:
+El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) es definido por Gupta\cite{OCPJavaSE7} como la abstracción y encapsulación de todo el acceso a la fuente de datos (bases de datos, archivos de texto plano, etcétera). Maneja la conexión con la fuente de datos para las operaciones de lectura y escritura, previene al usuario de conocer cómo se hacen la lectura y escritura mientras que le permite al usuario especificar que datos obtener o escribir.
+El ocasiones el patrón DAO se presenta acompaño de algún patrón de creación para liberar al usuario de la necesidad de conocer la forma de crear el objeto DAO.\\
+El patrón DAO comúnmente ofrece las siguientes\cite{OCPJavaSE7, OCAPJavaSE7}:
 \begin{enumerate}
 	\item [] \textbf{buscar}: Realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
 	\item [] \textbf{listar}: Extrae todos los elementos, el resultado puede utilizar estrategias de paginación.

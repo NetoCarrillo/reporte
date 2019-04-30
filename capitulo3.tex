@@ -1,5 +1,5 @@
 \chapter{Diseño del proyecto}\label{cap3}
-Conforme a lo visto en el capítulo anterior, el proyecto requiere ser ejecutado de dos formas distintas (ejecución de automatizaciones y portal de usuario), además necesita de una base de datos para persistir los datos de las órdenes de reposición atendidas, catálogos y datos de usuario, también es necesario acceso al sistema de archivo para guardar las capturas de pantalla de las órdenes de reposición enviadas. Es decir, es requerido tener dos ambientes de ejecución, la automatización que será ejecutada exclusivamente en el sistema operativo y la de web, que si bien también estará contenida en el sistema operativo también es previsto que se ejecute parte del sistema en el explorador del usuario.
+Conforme a lo visto en el capítulo anterior, el proyecto requiere ser ejecutado de dos formas distintas (ejecución de automatizaciones y portal de usuario), además necesita de una base de datos para mantener persistentes los datos de las órdenes de reposición atendidas, catálogos y datos de usuario, también es necesario acceso al sistema de archivo para guardar las capturas de pantalla de las órdenes de reposición enviadas. Por lo que es necesario dos ambientes de ejecución, la automatización que será ejecutada exclusivamente en el sistema operativo y la del web, que si bien también estará contenida en el sistema operativo es necesario que se ejecute parte del sistema en el explorador del usuario.
 
 
 %===============================================================================
@@ -7,31 +7,31 @@ Conforme a lo visto en el capítulo anterior, el proyecto requiere ser ejecutado
 
 
 \section{Diseño de la arquitectura}
-Bourque define la arquitectura de software como:
+Bourque define la arquitectura de software como:\footnote{\textcolor{red}{Karla, como es cita textual (según mi propia traducción :P ) prefiero dejarla en un párrafo por separado mientras que lo que sea paráfrasis dejarlo en texto seguido ¿cómo ves?}}
 \begin{quote}
-	El conjunto de estructuras necesarias para la comprensión de un sistema en el cual se comprometen elementos de software, relaciones entre ellos y sus propiedades.\cite{SWEBOOK}
+	El conjunto de estructuras necesarias para la comprensión de un sistema en el cual se comprometen elementos de software, relaciones entre ellos y sus propiedades\cite{SWEBOOK}.
 \end{quote}
-En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como Patrones de Diseño y Arquitectura 4+1.
-\paragraph{Arquitectura Orientada a Servicios}
-\textcolor{red}{Escribir lo que es la arquitectura orientada a servicios (tal vez sería bueno decir porque nos favorece.)}
-\paragraph{Patrones de Diseño:} ``Un patrón describe un problema recurrente sobre un ambiente, y entonces describe la técnica que soluciona el problema de forma tal que puede ser utilizado sobre cualquier instancia del problema.''\cite{DesignPatterns}. Esto quiere decir que dados los requerimientos funcionales del sistema es posible analizar la comunicación entre sus distintas partes y de esta forma saber lo patrones que son útiles para dar solución. Los patrones son organizados en tres categorías:
-\begin{itemize}
+En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como Patrones de Diseño y Arquitectura 4+1. \textcolor{red}{encontrar la fuente o quitarlo.}
+\paragraph{Arquitectura Orientada a Servicios:}
+\textcolor{red}{Escribir lo que es la arquitectura orientada a servicios y por qué nos favorece.)}
+\paragraph{Patrones de Diseño:} ``Un patrón describe un problema recurrente sobre un ambiente, y entonces describe la técnica que soluciona el problema de forma tal que puede ser utilizado sobre cualquier instancia del problema''\cite{DesignPatterns}, es decir, dados los requerimientos funcionales del sistema es posible analizar la comunicación entre sus distintas partes y de esta forma saber lo patrones que son útiles para dar solución. Los patrones son organizados en tres categorías:
+\begin{enumerate}
 	\item \textbf{Creacionales}: describen la forma en que las entidades (objetos si se utiliza el paradigma orientado a objetos) del sistema son creadas.
 	\item \textbf{Estructurales}: describen la organización entre las entidades del sistema.
 	\item \textbf{Comportamiento}: describen la comunicación entre entidades del sistema
-\end{itemize}
-\paragraph{Arquitectura 4+1:} Organiza cada decisión en el diseño del sistema en cuatro partes llamadas vistas, cada vista se encarga de enfocarse en un aspecto del diseño, estas cuatro vistas son unificadas por una cuarta vista de escenarios o casos de uso (ver Figura \ref{fig:dia-arq-4-1}):
+\end{enumerate}
+\paragraph{Arquitectura 4+1:} Organiza cada decisión en el diseño del sistema en cuatro partes llamadas vistas (ver Figura \ref{fig:dia-arq-4-1}), cada vista se encarga de enfocarse en un aspecto del diseño, estas cuatro vistas son unificadas por una cuarta vista de escenarios o casos de uso\cite{ViewModel4plus1}:
 \begin{itemize}
 	\item \textbf{Vista Lógica}: son las reglas del negocio por las que se rige la operación del usuario final.
 	\item \textbf{Vista de Proceso}: refleja concurrencia y sincronización.
 	\item \textbf{Vista de Física}: describe las relaciones del software con el hardware.
-	\item \textbf{Vista de Desarrollo}: describe la organización estática del software en su ambiente de desarrollo.\cite{ViewModel4plus1}
+	\item \textbf{Vista de Desarrollo}: describe la organización estática del software en su ambiente de desarrollo.
 \end{itemize}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{dia-arq-4-1} 
-\caption{Diagrama de arquitectura 4+1.}
+\caption{Diagrama de arquitectura 4+1.\cite{ViewModel4plus1}}
 \label{fig:dia-arq-4-1}
 \end{figure}
 
@@ -48,7 +48,7 @@ Vista Física:
 
 
 \subsection{Componentes del sistema AutoSA}
-El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes, el la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSAI.
+El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes, el la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSA.
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{dia-components}
@@ -132,7 +132,7 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\textbf{Identificador}	& \textbf{actualizar-estado-sa}\\
 		\hline
 		\hline
-		\textbf{Descripción}	& Actualiza el estado de atención SA a \textbf{cancelada} de las ordenes de reposición recibidas.\\
+		\textbf{Descripción}	& Actualiza el estado de atención en el Sistema de Abastecimiento a \textbf{cancelada} de las órdenes de reposición recibidas.\\
 		\hline
 		\textbf{Parámetros} 	& \textbullet\, Lista con los números de las órdenes de reposición.\\
 		\hline
@@ -165,7 +165,7 @@ Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes d
 		\hline
 		\textbf{Descripción}	& Entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Nueva}.\\
 		\hline
-		\textbf{Parámetros} 	& \textbullet\, \textit{No tiene parámetros}.\\
+		\textbf{Parámetros} 	& \textbullet\, No tiene parámetros.\\
 		\hline
 		\textbf{Resultado}		& Un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Nueva}. En caso de no existir tal orden regresa un mapa vacío.\\
 		\hline
@@ -178,7 +178,7 @@ Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes d
 		\hline
 		\textbf{Descripción}	& Entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Contestada}.\\
 		\hline
-		\textbf{Parámetros} 	& \textbullet\, \textit{No tiene parámetros}.\\
+		\textbf{Parámetros} 	& \textbullet\, No tiene parámetros.\\
 		\hline
 		\textbf{Resultado}		& Un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Contestada}. En caso de no existir tal orden regresa un mapa vacío.\\
 		\hline
@@ -283,8 +283,8 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 	\end{tabular}
 	\vspace{5mm}
 
-\subsubsection{Sistema de archivos}
-El componente Sistema de archivos es el único que se comunica con el sistema de archivos del sistema operativo\footnote{En este documento se utilizará de forma indistinta el término Sistema de archivos para referirse tanto al componente del sistema AutoSA como al propio del sistema operativo.}, tiene la función de realizar lectura de archivos de configuración, guardar los acuses de envío  y los reportes de las ordenes de reposición.\\
+\subsubsection{Sistema de Archivos}
+El componente Sistema de Archivos es el único que se comunica con el sistema de archivos del sistema operativo\footnote{En este documento se utilizará de forma indistinta el término Sistema de archivos para referirse tanto al componente del sistema AutoSA como al propio del sistema operativo.}, tiene la función de realizar la lectura de archivos de configuración, el almacenamiento de los acuses de envío  y los reportes de las órdenes de reposición.\\
 Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver apéndice \ref{sec-dao}}.
 \paragraph{Configuración\\}
 Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos.
@@ -320,8 +320,8 @@ Almacena archivos (reportes y acuses de envío) en el sistema de archivos.
 	\end{tabular}
 	\vspace{5mm}
 
-\subsubsection{Generador de reportes}
-El generador de reportes, como su nombre lo indica, tiene la función de generar documentos y reportes con los datos de las órdenes de reposición almacenados en la base de datos. 
+\subsubsection{Generador de Reportes}
+El Generador de Reportes, como su nombre lo indica, tiene la función de generar documentos y reportes con los datos de las órdenes de reposición almacenados en la base de datos. 
 \paragraph{Acuse\\} Genera el documento con el acuse de envío.
 	\vspace{5mm}\\
 	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
@@ -345,7 +345,7 @@ El generador de reportes, como su nombre lo indica, tiene la función de generar
 		\textbf{Identificador}	& \textbf{generar-reporte-ordenes}\\
 		\hline
 		\hline
-		\textbf{Descripción}	& Genera el reporte del tipo indicado y entre el rango de fechas dado.\\
+		\textbf{Descripción}	& Genera el reporte del tipo indicado, usando el rango de fechas establecido.\\
 		\hline
 		\multirow{3}{*}{\textbf{Parámetros}}	& \textbullet\, Tipo de reporte.\\
 												& \textbullet\, Fecha inicial.\\
@@ -356,7 +356,7 @@ El generador de reportes, como su nombre lo indica, tiene la función de generar
 	\end{tabular}
 	\vspace{5mm}
 
-\subsubsection{Lógica de automatización}
+\subsubsection{Lógica de Automatización}
 La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización.  
 \paragraph{Respuesta\\}
 Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}).
@@ -368,7 +368,7 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\hline
 		\textbf{Descripción}	& Guarda un listado de nuevas órdenes de reposición.\\
 		\hline
-		\textbf{Parámetros}		& \textbullet\, Listado de mapas, cada mapa contiene los datos de una ordenes de reposición.\\
+		\textbf{Parámetros}		& \textbullet\, Listado de mapas, cada mapa contiene los datos de una orden de reposición.\\
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
@@ -379,7 +379,7 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\textbf{Identificador}	& \textbf{obtener-datos-respuesta}\\
 		\hline
 		\hline
-		\textbf{Descripción}	& Da los datos necesarios para llenar los formularios para contestar una orden de reposición en SA.\\
+		\textbf{Descripción}	& Da los datos necesarios para llenar los formularios para contestar una orden de reposición en el Sistema de Abastecimiento.\\
 		\hline
 		\textbf{Parámetros}		& \textbullet\, Mapa con los datos de la orden para contestar.\\
 		\hline
@@ -392,7 +392,7 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\textbf{Identificador}	& \textbf{actualizar-orden-contestada}\\
 		\hline
 		\hline
-		\textbf{Descripción}	& Actualiza los datos guardados de la orden de reposición con los datos de la respuesta en SA. Utiliza el componente de persistencia para actualizar los datos.\\
+		\textbf{Descripción}	& Actualiza los datos guardados de la orden de reposición con los datos de la respuesta en el  Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.\\
 		\hline
 		\multirow{2}{*}{\textbf{Parámetros}}	& \textbullet\, Número de orden.\\
 												& \textbullet\, Mapa con los datos para guardar.\\
@@ -406,7 +406,7 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\textbf{Identificador}	& \textbf{guardar-orden-enviada}\\
 		\hline
 		\hline
-		\textbf{Descripción}	& Actualiza los datos guardados de la orden de reposición con los datos de la pantalla de envío de SA. Utiliza el componente de persistencia para actualizar los datos.\\
+		\textbf{Descripción}	& Actualiza los datos guardados de la orden de reposición con los datos de la pantalla de envío del Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.\\
 		\hline
 		\multirow{2}{*}{\textbf{Parámetros}}	& \textbullet\, Número de orden.\\
 												& \textbullet\, Mapa con los datos para guardar.\\
@@ -420,7 +420,7 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\textbf{Identificador}	& \textbf{obtener-acuse-envio}\\
 		\hline
 		\hline
-		\textbf{Descripción}	& Solicita la generación de el acuse de envío al componente de reportes y almacena el documento en el sistema de archivos utilizando el componente de sistema de archivos.\\
+		\textbf{Descripción}	& Solicita la generación de el acuse de envío al componente de reportes y almacena el documento el componente de Sistema de Archivos.\\
 		\hline
 		\textbf{Parámetros}		& \textbullet\, Número de orden.\\
 		\hline
@@ -436,7 +436,7 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 		\textbf{Identificador}	& \textbf{obtener-rango-fechas-verificar}\\
 		\hline
 		\hline
-		\textbf{Descripción}	& Obtiene el rango de fechas para ingresar en el formulario de búsqueda de SA. El número de días que comprende el rango se obtiene utilizando el componente de Sistema de archivos.\\
+		\textbf{Descripción}	& Obtiene el rango de fechas para ingresar en el formulario de búsqueda del Sistema de Abastecimiento. El número de días que comprende el rango se obtiene utilizando el componente de Sistema de archivos.\\
 		\hline
 		\textbf{Parámetros}		& \textbullet\, No tiene parámetros.\\
 		\hline
@@ -449,7 +449,7 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 		\textbf{Identificador}	& \textbf{actualizar-estado-sa}\\
 		\hline
 		\hline
-		\textbf{Descripción}	& Actualiza el estado SA de las órdenes de reposición recibidas a. \textbf{Cancelada}. Utiliza el componente de persistencia para la actualización de datos.\\
+		\textbf{Descripción}	& Actualiza el EstadoSA de las órdenes de reposición recibidas a \textbf{Cancelada}. Utiliza el componente de persistencia para la actualización de datos.\\
 		\hline
 		\textbf{Parámetros}		& \textbullet\, Listado con los números de las órdenes de reposición canceladas.\\
 		\hline
@@ -459,10 +459,10 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 	\vspace{5mm}
 
 \subsubsection{Robot}
-El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de Lógica de automatización.\\
+El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de Lógica de Automatización.\\
 
 \subsubsection{Portal Web}
-Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de reportes y Sistema de archivos.\\
+Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
 No ofrece interfaces a los demás componentes, al igual que el componente Robot.
 
 \subsection{Solución a casos de uso}
@@ -522,7 +522,8 @@ Ver sección \ref{cu-contestar}.\\
 	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
 	\label{fig:dia-seq-cu-contestar}
 \end{figure}
-\subsubsection{Actualizar estatus SA}
+\subsubsection{Actualizar EstatusSA}
+\textcolor{red}{verificar que sea el nombre correcto para la sección.}
 Ver sección \ref{cu-contestar}.\\
 \begin{figure}[h]
 	\centering
@@ -586,7 +587,7 @@ Ver sección \ref{cu-contestar}.\\
 
 
 \section{Diseño de la base de datos}
-La base de datos tiene dos finalidades, guardar la información capturada de las órdenes de reposición atendidas así como los catálogos necesarios para los procesos automatizados y generación de reportes; la segunda es guardar la información de los usuarios autorizados para utilizar el portal web.\\
+La base de datos tiene dos finalidades, guardar la información capturada de las órdenes de reposición atendidas así como los catálogos necesarios para los procesos automatizados y generación de reportes; la segunda es almacenar la información de los usuarios autorizados para utilizar el portal web.\\
 El diseño de la base de datos se centra en los siguientes grupos\footnote{Los nombres de las tablas están escritos utilizando letras minúsculas de alfabeto inglés y guión bajo $([a-z]{\textunderscore})^+$}(ver Figura \ref{fig:dia-er-resumen}):
 \begin{enumerate}
 	\item Tablas del registro de eventos.
@@ -614,16 +615,16 @@ El registro de eventos es todo lo relacionado con actividad de los actores del s
 \paragraph{sesion\\} Define una sesión bajo la cual se ejecuta una rutina de automatización, la sesión puede definir implícitamente un usuario y un rol.
 
 \subsection{Tablas de las órdenes de reposición}
-En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes de reposición atendidas durante la rutina automatizada para responder órdenes de reposición en SA\footnote{Ver caso de uso \ref{cu-contestar}}, de igual manera también es utilizada en la verificación de órdenes de reposición canceladas\footnote{Ver caso de uso \ref{cu-verificar}}.
+En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes de reposición atendidas durante la rutina automatizada para responder órdenes de reposición en el Sistema de Abastecimiento\footnote{Ver caso de uso \ref{cu-contestar}}, de igual manera también es utilizada en la verificación de órdenes de reposición canceladas\footnote{Ver caso de uso \ref{cu-verificar}}.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-er-ordenes} 
-  \caption{Diagrama Entidad Relación para el registro de ordenes de reposición.}
+  \caption{Diagrama Entidad Relación para el registro de órdenes de reposición.}
   \label{fig:dia-er-ordenes}
 \end{figure}
-\paragraph{ordenes{\textunderscore}is\\} Contiene el registro de las órdenes de reposición de SA que han sido atendidas por la rutina de automatización.
+\paragraph{ordenes{\textunderscore}is\\} Contiene el registro de las órdenes de reposición del Sistema de Abastecimiento que han sido atendidas por la rutina de automatización.
 \paragraph{cat{\textunderscore}estatus{\textunderscore}orden\\} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
-\paragraph{cat{\textunderscore}estatus{\textunderscore}sa\\} Este catálogo contiene los estados definidos por SA para una orden de reposición.
+\paragraph{cat{\textunderscore}estatus{\textunderscore}sa\\} Este catálogo contiene los estados definidos por el Sistema de Abastecimiento para registrar y almacenar una orden de reposición.
 
 
 \subsection{Tablas de los usuarios de la interfaz web}
