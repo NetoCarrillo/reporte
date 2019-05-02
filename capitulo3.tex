@@ -48,7 +48,7 @@ Vista Física:
 
 
 \subsection{Componentes del sistema AutoSA}
-El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes, el la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSA.
+El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes, el la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSA. En las secciones consecuentes se describe cada componente y las interfaces que ofrece\footnote{Únicamente se mostrarán los diagramas de secuencia más completos que reflejan un comportamiento no trivial.}.
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{dia-components}
@@ -56,7 +56,110 @@ El diagrama de componentes sirve para visualizar los componentes en los que se d
 \label{fig:dia-components}
 \end{figure}
 
-A continuación se muestran las interfaces mediante las cuales los componentes ofrecen conjuntos de operaciones.
+\subsubsection{Agente}
+El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de Lógica de Automatización.\\
+
+\subsubsection{Lógica de Automatización}
+La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización.  
+\paragraph{Respuesta\\}
+Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}).
+	\vspace{5mm}\\
+	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{guardar-orden-nueva}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Guarda un listado de nuevas órdenes de reposición.\\
+		\hline
+		\textbf{Parámetros}		& \textbullet\, Listado de mapas, cada mapa contiene los datos de una orden de reposición.\\
+		\hline
+		\textbf{Resultado}		& No ofrece resultado.\\
+		\hline
+	\end{tabular}
+	\vspace{5mm}\\
+	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{obtener-datos-respuesta}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Da los datos necesarios para llenar los formularios para contestar una orden de reposición en el Sistema de Abastecimiento.\\
+		\hline
+		\textbf{Parámetros}		& \textbullet\, Mapa con los datos de la orden para contestar.\\
+		\hline
+		\textbf{Resultado}		& Mapa con la información para llenar los formularios para contestar la orden de reposición.\\
+		\hline
+	\end{tabular}
+	\vspace{5mm}\\
+	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{actualizar-orden-contestada}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Actualiza los datos guardados de la orden de reposición con los datos de la respuesta en el  Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.\\
+		\hline
+		\multirow{2}{*}{\textbf{Parámetros}}	& \textbullet\, Número de orden.\\
+												& \textbullet\, Mapa con los datos para guardar.\\
+		\hline
+		\textbf{Resultado}		& No ofrece resultado.\\
+		\hline
+	\end{tabular}
+	\vspace{5mm}\\
+	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{guardar-orden-enviada}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Actualiza los datos guardados de la orden de reposición con los datos de la pantalla de envío del Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.\\
+		\hline
+		\multirow{2}{*}{\textbf{Parámetros}}	& \textbullet\, Número de orden.\\
+												& \textbullet\, Mapa con los datos para guardar.\\
+		\hline
+		\textbf{Resultado}		& No ofrece resultado.\\
+		\hline
+	\end{tabular}
+	\vspace{5mm}\\
+	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{obtener-acuse-envio}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Solicita la generación de el acuse de envío al componente de reportes y almacena el documento el componente de Sistema de Archivos.\\
+		\hline
+		\textbf{Parámetros}		& \textbullet\, Número de orden.\\
+		\hline
+		\textbf{Resultado}		& No ofrece resultado.\\
+		\hline
+	\end{tabular}
+	\vspace{5mm}
+\paragraph{Verificación\\}
+Provee el acceso a las reglas de negocio del proceso de verificación de órdenes de reposición canceladas.
+	\vspace{5mm}\\
+	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{obtener-rango-fechas-verificar}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Obtiene el rango de fechas para ingresar en el formulario de búsqueda del Sistema de Abastecimiento. El número de días que comprende el rango se obtiene utilizando el componente de Sistema de archivos.\\
+		\hline
+		\textbf{Parámetros}		& \textbullet\, No tiene parámetros.\\
+		\hline
+		\textbf{Resultado}		& El número de días para el rango de búsqueda.\\
+		\hline
+	\end{tabular}
+	\vspace{5mm}\\
+	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{actualizar-estado-sa}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Actualiza el EstadoSA de las órdenes de reposición recibidas a \textbf{Cancelada}. Utiliza el componente de persistencia para la actualización de datos.\\
+		\hline
+		\textbf{Parámetros}		& \textbullet\, Listado con los números de las órdenes de reposición canceladas.\\
+		\hline
+		\textbf{Resultado}		& El número de órdenes de reposición actualizadas.\\
+		\hline
+	\end{tabular}
+	\vspace{5mm}
 
 \subsubsection{Persistencia}
 El componente de persistencia está basado en el patrón de diseño \textit{DAO}\footnote{Ver apéndice \ref{sec-dao}}\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.} para controlar el acceso a la base de datos.\\
@@ -69,7 +172,7 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\textbf{Identificador}	& \textbf{guardar-nueva} \\
 		\hline
 		\hline
-		\textbf{Descripción}	& Inserta una nueva orden de reposición en la base de datos.\\
+		\textbf{Descripción}	& Inserta una nueva orden de reposición en la base de datos como se muestra en la figura \ref{fig:dia-seq-store-save-new}.\\
 		\hline
 		\textbf{Parámetros} 	& \textbullet\, Mapa con los datos de la orden de reposición.\\
 		\hline
@@ -77,13 +180,14 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\hline
 	\end{tabular}
 	\vspace{5mm}\\
-	\textcolor{red}{Karla, pienso que hacer diagramas de secuencia como el de la figura \ref{fig:dia-seq-store-save-new} es muy simple, pero no sé si aún así sea necesario ¿sería posible nada más incluir los diagramas de secuencia no triviales?\\\\}
+	\iffalse
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.4]{dia-seq-store-save-new}
 		\caption{Diagrama de secuencia de la operación guardar-nueva de la interfaz Almacenamiento.}
 		\label{fig:dia-seq-store-save-new}
 	\end{figure}
+	\fi
 %	\vspace{5mm}\\
 	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
@@ -356,114 +460,9 @@ El Generador de Reportes, como su nombre lo indica, tiene la función de generar
 	\end{tabular}
 	\vspace{5mm}
 
-\subsubsection{Lógica de Automatización}
-La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización.  
-\paragraph{Respuesta\\}
-Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}).
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
-		\hline
-		\textbf{Identificador}	& \textbf{guardar-orden-nueva}\\
-		\hline
-		\hline
-		\textbf{Descripción}	& Guarda un listado de nuevas órdenes de reposición.\\
-		\hline
-		\textbf{Parámetros}		& \textbullet\, Listado de mapas, cada mapa contiene los datos de una orden de reposición.\\
-		\hline
-		\textbf{Resultado}		& No ofrece resultado.\\
-		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
-		\hline
-		\textbf{Identificador}	& \textbf{obtener-datos-respuesta}\\
-		\hline
-		\hline
-		\textbf{Descripción}	& Da los datos necesarios para llenar los formularios para contestar una orden de reposición en el Sistema de Abastecimiento.\\
-		\hline
-		\textbf{Parámetros}		& \textbullet\, Mapa con los datos de la orden para contestar.\\
-		\hline
-		\textbf{Resultado}		& Mapa con la información para llenar los formularios para contestar la orden de reposición.\\
-		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
-		\hline
-		\textbf{Identificador}	& \textbf{actualizar-orden-contestada}\\
-		\hline
-		\hline
-		\textbf{Descripción}	& Actualiza los datos guardados de la orden de reposición con los datos de la respuesta en el  Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.\\
-		\hline
-		\multirow{2}{*}{\textbf{Parámetros}}	& \textbullet\, Número de orden.\\
-												& \textbullet\, Mapa con los datos para guardar.\\
-		\hline
-		\textbf{Resultado}		& No ofrece resultado.\\
-		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
-		\hline
-		\textbf{Identificador}	& \textbf{guardar-orden-enviada}\\
-		\hline
-		\hline
-		\textbf{Descripción}	& Actualiza los datos guardados de la orden de reposición con los datos de la pantalla de envío del Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.\\
-		\hline
-		\multirow{2}{*}{\textbf{Parámetros}}	& \textbullet\, Número de orden.\\
-												& \textbullet\, Mapa con los datos para guardar.\\
-		\hline
-		\textbf{Resultado}		& No ofrece resultado.\\
-		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
-		\hline
-		\textbf{Identificador}	& \textbf{obtener-acuse-envio}\\
-		\hline
-		\hline
-		\textbf{Descripción}	& Solicita la generación de el acuse de envío al componente de reportes y almacena el documento el componente de Sistema de Archivos.\\
-		\hline
-		\textbf{Parámetros}		& \textbullet\, Número de orden.\\
-		\hline
-		\textbf{Resultado}		& No ofrece resultado.\\
-		\hline
-	\end{tabular}
-	\vspace{5mm}
-\paragraph{Verificación\\}
-Provee el acceso a las reglas de negocio del proceso de verificación de órdenes de reposición canceladas.
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
-		\hline
-		\textbf{Identificador}	& \textbf{obtener-rango-fechas-verificar}\\
-		\hline
-		\hline
-		\textbf{Descripción}	& Obtiene el rango de fechas para ingresar en el formulario de búsqueda del Sistema de Abastecimiento. El número de días que comprende el rango se obtiene utilizando el componente de Sistema de archivos.\\
-		\hline
-		\textbf{Parámetros}		& \textbullet\, No tiene parámetros.\\
-		\hline
-		\textbf{Resultado}		& El número de días para el rango de búsqueda.\\
-		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
-		\hline
-		\textbf{Identificador}	& \textbf{actualizar-estado-sa}\\
-		\hline
-		\hline
-		\textbf{Descripción}	& Actualiza el EstadoSA de las órdenes de reposición recibidas a \textbf{Cancelada}. Utiliza el componente de persistencia para la actualización de datos.\\
-		\hline
-		\textbf{Parámetros}		& \textbullet\, Listado con los números de las órdenes de reposición canceladas.\\
-		\hline
-		\textbf{Resultado}		& El número de órdenes de reposición actualizadas.\\
-		\hline
-	\end{tabular}
-	\vspace{5mm}
-
-\subsubsection{Robot}
-El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de Lógica de Automatización.\\
-
 \subsubsection{Portal Web}
 Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
-No ofrece interfaces a los demás componentes, al igual que el componente Robot.
+No ofrece interfaces a los demás componentes, al igual que el componente Agente.
 
 \subsection{Solución a casos de uso}
 A continuación se presentan las soluciones a los casos de uso utilizando los componentes descritos en la sección anterior, para este fin se utilizan diagramas de secuencia UML\footnote{Ver sección \ref{sec-uml-seq}.}
@@ -617,7 +616,7 @@ En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes 
 
 
 \subsection{Tablas del registro de eventos}
-El registro de eventos es todo lo relacionado con actividad de los actores del sistema (robots de automatización y usuarios), como se muestra en la Figura \ref{fig:dia-er-bitacora}.
+El registro de eventos es todo lo relacionado con actividad de los actores del sistema (agentes de automatización y usuarios), como se muestra en la Figura \ref{fig:dia-er-bitacora}.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{dia-er-bitacora} 
