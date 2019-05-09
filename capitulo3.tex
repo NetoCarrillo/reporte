@@ -11,41 +11,11 @@ Bourque define la arquitectura de software como:\footnote{\textcolor{red}{Karla,
 \begin{quote}
 	El conjunto de estructuras necesarias para la comprensión de un sistema en el cual se comprometen elementos de software, relaciones entre ellos y sus propiedades\cite{SWEBOOK}.
 \end{quote}
-En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como Patrones de Diseño y Arquitectura 4+1\cite{SWEBOOK, SoftwareArchitectureInAction}.
-\paragraph{Arquitectura Orientada a Servicios:}
-\textcolor{red}{Escribir lo que es la arquitectura orientada a servicios y por qué nos favorece.)}
-\paragraph{Patrones de Diseño:} ``Un patrón describe un problema recurrente sobre un ambiente, y entonces describe la técnica que soluciona el problema de forma tal que puede ser utilizado sobre cualquier instancia del problema''\cite{DesignPatterns}, es decir, dados los requerimientos funcionales del sistema es posible analizar la comunicación entre sus distintas partes y de esta forma saber lo patrones que son útiles para dar solución. Los patrones son organizados en tres categorías:
-\begin{enumerate}
-	\item \textbf{Creacionales}: describen la forma en que las entidades (objetos si se utiliza el paradigma orientado a objetos) del sistema son creadas.
-	\item \textbf{Estructurales}: describen la organización entre las entidades del sistema.
-	\item \textbf{Comportamiento}: describen la comunicación entre entidades del sistema
-\end{enumerate}
-\paragraph{Arquitectura 4+1:} Organiza cada decisión en el diseño del sistema en cuatro partes llamadas vistas (ver Figura \ref{fig:dia-arq-4-1}), cada vista se encarga de enfocarse en un aspecto del diseño, estas cuatro vistas son unificadas por una cuarta vista de escenarios o casos de uso\cite{ViewModel4plus1}:
-\begin{itemize}
-	\item \textbf{Vista Lógica}: son las reglas del negocio por las que se rige la operación del usuario final.
-	\item \textbf{Vista de Proceso}: refleja concurrencia y sincronización.
-	\item \textbf{Vista de Física}: describe las relaciones del software con el hardware.
-	\item \textbf{Vista de Desarrollo}: describe la organización estática del software en su ambiente de desarrollo.
-\end{itemize}
+En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como los Patrones de Diseño (ver Apéndice \ref{sec-patrones}) \cite{SWEBOOK, SoftwareArchitectureInAction}.
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.5]{dia-arq-4-1} 
-\caption{Diagrama de arquitectura 4+1.\cite{ViewModel4plus1}}
-\label{fig:dia-arq-4-1}
-\end{figure}
+\textcolor{red}{Karla, Quité las secciones de patrones de diseño, arquitectura 4+1, arquitectura orientada a servicios.}\footnote{\textcolor{red}{Karla, no sentí que los conceptos de patrones de diseño y arquitecturas encajara aquí, así que los mandé al apéndice de patrones de diseño y si los necesito durante este capítulo o el siguiente (implementación) nada más haré referencia ¿Qué opinas?}}
 
-Tomando como referencia el modelo ``4+1'' descrito anteriormente, a esta altura se han presentado los escenarios, capítulo \ref{cap2}, y la vista lógica, capítulo \ref{cap1}, a continuación se tratarán temas que conciernen a la vista de Proceso y la vista Física, tocando un poco la vista de Desarrollo, pero esta última será explorada a profundidad en el siguiente capítulo.\\
-
-\textcolor{red}{Esto sería una descripción breve del contenido de cada vista}
-\textcolor{blue}{no estoy tan seguro... a ver que sale}
-
-\textcolor{gray}{
-Vista de Desarrollo:
-Vista de Proceso:
-Vista Física:
-}
-
+Siguiendo el concepto de arquitectura, dado anteriormente, a continuación se muestran los componentes del sistema y como dan solución a los casos de uso del Capítulo \ref{sec:casos-uso}.
 
 \subsection{Componentes del sistema AutoSA}
 El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes, el la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSA. En las secciones consecuentes se describe cada componente y las interfaces que ofrece\footnote{Únicamente se mostrarán los diagramas de secuencia más completos que reflejan un comportamiento no trivial.}.
@@ -57,13 +27,13 @@ El diagrama de componentes sirve para visualizar los componentes en los que se d
 \end{figure}
 
 \subsubsection{Agente}
-El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de Lógica de Automatización.\\
+El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de Lógica de Automatización.
 
 \subsubsection{Lógica de Automatización}
 La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización.  
 \paragraph{Respuesta\\}
-Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}).
-	\vspace{5mm}\\
+Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}).\\
+\noindent
 	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{guardar-orden-nueva}\\
@@ -76,8 +46,20 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
 	\end{tabular}
-	\vspace{5mm}\\
+	\vspace{3mm}\\
 	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{obtener-orden-contestar}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Da la siguiente orden de reposición para contestar.\\
+		\hline
+		\textbf{Parámetros}		& \textbullet\, No recibe parámetros.\\
+		\hline
+		\textbf{Resultado}		& Mapa con la información de la orden de reposición.\\
+		\hline
+	\end{tabular}
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{obtener-datos-respuesta}\\
 		\hline
@@ -88,9 +70,8 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\hline
 		\textbf{Resultado}		& Mapa con la información para llenar los formularios para contestar la orden de reposición.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{actualizar-orden-contestada}\\
 		\hline
@@ -102,9 +83,20 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+		\hline
+		\textbf{Identificador}	& \textbf{obtener-orden-enviar}\\
+		\hline
+		\hline
+		\textbf{Descripción}	& Da la siguiente orden de reposición para enviar.\\
+		\hline
+		\textbf{Parámetros}		& \textbullet\, No recibe parámetros.\\
+		\hline
+		\textbf{Resultado}		& Mapa con la información de la orden de reposición.\\
+		\hline
+	\end{longtable}
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{guardar-orden-enviada}\\
 		\hline
@@ -116,9 +108,8 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{obtener-acuse-envio}\\
 		\hline
@@ -129,14 +120,14 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
+	\end{longtable}
 	\vspace{5mm}
 \paragraph{Verificación\\}
 Provee el acceso a las reglas de negocio del proceso de verificación de órdenes de reposición canceladas.
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
-		\textbf{Identificador}	& \textbf{obtener-rango-fechas-verificar}\\
+		\textbf{Identificador}	& \textbf{obtener-rango-verificar}\\
 		\hline
 		\hline
 		\textbf{Descripción}	& Obtiene el rango de fechas para ingresar en el formulario de búsqueda del Sistema de Abastecimiento. El número de días que comprende el rango se obtiene utilizando el componente de Sistema de archivos.\\
@@ -145,9 +136,9 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 		\hline
 		\textbf{Resultado}		& El número de días para el rango de búsqueda.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{actualizar-estado-sa}\\
 		\hline
@@ -158,38 +149,28 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 		\hline
 		\textbf{Resultado}		& El número de órdenes de reposición actualizadas.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}
+	\end{longtable}
 
 \subsubsection{Persistencia}
-El componente de persistencia está basado en el patrón de diseño \textit{DAO}\footnote{Ver apéndice \ref{sec-dao}}\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.} para controlar el acceso a la base de datos.\\
+El componente de persistencia está basado en el patrón de diseño \textit{DAO}(ver apéndice \ref{sec-dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
 El componente de persistencia de el proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
 \paragraph{Almacenamiento\\}
 Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-guardar-nueva}, \ref{cu-responder-orden}, \ref{cu-enviar-orden} y \ref{cu-actualizar-estatus-sa}.}:
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{guardar-nueva} \\
 		\hline
 		\hline
-		\textbf{Descripción}	& Inserta una nueva orden de reposición en la base de datos como se muestra en la figura \ref{fig:dia-seq-store-save-new}.\\
+		\textbf{Descripción}	& Inserta una nueva orden de reposición en la base de datos.\\
 		\hline
 		\textbf{Parámetros} 	& \textbullet\, Mapa con los datos de la orden de reposición.\\
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\iffalse
-	\begin{figure}[h]
-		\centering
-		\includegraphics[scale=0.4]{dia-seq-store-save-new}
-		\caption{Diagrama de secuencia de la operación guardar-nueva de la interfaz Almacenamiento.}
-		\label{fig:dia-seq-store-save-new}
-	\end{figure}
-	\fi
-%	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{cambiar-estado} \\
 		\hline
@@ -201,9 +182,9 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{guardar-respuesta}\\
 		\hline
@@ -215,9 +196,9 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{guardar-folio-acuse}\\
 		\hline
@@ -229,9 +210,9 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{actualizar-estado-sa}\\
 		\hline
@@ -242,9 +223,9 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\hline
 		\textbf{Resultado}		& El número de órdenes de reposición actualizadas.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{registrar-evento}\\
 		\hline
@@ -256,13 +237,12 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}
+	\end{longtable}
 
 \paragraph{Lectura\\}
 Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes de reposición en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-enviar-orden} y \ref{cu-generar-acuse}.}:
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{siguiente-orden-contestar}\\
 		\hline
@@ -273,9 +253,9 @@ Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes d
 		\hline
 		\textbf{Resultado}		& Un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Nueva}. En caso de no existir tal orden regresa un mapa vacío.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{siguiente-orden-enviar}\\
 		\hline
@@ -286,9 +266,9 @@ Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes d
 		\hline
 		\textbf{Resultado}		& Un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Contestada}. En caso de no existir tal orden regresa un mapa vacío.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{obtener-datos-acuse}\\
 		\hline
@@ -299,13 +279,12 @@ Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes d
 		\hline
 		\textbf{Resultado}		& Un mapa con los datos de la orden de reposición. En caso de no existir tal orden regresa un mapa vacío.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}
+	\end{longtable}
 
 \paragraph{Administración\\}
 Son las operaciones que permiten modificar datos específicos de las órdenes de reposición contenidas en la base de datos, también ofrece la actualización masiva de catálogos\footnote{Ver casos de uso \ref{cu-entrar-web}, \ref{cu-generar-reporte}, \ref{cu-actualizar-catalogo}, \ref{cu-buscar}, \ref{cu-visualizar} y \ref{cu-editar}.}).
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{buscar-credenciales}\\
 		\hline
@@ -316,9 +295,9 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 		\hline
 		\textbf{Resultado}		& Un mapa con las credenciales del usuario.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{extraer-reporte}\\
 		\hline
@@ -330,9 +309,9 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 		\hline
 		\textbf{Resultado}		& Un listado con los datos del reporte.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{actualizar-catalogo}\\
 		\hline
@@ -344,9 +323,9 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 		\hline
 		\textbf{Resultado}		& El número de los registros insertados en el catálogo.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{buscar-ordenes}\\
 		\hline
@@ -357,9 +336,9 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 		\hline
 		\textbf{Resultado}		& Un listado con las órdenes de reposición encontradas.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{buscar-orden}\\
 		\hline
@@ -370,9 +349,9 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 		\hline
 		\textbf{Resultado}		& La orden de reposición encontrada. En caso de no encontrar la orden se regresa un identificador vacío.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+	\end{longtable}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{actualizar-orden}\\
 		\hline
@@ -384,16 +363,15 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 		\hline
 		\textbf{Excepciones}	& Error si la orden de reposición no se encuentra registrada en la base de datos.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}
+	\end{longtable}
 
 \subsubsection{Sistema de Archivos}
 El componente Sistema de Archivos es el único que se comunica con el sistema de archivos del sistema operativo\footnote{En este documento se utilizará de forma indistinta el término Sistema de archivos para referirse tanto al componente del sistema AutoSA como al propio del sistema operativo.}, tiene la función de realizar la lectura de archivos de configuración, el almacenamiento de los acuses de envío  y los reportes de las órdenes de reposición.\\
 Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver apéndice \ref{sec-dao}}.
 \paragraph{Configuración\\}
 Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos.
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{obtener-propiedad}\\
 		\hline
@@ -404,12 +382,12 @@ Da la configuración contenida en archivos de propiedades contenidas en el mismo
 		\hline
 		\textbf{Resultado}		& El valor de la propiedad. Si no existe la propiedad regresa la cadena vacía.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}
+	\end{longtable}
+
 \paragraph{Almacenamiento\\}
 Almacena archivos (reportes y acuses de envío) en el sistema de archivos.
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{guardar-archivo}\\
 		\hline
@@ -421,14 +399,13 @@ Almacena archivos (reportes y acuses de envío) en el sistema de archivos.
 		\hline
 		\textbf{Resultado}		& No ofrece resultado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}
+	\end{longtable}
 
 \subsubsection{Generador de Reportes}
 El Generador de Reportes, como su nombre lo indica, tiene la función de generar documentos y reportes con los datos de las órdenes de reposición almacenados en la base de datos. 
 \paragraph{Acuse\\} Genera el documento con el acuse de envío.
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{generar-acuse-envio}\\
 		\hline
@@ -439,12 +416,11 @@ El Generador de Reportes, como su nombre lo indica, tiene la función de generar
 		\hline
 		\textbf{Resultado}		& La ruta en el sistema de archivos donde ha sido depositado el acuse de envío.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}
+	\end{longtable}
 
 \paragraph{Generación\\} Genera reportes con los datos de las órdenes de reposición almacenados en la base de datos.
-	\vspace{5mm}\\
-	\begin{tabular}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
+
+	\begin{longtable}{|p{\dimexpr.2\textwidth}|p{\dimexpr.8\textwidth-4\tabcolsep}|}
 		\hline
 		\textbf{Identificador}	& \textbf{generar-reporte-ordenes}\\
 		\hline
@@ -457,79 +433,155 @@ El Generador de Reportes, como su nombre lo indica, tiene la función de generar
 		\hline
 		\textbf{Resultado}		& La ruta en el sistema de archivos donde ha sido depositado el reporte generado.\\
 		\hline
-	\end{tabular}
-	\vspace{5mm}
+	\end{longtable}
 
 \subsubsection{Portal Web}
 Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
 No ofrece interfaces a los demás componentes, al igual que el componente Agente.
 
+
+
 \subsection{Solución a casos de uso}
 A continuación se presentan las soluciones a los casos de uso utilizando los componentes descritos en la sección anterior, para este fin se utilizan diagramas de secuencia UML\footnote{Ver sección \ref{sec-uml-seq}.}
-\textcolor{red}{Karla, en esta sección pretendo describir los flujos entre componentes que solucionan cada caso de uso.}
 
 \subsubsection{Contestar órdenes}
-\textcolor{red}{
-	Esta es la muestra de como se presenta el flujo entre componentes para solucionar el caso de uso. Básicamente consiste en mostrar un diagrama de secuencia.\\
-	Aún no se hace mención a lenguajes, frameworks o tecnologías específicas, todo eso será en el siguiente capítulo.
-}
-Ver sección \ref{cu-contestar}.\\
+El diseño de la solución al caso de uso \textbf{CU-CONTESTAR} (sección \ref{cu-contestar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización}. La solución sigue la siguiente secuencia (ver diagrama\footnote{Por cuestión del tamaño de la figura y conservar el texto dentro de ella de tamaño legible únicamente se mostrarán los mensajes más importantes entre componentes} de la Figura \ref{fig:dia-seq-cu-contestar}):
+\begin{enumerate}
+	\item \textbf{Usuario}: inicia la ejecución del agente (mensaje 1 del diagrama).
+	\item \textbf{Agente}: dirige el explorador de Internet a la página del Sistema de Abastecimiento y pide al usuario la contraseña para ingresar.
+	\item \textbf{Usuario}: proporciona la contraseña (mensaje 2 del diagrama).
+	\item \textbf{Agente}: realiza el acceso al Sistema de Abastecimiento
+	\item \textbf{Agente}: dirige el explorador de Internet al listado de órdenes de reposición.
+	\item \textbf{Agente}: para cada orden en el listado, ejecuta el caso de uso \textbf{CU-GUARDAR-NUEVA} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 3 del diagrama).
+	\item \textbf{Agente}: para cada orden con estado \textbf{NUEVA} en la base de datos, ejecuta el caso de uso \textbf{CU-RESPONDER-ORDEN} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 4 del diagrama).
+	\item \textbf{Agente}: para cada orden con estado \textbf{CONTESTADA} en la base de datos, ejecuta los casos de uso \textbf{CU-ENVIAR-ORDEN} y \textbf{CU-GENERAR-ACUSE} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 5 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
+	\includegraphics[scale=0.7]{dia-seq-cu-contestar}
+	\caption{Diagrama de secuencia del caso de uso CU-CONTESTAR.}
 	\label{fig:dia-seq-cu-contestar}
 \end{figure}
-\iffalse
+
 \subsubsection{Guardar nueva orden}
-Ver sección \ref{cu-contestar}.\\
+El diseño para la solución del caso de uso \textbf{CU-GUARDAR-NUEVA} (sección \ref{cu-guardar-nueva}) utiliza los componentes \textbf{Agente}, \textbf{Lógica de Automatización} y \textbf{Persistencia}, tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-guardar-nueva} se muestra el diagrama de secuencia.):
+\begin{enumerate}
+	\item \textbf{Agente}: envía los datos de la nueva orden de reposición (mensaje 1 del diagrama).
+	\item \textbf{Lógica de Automatización}: remueve (de encontrarse) los espacios en blanco al principio y al final de cada dato de la orden.
+	\item \textbf{Lógica de Automatización}: construye la \textit{URL} de envío de la orden de reposición.
+	\item \textbf{Lógica de Automatización}: envía la orden de reposición al componente de persistencia, (mensaje 2 del diagrama).
+	\item \textbf{Persistencia}: almacena la orden de reposición en la base de datos.
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-guardar-nueva}
+	\caption{Diagrama de secuencia del caso de uso CU-GUARDAR-NUEVA.}
+	\label{fig:dia-seq-cu-guardar-nueva}
 \end{figure}
+
 \subsubsection{Responder orden}
-Ver sección \ref{cu-contestar}.\\
+El diseño para la solución del caso de uso \textbf{CU-RESPONDER-ORDEN} (sección \ref{cu-responder-orden}) utiliza los componentes \textbf{Agente}, \textbf{Lógica de Automatización} y \textbf{Persistencia}, tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-responder-orden} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Agente}: pide la siguiente orden de reposición para contestar (mensaje 1 del diagrama).
+	\item \textbf{Lógica de Automatización}: consulta el componente \textbf{Persistencia} para obtener la siguiente orden para contestar.
+	\item \textbf{Persistencia}: obtiene la primera orden de reposición con estado \textbf{Nueva}.
+	\item \textbf{Persistencia}: cambia el estado de la orden a \textbf{Siendo Contestada} (mensaje 3 del diagrama).
+	\item \textbf{Agente}: pide los datos para llenar los formularios (mensaje 6 del diagrama).
+	\item \textbf{Agente}: pide almacenar los datos de la orden de reposición contestada (mensaje 7 del diagrama).
+	\item \textbf{Lógica de Automatización}: envía los datos de la orden contestada al componente \textbf{Persistencia} para que sean almacenados (mensaje 8 del diagrama).
+	\item \textbf{Lógica de Automatización}: manda el cambio de estado de la orden a \textbf{Contestada} (mensaje 9 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-responder-orden}
+	\caption{Diagrama de secuencia del caso de uso CU-RESPONDER-ORDEN.}
+	\label{fig:dia-seq-cu-responder-orden}
 \end{figure}
+
 \subsubsection{Enviar orden}
-Ver sección \ref{cu-contestar}.\\
+El diseño para la solución del caso de uso \textbf{CU-ENVIAR-ORDEN} (sección \ref{cu-enviar-orden}) utiliza los componentes \textbf{Agente}, \textbf{Lógica de Automatización} y \textbf{Persistencia}, tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-enviar-orden} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Agente}: pide la siguiente orden de reposición para enviar (mensaje 1 del diagrama).
+	\item \textbf{Lógica de Automatización}: consulta el componente \textbf{Persistencia} para obtener la siguiente orden para enviar (mensaje 2 del diagrama).
+	\item \textbf{Persistencia}: obtiene la primera orden de reposición con estado \textbf{Contestada}.
+	\item \textbf{Persistencia}: cambia el estado de la orden a \textbf{Siendo Enviada} (mensaje 3 del diagrama).
+	\item \textbf{Agente}: dirige el explorador a la \textit{URL de envío}.
+	\item \textbf{Agente}: manda almacenar el folio de envío (mensaje 6 del diagrama).
+	\item \textbf{Lógica de Automatización}: utiliza el componente \textbf{Persistencia} para almacenar el folio de envío (mensaje 7 del diagrama).
+	\item \textbf{Lógica de Automatización}: actualiza el estado de la orden a \textbf{Enviada} (mensaje 8 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-enviar-orden}
+	\caption{Diagrama de secuencia del caso de uso CU-ENVIAR-ORDEN.}
+	\label{fig:dia-seq-cu-enviar-orden}
 \end{figure}
+
+
+
+
+
+	\vspace{25mm}
+
+
+
+
+
 \subsubsection{Generar acuse de envío}
-Ver sección \ref{cu-contestar}.\\
+El diseño para la solución del caso de uso \textbf{CU-GENERAR-ACUSE} (sección \ref{cu-generar-acuse}) utiliza los componentes \textbf{Lógica de Automatización}, \textbf{Persistencia}, \textbf{Generador de Reportes} y \textbf{Sistema de Archivos} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-generar-acuse} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Lógica de Automatización}: pide los datos de la orden de reposición al componente \textbf{Persistencia} (mensaje 1 del diagrama).
+	\item \textbf{Lógica de Automatización}: pide la generación del acuse de envío al componente \textbf{Generador de Reportes} (mensaje 2 del diagrama).
+	\item \textbf{Generador de Reportes}: pide almacenar el acuse de envío al componente \textbf{Sistema de Archivos} (mensaje 3 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-generar-acuse}
+	\caption{Diagrama de secuencia del caso de uso CU-GENERAR-ACUSE.}
+	\label{fig:dia-seq-cu-generar-acuse}
 \end{figure}
+
 \subsubsection{Verificar órdenes}
-Ver sección \ref{cu-contestar}.\\
+El diseño de la solución al caso de uso \textbf{CU-VERIFICAR} (sección \ref{cu-verificar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-verificar} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Usuario}: inicia la ejecución del agente (mensaje 1 del diagrama).
+	\item \textbf{Agente}: dirige el explorador de Internet a la página del Sistema de Abastecimiento y pide al usuario la contraseña para ingresar.
+	\item \textbf{Usuario}: proporciona la contraseña (mensaje 2 del diagrama).
+	\item \textbf{Agente}: realiza el acceso al Sistema de Abastecimiento
+	\item \textbf{Agente}: dirige el explorador de Internet a la búsqueda de órdenes de reposición.
+	\item \textbf{Agente}: pide el rango de fechas al componente \textbf{Lógica de Automatización} (mensaje 3 del diagrama).
+	\item \textbf{Agente}: realiza la búsqueda de órdenes de reposición \textit{canceladas}.
+	\item \textbf{Agente}: envía el listado con los números de orden de reposición resultantes al componente \textbf{Lógica de Automatización} (mensaje 4 del diagrama).
+	\item \textbf{Lógica de Automatización}: ejecuta los casos de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA}(mensaje 5 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-verificar}
+	\caption{Diagrama de secuencia del caso de uso CU-VERIFICAR.}
+	\label{fig:dia-seq-cu-verificar}
 \end{figure}
-\subsubsection{Actualizar EstatusSA}
-\textcolor{red}{verificar que sea el nombre correcto para la sección.}
-Ver sección \ref{cu-contestar}.\\
+
+\subsubsection{Actualizar estatus de Sistema de Abastecimiento}
+El diseño para la solución del caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA} (sección \ref{cu-actualizar-estatus-sa}) utiliza los componentes \textbf{Agente}, \textbf{Lógica de Automatización} y \textbf{Persistencia}, tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-actualizar-estatus-sa} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Lógica de Automatización}: envía el listado de con los números de órdenes de reposición al componente \textbf{Persistencia} para actualizar en la base de datos el estado conocido en el Sistema de Abastecimiento (mensaje 1 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-actualizar-estatus-sa}
+	\caption{Diagrama de secuencia del caso de uso CU-ACTUALIZAR-ESTATUS-SA.}
+	\label{fig:dia-seq-cu-actualizar-estatus-sa}
 \end{figure}
+
+
+\iffalse
 \subsubsection{Entrar en interfaz Web}
 Ver sección \ref{cu-contestar}.\\
 \begin{figure}[h]
@@ -652,37 +704,3 @@ Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son
 \end{figure}
 \paragraph{cat{\textunderscore}clientes\\} Este catálogo contiene información sobre la localización física de los lugares donde deben ser entregados los productos.
 \paragraph{cat{\textunderscore}contratos\\} Este catálogo contiene información referente a acuerdos comerciales referentes a los productos requeridos en las órdenes de reposición.
-
-
-%===============================================================================
-%===============================================================================
-%
-%
-%\section{Diseño de bibliotecas}
-%
-%
-%===============================================================================
-%===============================================================================
-%
-%
-%\section{Diseño de rutinas de automatización}
-%
-%
-%===============================================================================
-%===============================================================================
-%
-%
-%\section{Diseño de servicios}
-%\subsection{Persistencia}
-%\subsection{Acceso y Autorización}
-%\subsection{Ordenes de Reposición}
-%\subsection{Reportes}
-%
-%
-%===============================================================================
-%===============================================================================
-%
-%
-%\section{Diseño de interfaz de usuario}
-%
-%

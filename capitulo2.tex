@@ -154,7 +154,7 @@ El cliente ha solicitado que el proyecto se apegue a su infraestructura, para co
 %===============================================================================
 
 
-\section{Casos de uso}
+\section{Casos de uso}\label{sec:casos-uso}
 Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. A continuación se muestra el diagrama de casos de uso del sistema AutoSA.
 
 \begin{figure}[h]
@@ -260,7 +260,7 @@ Una orden de reposición es almacenada por primera vez con la información que s
 
 
 \subsection{Responder orden}\label{cu-responder-orden}
-\paragraph{Identificador:}\label{cu-responder-orden}
+\paragraph{Identificador:}
 CU-RESPONDER-ORDEN
 \paragraph{Actores:}
 Robot
@@ -274,7 +274,7 @@ En la pantalla para contestar una orden de reposición se llenan los formularios
 \end{enumerate}
 \paragraph{Secuencia normal:}
 \begin{enumerate}
-  \item Cambia el estado de la orden a \textbf{Siendo Contestada}.
+  \item Obtiene la orden de reposición y cambia el estado a \textbf{Siendo Contestada}, todo en una misma transacción.
   \item Dirige el explorador a la \textit{URL} de respuesta (ver caso de uso CU-GUARDAR-NUEVA).
   \item Llena el formulario que se presenta en esta pantalla con las siguientes consideraciones:
   \begin{enumerate}
@@ -290,8 +290,8 @@ En la pantalla para contestar una orden de reposición se llenan los formularios
     \end{itemize}
   \end{enumerate}
   \item Almacena en la base de datos los campos de los formularios.
-  \item Activar el botón ``contestar'' del formulario de la orden de reposición.
   \item Cambia el estado de la orden a \textbf{Contestada}.
+  \item Activar el botón ``contestar'' del formulario de la orden de reposición.
 \end{enumerate}
 \paragraph{Postcondiciones:}
 \begin{enumerate}
@@ -320,7 +320,7 @@ Enviar la orden de reposición contestada de regreso al Sistema de Abastecimient
 \paragraph{Secuencia normal:}
 \begin{enumerate}
   \item Cambia estado de la orden a \textbf{Siendo Enviada}.
-  \item El explorador dirige a la \textit{URL de envío}.
+  \item Dirige el explorador a la \textit{URL de envío}.
   \item Guardar el folio de envío en la base de datos.
   \item Cambia estado de la orden a \textbf{Enviada}.
 \end{enumerate}

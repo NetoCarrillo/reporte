@@ -31,7 +31,12 @@
 %\onehalfspacing
 
 %Tamaño de márgenes
-\usepackage[left=1.25in, right=1.25in]{geometry}
+\usepackage[left=1.05in, right=1.05in]{geometry}
+\usepackage{layout}
+%\usepackage{showframe}
+\setlength{\marginparwidth}{0pt}
+\setlength{\marginparsep}{0pt}
+%\setlength{\textheight}{610pt}
 
 %Colores en el texto
 \usepackage{xcolor}
@@ -48,6 +53,7 @@
 \usepackage{multirow} % Multirows
 
 \begin{document}
+%\layout
 
 \begin{center}
 \begin{Large}
@@ -68,7 +74,7 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 
 \tableofcontents
 \listoffigures
-\listoftables
+%\listoftables
 
 
 \include{capitulo1}
