@@ -521,16 +521,6 @@ El diseño para la solución del caso de uso \textbf{CU-ENVIAR-ORDEN} (sección 
 	\label{fig:dia-seq-cu-enviar-orden}
 \end{figure}
 
-
-
-
-
-	\vspace{25mm}
-
-
-
-
-
 \subsubsection{Generar acuse de envío}
 El diseño para la solución del caso de uso \textbf{CU-GENERAR-ACUSE} (sección \ref{cu-generar-acuse}) utiliza los componentes \textbf{Lógica de Automatización}, \textbf{Persistencia}, \textbf{Generador de Reportes} y \textbf{Sistema de Archivos} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-generar-acuse} se muestra el diagrama de secuencia):
 \begin{enumerate}
@@ -580,63 +570,110 @@ El diseño para la solución del caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA} (
 	\label{fig:dia-seq-cu-actualizar-estatus-sa}
 \end{figure}
 
-
-\iffalse
 \subsubsection{Entrar en interfaz Web}
-Ver sección \ref{cu-contestar}.\\
+El diseño de la solución al caso de uso \textbf{CU-ENTRAR-WEB} (sección \ref{cu-entrar-web}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Usuario}: introduce su nombre de usuario y contraseña \textbf{credenciales} (mensaje 1 del diagrama).
+	\item \textbf{Portal Web}: envía el nombre de usuario al componente \textbf{Persistencia} que realiza la búsqueda de los datos del usuario (mensaje 2 del diagrama).
+	\item \textbf{Portal Web}: compara la contraseña con la almacenada en la base de datos.
+	\begin{enumerate}
+		\item \textit{Si las credenciales son válidas}: el \textbf{Portal Web}regresa al \textbf{Usuario} un código de acceso temporal (mensaje 3 del diagrama).
+		\item \textit{Si las credenciales son inválidas}: el \textbf{Portal Web}regresa al \textbf{Usuario} un mensaje de error (mensaje 4 del diagrama).
+	\end{enumerate}
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-entrar-web}
+	\caption{Diagrama de secuencia del caso de uso CU-ENTRAR-WEB.}
+	\label{fig:dia-seq-cu-entrar-web}
 \end{figure}
+
 \subsubsection{Generar reporte}
-Ver sección \ref{cu-contestar}.\\
+El diseño de la solución al caso de uso \textbf{CU-GENERAR-REPORTE} (sección \ref{cu-generar-reporte}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web}, \textbf{Persistencia}, \textbf{Generador de Reportes} y  \textbf{Sistema de Archivos} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-generar-reporte} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Usuario}: selecciona el tipo de reporte y el rango de fechas (mensaje 1 del diagrama).
+	\item \textbf{Portal Web}: pide la búsqueda de órdenes al componente \textbf{Persistencia} (mensaje 2 del diagrama).
+	\item \textbf{Portal Web}: envía las órdenes para generar el reporte (mensaje 3 del diagrama).
+	\item \textbf{Generador de Reportes}: genera el reporte.
+	\item \textbf{Generador de Reportes}: pide al componente \textbf{Sistema de Archivos} almacenar el reporte (mensaje 4 del diagrama).
+	\item \textbf{Generador de Reportes}: regresa la ruta donde se guardó el componente (mensaje 5 del diagrama).
+	\item \textbf{Portal Web}: muestra al \textbf{Usuario} la ruta donde se encuentra el reporte (mensaje 6 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-generar-reporte}
+	\caption{Diagrama de secuencia del caso de uso CU-GENERAR-REPORTE.}
+	\label{fig:dia-seq-cu-generar-reporte}
 \end{figure}
+
 \subsubsection{Actualizar catálogo}
-Ver sección \ref{cu-contestar}.\\
+El diseño de la solución al caso de uso \textbf{CU-ACTUALIZAR-CATALOGO} (sección \ref{cu-actualizar-catalogo}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-actualizar-catalogo} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Usuario}: selecciona el catálogo y el archivo (mensaje 1 del diagrama).
+	\item \textbf{Portal Web}: pide la actualización del catálogo al componente \textbf{Persistencia} (mensaje 2 del diagrama).
+	\item \textbf{Portal Web}: muestra al \textbf{Usuario} la cantidad de registros almacenados (mensaje 3 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-actualizar-catalogo}
+	\caption{Diagrama de secuencia del caso de uso CU-ACTUALIZAR-CATALOGO.}
+	\label{fig:dia-seq-cu-actualizar-catalogo}
 \end{figure}
+
 \subsubsection{Buscar órdenes}
-Ver sección \ref{cu-contestar}.\\
+El diseño de la solución al caso de uso \textbf{CU-BUSCAR} (sección \ref{cu-buscar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-buscar} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Usuario}: llenada el formulario de búsqueda \textbf{filtro} (mensaje 1 del diagrama).
+	\item \textbf{Portal Web}: pide la realización de la búsqueda de órdenes al componente \textbf{Persistencia} (mensaje 2 del diagrama).
+	\item \textbf{Portal Web}: muestra al \textbf{Usuario} el listado de órdenes de reposición encontradas (mensaje 3 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-buscar}
+	\caption{Diagrama de secuencia del caso de uso CU-BUSCAR.}
+	\label{fig:dia-seq-cu-buscar}
 \end{figure}
+
 \subsubsection{Visualizar orden}
-Ver sección \ref{cu-contestar}.\\
+El diseño de la solución al caso de uso \textbf{CU-VISUALIZAR} (sección \ref{cu-visualizar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-visualizar} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Usuario}: selecciona la orden de reposición (mensaje 1 del diagrama).
+	\item \textbf{Portal Web}: pide la realización de la búsqueda de la orden al componente \textbf{Persistencia} (mensaje 2 del diagrama).
+	\item \textbf{Portal Web}: muestra al \textbf{Usuario} la información de la orden de reposición.
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-visualizar}
+	\caption{Diagrama de secuencia del caso de uso CU-VISUALIZAR.}
+	\label{fig:dia-seq-cu-visualizar}
 \end{figure}
+
 \subsubsection{Editar orden}
 Ver sección \ref{cu-contestar}.\\
+El diseño de la solución al caso de uso \textbf{CU-EDITAR} (sección \ref{cu-editar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (En el diagrama de la Figura \ref{fig:dia-seq-cu-editar} se muestra el diagrama de secuencia):
+\begin{enumerate}
+	\item \textbf{Usuario}: activa la edición de la orden de reposición (mensaje 1 del diagrama).
+	\item \textbf{Usuario}: modifica la información de la orden de reposición (mensaje 2).
+	\item \textbf{Portal Web}: pide la actualización de la orden al componente \textbf{Persistencia} (mensaje 3 del diagrama).
+\end{enumerate}
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia caso de uso contestar órdenes.}
-	\label{fig:dia-seq-cu-contestar}
+	\includegraphics[scale=0.7]{dia-seq-cu-editar}
+	\caption{Diagrama de secuencia del caso de uso CU-EDITAR.}
+	\label{fig:dia-seq-cu-editar}
 \end{figure}
-\fi
 
 
 %===============================================================================
 %===============================================================================
 
-
+\newpage
 \section{Diseño de la base de datos}
 La base de datos tiene dos finalidades, guardar la información capturada de las órdenes de reposición atendidas así como los catálogos necesarios para los procesos automatizados y generación de reportes; la segunda es almacenar la información de los usuarios autorizados para utilizar el portal web.\\
 El diseño de la base de datos se centra en los siguientes grupos\footnote{Los nombres de las tablas están escritos utilizando letras minúsculas de alfabeto inglés y guión bajo $([a-z]{\textunderscore})^+$}(ver Figura \ref{fig:dia-er-resumen}):
@@ -662,9 +699,9 @@ En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes 
   \caption{Diagrama Entidad Relación para el registro de órdenes de reposición.}
   \label{fig:dia-er-ordenes}
 \end{figure}
-\paragraph{ordenes{\textunderscore}is\\} Contiene el registro de las órdenes de reposición del Sistema de Abastecimiento que han sido atendidas por la rutina de automatización.
-\paragraph{cat{\textunderscore}estatus{\textunderscore}orden\\} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
-\paragraph{cat{\textunderscore}estatus{\textunderscore}sa\\} Este catálogo contiene los estados definidos por el Sistema de Abastecimiento para registrar y almacenar una orden de reposición.
+\paragraph{ordenes{\textunderscore}is:} Contiene el registro de las órdenes de reposición del Sistema de Abastecimiento que han sido atendidas por la rutina de automatización.
+\paragraph{cat{\textunderscore}estatus{\textunderscore}orden:} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
+\paragraph{cat{\textunderscore}estatus{\textunderscore}sa:} Este catálogo contiene los estados definidos por el Sistema de Abastecimiento para registrar y almacenar una orden de reposición.
 
 
 \subsection{Tablas del registro de eventos}
@@ -675,9 +712,9 @@ El registro de eventos es todo lo relacionado con actividad de los actores del s
   \caption{Diagrama Entidad Relación para el registro de eventos.}
   \label{fig:dia-er-bitacora}
 \end{figure}
-\paragraph{bitacora\\} Lleva el registro de eventos ocurridos durante la ejecución de las rutinas de automatización, el evento puede estar ligado a una sesión.
-\paragraph{cat{\textunderscore}tipo{\textunderscore}evento\\} Catálogo con los tipos de eventos que pueden ser registrados en la bitácora.
-\paragraph{sesion\\} Define una sesión bajo la cual se ejecuta una rutina de automatización, la sesión puede definir implícitamente un usuario y un rol.
+\paragraph{bitacora:} Lleva el registro de eventos ocurridos durante la ejecución de las rutinas de automatización, el evento puede estar ligado a una sesión.
+\paragraph{cat{\textunderscore}tipo{\textunderscore}evento:} Catálogo con los tipos de eventos que pueden ser registrados en la bitácora.
+\paragraph{sesion:} Define una sesión bajo la cual se ejecuta una rutina de automatización, la sesión puede definir implícitamente un usuario y un rol.
 
 
 \subsection{Tablas de los usuarios de la interfaz web}
@@ -688,10 +725,10 @@ Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz w
   \caption{Diagrama Entidad Relación para el manejo de usuarios.}
   \label{fig:dia-er-web}
 \end{figure}
-\paragraph{roles\\}Contiene los roles (permisos) que los usuarios pueden tener en la interfaz web.
-\paragraph{sesion\\}Contiene información de las sesiones de los usuarios de la interfaz web.
-\paragraph{usuarios{\textunderscore}web\\} Contiene la información de los usuarios de la interfaz web.
-\paragraph{credenciales\\} Contiene la credenciales con las cuales los usuarios autentican su acceso a la interfaz web.
+\paragraph{roles:}Contiene los roles (permisos) que los usuarios pueden tener en la interfaz web.
+\paragraph{sesion:}Contiene información de las sesiones de los usuarios de la interfaz web.
+\paragraph{usuarios{\textunderscore}web:} Contiene la información de los usuarios de la interfaz web.
+\paragraph{credenciales:} Contiene la credenciales con las cuales los usuarios autentican su acceso a la interfaz web.
 
 
 \subsection{Catálogos para la generación de reportes}
@@ -702,5 +739,10 @@ Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son
   \caption{Diagrama Entidad Relación de los catálogos para la generación de vistas.}
   \label{fig:dia-er-reportes}
 \end{figure}
-\paragraph{cat{\textunderscore}clientes\\} Este catálogo contiene información sobre la localización física de los lugares donde deben ser entregados los productos.
-\paragraph{cat{\textunderscore}contratos\\} Este catálogo contiene información referente a acuerdos comerciales referentes a los productos requeridos en las órdenes de reposición.
+\paragraph{cat{\textunderscore}clientes:} Este catálogo contiene información sobre la localización física de los lugares donde deben ser entregados los productos.
+\paragraph{cat{\textunderscore}contratos:} Este catálogo contiene información referente a acuerdos comerciales referentes a los productos requeridos en las órdenes de reposición.
+
+
+\section{Resumen}
+En este capítulo se ha mostrado la arquitectura del Sistema AutoSA, los componentes del mismo y las interfaces que ofrecen. Posteriormente se ha mostrado el flujo de mensajes entre los componentes del sistema para llevar a cabo los casos de uso del Capítulo \ref{cap2}. Así mismo se ha modelado la base de datos que a grandes rasgos está destinada a almacenar información de las órdenes de reposición e información de los usuarios del Sistema AutoSA.\\
+El diseño planteado será implementado en el siguiente capítulo donde se verá a detalle el funcionamiento de cada módulo así como algoritmos, tecnologías y marcos de trabajo utilizados. 
