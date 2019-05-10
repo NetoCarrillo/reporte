@@ -31,7 +31,12 @@
 %\onehalfspacing
 
 %Tamaño de márgenes
-\usepackage[left=1.25in, right=1.25in]{geometry}
+\usepackage[left=1.05in, right=1.05in]{geometry}
+\usepackage{layout}
+%\usepackage{showframe}
+\setlength{\marginparwidth}{0pt}
+\setlength{\marginparsep}{0pt}
+%\setlength{\textheight}{610pt}
 
 %Colores en el texto
 \usepackage{xcolor}
@@ -48,6 +53,7 @@
 \usepackage{multirow} % Multirows
 
 \begin{document}
+%\layout
 
 \begin{center}
 \begin{Large}
@@ -56,7 +62,7 @@ Facultad de Ciencias\\*[1ex]
 \end{Large}
 \begin{LARGE}
 Proyecto para la Opción de Titulación por Reporte de Trabajo Profesional\\*[1ex]
-AutoSA: Sistema para automatizar las órdenes de reposición en el Sistema de Abastecimiento del Instituto de Salud\\*[2ex]
+AutoSA: Sistema para automatizar las órdenes de reposición en el Sistema de Abastecimiento del Instituto de Salud Pública de México\\*[2ex]
 \end{LARGE}
 Alumno: Ernesto Carrillo Espinosa - No. de cuenta: 300138647\\
 Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
@@ -68,7 +74,7 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 
 \tableofcontents
 \listoffigures
-\listoftables
+%\listoftables
 
 
 \include{capitulo1}
@@ -79,16 +85,21 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 
 %\include{capitulo4}
 
+\renewcommand{\appendixname}{Apéndice}
+\renewcommand{\appendixtocname}{Apéndices}
+\renewcommand{\appendixpagename}{Apéndices}
 \begin{appendices}
 %\include{datadictionary}
-%\include{uml}
+\include{uml}
+
 \include{designpatterns}
+
 \end{appendices}
 
 %Bibliografia
 \renewcommand{\bibname}{Bibliografía}
 %\nocite{*} 
 %\bibliographystyle{apacite}
-\bibliographystyle{unsrt}
+\bibliographystyle{acm}
 \bibliography{Bibliografia}
 \end{document}
