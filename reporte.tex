@@ -85,16 +85,21 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 
 %\include{capitulo4}
 
+\renewcommand{\appendixname}{Apéndice}
+\renewcommand{\appendixtocname}{Apéndices}
+\renewcommand{\appendixpagename}{Apéndices}
 \begin{appendices}
 %\include{datadictionary}
-%\include{uml}
+\include{uml}
+
 \include{designpatterns}
+
 \end{appendices}
 
 %Bibliografia
 \renewcommand{\bibname}{Bibliografía}
 %\nocite{*} 
 %\bibliographystyle{apacite}
-\bibliographystyle{unsrt}
+\bibliographystyle{acm}
 \bibliography{Bibliografia}
 \end{document}
