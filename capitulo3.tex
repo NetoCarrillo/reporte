@@ -367,7 +367,7 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 
 \subsubsection{Sistema de Archivos}
 El componente Sistema de Archivos es el único que se comunica con el sistema de archivos del sistema operativo\footnote{En este documento se utilizará de forma indistinta el término Sistema de archivos para referirse tanto al componente del sistema AutoSA como al propio del sistema operativo.}, tiene la función de realizar la lectura de archivos de configuración, el almacenamiento de los acuses de envío  y los reportes de las órdenes de reposición.\\
-Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver apéndice \ref{sec-dao}}.
+Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver apéndice \ref{sec-dao}.}.
 \paragraph{Configuración\\}
 Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos.
 
@@ -436,7 +436,7 @@ El Generador de Reportes, como su nombre lo indica, tiene la función de generar
 	\end{longtable}
 
 \subsubsection{Portal Web}
-Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
+Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}.}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
 No ofrece interfaces a los demás componentes, al igual que el componente Agente.
 
 
@@ -445,7 +445,7 @@ No ofrece interfaces a los demás componentes, al igual que el componente Agente
 A continuación se presentan las soluciones a los casos de uso utilizando los componentes descritos en la sección anterior, para este fin se utilizan diagramas de secuencia UML\footnote{Ver sección \ref{sec-uml-seq}.}
 
 \subsubsection{Contestar órdenes}
-El diseño de la solución al caso de uso \textbf{CU-CONTESTAR} (sección \ref{cu-contestar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización}. La solución sigue la siguiente secuencia (ver diagrama\footnote{Por cuestión del tamaño de la figura y conservar el texto dentro de ella de tamaño legible únicamente se mostrarán los mensajes más importantes entre componentes} de la Figura \ref{fig:dia-seq-cu-contestar}):
+El diseño de la solución al caso de uso \textbf{CU-CONTESTAR} (sección \ref{cu-contestar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización}. La solución sigue la siguiente secuencia (ver diagrama\footnote{Por cuestión del tamaño de la figura y conservar el texto dentro de ella de tamaño legible únicamente se mostrarán los mensajes más importantes entre componentes.} de la Figura \ref{fig:dia-seq-cu-contestar}):
 \begin{enumerate}
 	\item \textbf{Usuario}: inicia la ejecución del agente (mensaje 1 del diagrama).
 	\item \textbf{Agente}: dirige el explorador de Internet a la página del Sistema de Abastecimiento y pide al usuario la contraseña para ingresar.
@@ -676,7 +676,7 @@ El diseño de la solución al caso de uso \textbf{CU-EDITAR} (sección \ref{cu-e
 \newpage
 \section{Diseño de la base de datos}
 La base de datos tiene dos finalidades, guardar la información capturada de las órdenes de reposición atendidas así como los catálogos necesarios para los procesos automatizados y generación de reportes; la segunda es almacenar la información de los usuarios autorizados para utilizar el portal web.\\
-El diseño de la base de datos se centra en los siguientes grupos\footnote{Los nombres de las tablas están escritos utilizando letras minúsculas de alfabeto inglés y guión bajo $([a-z]{\textunderscore})^+$}(ver Figura \ref{fig:dia-er-resumen}):
+El diseño de la base de datos se centra en los siguientes grupos\footnote{Los nombres de las tablas están escritos utilizando letras minúsculas de alfabeto inglés y guión bajo $([a-z]{\textunderscore})^+$.}(ver Figura \ref{fig:dia-er-resumen}):
 \begin{enumerate}
 	\item Tablas de las órdenes de reposición.
 	\item Tablas del registro de eventos.
@@ -692,7 +692,7 @@ El diseño de la base de datos se centra en los siguientes grupos\footnote{Los n
 
 
 \subsection{Tablas de las órdenes de reposición}
-En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes de reposición atendidas durante la rutina automatizada para responder órdenes de reposición en el Sistema de Abastecimiento\footnote{Ver caso de uso \ref{cu-contestar}}, de igual manera también es utilizada en la verificación de órdenes de reposición canceladas\footnote{Ver caso de uso \ref{cu-verificar}}.
+En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes de reposición atendidas durante la rutina automatizada para responder órdenes de reposición en el Sistema de Abastecimiento\footnote{Ver caso de uso \ref{cu-contestar}.}, de igual manera también es utilizada en la verificación de órdenes de reposición canceladas\footnote{Ver caso de uso \ref{cu-verificar}.}.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{dia-er-ordenes} 
@@ -718,7 +718,7 @@ El registro de eventos es todo lo relacionado con actividad de los actores del s
 
 
 \subsection{Tablas de los usuarios de la interfaz web}
-Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz web\footnote{Ver caso de uso \ref{cu-entrar-web}} (ver Figura \ref{fig:dia-er-web}).
+Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz web\footnote{Ver caso de uso \ref{cu-entrar-web}.} (ver Figura \ref{fig:dia-er-web}).
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{dia-er-web} 
@@ -732,7 +732,7 @@ Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz w
 
 
 \subsection{Catálogos para la generación de reportes}
-Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son necesarios para la generación de los reportes\footnote{Ver casos de uso \ref{cu-generar-reporte} y \ref{cu-actualizar-catalogo}} que sirven que las siguientes áreas de la farmacéutica continúen con la atención de las órdenes de reposición.
+Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son necesarios para la generación de los reportes\footnote{Ver casos de uso \ref{cu-generar-reporte} y \ref{cu-actualizar-catalogo}.} que sirven que las siguientes áreas de la farmacéutica continúen con la atención de las órdenes de reposición.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{dia-er-reportes} 
