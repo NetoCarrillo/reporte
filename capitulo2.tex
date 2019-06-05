@@ -189,7 +189,8 @@ CU-CONTESTAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-El procedimiento completo para contestar las órdenes de reposición listadas en el Sistema de Abastecimiento del Instituto (ver Figura \ref{fig:dia-activity-contestar}), el alcance de este caso comprende el acceso al Sistema de Abastecimiento, contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
+El procedimiento principal para contestar las órdenes de reposición listadas en el Sistema de Abastecimiento del Instituto, como se muestra en la Figura \ref{fig:dia-activity-contestar}, inicia con la consulta de la pantalla de acceso al Sistema de Abastecimiento.\\
+El alcance de este caso comprende el acceso al Sistema de Abastecimiento, contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
 Queda fuera de alcance la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso Generación de Reportes.
 \paragraph{Precondiciones:}
 \begin{enumerate}
@@ -232,7 +233,7 @@ CU-GUARDAR-NUEVA
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Una orden de reposición es almacenada por primera vez con la información que se muestra en el listado de órdenes de reposición.
+Una orden de reposición es almacenada por primera vez con la información que se muestra en el listado de órdenes de reposición, este caso de uso corresponde a la actividad 4 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Se tiene indicado un renglón del listado de órdenes de reposición sobre el cuál se realizará este caso de uso.
@@ -267,7 +268,7 @@ CU-RESPONDER-ORDEN
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-En la pantalla para contestar una orden de reposición se llenan los formularios y se almacena la información de la pantalla en el registro de la base de datos que corresponde a la orden de reposición.
+En la pantalla para contestar una orden de reposición se llenan los formularios y se almacena la información de la pantalla en el registro de la base de datos que corresponde a la orden de reposición, este caso de uso corresponde a las actividades 6 y 7 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Se indica una orden de reposición almacenada en la base de datos sobre la cual se aplica este caso de uso.
@@ -313,7 +314,7 @@ CU-ENVIAR-ORDEN
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Enviar la orden de reposición contestada de regreso al Sistema de Abastecimiento.
+Enviar la orden de reposición contestada de regreso al Sistema de Abastecimiento, este caso de uso corresponde a las actividades 8 y 9 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Una orden de reposición registrada en la base de datos.
@@ -343,7 +344,7 @@ CU-GENERAR-ACUSE
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Generar el acuse de envío de la orden de reposición.
+Generar el acuse de envío de la orden de reposición, este caso de uso corresponde a la actividad 10 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Una orden de reposición registrada en la base de datos.
@@ -371,7 +372,8 @@ CU-VERIFICAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas (ver Figura \ref{fig:dia-activity-verificar}), el alcance de este caso de uso comprende el acceso al Sistema de Abastecimiento, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
+Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas, en la Figura \ref{fig:dia-activity-verificar} se muestra que dicho procedimiento comienza con la actividad de mostrar la página de acceso al Sistema de Abastecimiento para después dirigirse a la página donde se realiza la búsqueda de órdenes de reposición por estado (Contestada, Enviada, Cancelada).\\
+El alcance de este caso de uso comprende el acceso al Sistema de Abastecimiento, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
 Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}, y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
@@ -407,7 +409,7 @@ CU-ACTUALIZAR-ESTATUS-SA
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Actualizar en forma masiva el estado de atención en el Sistema de Abastecimiento dentro de la base de datos del sistema AutoSA.
+Actualizar en forma masiva el estado de atención en el Sistema de Abastecimiento dentro de la base de datos del sistema AutoSA, este caso de uso corresponde a la actividad 6 del diagrama de actividad de la Figura \ref{fig:dia-activity-verificar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Se cuenta con una lista de órdenes de reposición.
@@ -434,7 +436,7 @@ CU-ENTRAR-WEB
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Explicar el flujo para autorizar la entrada de un usuario a la interfaz Web del sistema, como se muestra en diagrama de actividad de la Figura \ref{fig:dia-activity-login}, este es el punto de acceso que tienen los usuarios para hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
+Este caso de uso define el flujo para autorizar la entrada de un usuario a la interfaz Web del sistema, en el diagrama de actividad de la Figura \ref{fig:dia-activity-login} se puede observar que el flujo inicia cuando el sistema muestra la pantalla de acceso (parte superior izquierda del apartado AutoSA). Este es el punto de acceso que tienen los usuarios para hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-login}
@@ -478,7 +480,9 @@ CU-GENERAR-REPORTE
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Este caso de uso ofrece al usuario la generación de reportes, es decir, ejecutar una consulta a la base de datos y vaciar el resultado en un archivo, como se muestra en el diagrama de actividad de la Figura \ref{fig:dia-activity-reporter}. La consulta puede ser ejecutada sobre una o más tablas, es importante mencionar que existen catálogos con claves de productos y clientes que cambian constantemente, ver caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
+Este caso de uso ofrece al usuario la generación de reportes, entendiendo como reporte un documento de Excel\textsuperscript{\textcopyright} que contiene el resultado de una consulta a la base de datos.\\
+En el diagrama de actividad de la Figura \ref{fig:dia-activity-reporter} se muestra el flujo que sigue este caso de uso, el cual comienza con el usuario solicitando la pantalla para la generación de reportes (parte superior del apartado Usuario del diagrama de actividad).\\
+Es posible que la consulta a la base de datos (primera actividad del apartado AutoSA del diagrama de actividad) haga referencia a catálogos con claves de productos y clientes que cambian constantemente por lo que es necesario considerar la actualización de catálogos, tal funcionalidad es cubierta por el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-reporter}
@@ -525,7 +529,7 @@ CU-ACTUALIZAR-CATALOGO
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz Web, la Figura \ref{fig:dia-activity-cat-update} muestra el diagrama de actividad para este caso de uso.
+Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz Web, la Figura \ref{fig:dia-activity-cat-update} muestra el diagrama de actividad para este caso de uso donde se puede apreciar que se inicia cuando el usuario solicita la pantalla de administración de catálogos (parte superior del apartado Usuario del diagrama de actividad).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-cat-update}

@@ -75,6 +75,10 @@
 	\endgroup
 }
 
+% Estilos
+\newenvironment{consolaenv}{\fontfamily{pcr}\selectfont}{\par}
+\DeclareTextFontCommand{\consolatext}{\consolaenv}
+
 \begin{document}
 %\layout
 
@@ -121,6 +125,7 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 
 \include{designpatterns}
 
+%\include{technologies}
 \end{appendices}
 
 %Bibliografia
