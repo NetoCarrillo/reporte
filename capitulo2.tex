@@ -19,7 +19,7 @@ Por ejemplo: la caída de el servidor de base de datos, en siguientes secciones 
 \subsection{Alcance del proyecto}\label{sec-alcance}
 Moustafaev define el alcance del proyecto de software como:
 \begin{quote}
-\textit{Es el proceso de definir todo el trabajo necesario para entregar un producto o servicio con las funciones y características especificadas\cite{ScopeManagement}.}
+Es el proceso de definir todo el trabajo necesario para entregar un producto o servicio con las funciones y características especificadas\cite{ScopeManagement}.
 \end{quote}
 Para fines del sistema AutoSA, el alcance está acotado en los siguientes puntos:
 \begin{itemize}
@@ -38,7 +38,7 @@ Para fines del sistema AutoSA, el alcance está acotado en los siguientes puntos
 \subsection{Riesgos asociados al proyecto}\label{sec-riesgos}
 Moustafaev define el riesgo de un proyecto como:
 \begin{quote}
-Riesgo es la incertidumbre sobre escenarios que pueden arriesgar el éxito del proyecto.\cite{ScopeManagement}.
+Riesgo es la incertidumbre sobre algunos escenarios que ponen en peligro el éxito del proyecto.\cite{ScopeManagement}.
 \end{quote}
 Los riesgos identificados para este proyecto se listan a continuación:
 \begin{enumerate}
@@ -156,7 +156,7 @@ El cliente ha solicitado que el proyecto se apegue a su infraestructura, para co
 
 
 \section{Casos de uso}\label{sec:casos-uso}
-Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. A continuación se muestra el diagrama de casos de uso del sistema AutoSA.
+Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. En la Figura \ref{fig:dia-casos-uso} se muestra el diagrama de casos de uso del sistema AutoSA.
 
 \begin{figure}[h]
   \centering
@@ -168,10 +168,10 @@ Un caso de uso es la representación de las posibles interacciones entre el sist
 Con el fin de explicar mejor el flujo de atención de una orden de reposición es necesario mostrar el diagrama de estados de una orden de reposición durante el flujo de \textbf{envío de órdenes de reposición} (ver sección \ref{sec:intro-contexto}).\\
 Los estados que puede tomar una orden (ver Figura \ref{fig:dia-estados-orden}) indican:
 \begin{itemize}
-  \item Si la solicitud está lista para ser procesada: ``Nueva'' o ``Contestada''.
-  \item Si está siendo procesada: ``Siendo Contestada'' o ``Siendo Enviada''.
-  \item Si ha terminado el ciclo correctamente: ``Enviada''.
-  \item Si ha terminado el ciclo con errores: ``Error''.
+  \item Si la solicitud está lista para ser procesada: \consolatext{Nueva} o \consolatext{Contestada}.
+  \item Si está siendo procesada: \consolatext{Siendo Contestada} o \consolatext{Siendo Enviada}.
+  \item Si ha terminado el ciclo correctamente: \consolatext{Enviada}.
+  \item Si ha terminado el ciclo con errores: \consolatext{Error}.
 \end{itemize} 
 
 \begin{figure}[h]
@@ -576,7 +576,7 @@ CU-BUSCAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Define el flujo para la búsqueda de órdenes de reposición, la Figura \ref{fig:dia-activity-search} muestra el diagrama de actividad para este caso de uso.
+Define el flujo para la búsqueda de órdenes de reposición, la Figura \ref{fig:dia-activity-search} muestra el diagrama de actividad para este caso de uso en ella se puede apreciar que el flujo inicia cuando el usuario solicita la pantalla de búsqueda de órdenes (parte superior izquierda) y termina cuando el sistema muestra el resultado de la búsqueda (parte inferior derecha si la búsqueda tiene al menos una orden).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-search}
@@ -614,7 +614,7 @@ CU-VISUALIZAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, en la Figura \ref{fig:dia-activity-view} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta sección es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición y seleccionado la orden para visualizar como se muestra en la Figura \ref{fig:dia-casos-uso} (ver caso de uso \textbf{CU-BUSCAR}).
+La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, en la Figura \ref{fig:dia-activity-view} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta sección es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición (ver caso de uso \textbf{CU-BUSCAR}) y seleccionado la orden para visualizar (correspondiente a las dos actividades del Usuario en el diagrama). La dependencia de este caso de uso se muestra en la Figura \ref{fig:dia-casos-uso}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-view}
@@ -653,7 +653,7 @@ CU-EDITAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-La forma en que el usuario de la interfaz web puede modificar los datos de una orden de reposición que está visualizando, en la Figura \ref{fig:dia-activity-edit} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta vista es necesario que el usuario haya ejecutado la visualización de la orden de reposición que desea modificar. La dependencia de este caso de uso se muestra en la Figura \ref{fig:dia-casos-uso} (ver caso de uso \textbf{CU-BUSCAR}).
+La forma en que el usuario de la interfaz web puede modificar los datos de una orden de reposición que se muestra en pantalla (ver caso de uso \textbf{CU-BUSCAR}), en la Figura \ref{fig:dia-activity-edit} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta vista es necesario que el usuario haya ejecutado la visualización de la orden de reposición que desea modificar (primeras dos actividades del Usuario en el diagrama). La dependencia de este caso de uso se muestra en la Figura \ref{fig:dia-casos-uso}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-edit}
