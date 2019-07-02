@@ -1,307 +1,66 @@
 \chapter{Implementación}\label{cap4}
 
-\section{Aspectos generales del la implementación}
-\textcolor{red}{Esta sección contiene las tecnologías más relevantes para la implmentación del sistema}
-\paragraph{Lenguajes de programación}
-	\begin{itemize}
-		\item Java
-		\item Javascript
-		\item Sahiscript
-	\end{itemize}
-\paragraph{Base de datos}
-	\textcolor{red}{hacer nota: para respetar acuerdos de confidencialidad con el cliente no se mencionará de forma específica el sistema manejador de base de datos utilizado}
-	\begin{itemize}
-		\item SQL
-		\item Estándares
-	\end{itemize}
+\section{Tecnologías utilizadas}
+\subsection{Java}
 
-\paragraph{Herramienta de automatización}
-	\begin{itemize}
-		\item Sahi\footnote{Esta herramienta fue utilizada para la automatización con SA a petición de la farmacéutica.}
-	\end{itemize}
-\paragraph{Spring}
-	\begin{itemize}
-		\item Spring core\cite{SpringInAction}
-		\item Spring data\cite{SpringInAction}
-		\item Spring boot\cite{SpringBootInAction}
-		\item Spring MVC\cite{SpringInAction}
-		\item Spring REST\cite{SpringInAction}
-		\item Spring security\cite{ProSpringSecurity}
-	\end{itemize}
+\begin{quote}
+	Java is related to C++, which is a direct descendant of C. Much of the character of Java is inherited from these two languages. From C, Java derives its syntax. Many of Java’s objectoriented features were influenced by C++. In fact, several of Java’s defining characteristics come from—or are responses to—its predecessors. Moreover, the creation of Java was deeply rooted in the process of refinement and adaptation that has been occurring in computer programming languages for the past several decades. For these reasons, this section reviews the sequence of events and forces that led to Java. As you will see, each innovation in language design was driven by the need to solve a fundamental problem that the preceding languages could not solve. Java is no exception\cite{JavaCompleteReference}.
+\end{quote}
 
-\paragraph{Mybatis}\cite{MyBatis}
-En la ``listing'' \ref{lst:mybatis-interface} se muestra la interfaz de Java y el ``listing'' \ref{lst:mybatis-mapping} se muestra el DML. 
-\begin{lstlisting}[language=Java, caption={Ejemplo de MyBatis}, label={lst:mybatis-interface}]
-public interface IDomainUser{
-	UsuarioDomain getUsuario(String name);
-}
-\end{lstlisting}
+\begin{quote}
+	Java was conceived by James Gosling, Patrick Naughton, Chris Warth, Ed Frank, and Mike Sheridan at Sun Microsystems, Inc. in 1991. It took 18 months to develop the first working version. This language was initially called “Oak,” but was renamed “Java” in 1995. Between the initial implementation of Oak in the fall of 1992 and the public announcement of Java in the spring of 1995, many more people contributed to the design and evolution of the language. Bill Joy, Arthur van Hoff, Jonathan Payne, Frank Yellin, and Tim Lindholm were key contributors to the maturing of the original prototype\cite{JavaCompleteReference}.
+\end{quote}
 
-\begin{lstlisting}[language=XML, caption={Ejemplo de MyBatis}, label={lst:mybatis-mapping}]
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="IDomainUser">
-
-	<resultMap id="rol" autoMapping="true"
-			   type="RolDomain">
-		<id property="rol" column="rol"/>
-	</resultMap>
-
-	<resultMap id="usuario" autoMapping="true"
-			   type="UsuarioDomain">
-		<id property="usuario" column="usuario"/>
-		<collection property="roles"
-					resultMap="rol"
-					javaType="ArrayList"/>
-	</resultMap>
-	
-	<!-- UsuarioDomain getUsuario(final String name); -->
-	<select id="getUsuario" resultMap="usuario" useCache="false">
-		SELECT u.*, r.*
-		  FROM ralca.usuarios_domain u,
-		       ralca.roles_domain r,
-		       ralca.usuarios_roles ur
-		 WHERE u.usuario = ur.usuario
-		   AND r.rol = ur.rol
-		   AND u.usuario = #{0};
-	</select>
-</mapper>
-\end{lstlisting}
-
-
-
-\paragraph{Velocity}
-En el ``listing'' \ref{lst:velocity-template} se muestra un ejemplo de plantilla con Velocity.
-\begin{lstlisting}[language=HTML, caption={Ejemplo de plantilla de Velocity}, label={lst:velocity-template}]
-<tr>
-	<td width="160"><b>No. de Orden: </b></td>
-	<td>${numorden}</td>
-</tr>
-\end{lstlisting}
-
-\paragraph{POI}
-
-\paragraph{iTextPdf}\cite{iTextInAction}
-
-\paragraph{Maven}\cite{MasteringApacheMaven3}
-\begin{lstlisting}[language=XML, caption={Proyecto padre de Maven}, label={lst:maven-parent-project}]
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	
-	<groupId>com.meve</groupId>
-	<artifactId>surtimiento-project</artifactId>
-	<version>1</version>
-
-	<modules>
-		<module>surtimiento</module>
-		<module>surtimiento-domain</module>
-		<module>surtimiento-basic</module>
-		<module>surtimiento-api</module>
-		<module>surtimiento-dao-impl</module>
-		<module>surtimiento-dao-jpa</module>
-		<module>surtimiento-service-impl</module>
-		<module>surtimiento-excel-plugin</module>
-		<module>surtimiento-reporter</module>
-		<module>surtimiento-worker</module>
-	</modules>
-</project>
-\end{lstlisting}
-
-
-\begin{lstlisting}[language=XML, caption={Configuración de la aplicación web}, label={lst:maven-spring-boot-webapp}]
-<project>
-	...
-	<artifactId>surtimiento-webapp</artifactId>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-	</parent>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-	
-		<!-- Domain -->
-		<dependency>
-			<groupId>com.meve</groupId>
-			<artifactId>surtimiento-domain</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.meve</groupId>
-			<artifactId>surtimiento-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.meve</groupId>
-			<artifactId>surtimiento-dao-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.meve</groupId>
-			<artifactId>surtimiento-service-impl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.meve</groupId>
-			<artifactId>surtimiento-reporter</artifactId>
-		</dependency>
-		<!-- Domain -->
-		
-		<!-- Persistence -->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-		</dependency>
-	    <dependency>
-	    	<groupId>javax.persistence</groupId>
-	    	<artifactId>persistence-api</artifactId>
-	    	<version>1.0</version>
-	    </dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<!-- Persistence -->
-	</dependencies>
-
-	<build>
-		<filters>
-			<filter>profiles/${build.profile.id}/config.properties</filter>
-		</filters>
-		
-		<resources>
-			<resource>
-				<filtering>true</filtering>
-				<directory>${project.basedir}/src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>${project.build.directory}/generated-resources</directory>
-			</resource>
-		</resources>
-		
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<finalName>${jar.file.name}</finalName>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<!-- Serves *only* to filter the wro.xml so it can get an absolute path 
-							for the project -->
-						<id>copy-resources</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/wro</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/wro</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-							<delimiters>
-								<delimiter>@</delimiter>
-							</delimiters>
-							<useDefaultDelimiters>false</useDefaultDelimiters>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>ro.isdc.wro4j</groupId>
-				<artifactId>wro4j-maven-plugin</artifactId>
-				<version>1.7.6</version>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-					<cssDestinationFolder>${project.build.directory}/generated-resources/static/css</cssDestinationFolder>
-					<jsDestinationFolder>${project.build.directory}/generated-resources/static/js</jsDestinationFolder>
-					<wroFile>${project.build.directory}/wro/wro.xml</wroFile>
-					<extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
-					<contextFolder>${basedir}/src/main/wro</contextFolder>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.webjars</groupId>
-						<artifactId>jquery</artifactId>
-						<version>2.1.1</version>
-					</dependency>
-					<dependency>
-						<groupId>org.webjars</groupId>
-						<artifactId>angularjs</artifactId>
-						<version>1.3.8</version>
-					</dependency>
-					<dependency>
-						<groupId>org.webjars</groupId>
-						<artifactId>bootstrap</artifactId>
-						<version>3.2.0</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>
-	</build>
-	
-	<profiles>
-		<!-- Developing -->
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<build.profile.id>dev</build.profile.id>
-				<jar.file.name>webapp_${build.profile.id}</jar.file.name>
-			</properties>
-		</profile>
-		
-		<!-- Testing -->
-		<profile>
-			<id>test</id>
-			<properties>
-				<build.profile.id>test</build.profile.id>
-				<jar.file.name>webapp_${build.profile.id}</jar.file.name>
-			</properties>
-		</profile>
-		
-		<!-- Production -->
-		<profile>
-			<id>prod</id>
-			<properties>
-				<build.profile.id>prod</build.profile.id>
-				<jar.file.name>webapp</jar.file.name>
-			</properties>
-		</profile>
-	</profiles>
-</project>	
-\end{lstlisting}
+Java es un lenguaje bonito porque gracias a él puedo obtener dinero para hacer las cosas que me gustan 
+\subsubsection{Java Data Base Controller}
+\subsubsection{Java IO}
+\subsubsection{Java Enterprise Edition}
+\subsection{Javascript}
+\subsection{Sahi}
+\subsection{SQL}
+\subsection{iBatis}
+\subsection{Spring}
+\subsubsection{Spring MVC}
+\subsubsection{Spring JPA}
+\subsubsection{Spring Security}
 
 
 \section{Implementación de base de datos}
 \textcolor{blue}{La base de datos utilizada para el proyecto es una base de datos relacional compatible con el modelo ANSI}\\
 Mencionar: 
 \begin{itemize}
-	\item Concepto de índice.
+	\item Concepto de índice.\\
+	Auxiliary access structures called indexes, which are used to speed up the retrieval of records in response to certain search conditions. The index structures are additional files on disk that provide secondary access paths, which provide alternative ways to access the records without affecting the physical placement of records in the primary data file on disk
+	\cite{FundamentalsOfDBSystems}
+
+
+
+	\item Índices para búsquedas de órdenes.
+	\item Índices para reportes.
+	\item Concepto de vista.
+	\item Vistas para reportes.
+	\item Concepto de transacción.
+\end{itemize}
+
+\section{Implementación del sistema}
+\subsection{Implementación de la base de datos}
+\subsection{Implementación de componentes}
+
+\textcolor{red}{
+--------------------------------------------------------------------------------\\
+Estoy pensando que sección contiene las tecnologías más relevantes para la implmentación del sistema, principales lenguajes y marcos de trabajo.\\
+--------------------------------------------------------------------------------}
+
+\section{Implementación de base de datos}
+\textcolor{blue}{La base de datos utilizada para el proyecto es una base de datos relacional compatible con el modelo ANSI}\\
+Mencionar: 
+\begin{itemize}
+	\item Concepto de índice.\\
+	Auxiliary access structures called indexes, which are used to speed up the retrieval of records in response to certain search conditions. The index structures are additional files on disk that provide secondary access paths, which provide alternative ways to access the records without affecting the physical placement of records in the primary data file on disk
+	\cite{FundamentalsOfDBSystems}
+
+
+
 	\item Índices para búsquedas de órdenes.
 	\item Índices para reportes.
 	\item Concepto de vista.
