@@ -9,10 +9,7 @@
 \end{itemize}
 
 \section{Patrón Objeto de Acceso a Datos}\label{sec-dao}
-
-El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) es definido por Gupta\cite{OCPJavaSE7} como la abstracción y encapsulación de todo el acceso a la fuente de datos (bases de datos, archivos de texto plano, etcétera). Maneja la conexión con la fuente de datos para las operaciones de lectura y escritura, previene al usuario de conocer cómo se hacen la lectura y escritura mientras que le permite al usuario especificar que datos obtener o escribir.
-El ocasiones el patrón DAO se presenta acompaño de algún patrón de creación para liberar al usuario de la necesidad de conocer la forma de crear el objeto DAO.\\
-El patrón DAO comúnmente ofrece las siguientes\cite{OCPJavaSE7, OCAPJavaSE7}:
+El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etc.) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
 \begin{enumerate}
 	\item [] \textbf{buscar}: Realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
 	\item [] \textbf{listar}: Extrae todos los elementos, el resultado puede utilizar estrategias de paginación.
@@ -32,7 +29,7 @@ Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-mvc-simple}
-  \caption{Diagrama del patrón MVC.}
+  \caption{Diagrama del patrón MVC\cite{JavaDesignPatternsExamples}.}
   \label{fig:dia-mvc-simple}
 \end{figure}
 

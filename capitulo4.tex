@@ -1,13 +1,114 @@
 \chapter{Implementación}\label{cap4}
 
+\section{Tecnologías utilizadas}
+\subsection{Java}
+
+\begin{quote}
+	Java is related to C++, which is a direct descendant of C. Much of the character of Java is inherited from these two languages. From C, Java derives its syntax. Many of Java’s objectoriented features were influenced by C++. In fact, several of Java’s defining characteristics come from—or are responses to—its predecessors. Moreover, the creation of Java was deeply rooted in the process of refinement and adaptation that has been occurring in computer programming languages for the past several decades. For these reasons, this section reviews the sequence of events and forces that led to Java. As you will see, each innovation in language design was driven by the need to solve a fundamental problem that the preceding languages could not solve. Java is no exception\cite{JavaCompleteReference}.
+\end{quote}
+
+\begin{quote}
+	Java was conceived by James Gosling, Patrick Naughton, Chris Warth, Ed Frank, and Mike Sheridan at Sun Microsystems, Inc. in 1991. It took 18 months to develop the first working version. This language was initially called “Oak,” but was renamed “Java” in 1995. Between the initial implementation of Oak in the fall of 1992 and the public announcement of Java in the spring of 1995, many more people contributed to the design and evolution of the language. Bill Joy, Arthur van Hoff, Jonathan Payne, Frank Yellin, and Tim Lindholm were key contributors to the maturing of the original prototype\cite{JavaCompleteReference}.
+\end{quote}
+
+Java es un lenguaje bonito porque gracias a él puedo obtener dinero para hacer las cosas que me gustan 
+\subsubsection{Java Data Base Controller}
+\subsubsection{Java IO}
+\subsubsection{Java Enterprise Edition}
+\subsection{Javascript}
+\subsection{Sahi}
+\subsection{SQL}
+\subsection{iBatis}
+\subsection{Spring}
+\subsubsection{Spring MVC}
+\subsubsection{Spring JPA}
+\subsubsection{Spring Security}
+
 
 \section{Implementación de base de datos}
-\textcolor{blue}{Modelo relacional}\\
-\subsection{SQL}
-\textcolor{blue}{ANSII y cosas de esas}
-\subsection{Tablas de órdenes}
-\subsection{Catálogos}
-\subsection{Tablas de usuarios}
+\textcolor{blue}{La base de datos utilizada para el proyecto es una base de datos relacional compatible con el modelo ANSI}\\
+Mencionar: 
+\begin{itemize}
+	\item Concepto de índice.\\
+	Auxiliary access structures called indexes, which are used to speed up the retrieval of records in response to certain search conditions. The index structures are additional files on disk that provide secondary access paths, which provide alternative ways to access the records without affecting the physical placement of records in the primary data file on disk
+	\cite{FundamentalsOfDBSystems}
+
+
+
+	\item Índices para búsquedas de órdenes.
+	\item Índices para reportes.
+	\item Concepto de vista.
+	\item Vistas para reportes.
+	\item Concepto de transacción.
+\end{itemize}
+
+\section{Implementación del sistema}
+\subsection{Implementación de la base de datos}
+\subsection{Implementación de componentes}
+
+\textcolor{red}{
+--------------------------------------------------------------------------------\\
+Estoy pensando que sección contiene las tecnologías más relevantes para la implmentación del sistema, principales lenguajes y marcos de trabajo.\\
+--------------------------------------------------------------------------------}
+
+\section{Implementación de base de datos}
+\textcolor{blue}{La base de datos utilizada para el proyecto es una base de datos relacional compatible con el modelo ANSI}\\
+Mencionar: 
+\begin{itemize}
+	\item Concepto de índice.\\
+	Auxiliary access structures called indexes, which are used to speed up the retrieval of records in response to certain search conditions. The index structures are additional files on disk that provide secondary access paths, which provide alternative ways to access the records without affecting the physical placement of records in the primary data file on disk
+	\cite{FundamentalsOfDBSystems}
+
+
+
+	\item Índices para búsquedas de órdenes.
+	\item Índices para reportes.
+	\item Concepto de vista.
+	\item Vistas para reportes.
+	\item Concepto de transacción.
+\end{itemize}
+
+
+\section{Implementación de los componentes}
+
+\subsection{Persistencia}
+\subsubsection{Tecnologías utilizadas}
+\begin{enumerate}
+	\item SQL 
+		\begin{enumerate}
+			\item DDL: CREATE TABLE, VIEW
+			\item DML: INSERT, UPDATE, DELETE, SELECT
+		\end{enumerate}
+	\item JDBC 			(Patrón factory)
+	\item JPA			(Patrón proxy)
+	\item SpringData	(Patrón proxy)
+\end{enumerate}
+
+\textcolor{blue}{
+	Acá un diagrama que muestra las partes importantes del componente
+}
+
+\subsection{Sistema de archivos}
+	\paragraph{Configuración\\}
+		\textbf{obtener-propiedad}
+	\paragraph{Almacenamiento\\}
+		\textbf{guardar-archivo}
+\subsection{Generador de reportes}
+	\paragraph{Acuse\\}
+		\textbf{generar-acuse-envio}
+	\paragraph{Generación\\}
+ 		\textbf{generar-reporte-ordenes}
+\subsection{Lógica de automatización}
+	\paragraph{Respuesta\\}
+		\textbf{guardar-orden-nueva}\\
+		\textbf{obtener-datos-respuesta}\\
+		\textbf{actualizar-orden-contestada}\\
+		\textbf{guardar-orden-enviada}\\
+		\textbf{obtener-acuse-envio}
+	\paragraph{Verificación\\}
+		\textbf{obtener-rango-fechas-verificar}\\
+		\textbf{actualizar-estado-sa}
+
 
 \section{Implmenetación de genración de reportes}
 

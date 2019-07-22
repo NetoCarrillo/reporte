@@ -1,0 +1,109 @@
+\chapter{Tecnologías utilizadas en la implementación}
+
+\paragraph{Lenguajes de programación}
+	\begin{itemize}
+		\item Java
+		\item Javascript
+		\item Sahiscript
+	\end{itemize}
+\paragraph{Base de datos}
+	\textcolor{red}{hacer nota: para respetar acuerdos de confidencialidad con el cliente no se mencionará de forma específica el sistema manejador de base de datos utilizado}
+	\begin{itemize}
+		\item SQL
+		\item Estándares
+	\end{itemize}
+
+\paragraph{Herramienta de automatización}
+	\begin{itemize}
+		\item Sahi\footnote{Esta herramienta fue utilizada para la automatización con SA a petición de la farmacéutica.}
+	\end{itemize}
+\paragraph{Spring}
+	\begin{itemize}
+		\item Spring core\cite{SpringInAction}
+		\item Spring data\cite{SpringInAction}
+		\item Spring boot\cite{SpringBootInAction}
+		\item Spring MVC\cite{SpringInAction}
+		\item Spring REST\cite{SpringInAction}
+		\item Spring security\cite{ProSpringSecurity}
+	\end{itemize}
+
+\paragraph{Mybatis}\cite{MyBatis}
+En la ``listing'' \ref{lst:mybatis-interface} se muestra la interfaz de Java y el ``listing'' \ref{lst:mybatis-mapping} se muestra el DML. 
+\begin{lstlisting}[language=Java, caption={Ejemplo de MyBatis}, label={lst:mybatis-interface}]
+public interface IDomainUser{
+	UsuarioDomain getUsuario(String name);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=XML, caption={Ejemplo de MyBatis}, label={lst:mybatis-mapping}]
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="IDomainUser">
+
+	<resultMap id="rol" autoMapping="true"
+			   type="RolDomain">
+		<id property="rol" column="rol"/>
+	</resultMap>
+
+	<resultMap id="usuario" autoMapping="true"
+			   type="UsuarioDomain">
+		<id property="usuario" column="usuario"/>
+		<collection property="roles"
+					resultMap="rol"
+					javaType="ArrayList"/>
+	</resultMap>
+	
+	<!-- UsuarioDomain getUsuario(final String name); -->
+	<select id="getUsuario" resultMap="usuario" useCache="false">
+		SELECT u.*, r.*
+		  FROM ralca.usuarios_domain u,
+		       ralca.roles_domain r,
+		       ralca.usuarios_roles ur
+		 WHERE u.usuario = ur.usuario
+		   AND r.rol = ur.rol
+		   AND u.usuario = #{0};
+	</select>
+</mapper>
+\end{lstlisting}
+
+
+
+\paragraph{Velocity}
+En el ``listing'' \ref{lst:velocity-template} se muestra un ejemplo de plantilla con Velocity.
+\begin{lstlisting}[language=HTML, caption={Ejemplo de plantilla de Velocity}, label={lst:velocity-template}]
+<tr>
+	<td width="160"><b>No. de Orden: </b></td>
+	<td>${numorden}</td>
+</tr>
+\end{lstlisting}
+
+\paragraph{POI}
+
+\paragraph{iTextPdf}\cite{iTextInAction}
+
+\paragraph{Maven}\cite{MasteringApacheMaven3}
+\begin{lstlisting}[language=XML, caption={Proyecto padre de Maven}, label={lst:maven-parent-project}]
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.meve</groupId>
+	<artifactId>surtimiento-project</artifactId>
+	<version>1</version>
+
+	<modules>
+		<module>surtimiento</module>
+		<module>surtimiento-domain</module>
+		<module>surtimiento-basic</module>
+		<module>surtimiento-api</module>
+		<module>surtimiento-dao-impl</module>
+		<module>surtimiento-dao-jpa</module>
+		<module>surtimiento-service-impl</module>
+		<module>surtimiento-excel-plugin</module>
+		<module>surtimiento-reporter</module>
+		<module>surtimiento-worker</module>
+	</modules>
+</project>
+\end{lstlisting}
