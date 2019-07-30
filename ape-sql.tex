@@ -1,0 +1,26 @@
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear una tabla.}, label={lst:sql-create-table}]
+CREATE TABLE ordenes_is(
+   id numeric(20,0) PRIMARY KEY NOT NULL,
+   orden numeric(20,0) NOT NULL,
+   estatus numeric(2,0) NOT NULL,
+   id_sesion_insersion numeric(20,0) NOT NULL,
+   id_sesion_estatus numeric(20,0) NOT NULL,
+   estatus_sa numeric(2,0),
+   estatus_sap numeric(2,0)
+);
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear un índice.}, label={lst:sql-create-index}]
+CREATE INDEX ordenes_is_orden_idx ON ordenes_is(orden);
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear una llave foránea.}, label={lst:sql-create-fk}]
+ALTER TABLE ordenes_is 
+  ADD CONSTRAINT fk_ordenes_is_session_est 
+      FOREIGN KEY (id_sesion_estatus)
+      REFERENCES sesion(id);
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption={Sentencia insertar un registro.}, label={lst:sql-insert}]
+INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
+\end{lstlisting}

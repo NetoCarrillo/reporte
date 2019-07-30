@@ -1,6 +1,35 @@
 \chapter{Implementación}\label{cap4}
 
 \section{Tecnologías utilizadas}
+\subsection{Base de datos relacional}\label{sec-bd-r}
+Una base de datos relaciones es una colección de tablas relacionadas entre sí. La colección de tablas se describe a sí misma en cuanto a que el significado de los datos contenidos pertenecen a un mismo ámbito\cite{DataBaseConcepts}.\\
+Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (DBMS por sus siglas en inglés), un DBMS es un programa de computadora usado para crear, procesas y administrar bases de datos. El DBMS recibe peticiones en lenguaje SQL (como se describe más adelante) y traduce esas peticiones a acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
+Para el desarrollo del proyecto AutoSA se han ocupado los siguientes conceptos:
+\begin{enumerate}
+	\item \textbf{Tabla}: una tabla es un conjunto de renglones (registros) y columnas (atributos) que cumple con las siguientes características\cite{DataBaseConcepts}:
+	\begin{enumerate}
+		\item Los renglones contienen unicamente datos relacionados con la tabla.
+		\item Las entradas de una columna contienen un solo valor.
+		\item Todas las entradas de una columna son del mismo tipo.
+		\item Las columnas tienen un nombre único dentro de la tabla.
+		\item El orden de las columnas y los renglones no es relevante.
+		\item No contiene dos renglones idénticos.
+	\end{enumerate}
+	\item \textbf{Vista}: es una tabla derivada de una consulta de otras tablas, estas tablas pueden ser tablas de la base de datos o vistas definidas previamente. Una vista es considerada como tabla virtual porque no necesariamente existe físicamente a diferencia de una tabla de la base cuyas tuplas siempre están almacenadas físicamente en la base de datos\cite{FundamentalsOfDBSystems}.
+	\item \textbf{Llave primaria}: es el conjunto de columnas que identifican de manera unívoca a cada renglón de la tabla.\cite{DataBaseConcepts}
+	\item \textbf{Llave foránea}: define la relación de una tabla, \textbf{A}, hacia otra \textbf{B} y satisface las siguientes condiciones\cite{FundamentalsOfDBSystems, DataBaseConcepts}:
+	\begin{enumerate}
+		\item Los atributos de las tablas \textbf{A} y \textbf{B} son del mismo tipo y se corresponden uno a uno.
+		\item Los atributos en la tabla \textbf{B} son exactamente los mismos de la llave primaria de la tabla \textbf{B}.
+	\end{enumerate}
+	\item \textbf{Restricción $NOT$ $NULL$}: indica que el valor del atributo no puede ser nulo\cite{FundamentosSistemasBasesDatos}. 
+	\item \textbf{Índice}: es una estructura auxiliar para agilizar la obtención de registros. Los índices proveen rutas de acceso alternativo a los registros de la base de datos sin afectar la colocación física de los registros\cite{FundamentalsOfDBSystems}.
+	\item \textbf{Lenguaje Estructurado de Consulta}\label{sec-sql}: del inglés Structured Query Language (SQL), fue desarrollado por IBM\textcopyright al final de los años 70, es un lenguaje de datos orientado a texto, ha sido avalado por el Instituto Nacional de Estándares Americanos (ANSI por sus siglas en inglés) dando así los estándares ANSI para SQL, principalmente para este trabajo el estándar ANSI-92 o SQL-92.
+	\item \textbf{Lenguaje de Definición de Datos}: DDL por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
+	\item \textbf{Lenguaje de Modelado de Datos}: DML por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
+\end{enumerate}
+
+\iffalse
 \subsection{Java}
 
 \begin{quote}
@@ -11,94 +40,68 @@
 	Java was conceived by James Gosling, Patrick Naughton, Chris Warth, Ed Frank, and Mike Sheridan at Sun Microsystems, Inc. in 1991. It took 18 months to develop the first working version. This language was initially called “Oak,” but was renamed “Java” in 1995. Between the initial implementation of Oak in the fall of 1992 and the public announcement of Java in the spring of 1995, many more people contributed to the design and evolution of the language. Bill Joy, Arthur van Hoff, Jonathan Payne, Frank Yellin, and Tim Lindholm were key contributors to the maturing of the original prototype\cite{JavaCompleteReference}.
 \end{quote}
 
-Java es un lenguaje bonito porque gracias a él puedo obtener dinero para hacer las cosas que me gustan 
-\subsubsection{Java Data Base Controller}
-\subsubsection{Java IO}
-\subsubsection{Java Enterprise Edition}
-\subsection{Javascript}
-\subsection{Sahi}
-\subsection{SQL}
-\subsection{iBatis}
-\subsection{Spring}
-\subsubsection{Spring MVC}
-\subsubsection{Spring JPA}
-\subsubsection{Spring Security}
+Java es un lenguaje bonito porque gracias a él  puedo obtener dinero para hacer las cosas que me gustan como comer  y jugar squash
+\fi
+%\subsubsection{Java Data Base Controller}
+%\subsubsection{Java IO}
+%\subsubsection{Java Enterprise Edition}
+%\subsection{Javascript}
+%\subsection{Sahi}
+%\subsection{iBatis}
+%\subsection{Spring}
+%\subsubsection{Spring MVC}
+%\subsubsection{Spring JPA}
+%\subsubsection{Spring Security}
 
 
 \section{Implementación de base de datos}
-\textcolor{blue}{La base de datos utilizada para el proyecto es una base de datos relacional compatible con el modelo ANSI}\\
-Mencionar: 
-\begin{itemize}
-	\item Concepto de índice.\\
-	Auxiliary access structures called indexes, which are used to speed up the retrieval of records in response to certain search conditions. The index structures are additional files on disk that provide secondary access paths, which provide alternative ways to access the records without affecting the physical placement of records in the primary data file on disk
-	\cite{FundamentalsOfDBSystems}
+El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencialidad no se hace mención específica del nombre y versión del sistema administrador de bases de datos.}(ver sección \ref{sec-bd-r}) para almacenar la información requerida en los casos de uso (ver sección \ref{sec:casos-uso}).\\
+La implementación de la base de datos se ve reflejada en las rutinas con sentencias SQL (ver sección \ref{sec-bd-r}) donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas DDL y las rutinas DML.
 
+\subsection{Rutinas de definición de datos}
+Estas rutinas contienen las sentencias DDL (ver sección \ref{sec-bd-r}) para la creación de tablas, llaves primarias, llaves foráneas, índices y restricciones. En el código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de una tabla.
+\\
+\\
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear una tabla.}, label={lst:sql-create-table}]
+CREATE TABLE ordenes_is(
+   id numeric(20,0) PRIMARY KEY NOT NULL,
+   orden numeric(20,0) NOT NULL,
+   estatus numeric(2,0) NOT NULL,
+   id_sesion_insersion numeric(20,0) NOT NULL,
+   id_sesion_estatus numeric(20,0) NOT NULL,
+   estatus_sa numeric(2,0),
+   estatus_sap numeric(2,0)
+);
+\end{lstlisting}
 
+La generación de reportes que se menciona en el caso de uso \textbf{Generar reporte} (ver sección \ref{cu-generar-reporte}), utiliza una vista para la definición de la consulta de los datos del reporte (ver código \ref{lst:sql-create-view}, además se han implementado índices para agilizar tales consultas (ver código \ref{lst:sql-create-index}).
 
-	\item Índices para búsquedas de órdenes.
-	\item Índices para reportes.
-	\item Concepto de vista.
-	\item Vistas para reportes.
-	\item Concepto de transacción.
-\end{itemize}
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear una vista.}, label={lst:sql-create-view}]
+CREATE VIEW ordenes_contestadas AS
+     SELECT *
+       FROM ordenes_is
+      WHERE id_sesion_estatus = :sesion
+        AND estatus = 3
+\end{lstlisting}
 
-\section{Implementación del sistema}
-\subsection{Implementación de la base de datos}
-\subsection{Implementación de componentes}
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear un índice.}, label={lst:sql-create-index}]
+CREATE INDEX ordenes_contetadas_idx ON ordenes_is(id_sesion_estatus, estatus);
+\end{lstlisting}
 
-\textcolor{red}{
---------------------------------------------------------------------------------\\
-Estoy pensando que sección contiene las tecnologías más relevantes para la implmentación del sistema, principales lenguajes y marcos de trabajo.\\
---------------------------------------------------------------------------------}
+\subsection{Rutinas de modelado de datos}
+Estas rutinas contienen la sentencias DML (ver sección \ref{sec-bd-r}) para insertar la información necesaria para la ejecución del sistema, como son, por ejemplo, los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
 
-\section{Implementación de base de datos}
-\textcolor{blue}{La base de datos utilizada para el proyecto es una base de datos relacional compatible con el modelo ANSI}\\
-Mencionar: 
-\begin{itemize}
-	\item Concepto de índice.\\
-	Auxiliary access structures called indexes, which are used to speed up the retrieval of records in response to certain search conditions. The index structures are additional files on disk that provide secondary access paths, which provide alternative ways to access the records without affecting the physical placement of records in the primary data file on disk
-	\cite{FundamentalsOfDBSystems}
+\begin{lstlisting}[language=SQL, caption={Sentencia insertar un registro.}, label={lst:sql-insert}]
+INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
+\end{lstlisting}
 
-
-
-	\item Índices para búsquedas de órdenes.
-	\item Índices para reportes.
-	\item Concepto de vista.
-	\item Vistas para reportes.
-	\item Concepto de transacción.
-\end{itemize}
-
+%================================================================================
+%
+%================================================================================
 
 \section{Implementación de los componentes}
-
-\subsection{Persistencia}
-\subsubsection{Tecnologías utilizadas}
-\begin{enumerate}
-	\item SQL 
-		\begin{enumerate}
-			\item DDL: CREATE TABLE, VIEW
-			\item DML: INSERT, UPDATE, DELETE, SELECT
-		\end{enumerate}
-	\item JDBC 			(Patrón factory)
-	\item JPA			(Patrón proxy)
-	\item SpringData	(Patrón proxy)
-\end{enumerate}
-
-\textcolor{blue}{
-	Acá un diagrama que muestra las partes importantes del componente
-}
-
-\subsection{Sistema de archivos}
-	\paragraph{Configuración\\}
-		\textbf{obtener-propiedad}
-	\paragraph{Almacenamiento\\}
-		\textbf{guardar-archivo}
-\subsection{Generador de reportes}
-	\paragraph{Acuse\\}
-		\textbf{generar-acuse-envio}
-	\paragraph{Generación\\}
- 		\textbf{generar-reporte-ordenes}
-\subsection{Lógica de automatización}
+\subsection{Agente}
+\subsection{Lógica de Automatización}
 	\paragraph{Respuesta\\}
 		\textbf{guardar-orden-nueva}\\
 		\textbf{obtener-datos-respuesta}\\
@@ -109,8 +112,28 @@ Mencionar:
 		\textbf{obtener-rango-fechas-verificar}\\
 		\textbf{actualizar-estado-sa}
 
+\subsection{Persistencia}
+\subsubsection{Tecnologías utilizadas}
+\textcolor{blue}{
+\begin{enumerate}
+	\item JDBC 			(Patrón factory)
+	\item JPA			(Patrón proxy)
+	\item SpringData	(Patrón proxy)
+\end{enumerate}
+}
 
-\section{Implmenetación de genración de reportes}
+\textcolor{blue}{
+	Acá un diagrama que muestra las partes importantes del componente
+}
+
+\subsection{Sistema de archivos}
+	\paragraph{Configuración\\}
+		\textbf{obtener-propiedad}
+	\paragraph{Almacenamiento\\}
+		\textbf{guardar-archivo}
+
+
+\subsection{Generador de reportes}
 
 \textcolor{blue}{En el diseño debe agregarse un diagrama del funcionamiento de reportes: seleccionar templates... agregar patrones de diseño}\\
 \subsection{Motor de plantillas}
@@ -118,11 +141,13 @@ Mencionar:
 \textcolor{blue}{aquí va la configuración}\\
 \textcolor{blue}{tipos de reporte}
 
-\section{Implementación de automatización para SA}
-\subsection{Bibliotecas para las rutinas de automatización}
-\subsection{Rutinas de automatización}
+	\paragraph{Acuse\\}
+		\textbf{generar-acuse-envio}
+	\paragraph{Generación\\}
+ 		\textbf{generar-reporte-ordenes}
 
-\section{Implementación de interfaz web}
+
+\subsection{Portal Web}
 \textcolor{blue}{Las secciones de esta parte serán presentadas por capas desde datos hasta la vista}\\
 \textcolor{blue}{Presentar el patron MVC}\\
 \subsection{Acceso}
@@ -136,3 +161,21 @@ Mencionar:
 \subsection{Visualización de órden de reposición}
 
 \subsection{Edición de órden de reposición}
+
+
+
+
+
+
+
+
+
+%\section{Implmenetación de genración de reportes}
+
+%\section{Implementación de automatización para SA}
+%\subsection{Bibliotecas para las rutinas de automatización}
+%\subsection{Rutinas de automatización}
+
+
+
+
