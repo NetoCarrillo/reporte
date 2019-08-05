@@ -1,22 +1,28 @@
 \chapter{Diseño del proyecto}\label{cap3}
-Conforme a lo visto en el Capítulo \ref{cap2}, el proyecto requiere ser ejecutado de dos formas distintas (ejecución de automatizaciones y en el portal de usuario), además necesita de una base de datos para mantener persistentes los datos de las órdenes de reposición atendidas, catálogos y datos de usuario, también es necesario acceso al sistema de archivo para guardar las capturas de pantalla de las órdenes de reposición enviadas. Por lo que es necesario tener dos ambientes de ejecución, la automatización que será ejecutada exclusivamente en el sistema operativo y la de web, que se ejecuta en el sistema operativo y en el explorador de Internet del usuario.
+Conforme a lo visto en el Capítulo \ref{cap2}, el proyecto AutoSA requiere ser ejecutado de dos formas distintas:
+\begin{enumerate}
+ 	\item Rutinas automatizadas: se ejecutan a partir del entorno gráfico del sistema operativo.
+ 	\item Portal de usuario: se ofrece como una página web, la cual depende del servidor web de la farmacéutica y del explorador web del usuario.
+\end{enumerate}
+Por otro lado es necesario contar con una base de datos la cual debe mantener los datos de las órdenes de reposición persistentes, también es necesario mantener el acceso al sistema de archivos para guardar las capturas de pantalla de las órdenes de reposición enviadas.\\
+Por lo que es necesario tener dos ambientes de ejecución, la automatización que será ejecutada exclusivamente en el sistema operativo y la de web, que se ejecuta en el sistema operativo y en el explorador de Internet del usuario.
 
 
 %===============================================================================
 %===============================================================================
 
 
-\section{Diseño de la arquitectura}
+\section{Diseño de la arquitectura del sistema AutoSA}
 Bourque define la arquitectura de software como:
 \begin{quote}
 	El conjunto de estructuras necesarias para la comprensión de un sistema en el cual se comprometen elementos de software, relaciones entre ellos y sus propiedades\cite{SWEBOOK}.
 \end{quote}
-En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como los Patrones de Diseño (ver Apéndice \ref{sec-patrones}) \cite{SWEBOOK, SoftwareArchitectureInAction}.
+En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como los patrones de diseño (ver Apéndice \ref{sec-patrones}) \cite{SWEBOOK, SoftwareArchitectureInAction}.
 
-Siguiendo el concepto de arquitectura, dado anteriormente, a continuación se muestran los componentes del sistema y como dan solución a los casos de uso del Capítulo \ref{sec:casos-uso}.
+Siguiendo el concepto de arquitectura, se muestran los componentes del sistema y su respectiva solución a los casos de uso del Capítulo \ref{sec:casos-uso}.
 
 \subsection{Componentes del sistema AutoSA}
-El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes, el la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSA. En las secciones consecuentes se describe cada componente y las interfaces que ofrece\footnote{Únicamente se mostrarán los diagramas de secuencia más completos que reflejan un comportamiento no trivial.}.
+El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes. El la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSA. En las secciones consecuentes se describe cada componente y las interfaces que ofrece\footnote{Únicamente se mostrarán los diagramas de secuencia más completos que reflejan un comportamiento no trivial.}.
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{dia-components}
@@ -25,104 +31,88 @@ El diagrama de componentes sirve para visualizar los componentes en los que se d
 \end{figure}
 
 \subsubsection{Agente}
-El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de Lógica de Automatización.
+El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de \textbf{Lógica de Automatización}.
 
-\subsubsection{Lógica de Automatización}
-La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización, ofrece las interfaces de repuesta y verificación.
+\subsubsection{Lógica de automatización}
+La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización, ofrece las interfaces de respuesta y verificación.
 \paragraph{Interfaz Respuesta\\}
-Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}).\\
-Esta interfaz expone las siguientes operaciones:
+Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}). Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
-	\item \textbf{guardar-orden-nueva}: Guarda un listado de nuevas órdenes de reposición.
-	\item \textbf{obtener-orden-contestar}: Da la siguiente orden de reposición para contestar.
-	\item \textbf{obtener-datos-respuesta}: Da los datos necesarios para llenar los formularios para contestar una orden de reposición en el Sistema de Abastecimiento.
-	\item \textbf{actualizar-orden-contestada}: Actualiza los datos guardados de la orden de reposición con los datos de la respuesta en el  Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.
-	\item \textbf{obtener-orden-enviar}: Da la siguiente orden de reposición para enviar.
-	\item \textbf{guardar-orden-enviada}: Actualiza los datos guardados de la orden de reposición con los datos de la pantalla de envío del Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.
-	\item \textbf{obtener-acuse-envio}: Solicita la generación de el acuse de envío al componente de reportes y almacena el documento el componente de Sistema de Archivos.
+	\item \textbf{guardar-orden-nueva}: guarda un listado de nuevas órdenes de reposición.
+	\item \textbf{obtener-orden-contestar}: da la siguiente orden de reposición para contestar.
+	\item \textbf{obtener-datos-respuesta}: da los datos necesarios para llenar los formularios para contestar una orden de reposición en el Sistema de Abastecimiento.
+	\item \textbf{actualizar-orden-contestada}: actualiza los datos almacenados de la orden de reposición con los datos de la respuesta en el  Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.
+	\item \textbf{obtener-orden-enviar}: da la siguiente orden de reposición para enviar.
+	\item \textbf{guardar-orden-enviada}: actualiza los datos almacenados de la orden de reposición con los datos de la pantalla de envío del Sistema de Abastecimiento. Utiliza el componente de persistencia para actualizar los datos.
+	\item \textbf{obtener-acuse-envio}: solicita la generación de el acuse de envío al componente de reportes y almacena el documento el componente de Sistema de Archivos.
 \end{enumerate}
 
 \paragraph{Interfaz Verificación\\}
-Provee el acceso a las reglas de negocio del proceso de verificación de órdenes de reposición canceladas.\\
-Esta interfaz expone las siguientes operaciones:
-
+Provee el acceso a las reglas de negocio del proceso de verificación de órdenes de reposición canceladas. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
-	\item \textbf{obtener-rango-verificar}: Obtiene el rango de fechas para ingresar en el formulario de búsqueda del Sistema de Abastecimiento. El número de días que comprende el rango se obtiene utilizando el componente de Sistema de Archivos.
-	\item \textbf{actualizar-estado-sa}: Actualiza el EstadoSA de las órdenes de reposición recibidas a \textbf{Cancelada}. Utiliza el componente de persistencia para la actualización de datos.
+	\item \textbf{obtener-rango-verificar}: obtiene el rango de fechas para ingresar en el formulario de búsqueda del Sistema de Abastecimiento. El número de días que comprende el rango se obtiene utilizando el componente de Sistema de Archivos.
+	\item \textbf{actualizar-estado-sa}: actualiza el EstadoSA de las órdenes de reposición recibidas a \textbf{Cancelada}. Utiliza el componente de persistencia para la actualización de datos.
 \end{enumerate}
 
 \subsubsection{Persistencia}
-El componente de persistencia está basado en el patrón de diseño \textit{DAO} (ver apéndice \ref{sec-dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
+El componente de persistencia está basado en el patrón de diseño \textit{DAO} (ver Apéndice \ref{sec-dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
 El componente de persistencia de el proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
 \paragraph{Interfaz Almacenamiento\\}
-Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-guardar-nueva}, \ref{cu-responder-orden}, \ref{cu-enviar-orden} y \ref{cu-actualizar-estatus-sa}.}.\\
-Esta interfaz expone las siguientes operaciones:
-
+Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-guardar-nueva}, \ref{cu-responder-orden}, \ref{cu-enviar-orden} y \ref{cu-actualizar-estatus-sa}.}. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
-	\item \textbf{guardar-nueva}: Inserta una nueva orden de reposición en la base de datos.
-	\item \textbf{cambiar-estado}: Cambia el estado de atención de una orden de reposición.
-	\item \textbf{guardar-respuesta}: Guarda los datos de los formularios de la pantalla de respuesta de las órdenes de reposición.
-	\item \textbf{guardar-folio-acuse}: Guarda el folio de acuse de envío de la orden de reposición.
-	\item \textbf{actualizar-estado-sa}: Actualiza el estado de atención en el Sistema de Abastecimiento a \textbf{cancelada} de las órdenes de reposición recibidas.
-	\item \textbf{registrar-evento}: Registra en la base de datos un evento que ocurre durante los procesos automatizados, el evento puede ser de carácter informativo o de error.
+	\item \textbf{guardar-nueva}: inserta una nueva orden de reposición en la base de datos.
+	\item \textbf{cambiar-estado}: cambia el estado de atención de una orden de reposición.
+	\item \textbf{guardar-respuesta}: guarda los datos de los formularios de la pantalla de respuesta de las órdenes de reposición.
+	\item \textbf{guardar-folio-acuse}: guarda el folio de acuse de envío de la orden de reposición.
+	\item \textbf{actualizar-estado-sa}: actualiza el estado de atención en el Sistema de Abastecimiento a \textbf{cancelada} de las órdenes de reposición recibidas.
+	\item \textbf{registrar-evento}: registra en la base de datos un evento que ocurre durante los procesos automatizados, el evento puede ser de carácter informativo o de error.
 \end{enumerate}
 
 \paragraph{Interfaz Lectura\\}
-Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes de reposición en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-enviar-orden} y \ref{cu-generar-acuse}.}.\\
-Esta interfaz expone las siguientes operaciones:
-
+Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes de reposición en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-enviar-orden} y \ref{cu-generar-acuse}.}. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
-	\item \textbf{siguiente-orden-contestar}: Entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Nueva}.
-	\item \textbf{siguiente-orden-enviar}: Entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Contestada}.
-	\item \textbf{obtener-datos-acuse}: Obtiene los datos de una orden de reposición necesarios para generar el documento de acuse de envío.
+	\item \textbf{siguiente-orden-contestar}: entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Nueva}.
+	\item \textbf{siguiente-orden-enviar}: entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Contestada}.
+	\item \textbf{obtener-datos-acuse}: obtiene los datos de una orden de reposición necesarios para generar el documento de acuse de envío.
 \end{enumerate}
 
 \paragraph{Interfaz Administración\\}
-Son las operaciones que permiten modificar datos específicos de las órdenes de reposición contenidas en la base de datos, también ofrece la actualización masiva de catálogos\footnote{Ver casos de uso \ref{cu-entrar-web}, \ref{cu-generar-reporte}, \ref{cu-actualizar-catalogo}, \ref{cu-buscar}, \ref{cu-visualizar} y \ref{cu-editar}.}).\\
-Esta interfaz expone las siguientes operaciones:
-
+Son las operaciones que permiten modificar datos específicos de las órdenes de reposición contenidas en la base de datos, también ofrece la actualización masiva de catálogos\footnote{Ver casos de uso \ref{cu-entrar-web}, \ref{cu-generar-reporte}, \ref{cu-actualizar-catalogo}, \ref{cu-buscar}, \ref{cu-visualizar} y \ref{cu-editar}.}). Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
-	\item \textbf{buscar-credenciales}: Busca las credenciales del usuario.
-	\item \textbf{extraer-reporte}: Ejecuta la búsqueda necesaria para extraer los datos del reporte indicado.
-	\item \textbf{actualizar-catalogo}: Actualiza la información del catálogo indicado.
-	\item \textbf{buscar-ordenes}: Busca órdenes de reposición que cumplan con el filtro de búsqueda indicado.
-	\item \textbf{buscar-orden}: Busca una orden de reposición por el número de orden.
-	\item \textbf{actualizar-orden}: Actualiza los datos de orden de reposición.
+	\item \textbf{buscar-credenciales}: busca las credenciales del usuario.
+	\item \textbf{extraer-reporte}: ejecuta la búsqueda necesaria para extraer los datos del reporte indicado.
+	\item \textbf{actualizar-catalogo}: actualiza la información del catálogo indicado.
+	\item \textbf{buscar-ordenes}: busca órdenes de reposición que cumplan con el filtro de búsqueda indicado.
+	\item \textbf{buscar-orden}: busca una orden de reposición por el número de orden.
+	\item \textbf{actualizar-orden}: actualiza los datos de orden de reposición.
 \end{enumerate}
 
 \subsubsection{Sistema de Archivos}
 El componente Sistema de Archivos es el único que se comunica con el sistema de archivos del sistema operativo\footnote{En este documento se utilizará de forma indistinta el término Sistema de archivos para referirse tanto al componente del sistema AutoSA como al propio del sistema operativo.}, tiene la función de realizar la lectura de archivos de configuración, el almacenamiento de los acuses de envío  y los reportes de las órdenes de reposición.\\
-Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver apéndice \ref{sec-dao}.}.
+Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver Apéndice \ref{sec-dao}.}.
 \paragraph{Interfaz Configuración\\}
-Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos.\\
-Esta interfaz expone las siguientes operaciones:
+Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos. Esta interfaz expone las siguientes operaciones:
 
 \begin{enumerate}
-	\item \textbf{obtener-propiedad}: Obtiene una propiedad de los archivos de configuración.
+	\item \textbf{obtener-propiedad}: obtiene una propiedad de los archivos de configuración.
 \end{enumerate}
 
 \paragraph{Interfaz Almacenamiento\\}
-Almacena archivos (reportes y acuses de envío) en el sistema de archivos.\\
-Esta interfaz expone las siguientes operaciones:
-
+Almacena archivos (reportes y acuses de envío) en el sistema de archivos. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
-	\item \textbf{guardar-archivo}: Guarda un archivo en el sistema de archivos.
+	\item \textbf{guardar-archivo}: guarda un archivo en el sistema de archivos.
 \end{enumerate}
 
-\subsubsection{Generador de Reportes}
-El Generador de Reportes, como su nombre lo indica, tiene la función de generar documentos y reportes con los datos de las órdenes de reposición almacenados en la base de datos. 
-\paragraph{Interfaz Acuse\\} Genera el documento con el acuse de envío.\\
-Esta interfaz expone las siguientes operaciones:
-
+\subsubsection{Generador de reportes}
+El generador de reportes, como su nombre lo indica, tiene la función de generar documentos y reportes con los datos de las órdenes de reposición almacenados en la base de datos. 
+\paragraph{Interfaz Acuse\\} Genera el documento con el acuse de envío. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
-	\item \textbf{generar-acuse-envio}: Genera el acuse de envío para la orden de reposición especificada. Utiliza el componente de persistencia para obtener los datos de la orden.
+	\item \textbf{generar-acuse-envio}: genera el acuse de envío para la orden de reposición especificada. Utiliza el componente de persistencia para obtener los datos de la orden.
 \end{enumerate}
 
-\paragraph{Interfaz Generación\\} Genera reportes con los datos de las órdenes de reposición almacenados en la base de datos.\\
-Esta interfaz expone las siguientes operaciones:
-
+\paragraph{Interfaz Generación\\} Genera reportes con los datos de las órdenes de reposición almacenados en la base de datos. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
-	\item \textbf{generar-reporte-ordenes}: Genera el reporte del tipo indicado, usando el rango de fechas establecido.
+	\item \textbf{generar-reporte-ordenes}: genera el reporte del tipo indicado, usando el rango de fechas establecido.
 \end{enumerate}
 
 \subsubsection{Portal Web}
