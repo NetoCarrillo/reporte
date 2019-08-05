@@ -1,0 +1,308 @@
+var $persistence = new Packages.com.meve.surtimiento.app.App();
+var $sesion = $persistence.getSesion();
+var $imss = $persistence.getImss();
+
+var $idSesion = -1;
+var $usuario = 1;
+
+var $errores = 0;
+var $answercount = 0;
+var $sendedcount = 0;
+
+var $primerIngreso = true;
+
+var $fechaFab = 0;
+var $fechaCad = 0;
+	
+
+/*Manejo de errores*/
+function onScriptFailure($e){
+	processesError($e);
+}
+function onScriptError($e){
+	processesError($e);
+}
+function onScriptEnd(){
+	finalizaSesion($idSesion, $usuario);
+	if($idSesion){
+		$sesion.sendReporteSesion($idSesion);
+		$sesion.registrarBitacora($idSesion, "Fin de sesion, ordenes contestadas: " + $answercount);
+		$sesion.registrarBitacora($idSesion, "Fin de sesion, ordenes enviadas: " + $sendedcount);
+	}
+}
+function processesError($e){
+	//Sesion caducada
+	if(_exists(_bold("ACCESO DENEGADO"))){
+		_log("La sesion ha caducado");
+		$sesion.registrarBitacora($idSesion, "Se ha perdido la sesion, se procede desde ingreso al portal SAI");
+		_navigateTo("http://sai.imss.gob.mx/");
+		main();
+	}
+}
+
+function extractTable(){
+	_assertExists(_table(1));
+	_assertExists(_tableHeader("No. Contrato"));
+
+	//Guardar las ordenes del listado
+	guardaPantallaOrdenes();
+
+	//Contestar ordenes guardadas
+	contestaOrdenes();
+
+	//Enviar ordenes
+	enviaOrdenes();
+	
+	//Regresar al listado
+	_navigateTo("http://sai.imss.gob.mx/Inicio.asp");
+	_click(_image("Normal[2]"));
+
+	var $rowCount = 0;
+	_set($rowCount, _table(1).rows.length - 1);
+	if($rowCount > $errores){
+		extractTable();
+	}else{
+		finalizaSesion($idSesion, $usuario);
+	}
+}
+
+function guardaPantallaOrdenes(){
+	var $rowCount = 0;
+	_set($rowCount, _table(1).rows.length - 1);
+	if($rowCount > 20 + $errores){
+		_set($rowCount, 20 + $errores);
+	}
+	
+	for(var $i = 1 + $errores; $i <= $rowCount; $i++){
+		var $contrato = _getText(_table(1).rows[$i].cells[0]);
+		var $solicitud = _getText(_table(1).rows[$i].cells[1]);
+		var $numorden = _getText(_table(1).rows[$i].cells[2]);
+		var $expedicion = _getText(_table(1).rows[$i].cells[4]);
+		var $almacen = _getText(_table(1).rows[$i].cells[5]);
+		
+		var $urlcon = "";
+		_log(_table(1).rows[$i].cells[6].childNodes[0].href);
+		_set($urlcon, _table(1).rows[$i].cells[6].childNodes[0].href);
+		var $urlenv = $urlcon.replace("respoOra", "enviaOra");
+		
+		try{
+			var $inserted = $imss.insertOrdenImss($contrato, $solicitud, $numorden, $expedicion, $almacen, $urlcon, $urlenv, $idSesion);
+			if($inserted == 1){
+				if(_getText(_table(1).rows[$i].cells[7]) == 'Enviar'){
+					$imss.updateCantidad($contrato, $numorden, 0, $idSesion);
+				}
+			}else if($inserted == 6){
+				_set($errores, $errores + 1);
+			}
+		}catch($e){
+			$sesion.registrarBitacora($idSesion, "Error al registrar la orden contrato=" + $contrato + ", solicitud=" + $solicitud + ", numero_orden=" + $numorden);
+			_log($e);
+		}
+	}
+}
+
+/* Iteracion sobre el proceso de contestacion*/
+function contestaOrdenes(){
+	while(contestar()){
+		$answercount = $answercount + 1;
+	}
+}
+/* Contestación */
+function contestar(){
+	try{
+		var $oimss = $imss.takeToAnswer($idSesion);
+		if($oimss){
+			contestarAux($oimss, 0);
+			return true;
+		}
+	}catch($e){
+		$sesion.registrarBitacora($idSesion, "Error mientras se recuperaba la siguiente orden para contestar.");
+		_log($e);
+	}
+	return false;
+}
+/* Funcion auxiliar de contestacion*/
+function contestarAux($oimss, $intentos){
+	var $numorden = $oimss.getOrden();
+	var $contrato = $oimss.getContrato();
+	try{
+		var $url = $oimss.getUrlCon();
+		_navigateTo($url);
+	
+		var $cantidad = _getText(_table(1).rows[6].cells[1]).split(" ")[0];
+	
+		_setValue(_textbox("Lote"), "SL");
+		_setValue(_textbox("Cant"), $cantidad);
+		_setValue(_textbox("FeFa"), $fechaFab);
+		_setValue(_textbox("FeCa"), $fechaCad);
+	
+		_assertExists(_submit("Agregar Captura"));
+		_click(_submit("Agregar Captura"));
+	
+		$imss.updateCantidad($contrato, $numorden, $cantidad, $idSesion);
+		
+		guardaAdicionales($contrato, $numorden);
+	}catch($e){
+		if($intentos < 3){
+			_log("Ha ocurrido un error en la comunicación, se volverá a intentar");
+			contestarAux($oimss, $intentos + 1);
+		}else{
+			$imss.setErrorStatus($contrato, $numorden, $idSesion);
+			_set($errores, $errores + 1);
+			_log($errores);
+			$sesion.registrarBitacora($idSesion, "Error al contestar la orden contrato=" + $contrato + ", numero_orden=" + $numorden);
+			_log($e);
+		}
+	}
+}
+
+function guardaAdicionales($contrato, $numorden){
+	try{
+		var $marca = _getText(_table(1).rows[12].cells[1]);
+		var $procedencia = _getText(_table(1).rows[13].cells[1]);
+		$imss.updateAdicionales($contrato, $numorden, $marca, $procedencia);
+	}catch($e){
+		_log($e);
+	}
+}
+
+function enviaOrdenes(){
+	while(enviar()){
+		$sendedcount = $sendedcount + 1;
+	}
+}
+
+function enviar(){
+	try{
+		var $oimss = $imss.takeToSend($idSesion);
+		if($oimss){
+			enviarAux($oimss, 0);
+			return true;
+		}
+	}catch($e){
+		$sesion.registrarBitacora($idSesion, "Error mientras se recuperaba la siguiente orden para enviar.");
+		_log($e);
+	}
+	return false;
+}
+
+function enviarAux($oimss, $intentos){
+
+	var $numorden = $oimss.getOrden();
+	var $contrato = $oimss.getContrato();
+	try{
+		var $url = $oimss.getUrlEnv();
+		_navigateTo($url);
+
+		if($oimss.getCantidad() == 0){
+			var $cantidad = _getText(_table(2).rows[1].cells[1]);
+			$imss.updateCantidad($contrato, $numorden, $cantidad, $idSesion);
+		}
+		
+		var $orden = {};
+		$orden.contrato = _getText(_table(1).rows[1].cells[1]);
+		$orden.numorden = _getText(_table(1).rows[2].cells[1]);
+		$orden.solicitud = _getText(_table(1).rows[3].cells[1]);
+		$orden.articulo = _getText(_table(1).rows[4].cells[1]);
+		$orden.fecentr = _getText(_table(1).rows[10].cells[1]);
+		$orden.confirmacion = _getText(_paragraph(0)).split(':')[1];
+		$orden.cantsol = _getText(_table(1).rows[5].cells[1]);
+		$orden.cantcomp = _getText(_table(1).rows[6].cells[1]);
+		$orden.cantaten = _getText(_table(1).rows[7].cells[1]);
+		$orden.precio = _getText(_table(1).rows[8].cells[1]);
+		$orden.fecexp = _getText(_table(1).rows[9].cells[1]);
+		$orden.lugentr = _getText(_table(1).rows[11].cells[1]);
+		$orden.direntr = _getText(_table(1).rows[12].cells[1]);
+//		$orden.marca = _getText(_table(1).rows[13].cells[1]);
+//		$orden.procedencia = _getText(_table(1).rows[14].cells[1]);
+		$orden.lote = _getText(_table(2).rows[1].cells[0]);
+		$orden.cantasig = _getText(_table(2).rows[1].cells[1]);
+		$orden.fecfab = _getText(_table(2).rows[1].cells[2]);
+		$orden.feccad = _getText(_table(2).rows[1].cells[3]);
+
+		$orden.total = _getText(_table(3).rows[0].cells[1]);
+		
+		var $mapa = new java.util.LinkedHashMap();
+		for(var $llave in $orden){
+			$mapa.put($llave, $orden[$llave]);
+		}
+		$imss.updateOrdenImss($mapa, $idSesion);
+		
+	}catch($e){
+		if($intentos < 3){
+			_log("Ha ocurrido un error en la comunicación, se volverá a intentar");
+			enviarAux($oimss, $intentos + 1);
+		}else{
+			$imss.setErrorStatus($contrato, $numorden, $idSesion);
+			_set($errores, $errores + 1);
+			_log($errores);
+			$sesion.registrarBitacora($idSesion, "Error al enviar la orden contrato=" + $contrato + ", numero_orden=" + $numorden);
+			_log($e);
+		}
+	}
+}
+
+//Ingreso
+//_navigateTo("http://sai.imss.gob.mx/");
+function main(){
+	_assertExists(_textbox("Usuario[1]"));
+	_assertExists(_password("Contras[1]"));
+	_assertExists(_submit("Ingresar al Sistema"));
+
+	_setValue(_textbox("Usuario[1]"), "farmaypo");
+	//Ingresado por el usuario	
+	_setValue(_password("Contras[1]"), _sahi._prompt("Contraseña"));
+
+	_click(_submit("Ingresar al Sistema"));
+
+	//Ir a listado de  
+	_assertExists(_image("Normal[2]"));
+	_click(_image("Normal[2]"));
+
+	//
+	if($primerIngreso){
+		var $anhoFab = $imss.getAnhoFabricacion();
+		
+		_set($fechaFab, "01/01/" + $anhoFab);
+		_set($fechaCad, "01/01/" + ($anhoFab + 3));
+
+		var $rowCount = 0;
+		_set($rowCount, _table(1).rows.length - 1);
+		$sesion.registrarBitacora($idSesion, "Primer ingreso, ordenes encontradas: " + $rowCount);
+		$primerIngreso = false;
+	}
+
+	//Extraer la tabla de órdenes	
+	extractTable();
+}
+
+function iniciaSesion(){
+	try{
+		$idSesion = $sesion.createSesion($usuario, 1);
+	}catch($e){
+		_alert("No se ha podido iniciar sesion, intente de nuevo más tarde");
+		_log($e);
+		$sesion.registrarBitacora($idSesion, "No se ha podido iniciar sesión debido a un error");
+	}
+
+	if($idSesion > 0){
+		$sesion.registrarBitacora($idSesion, "Inicio de sesión");
+		main();
+	}else{
+		$sesion.registrarBitacora($idSesion, "No se ha podido iniciar sesión");
+	}
+
+	$sesion.registrarBitacora($idSesion, "La sesion terminó normalmente");
+}
+
+function finalizaSesion($idSesion, $usuario){
+	try{
+		$sesion.finalizaSesion($idSesion, $usuario);
+	}catch($e){
+		_log($e);
+		$sesion.registrarBitacora($idSesion, "Error al finalizar sesion");
+	}
+}
+
+_log("Inicio de script");
+iniciaSesion();

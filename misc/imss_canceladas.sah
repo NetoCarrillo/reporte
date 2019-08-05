@@ -1,0 +1,126 @@
+var $persistence = new Packages.com.meve.surtimiento.app.App();
+var $sesion = $persistence.getSesion();
+var $imss = $persistence.getImss();
+
+var $idSesion = -1;
+var $usuario = 1;
+var $dateLimits = [];
+
+/*Manejo de errores*/
+function onScriptFailure($e){
+	_alert("No se encuentran los componentes de la página, es posible que haya cambiado");
+	processesError($e);
+}
+function onScriptError($e){
+	processesError($e);
+}
+function onScriptEnd(){
+	finalizaSesion();
+	$imss.notifyStatusUpdate($idSesion, $dateLimits);
+	if($idSesion){
+		$sesion.registrarBitacora($idSesion, "Fin de sesion");
+	}
+}
+function processesError($e){
+	//Sesion caducada
+	if(_exists(_bold("ACCESO DENEGADO"))){
+		_log("La sesion ha caducado");
+		$sesion.registrarBitacora($idSesion, "Se ha perdido la sesion, se procede desde ingreso al portal SAI");
+		_navigateTo("http://sai.imss.gob.mx/");
+		main();
+	}
+}
+
+function fillFilter($estado, $optionname){
+	_assertExists(_select("OrdStt"));
+	_assertExists(_textbox("OrdFeD"));
+	_assertExists(_textbox("OrdFeA"));
+	_assertExists(_submit(0));
+	
+	_setSelected(_select("OrdStt"), $optionname);
+	
+	//_setValue(_textbox("OrdFeD"), '01/09/2014');
+	_setValue(_textbox("OrdFeD"), $dateLimits[0]);
+	
+	//_setValue(_textbox("OrdFeA"), '30/10/2014');
+	_setValue(_textbox("OrdFeA"), $dateLimits[1]);
+
+	_click(_submit(0));
+	
+	_assertExists(_table(5));
+	
+	var $html = '';
+	_set($html, _table(5).innerHTML);
+	
+	$imss.setSaiStatus($html, $estado, $idSesion);
+	
+	$sesion.registrarBitacora($idSesion, "Estatus SAP " + $estado + " actualizado");
+}
+
+function gotoConsulta($estado, $optionname){
+	//Ir a consulta de  
+	_assertExists(_image("Normal[2]"));
+	_click(_image("ImageButton4"));
+
+	fillFilter($estado, $optionname);
+}
+
+//Ingreso
+//_navigateTo("http://sai.imss.gob.mx/");
+function main(){
+	_assertExists(_textbox("Usuario[1]"));
+	_assertExists(_password("Contras[1]"));
+	_assertExists(_submit("Ingresar al Sistema"));
+
+	//Ingresado por el usuario	
+	//_setValue(_textbox("Usuario[1]"), _sahi._prompt("Usuario"));
+	//_setValue(_password("Contras[1]"), _sahi._prompt("Contraseña"));
+	
+	//Hardcode
+	_setValue(_textbox("Usuario[1]"), "farmaypo");
+	_setValue(_password("Contras[1]"), "salud273627");
+	
+	_click(_submit("Ingresar al Sistema"));
+	
+	//Intervalo de fechas para la consulta de órdenes
+	$dateLimits = $imss.getDateLimits('dd/MM/yyyy');
+	
+	gotoConsulta($imss.getCancelStatus(), "Canceladas");
+	
+	gotoConsulta($imss.getUnaccomplishStatus(), "Incumplidas/No atendidas");
+
+	gotoConsulta($imss.getConfirmadaStatus(), "Confirmadas");
+
+	gotoConsulta($imss.getAtendidaStatus(), "Atendidas");
+}
+
+function iniciaSesion(){
+	try{
+		$idSesion = $sesion.createSesion($usuario, 1);
+	}catch($e){
+		_alert("No se ha podido iniciar sesion, intente de nuevo más tarde");
+		_log($e);
+		$sesion.registrarBitacora($idSesion, "No se ha podido iniciar sesión debido a un error");
+	}
+
+	if($idSesion > 0){
+		$sesion.registrarBitacora($idSesion, "Inicio de sesión");
+		main();
+	}else{
+		$sesion.registrarBitacora($idSesion, "No se ha podido iniciar sesión");
+	}
+
+	$sesion.registrarBitacora($idSesion, "La sesion terminó normalmente");
+}
+
+function finalizaSesion(){
+	try{
+		$sesion.finalizaSesion($idSesion, $usuario);
+	}catch($e){
+		_log($e);
+		$sesion.registrarBitacora($idSesion, "Error al finalizar sesion");
+	}
+}
+
+_log("Inicio de script");
+iniciaSesion();
