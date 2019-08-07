@@ -35,7 +35,7 @@ El componente que contiene y ejecuta las rutinas de automatización, esto es med
 
 \subsubsection{Lógica de automatización}
 La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización, ofrece las interfaces de respuesta y verificación.
-\paragraph{Interfaz Respuesta\\}
+\paragraph{\indent Interfaz Respuesta\\}
 Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}). Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{guardar-orden-nueva}: guarda un listado de nuevas órdenes de reposición.
@@ -47,7 +47,7 @@ Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de
 	\item \textbf{obtener-acuse-envio}: solicita la generación de el acuse de envío al componente de reportes y almacena el documento el componente de Sistema de Archivos.
 \end{enumerate}
 
-\paragraph{Interfaz Verificación\\}
+\paragraph{\indent Interfaz Verificación\\}
 Provee el acceso a las reglas de negocio del proceso de verificación de órdenes de reposición canceladas. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{obtener-rango-verificar}: obtiene el rango de fechas para ingresar en el formulario de búsqueda del Sistema de Abastecimiento. El número de días que comprende el rango se obtiene utilizando el componente de Sistema de Archivos.
@@ -57,7 +57,7 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 \subsubsection{Persistencia}
 El componente de persistencia está basado en el patrón de diseño \textit{DAO} (ver Apéndice \ref{sec-dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
 El componente de persistencia de el proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
-\paragraph{Interfaz Almacenamiento\\}
+\paragraph{\indent Interfaz Almacenamiento\\}
 Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-guardar-nueva}, \ref{cu-responder-orden}, \ref{cu-enviar-orden} y \ref{cu-actualizar-estatus-sa}.}. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{guardar-nueva}: inserta una nueva orden de reposición en la base de datos.
@@ -68,7 +68,7 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 	\item \textbf{registrar-evento}: registra en la base de datos un evento que ocurre durante los procesos automatizados, el evento puede ser de carácter informativo o de error.
 \end{enumerate}
 
-\paragraph{Interfaz Lectura\\}
+\paragraph{\indent Interfaz Lectura\\}
 Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes de reposición en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-enviar-orden} y \ref{cu-generar-acuse}.}. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{siguiente-orden-contestar}: entrega un mapa con los datos de la primera orden de reposición encontrada con estado \textbf{Nueva}.
@@ -76,7 +76,7 @@ Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes d
 	\item \textbf{obtener-datos-acuse}: obtiene los datos de una orden de reposición necesarios para generar el documento de acuse de envío.
 \end{enumerate}
 
-\paragraph{Interfaz Administración\\}
+\paragraph{\indent Interfaz Administración\\}
 Son las operaciones que permiten modificar datos específicos de las órdenes de reposición contenidas en la base de datos, también ofrece la actualización masiva de catálogos\footnote{Ver casos de uso \ref{cu-entrar-web}, \ref{cu-generar-reporte}, \ref{cu-actualizar-catalogo}, \ref{cu-buscar}, \ref{cu-visualizar} y \ref{cu-editar}.}). Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{buscar-credenciales}: busca las credenciales del usuario.
@@ -90,14 +90,14 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 \subsubsection{Sistema de Archivos}
 El componente Sistema de Archivos es el único que se comunica con el sistema de archivos del sistema operativo\footnote{En este documento se utilizará de forma indistinta el término Sistema de archivos para referirse tanto al componente del sistema AutoSA como al propio del sistema operativo.}, tiene la función de realizar la lectura de archivos de configuración, el almacenamiento de los acuses de envío  y los reportes de las órdenes de reposición.\\
 Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver Apéndice \ref{sec-dao}.}.
-\paragraph{Interfaz Configuración\\}
+\paragraph{\indent Interfaz Configuración\\}
 Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos. Esta interfaz expone las siguientes operaciones:
 
 \begin{enumerate}
 	\item \textbf{obtener-propiedad}: obtiene una propiedad de los archivos de configuración.
 \end{enumerate}
 
-\paragraph{Interfaz Almacenamiento\\}
+\paragraph{\indent Interfaz Almacenamiento\\}
 Almacena archivos (reportes y acuses de envío) en el sistema de archivos. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{guardar-archivo}: guarda un archivo en el sistema de archivos.
@@ -105,36 +105,36 @@ Almacena archivos (reportes y acuses de envío) en el sistema de archivos. Esta 
 
 \subsubsection{Generador de reportes}
 El generador de reportes, como su nombre lo indica, tiene la función de generar documentos y reportes con los datos de las órdenes de reposición almacenados en la base de datos. 
-\paragraph{Interfaz Acuse\\} Genera el documento con el acuse de envío. Esta interfaz expone las siguientes operaciones:
+\paragraph{\indent Interfaz Acuse\\} Genera el documento con el acuse de envío. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{generar-acuse-envio}: genera el acuse de envío para la orden de reposición especificada. Utiliza el componente de persistencia para obtener los datos de la orden.
 \end{enumerate}
 
-\paragraph{Interfaz Generación\\} Genera reportes con los datos de las órdenes de reposición almacenados en la base de datos. Esta interfaz expone las siguientes operaciones:
+\paragraph{\indent Interfaz Generación\\} Genera reportes con los datos de las órdenes de reposición almacenados en la base de datos. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{generar-reporte-ordenes}: genera el reporte del tipo indicado, usando el rango de fechas establecido.
 \end{enumerate}
 
 \subsubsection{Portal Web}
-Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC\footnote{Ver sección \ref{sec-mvc}.}. Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
+Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC (ver sección \ref{sec-mvc}). Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
 No ofrece interfaces a los demás componentes, al igual que el componente Agente.
 
 
 
 \subsection{Solución a casos de uso}
-A continuación se presentan las soluciones a los casos de uso utilizando los componentes descritos en la sección anterior, para este fin se utilizan diagramas de secuencia UML\footnote{Ver sección \ref{sec-uml-seq}.}
+A continuación se presentan las soluciones a los casos de uso utilizando los componentes descritos en la sección anterior, para este fin se utilizan diagramas de secuencia UML (ver sección \ref{sec-uml-seq}).
 
 \subsubsection{Contestar órdenes}
-El diseño de la solución al caso de uso \textbf{CU-CONTESTAR} (sección \ref{cu-contestar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización}. La solución sigue la siguiente secuencia (ver diagrama\footnote{Por cuestión del tamaño de la figura y conservar el texto dentro de ella de tamaño legible únicamente se mostrarán los mensajes más importantes entre componentes.} de la Figura \ref{fig:dia-seq-cu-contestar}):
+El diseño de la solución al caso de uso \textbf{CU-CONTESTAR} (sección \ref{cu-contestar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización}. La solución sigue la siguiente secuencia (ver diagrama de la Figura \ref{fig:dia-seq-cu-contestar}\footnote{Por cuestión del tamaño de la figura y conservar el texto dentro de ella de tamaño legible únicamente se mostrarán los mensajes más importantes entre componentes.}):
 \begin{enumerate}
-	\item \textbf{Usuario}: inicia la ejecución del agente (mensaje 1 del diagrama).
-	\item \textbf{Agente}: dirige el explorador de Internet a la página del Sistema de Abastecimiento y pide al usuario la contraseña para ingresar.
-	\item \textbf{Usuario}: proporciona la contraseña (mensaje 2 del diagrama).
+	\item \textbf{Usuario}: inicia la ejecución del agente (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-contestar}).
+	\item \textbf{Agente}: dirige el explorador de Internet a la página del Sistema de Abastecimiento y solicita al usuario la contraseña para ingresar.
+	\item \textbf{Usuario}: proporciona la contraseña (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-contestar}).
 	\item \textbf{Agente}: realiza el acceso al Sistema de Abastecimiento
 	\item \textbf{Agente}: dirige el explorador de Internet al listado de órdenes de reposición.
-	\item \textbf{Agente}: para cada orden en el listado, ejecuta el caso de uso \textbf{CU-GUARDAR-NUEVA} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 3 del diagrama).
-	\item \textbf{Agente}: para cada orden con estado de \textbf{NUEVA} en la base de datos, ejecuta el caso de uso \textbf{CU-RESPONDER-ORDEN} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 4 del diagrama).
-	\item \textbf{Agente}: para cada orden con estado de \textbf{CONTESTADA} en la base de datos, ejecuta los casos de uso \textbf{CU-ENVIAR-ORDEN} y \textbf{CU-GENERAR-ACUSE} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 5 del diagrama).
+	\item \textbf{Agente}: para cada orden en el listado, ejecuta el caso de uso \textbf{CU-GUARDAR-NUEVA} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-contestar}).
+	\item \textbf{Agente}: para cada orden con estado de \textbf{NUEVA} en la base de datos, ejecuta el caso de uso \textbf{CU-RESPONDER-ORDEN} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 4 del diagrama de la Figura \ref{fig:dia-seq-cu-contestar}).
+	\item \textbf{Agente}: para cada orden con estado de \textbf{CONTESTADA} en la base de datos, ejecuta los casos de uso \textbf{CU-ENVIAR-ORDEN} y \textbf{CU-GENERAR-ACUSE} con apoyo del componente \textbf{Lógica de Automatización} (mensaje 5 del diagrama de la Figura \ref{fig:dia-seq-cu-contestar}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -147,10 +147,10 @@ El diseño de la solución al caso de uso \textbf{CU-CONTESTAR} (sección \ref{c
 \subsubsection{Guardar nueva orden}
 El diseño para la solución del caso de uso \textbf{CU-GUARDAR-NUEVA} (sección \ref{cu-guardar-nueva}) utiliza los componentes \textbf{Agente}, \textbf{Lógica de Automatización} y \textbf{Persistencia}, tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-guardar-nueva} se muestra el diagrama de secuencia.):
 \begin{enumerate}
-	\item \textbf{Agente}: envía los datos de la nueva orden de reposición (mensaje 1 del diagrama).
+	\item \textbf{Agente}: envía los datos de la nueva orden de reposición (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-guardar-nueva}).
 	\item \textbf{Lógica de Automatización}: remueve (de encontrarse) los espacios en blanco al principio y al final de cada dato de la orden.
 	\item \textbf{Lógica de Automatización}: construye la \textit{URL} de envío de la orden de reposición.
-	\item \textbf{Lógica de Automatización}: envía la orden de reposición al componente de persistencia, (mensaje 2 del diagrama).
+	\item \textbf{Lógica de Automatización}: envía la orden de reposición al componente de persistencia, (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-guardar-nueva}).
 	\item \textbf{Persistencia}: almacena la orden de reposición en la base de datos.
 \end{enumerate}
 
@@ -164,14 +164,14 @@ El diseño para la solución del caso de uso \textbf{CU-GUARDAR-NUEVA} (sección
 \subsubsection{Responder orden}
 El diseño para la solución del caso de uso \textbf{CU-RESPONDER-ORDEN} (sección \ref{cu-responder-orden}) utiliza los componentes \textbf{Agente}, \textbf{Lógica de Automatización} y \textbf{Persistencia}, tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-responder-orden} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Agente}: pide la siguiente orden de reposición para contestar (mensaje 1 del diagrama).
+	\item \textbf{Agente}: solicita la siguiente orden de reposición para contestar (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-responder-orden}).
 	\item \textbf{Lógica de Automatización}: consulta el componente \textbf{Persistencia} para obtener la siguiente orden para contestar.
 	\item \textbf{Persistencia}: obtiene la primera orden de reposición con estado de \textbf{Nueva}.
-	\item \textbf{Persistencia}: cambia el estado de la orden a \textbf{Siendo Contestada} (mensaje 3 del diagrama).
-	\item \textbf{Agente}: pide los datos para llenar los formularios (mensaje 6 del diagrama).
-	\item \textbf{Agente}: pide almacenar los datos de la orden de reposición contestada (mensaje 7 del diagrama).
-	\item \textbf{Lógica de Automatización}: envía los datos de la orden contestada al componente \textbf{Persistencia} para que sean almacenados (mensaje 8 del diagrama).
-	\item \textbf{Lógica de Automatización}: manda el cambio de estado de la orden a \textbf{Contestada} (mensaje 9 del diagrama).
+	\item \textbf{Persistencia}: cambia el estado de la orden a \textbf{Siendo Contestada} (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-responder-orden}).
+	\item \textbf{Agente}: solicita los datos para llenar los formularios (mensaje 6 del diagrama de la Figura \ref{fig:dia-seq-cu-responder-orden}).
+	\item \textbf{Agente}: solicita almacenar los datos de la orden de reposición contestada (mensaje 7 del diagrama de la Figura \ref{fig:dia-seq-cu-responder-orden}).
+	\item \textbf{Lógica de Automatización}: envía los datos de la orden contestada al componente \textbf{Persistencia} para que sean almacenados (mensaje 8 del diagrama de la Figura \ref{fig:dia-seq-cu-responder-orden}).
+	\item \textbf{Lógica de Automatización}: manda el cambio de estado de la orden a \textbf{Contestada} (mensaje 9 del diagrama de la Figura \ref{fig:dia-seq-cu-responder-orden}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -184,14 +184,14 @@ El diseño para la solución del caso de uso \textbf{CU-RESPONDER-ORDEN} (secci�
 \subsubsection{Enviar orden}
 El diseño para la solución del caso de uso \textbf{CU-ENVIAR-ORDEN} (sección \ref{cu-enviar-orden}) utiliza los componentes \textbf{Agente}, \textbf{Lógica de Automatización} y \textbf{Persistencia}, tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-enviar-orden} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Agente}: pide la siguiente orden de reposición para enviar (mensaje 1 del diagrama).
-	\item \textbf{Lógica de Automatización}: consulta el componente \textbf{Persistencia} para obtener la siguiente orden para enviar (mensaje 2 del diagrama).
+	\item \textbf{Agente}: solicita la siguiente orden de reposición para enviar (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-enviar-orden}).
+	\item \textbf{Lógica de Automatización}: consulta el componente \textbf{Persistencia} para obtener la siguiente orden para enviar (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-enviar-orden}).
 	\item \textbf{Persistencia}: obtiene la primera orden de reposición con estado de \textbf{Contestada}.
-	\item \textbf{Persistencia}: cambia el estado de la orden a \textbf{Siendo Enviada} (mensaje 3 del diagrama).
-	\item \textbf{Agente}: dirige el explorador a la \textit{URL de envío}.
-	\item \textbf{Agente}: manda almacenar el folio de envío (mensaje 6 del diagrama).
-	\item \textbf{Lógica de Automatización}: utiliza el componente \textbf{Persistencia} para almacenar el folio de envío (mensaje 7 del diagrama).
-	\item \textbf{Lógica de Automatización}: actualiza el estado de la orden a \textbf{Enviada} (mensaje 8 del diagrama).
+	\item \textbf{Persistencia}: cambia el estado de la orden a \textbf{Siendo Enviada} (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-enviar-orden}).
+	\item \textbf{Agente}: dirige el explorador de Internet a la \textit{URL de envío}.
+	\item \textbf{Agente}: manda almacenar el folio de envío (mensaje 6 del diagrama de la Figura \ref{fig:dia-seq-cu-enviar-orden}).
+	\item \textbf{Lógica de Automatización}: utiliza el componente \textbf{Persistencia} para almacenar el folio de envío (mensaje 7 del diagrama de la Figura \ref{fig:dia-seq-cu-enviar-orden}).
+	\item \textbf{Lógica de Automatización}: actualiza el estado de la orden a \textbf{Enviada} (mensaje 8 del diagrama de la Figura \ref{fig:dia-seq-cu-enviar-orden}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -204,9 +204,9 @@ El diseño para la solución del caso de uso \textbf{CU-ENVIAR-ORDEN} (sección 
 \subsubsection{Generar acuse de envío}
 El diseño para la solución del caso de uso \textbf{CU-GENERAR-ACUSE} (sección \ref{cu-generar-acuse}) utiliza los componentes \textbf{Lógica de Automatización}, \textbf{Persistencia}, \textbf{Generador de Reportes} y \textbf{Sistema de Archivos} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-generar-acuse} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Lógica de Automatización}: pide los datos de la orden de reposición al componente \textbf{Persistencia} (mensaje 1 del diagrama).
-	\item \textbf{Lógica de Automatización}: pide la generación del acuse de envío al componente \textbf{Generador de Reportes} (mensaje 2 del diagrama).
-	\item \textbf{Generador de Reportes}: pide almacenar el acuse de envío al componente \textbf{Sistema de Archivos} (mensaje 3 del diagrama).
+	\item \textbf{Lógica de Automatización}: solicita los datos de la orden de reposición al componente \textbf{Persistencia} (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-acuse}).
+	\item \textbf{Lógica de Automatización}: solicita la generación del acuse de envío al componente \textbf{Generador de Reportes} (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-acuse}).
+	\item \textbf{Generador de Reportes}: solicita almacenar el acuse de envío al componente \textbf{Sistema de Archivos} (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-acuse}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -219,15 +219,15 @@ El diseño para la solución del caso de uso \textbf{CU-GENERAR-ACUSE} (sección
 \subsubsection{Verificar órdenes}
 El diseño de la solución al caso de uso \textbf{CU-VERIFICAR} (sección \ref{cu-verificar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-verificar} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Usuario}: inicia la ejecución del agente (mensaje 1 del diagrama).
-	\item \textbf{Agente}: dirige el explorador de Internet a la página del Sistema de Abastecimiento y pide al usuario la contraseña para ingresar.
-	\item \textbf{Usuario}: proporciona la contraseña (mensaje 2 del diagrama).
+	\item \textbf{Usuario}: inicia la ejecución del agente (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-verificar}).
+	\item \textbf{Agente}: dirige el explorador de Internet a la página del Sistema de Abastecimiento y solicita al usuario la contraseña para ingresar.
+	\item \textbf{Usuario}: proporciona la contraseña (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-verificar}).
 	\item \textbf{Agente}: realiza el acceso al Sistema de Abastecimiento.
 	\item \textbf{Agente}: dirige el explorador de Internet a la búsqueda de órdenes de reposición.
-	\item \textbf{Agente}: pide el rango de fechas al componente \textbf{Lógica de Automatización} (mensaje 3 del diagrama).
+	\item \textbf{Agente}: solicita el rango de fechas al componente \textbf{Lógica de Automatización} (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-verificar}).
 	\item \textbf{Agente}: realiza la búsqueda de órdenes de reposición \textit{canceladas}.
-	\item \textbf{Agente}: envía el listado con los números de orden de reposición resultantes al componente \textbf{Lógica de Automatización} (mensaje 4 del diagrama).
-	\item \textbf{Lógica de Automatización}: ejecuta los casos de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA} (mensaje 5 del diagrama).
+	\item \textbf{Agente}: envía el listado con los números de orden de reposición resultantes al componente \textbf{Lógica de automatización} (mensaje 4 del diagrama de la Figura \ref{fig:dia-seq-cu-verificar}).
+	\item \textbf{Lógica de automatización}: ejecuta los casos de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA} (mensaje 5 del diagrama de la Figura \ref{fig:dia-seq-cu-verificar}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -240,7 +240,7 @@ El diseño de la solución al caso de uso \textbf{CU-VERIFICAR} (sección \ref{c
 \subsubsection{Actualizar estatus de Sistema de Abastecimiento}
 El diseño para la solución del caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA} (sección \ref{cu-actualizar-estatus-sa}) utiliza los componentes \textbf{Agente}, \textbf{Lógica de Automatización} y \textbf{Persistencia}, tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-actualizar-estatus-sa} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Lógica de Automatización}: envía el listado de con los números de órdenes de reposición al componente \textbf{Persistencia} para actualizar en la base de datos el estado conocido en el Sistema de Abastecimiento (mensaje 1 del diagrama).
+	\item \textbf{Lógica de Automatización}: envía el listado de con los números de órdenes de reposición al componente \textbf{Persistencia} para actualizar en la base de datos el estado conocido en el Sistema de Abastecimiento (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-actualizar-estatus-sa}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -253,12 +253,12 @@ El diseño para la solución del caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA} (
 \subsubsection{Entrar en interfaz Web}
 El diseño de la solución al caso de uso \textbf{CU-ENTRAR-WEB} (sección \ref{cu-entrar-web}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Usuario}: introduce su nombre de usuario y contraseña \textbf{credenciales} (mensaje 1 del diagrama).
-	\item \textbf{Portal Web}: envía el nombre de usuario al componente \textbf{Persistencia} que realiza la búsqueda de los datos del usuario (mensaje 2 del diagrama).
+	\item \textbf{Usuario}: introduce su nombre de usuario y contraseña \textbf{credenciales} (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
+	\item \textbf{Portal Web}: envía el nombre de usuario al componente \textbf{Persistencia} que realiza la búsqueda de los datos del usuario (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
 	\item \textbf{Portal Web}: compara la contraseña con la almacenada en la base de datos.
 	\begin{enumerate}
-		\item \textit{Si las credenciales son válidas}: el \textbf{Portal Web}regresa al \textbf{Usuario} un código de acceso temporal (mensaje 3 del diagrama).
-		\item \textit{Si las credenciales son inválidas}: el \textbf{Portal Web}regresa al \textbf{Usuario} un mensaje de error (mensaje 4 del diagrama).
+		\item Si las credenciales son válidas: el \textbf{Portal Web}regresa al \textbf{Usuario} un código de acceso temporal (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
+		\item Si las credenciales son inválidas: el \textbf{Portal Web}regresa al \textbf{Usuario} un mensaje de error (mensaje 4 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
 	\end{enumerate}
 \end{enumerate}
 
@@ -272,13 +272,13 @@ El diseño de la solución al caso de uso \textbf{CU-ENTRAR-WEB} (sección \ref{
 \subsubsection{Generar reporte}
 El diseño de la solución al caso de uso \textbf{CU-GENERAR-REPORTE} (sección \ref{cu-generar-reporte}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web}, \textbf{Persistencia}, \textbf{Generador de Reportes} y  \textbf{Sistema de Archivos} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-generar-reporte} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Usuario}: selecciona el tipo de reporte y el rango de fechas (mensaje 1 del diagrama).
-	\item \textbf{Portal Web}: pide la búsqueda de órdenes al componente \textbf{Persistencia} (mensaje 2 del diagrama).
-	\item \textbf{Portal Web}: envía las órdenes para generar el reporte (mensaje 3 del diagrama).
+	\item \textbf{Usuario}: selecciona el tipo de reporte y el rango de fechas (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-reporte}).
+	\item \textbf{Portal Web}: solicita la búsqueda de órdenes al componente \textbf{Persistencia} (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-reporte}).
+	\item \textbf{Portal Web}: envía las órdenes para generar el reporte (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-reporte}).
 	\item \textbf{Generador de Reportes}: genera el reporte.
-	\item \textbf{Generador de Reportes}: pide al componente \textbf{Sistema de Archivos} almacenar el reporte (mensaje 4 del diagrama).
-	\item \textbf{Generador de Reportes}: regresa la ruta donde se guardó el componente (mensaje 5 del diagrama).
-	\item \textbf{Portal Web}: muestra al \textbf{Usuario} la ruta donde se encuentra el reporte (mensaje 6 del diagrama).
+	\item \textbf{Generador de Reportes}: solicita al componente \textbf{Sistema de Archivos} almacenar el reporte (mensaje 4 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-reporte}).
+	\item \textbf{Generador de Reportes}: regresa la ruta donde se guardó el componente (mensaje 5 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-reporte}).
+	\item \textbf{Portal Web}: muestra al \textbf{Usuario} la ruta donde se encuentra el reporte (mensaje 6 del diagrama de la Figura \ref{fig:dia-seq-cu-generar-reporte}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -291,9 +291,9 @@ El diseño de la solución al caso de uso \textbf{CU-GENERAR-REPORTE} (sección 
 \subsubsection{Actualizar catálogo}
 El diseño de la solución al caso de uso \textbf{CU-ACTUALIZAR-CATALOGO} (sección \ref{cu-actualizar-catalogo}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-actualizar-catalogo} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Usuario}: selecciona el catálogo y el archivo (mensaje 1 del diagrama).
-	\item \textbf{Portal Web}: pide la actualización del catálogo al componente \textbf{Persistencia} (mensaje 2 del diagrama).
-	\item \textbf{Portal Web}: muestra al \textbf{Usuario} la cantidad de registros almacenados (mensaje 3 del diagrama).
+	\item \textbf{Usuario}: selecciona el catálogo y el archivo (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-actualizar-catalogo}).
+	\item \textbf{Portal Web}: solicita la actualización del catálogo al componente \textbf{Persistencia} (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-actualizar-catalogo}).
+	\item \textbf{Portal Web}: muestra al \textbf{Usuario} la cantidad de registros almacenados (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-actualizar-catalogo}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -306,9 +306,9 @@ El diseño de la solución al caso de uso \textbf{CU-ACTUALIZAR-CATALOGO} (secci
 \subsubsection{Buscar órdenes}
 El diseño de la solución al caso de uso \textbf{CU-BUSCAR} (sección \ref{cu-buscar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-buscar} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Usuario}: llenada el formulario de búsqueda \textbf{filtro} (mensaje 1 del diagrama).
-	\item \textbf{Portal Web}: pide la realización de la búsqueda de órdenes al componente \textbf{Persistencia} (mensaje 2 del diagrama).
-	\item \textbf{Portal Web}: muestra al \textbf{Usuario} el listado de órdenes de reposición encontradas (mensaje 3 del diagrama).
+	\item \textbf{Usuario}: llena el formulario de búsqueda \textbf{filtro} (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-buscar}).
+	\item \textbf{Portal Web}: solicita la realización de la búsqueda de órdenes al componente \textbf{Persistencia} (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-buscar}).
+	\item \textbf{Portal Web}: muestra al \textbf{Usuario} el listado de órdenes de reposición encontradas (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-buscar}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -321,8 +321,8 @@ El diseño de la solución al caso de uso \textbf{CU-BUSCAR} (sección \ref{cu-b
 \subsubsection{Visualizar orden}
 El diseño de la solución al caso de uso \textbf{CU-VISUALIZAR} (sección \ref{cu-visualizar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-visualizar} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Usuario}: selecciona la orden de reposición (mensaje 1 del diagrama).
-	\item \textbf{Portal Web}: pide la realización de la búsqueda de la orden al componente \textbf{Persistencia} (mensaje 2 del diagrama).
+	\item \textbf{Usuario}: selecciona la orden de reposición (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-visualizar}).
+	\item \textbf{Portal Web}: solicita la realización de la búsqueda de la orden al componente \textbf{Persistencia} (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-visualizar}).
 	\item \textbf{Portal Web}: muestra al \textbf{Usuario} la información de la orden de reposición.
 \end{enumerate}
 
@@ -337,9 +337,9 @@ El diseño de la solución al caso de uso \textbf{CU-VISUALIZAR} (sección \ref{
 Ver sección \ref{cu-contestar}.\\
 El diseño de la solución al caso de uso \textbf{CU-EDITAR} (sección \ref{cu-editar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-editar} se muestra el diagrama de secuencia):
 \begin{enumerate}
-	\item \textbf{Usuario}: activa la edición de la orden de reposición (mensaje 1 del diagrama).
-	\item \textbf{Usuario}: modifica la información de la orden de reposición (mensaje 2).
-	\item \textbf{Portal Web}: pide la actualización de la orden al componente \textbf{Persistencia} (mensaje 3 del diagrama).
+	\item \textbf{Usuario}: activa la edición de la orden de reposición (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-editar}).
+	\item \textbf{Usuario}: modifica la información de la orden de reposición (mensaje 2 de la Figura \ref{fig:dia-seq-cu-editar}).
+	\item \textbf{Portal Web}: solicita la actualización de la orden al componente \textbf{Persistencia} (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-editar}).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -356,7 +356,7 @@ El diseño de la solución al caso de uso \textbf{CU-EDITAR} (sección \ref{cu-e
 \newpage
 \section{Diseño de la base de datos}
 La base de datos tiene dos finalidades, guardar la información capturada de las órdenes de reposición atendidas así como los catálogos necesarios para los procesos automatizados y generación de reportes; la segunda es almacenar la información de los usuarios autorizados para utilizar el portal web.\\
-El diseño de la base de datos se centra en los siguientes grupos\footnote{Los nombres de las tablas están escritos utilizando letras minúsculas de alfabeto inglés y guión bajo $([a-z]{\_})^+$.}(ver Figura \ref{fig:dia-er-resumen}):
+El diseño de la base de datos se centra en los siguientes grupos(ver Figura \ref{fig:dia-er-resumen}\footnote{Los nombres de las tablas están escritos utilizando letras minúsculas de alfabeto inglés y guión bajo $([a-z]{\_})^+$.}):
 \begin{enumerate}
 	\item Tablas de las órdenes de reposición.
 	\item Tablas del registro de eventos.
@@ -372,16 +372,16 @@ El diseño de la base de datos se centra en los siguientes grupos\footnote{Los n
 
 
 \subsection{Tablas de las órdenes de reposición}
-En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes de reposición atendidas durante la rutina automatizada para responder órdenes de reposición en el Sistema de Abastecimiento\footnote{Ver caso de uso \ref{cu-contestar}.}, de igual manera también es utilizada en la verificación de órdenes de reposición canceladas\footnote{Ver caso de uso \ref{cu-verificar}.}.
+En estas tablas (ver Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes de reposición atendidas durante la rutina automatizada para responder órdenes de reposición en el Sistema de Abastecimiento (ver caso de uso \ref{cu-contestar}), de igual manera también es utilizada en la verificación de órdenes de reposición canceladas (ver caso de uso \ref{cu-verificar}).
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{dia-er-ordenes} 
   \caption{Diagrama Entidad Relación para el registro de órdenes de reposición.}
   \label{fig:dia-er-ordenes}
 \end{figure}
-\paragraph{ordenes{\textunderscore}is:} Contiene el registro de las órdenes de reposición del Sistema de Abastecimiento que han sido atendidas por la rutina de automatización.
-\paragraph{cat{\textunderscore}estatus{\textunderscore}orden:} Este catálogo no debe ser alterado, contiene los posibles estatus que pude tomar una orden durante el ciclo de vida de la aplicación.
-\paragraph{cat{\textunderscore}estatus{\textunderscore}sa:} Este catálogo contiene los estados definidos por el Sistema de Abastecimiento para registrar y almacenar una orden de reposición.
+\paragraph{ordenes{\textunderscore}is:} contiene el registro de las órdenes de reposición del Sistema de Abastecimiento que han sido atendidas por la rutina de automatización.
+\paragraph{cat{\textunderscore}estatus{\textunderscore}orden:} este catálogo no debe ser alterado, contiene los posibles estados que puede tomar una orden durante el ciclo de vida de la aplicación.
+\paragraph{cat{\textunderscore}estatus{\textunderscore}sa:} este catálogo contiene los estados definidos por el Sistema de Abastecimiento para registrar y almacenar una orden de reposición.
 
 
 \subsection{Tablas del registro de eventos}
@@ -392,35 +392,35 @@ El registro de eventos es todo lo relacionado con actividad de los actores del s
   \caption{Diagrama Entidad Relación para el registro de eventos.}
   \label{fig:dia-er-bitacora}
 \end{figure}
-\paragraph{bitacora:} Lleva el registro de eventos ocurridos durante la ejecución de las rutinas de automatización, el evento puede estar ligado a una sesión.
-\paragraph{cat{\textunderscore}tipo{\textunderscore}evento:} Catálogo con los tipos de eventos que pueden ser registrados en la bitácora.
-\paragraph{sesion:} Define una sesión bajo la cual se ejecuta una rutina de automatización, la sesión puede definir implícitamente un usuario y un rol.
+\paragraph{bitacora:} lleva el registro de eventos ocurridos durante la ejecución de las rutinas de automatización, el evento puede estar ligado a una sesión.
+\paragraph{cat{\textunderscore}tipo{\textunderscore}evento:} se refiere al catálogo con los tipos de eventos que pueden ser registrados en la bitácora.
+\paragraph{sesion:} define una sesión bajo la cual se ejecuta una rutina de automatización, la sesión puede definir implícitamente un usuario y un rol.
 
 
 \subsection{Tablas de los usuarios de la interfaz web}
-Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz web\footnote{Ver caso de uso \ref{cu-entrar-web}.} (ver Figura \ref{fig:dia-er-web}).
+Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz web (ver caso de uso \ref{cu-entrar-web} y Figura \ref{fig:dia-er-web}).
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{dia-er-web} 
   \caption{Diagrama Entidad Relación para el manejo de usuarios.}
   \label{fig:dia-er-web}
 \end{figure}
-\paragraph{roles:}Contiene los roles (permisos) que los usuarios pueden tener en la interfaz web.
-\paragraph{sesion:}Contiene información de las sesiones de los usuarios de la interfaz web.
+\paragraph{roles:} contiene los roles (permisos) que los usuarios pueden tener en la interfaz web.
+\paragraph{sesion:} contiene información de las sesiones de los usuarios de la interfaz web.
 \paragraph{usuarios{\textunderscore}web:} Contiene la información de los usuarios de la interfaz web.
-\paragraph{credenciales:} Contiene la credenciales con las cuales los usuarios autentican su acceso a la interfaz web.
+\paragraph{credenciales:} contiene la credenciales con las cuales los usuarios autentican su acceso a la interfaz web.
 
 
 \subsection{Catálogos para la generación de reportes}
-Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son necesarios para la generación de los reportes\footnote{Ver casos de uso \ref{cu-generar-reporte} y \ref{cu-actualizar-catalogo}.} que sirven que las siguientes áreas de la farmacéutica continúen con la atención de las órdenes de reposición.
+Estas tablas contienen catálogos (ver Figura \ref{fig:dia-er-reportes}) que son necesarios para la generación de los reportes (ver casos de uso \ref{cu-generar-reporte} y \ref{cu-actualizar-catalogo}) que sirven que las siguientes áreas de la farmacéutica continúen con la atención de las órdenes de reposición.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{dia-er-reportes} 
   \caption{Diagrama Entidad Relación de los catálogos para la generación de vistas.}
   \label{fig:dia-er-reportes}
 \end{figure}
-\paragraph{cat{\textunderscore}clientes:} Este catálogo contiene información sobre la localización física de los lugares donde deben ser entregados los productos.
-\paragraph{cat{\textunderscore}contratos:} Este catálogo contiene información referente a acuerdos comerciales referentes a los productos requeridos en las órdenes de reposición.
+\paragraph{cat{\textunderscore}clientes:} este catálogo contiene información sobre la localización física de los lugares donde deben ser entregados los productos.
+\paragraph{cat{\textunderscore}contratos:} este catálogo contiene información referente a acuerdos comerciales referentes a los productos requeridos en las órdenes de reposición.
 
 
 \section{Resumen}

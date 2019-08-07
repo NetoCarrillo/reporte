@@ -11,18 +11,18 @@
 \section{Patrón Objeto de Acceso a Datos}\label{sec-dao}
 El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etc.) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
 \begin{enumerate}
-	\item [] \textbf{buscar}: Realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
-	\item [] \textbf{listar}: Extrae todos los elementos, el resultado puede utilizar estrategias de paginación.
-	\item [] \textbf{insertar}: Guarda un nuevo elemento en la fuente de datos.
-	\item [] \textbf{actualizar}: Actualiza la información de un elemento existente en la fuente de datos.
-	\item [] \textbf{borrar}: Borra el registro de un elemento en la fuente de datos.
+	\item [] \textbf{buscar}: realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
+	\item [] \textbf{listar}: extrae todos los elementos, el resultado puede utilizar estrategias de paginación.
+	\item [] \textbf{insertar}: guarda un nuevo elemento en la fuente de datos.
+	\item [] \textbf{actualizar}: actualiza la información de un elemento existente en la fuente de datos.
+	\item [] \textbf{borrar}: borra el registro de un elemento en la fuente de datos.
 \end{enumerate}
 
 
 \section{Patrón Modelo-Vista-Controlador}\label{sec-mvc}
 Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador (MVC) es un patrón de arquitectura que consiste de tres grandes componentes: Modelo, Vista y Controlador. El Controlador conduce la comunicación entre la Vista y el Modelo, en la Figura \ref{fig:dia-mvc-simple} se muestra el flujo de comunicación entre los componentes MVC.
 \begin{enumerate}
-	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del patrón DAO\footnote{Ver sección \ref{sec-dao}} para el manejo de datos.
+	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del patrón DAO (ver sección \ref{sec-dao}) para el manejo de datos.
 	\item \textbf{Vista}: es la capa de presentación, es responsable de mostrar los datos al actor\footnote{Puede ser una persona u otro sistema} que use el sistema.
 	\item \textbf{Controlador}: es el intermediario entre la Vista y el Modelo: comunica las peticiones de la vista al modelo y los datos del modelo a la vista.
 \end{enumerate}
