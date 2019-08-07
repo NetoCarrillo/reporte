@@ -33,7 +33,7 @@ El diagrama de componentes sirve para visualizar los componentes en los que se d
 \subsubsection{Agente}
 El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de \textbf{Lógica de Automatización}.
 
-\subsubsection{Lógica de automatización}
+\subsubsection{Lógica de automatización}\label{sec-logica-auto}
 La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización, ofrece las interfaces de respuesta y verificación.
 \paragraph{\indent Interfaz Respuesta\\}
 Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}). Esta interfaz expone las siguientes operaciones:

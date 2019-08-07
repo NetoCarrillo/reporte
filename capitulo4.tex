@@ -122,7 +122,7 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 La implementación del componente Agente esta escrita en rutinas de Sahi (ver sección \ref{sec-sahi}), primero se mostrarán los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realizar la ejecución mediante la herramienta gráfica de Sahi.
 
 \subsubsection{Rutina para automatizar la respuesta de órdenes de reposición}\label{sec-aut-contestar}
-La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso  CU-CONTESTAR que se describe en la sección \ref{cu-contestar}, a continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). A grandes rasgos, contestar las órdenes de reposición sigue los siguientes pasos:
+La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso  CU-CONTESTAR que se describe en la sección \ref{cu-contestar}, a continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son los siguientes:
 \begin{enumerate}
 	\item Ingresar al Sistema de Abastecimiento, en el código \ref{lst:sah-session} se muestra la rutina para iniciar sesión en el Sistema de Abastecimiento:
 	\begin{enumerate}
@@ -165,11 +165,11 @@ for(var $i = 1 + $errores; $i <= $rowCount; $i++){
 		\item La línea 5 manda la actualización de la orden de reposición en la base de datos.
 	\end{enumerate}
 	\begin{lstlisting}[language=Javascript, caption={Responder orden de reposición.}, label={lst:sah-respond}]
-var $url = $oimss.getUrlCon();
+var $url = $entidad.getUrlCon();
 _navigateTo($url);
 _setValue(_textbox("Lote"), "SL");
 _click(_submit("Agregar Captura"));
-$imss.updateCantidad($contrato, $numorden, $cantidad, $idSesion);
+$logica.updateCantidad($contrato, $numorden, $cantidad, $idSesion);
 	\end{lstlisting}
 
 	\item Enviar las órdenes de reposición contestadas, el código \ref{lst:sah-send} muestra un resumen de la automatización para envíar una órden de reposición (ver caso de uso en la sección \ref{cu-enviar-orden}):
@@ -185,44 +185,34 @@ $mapa = new java.util.LinkedHashMap();
 for(var $llave in $orden){
 	$mapa.put($llave, $orden[$llave]);
 }
-$imss.updateOrdenImss($mapa, $idSesion);
+$logica.updateOrdenImss($mapa, $idSesion);
 	\end{lstlisting}
 \end{enumerate}
 
 \subsubsection{Rutina para automatizar la verificación de órdenes de reposición canceladas}
-La rutina para automatizar la verificación de órdenes de reposición canceladas refleja el caso de uso  CU-VERIFICAR que se describe en la sección \ref{cu-verificar}, a continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Recordando que, a grandes rasgos, verificar las órdenes de reposición canceladas sigue los siguientes pasos:
+La rutina para automatizar la verificación de órdenes de reposición canceladas refleja el caso de uso  CU-VERIFICAR que se describe en la sección \ref{cu-verificar}, a continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son los siguientes:
 \begin{enumerate}
 	\item Ingresar al Sistema de Abastecimiento, el ingreso al sistema es idéntico a la rutina mostrada en la sección anterior (sección \ref{sec-aut-contestar}).
 
 	\item Establecer los criterios de búsqueda, el código \ref{lst:sah-} muestra un resumen de la automatización para :
 	\begin{enumerate}
-		\item 
+		\item La línea 1 muestra la consulta de las fechas que acotan la búsqueda.
+		\item Las líneas 2 a 5 realizan la búsqueda en el Sistema de Abastecimiento.
+		\item Las líneas 6 y 7 extraen la información de las órdenes de reposición que muestra el Sistema de Abastecimiento como resultado de la búsqueda.
+		\item Las líneas 8 y 9 utilizan el componente \textbf{Lógica de automatización} para actualizar en la base de datos el estado de las órdenes de reposición canceladas.
 	\end{enumerate}
 	\begin{lstlisting}[language=Javascript, caption={Responder orden de reposición.}, label={lst:sah-search}]
-$dateLimits = $imss.getDateLimits('dd/MM/yyyy');
+$dateLimits = $logica.getDateLimits('dd/MM/yyyy');
 _setSelected(_select("OrdStt"), "Canceladas");
 _setValue(_textbox("OrdFeD"), $dateLimits[0]);
 _setValue(_textbox("OrdFeA"), $dateLimits[1]);
 _click(_submit(0));
 var $html = '';
 _set($html, _table(5).innerHTML);
-$estado = $imss.getCancelStatus();
-$imss.setSaiStatus($html, $estado, $idSesion);
+$estado = $logica.getCancelStatus();
+$logica.setSaiStatus($html, $estado, $idSesion);
 	\end{lstlisting}
-
-	\item Extraer el listado de órdenes de reposición canceladas, el código \ref{lst:sah-} muestra un resumen de la automatización para :
-
-	\item Actualizar el estado de las órdenes de reposición en la base de datos, el código \ref{lst:sah-} muestra un resumen de la automatización para :
 \end{enumerate}
-
-
-
-
-
-
-
-
-
 
 \subsubsection{Ejecución de las rutinas de automatización}
 La ejecución de las rutinas de sahi corresponden a los casos de uso CU-CONTESTAAR y 
@@ -252,19 +242,46 @@ dejando la ejecución al usuario por medio de la interfaz gráfica de Sahi:
 \end{itemize}
 
 
+\subsection{Lógica de automatización}
+El componente de lógica de automatización provee de la información necesaria a las rutinas automatizadas, la información puede proceder de fuentes diferentes y cada una se accede de forma diferente:
+\begin{enumerate}
+ 	\item Un archivo en el sistema de archivos del sistema operativo, se obtiene información utilizando el componente \textbf{Sistema de Archivos}.
+ 	\item Información almacenada en la base de datos, se tiene acceso miente el componente \textbf{Persistencia}.
+ 	\item Cálculos que corresponde a la lógica de negocio, estos datos se obtienen mediante la aplicación de reglas implementadas dentro del componente \textbf{Lógica de automatización}.
+ \end{enumerate}
+%Dado que la implementación a los datos en el sistema de archivos del sistema operativo y los almacenados en la base de datos son adquiridos mediante otros componentes, únicamente haré mención de la implementación de los datos que se obtienen por medio de reglas de negocio.
+A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas en la sección \ref{sec-logica-auto}:
+\paragraph{\indent Interfaz Respuesta}
+\begin{enumerate}
+	\item guardar-orden-nueva: la implementación de esta operación (ver código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}\footnote{Para evitar redundancia en la explicación de la implementación del sistema AutoSA, en adelante no se mostrará más código que únicamente delegue la operación a otros componentes.}.
+	\begin{lstlisting}[language=Java, caption={Delegación del almacenamiento de una nueva orden de reposición.}, label={lst:la-save-new}]
+OrdenImss orden = new Orden();
+orden.setContrato(contrato);
+orden.setSolicitud(Long.parseLong(solicitud));
+orden.setOrden(ordenLong);
+orden.setFechaExpedicion(fechaExpedicion);
+orden.setAlmacenDestino(Long.parseLong(almacenDestino));
+orden.setUrlCon(urlCon);
+orden.setUrlEnv(urlEnv);
+orden.setEstatus(1);
+orden.setIdSesionInsersion(idSesion);
+orden.setIdSesionEstatus(idSesion);
 
+ordenesDAO.insertOrden(orden);
+	\end{lstlisting}
 
+	\item obtener-datos-respuesta:
 
-\subsection{Lógica de Automatización}
-	\paragraph{Respuesta\\}
-		\textbf{guardar-orden-nueva}\\
-		\textbf{obtener-datos-respuesta}\\
-		\textbf{actualizar-orden-contestada}\\
-		\textbf{guardar-orden-enviada}\\
-		\textbf{obtener-acuse-envio}
-	\paragraph{Verificación\\}
-		\textbf{obtener-rango-fechas-verificar}\\
-		\textbf{actualizar-estado-sa}
+	\item actualizar-orden-contestada:
+	\item guardar-orden-enviada:
+	\item obtener-acuse-envio:
+\end{enumerate}
+\paragraph{\indent Interfaz Verificación}
+\begin{enumerate}
+	\item obtener-rango-fechas-verificar: 
+	\item actualizar-estado-sa:
+\end{enumerate}
+
 
 \subsection{Persistencia}
 \subsubsection{Tecnologías utilizadas}
