@@ -29,21 +29,20 @@ Para el desarrollo del proyecto AutoSA se han ocupado los siguientes conceptos:
 	\item \textbf{Lenguaje de Modelado de Datos}: DML por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
 \end{enumerate}
 
-\iffalse
 \subsection{Java}\label{sec-java}
 
-\begin{quote}
-	Java is related to C++, which is a direct descendant of C. Much of the character of Java is inherited from these two languages. From C, Java derives its syntax. Many of Java’s objectoriented features were influenced by C++. In fact, several of Java’s defining characteristics come from—or are responses to—its predecessors. Moreover, the creation of Java was deeply rooted in the process of refinement and adaptation that has been occurring in computer programming languages for the past several decades. For these reasons, this section reviews the sequence of events and forces that led to Java. As you will see, each innovation in language design was driven by the need to solve a fundamental problem that the preceding languages could not solve. Java is no exception\cite{JavaCompleteReference}.
-\end{quote}
-
-\begin{quote}
-	Java was conceived by James Gosling, Patrick Naughton, Chris Warth, Ed Frank, and Mike Sheridan at Sun Microsystems, Inc. in 1991. It took 18 months to develop the first working version. This language was initially called “Oak,” but was renamed “Java” in 1995. Between the initial implementation of Oak in the fall of 1992 and the public announcement of Java in the spring of 1995, many more people contributed to the design and evolution of the language. Bill Joy, Arthur van Hoff, Jonathan Payne, Frank Yellin, and Tim Lindholm were key contributors to the maturing of the original prototype\cite{JavaCompleteReference}.
-\end{quote}
-
-Java es un lenguaje bonito porque gracias a él  puedo obtener dinero para hacer las cosas que me gustan como comer  y jugar squash
+El lenguaje de programación Java fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan en 1991 bajo el nombre ``Oak'' y en 1995 cambiaron el nombre a Java. El lenguaje Java está basado en los lenguajes de programación C, de donde deriva su sintaxis y de C++, que se toma como base para las características del paradigma orientado a objetos. Java es un lenguaje orientado a objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
+El concepto de Java tiene varios componentes, para efectos de este proyecto se mencionarán los siguientes\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
+\begin{enumerate}
+	\item Lenguaje de programación Java: previamente descrito, es un lenguaje multiplataforma, estáticamente tipado y orientado a objetos.
+	\item Máquina Virtual de Java: JVM por sus siglas en inglés, es el sistema de ejecución en tiempo real de Java\footnote{\textcolor{red}{Karla, \textbf{Sistem de ejecución en tiempo real de Java} fue lo que me pareció más correcto para traducir ``Java run-time system'' ¿qué opinas, sabes una traducción mejor?}}.
+	\item Bytecode: es el nombre que recibe el conjunto optimizado de instrucciones diseñadas para ser ejecutadas en la JVM.
+	\item Paquete de Desarrollo de Java JDK (Java Development Kit): es el conjunto de herramientas utilizadas para el desarrollo de software para la máquina virtual de Java.
+	\item Ambiente de Ejecución de Java JRE (Java Runtime Environment): es la herramienta encargada de la creación y administración de instancias de la máquina virtual de Java.
+\end{enumerate}
 
 \subsection{Javascript}\label{sec-javascript}
-\fi
+\textcolor{blue}{Javascript es un lenguaje que lo único que tiene similar a Java es la sintaxis, y no mucho, así que por favor dejen de tratarlos como sinónimos (odio a los PMs)}\footnote{se recomienda no hacer mucho caso, escribí algo de Javascript nada más para tener texto en la sección.}.
 
 
 \subsection{Sahi}\label{sec-sahi}
@@ -52,7 +51,7 @@ La compañía Sahi Pro\textsuperscript{\textcopyright}\cite{SahiPro} describe a 
 	Sahi es una herramienta enfocada a la automatización de pruebas para servicios Web, plataformas Web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de Java.
 \end{quote}
 
-Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en Sahi logra la ejecución de rutinas es actuando como proxy\footnote{Un proxy es un intermediario entre el cliente (explorador) y el servidor (página Web)\cite{BeginningUbuntuLinux}} entre el sitio Web y el explorador de Internet como se muestra en la Figura \ref{dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio Web, Sahi intercepta la comunicación e inserta código de Javascript que ejecuta la rutina automatizada.\cite{WebEng9IntConf, SahiPro}
+Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en Sahi logra la ejecución de rutinas es actuando como proxy\footnote{Un proxy es un intermediario entre el cliente (explorador) y el servidor (página Web)\cite{BeginningUbuntuLinux}} entre el sitio Web y el explorador de Internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio Web, Sahi intercepta la comunicación e inserta código de Javascript que ejecuta la rutina automatizada.\cite{WebEng9IntConf, SahiPro}
 
 \begin{figure}[h]
 \centering
@@ -194,7 +193,7 @@ La rutina para automatizar la verificación de órdenes de reposición cancelada
 \begin{enumerate}
 	\item Ingresar al Sistema de Abastecimiento, el ingreso al sistema es idéntico a la rutina mostrada en la sección anterior (sección \ref{sec-aut-contestar}).
 
-	\item Establecer los criterios de búsqueda, el código \ref{lst:sah-} muestra un resumen de la automatización para :
+	\item Establecer los criterios de búsqueda, el código \ref{lst:sah-search} muestra un resumen de la automatización para :
 	\begin{enumerate}
 		\item La línea 1 muestra la consulta de las fechas que acotan la búsqueda.
 		\item Las líneas 2 a 5 realizan la búsqueda en el Sistema de Abastecimiento.
@@ -248,7 +247,8 @@ El componente de lógica de automatización provee de la información necesaria 
  	\item Un archivo en el sistema de archivos del sistema operativo, se obtiene información utilizando el componente \textbf{Sistema de Archivos}.
  	\item Información almacenada en la base de datos, se tiene acceso miente el componente \textbf{Persistencia}.
  	\item Cálculos que corresponde a la lógica de negocio, estos datos se obtienen mediante la aplicación de reglas implementadas dentro del componente \textbf{Lógica de automatización}.
- \end{enumerate}
+\end{enumerate}
+La implementación de este componente ha sido escrita en el lenguaje de programación Java (ver sección \ref{sec-java}).\\
 %Dado que la implementación a los datos en el sistema de archivos del sistema operativo y los almacenados en la base de datos son adquiridos mediante otros componentes, únicamente haré mención de la implementación de los datos que se obtienen por medio de reglas de negocio.
 A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas en la sección \ref{sec-logica-auto}:
 \paragraph{\indent Interfaz Respuesta}
@@ -270,16 +270,73 @@ orden.setIdSesionEstatus(idSesion);
 ordenesDAO.insertOrden(orden);
 	\end{lstlisting}
 
-	\item obtener-datos-respuesta:
+	\item obtener-datos-respuesta: la implementación del cálculo de fechas de fabricación y de caducidad descrita en el caso de uso \textbf{CU-RESPONDER-ORDEN} (ver sección \ref{cu-responder-orden}), código \ref{lst:la-dates} muestra el método en lenguaje Java:
+	\begin{enumerate}
+		\item En las líneas 2 a 7 se calcula el año para las fechas de fabricación y de caducidad.
+		\item En las líneas 8 a 10 se construyen las fechas de fabricación y de caducidad.
+	\end{enumerate}
+	\begin{lstlisting}[language=Java, caption={Método para calcular las fechas de fabricación y caducidad.}, label={lst:la-dates}]
+public String[] getFechasFab(){
+	Calendar today = GregorianCalendar.getInstance();
+	int anho;
+	if(Calendar.DECEMBER == today.get(Calendar.MONTH)){
+		anho = today.get(Calendar.YEAR) + 1;
+	}else{
+		anho = today.get(Calendar.YEAR);
+	}
+	String[] fechas = new String[2];
+	fechas[0] = "01/01/" + anho;
+	fechas[1] = "31/12/" + anho;
+	
+	return fechas;
+}
+	\end{lstlisting}
 
-	\item actualizar-orden-contestada:
-	\item guardar-orden-enviada:
-	\item obtener-acuse-envio:
+	\item obtener-acuse-envio: esta operación principalmente obtiene las rutas en el sistema de archivos para la generación del acuse de envío, posteriormente delega la generación del acuse al componente \textbf{Generación de reportes}. En el código \ref{lst:la-acuse} se muestra el código de Java que realiza los pasos anteriores.
+	\begin{enumerate}
+		\item La línea 1 estable el nombre del archivo como el número de la orden de reposición.
+		\item La línea 2 obtiene la plantilla del acuse de envío para el Instituto de Salud.
+		\item La línea 3 obtiene la ruta donde se depositan los archivos auxiliares en la generación del acuse de envío.
+		\item Las líneas 4 a 7 construyen la ruta de directorios donde se depositará el acuse de envío.
+		\item La línea 8 utiliza el componente \textbf{Generador de Reportes} para la creación del acuse de envío.
+	\end{enumerate}
+	\begin{lstlisting}[language=Java, caption={Generación del acuse de envío.}, label={lst:la-acuse}]
+String filename = params.get("numorden");
+String template = properties.getProperty("is.template.html");
+File outhtmldir = new File(properties.getProperty("imss.output.dir"), filename + ".html");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMMM dd", new Locale("es", "MX"));
+String[] date = sdf.format(new Date()).split(" ");
+File outputdir = new File(properties.getProperty("is.output.pdf"), String.format(REPORT_DIR_TMPL, date[0], date[1], date[2]));
+outputdir.mkdirs();
+snapShotService.takeSnapShot(params, filename, template, outhtmldir, outputdir);
+	\end{lstlisting}
+
 \end{enumerate}
 \paragraph{\indent Interfaz Verificación}
 \begin{enumerate}
-	\item obtener-rango-fechas-verificar: 
-	\item actualizar-estado-sa:
+	\item obtener-rango-fechas-verificar: el código \ref{lst:la-date-search} muestra el cálculo de las fechas necesarias para el formulario de búsqueda de órdenes de reposición.
+	\begin{enumerate}
+		\item La línea 5 muestra la obtención de la fecha mayor (día actual).
+		\item La líneas 6 y 7 muestran la obtención de la fecha menor (60 días antes de la fecha actual).
+	\end{enumerate}
+	\begin{lstlisting}[language=Java, caption={Cálculo del rango de fechas para buscar órdenes de reposición canceladas.}, label={lst:la-date-search}]
+DateFormat dateFormat = new SimpleDateFormat(format);
+Calendar cal = GregorianCalendar.getInstance();
+String[] dates = new String[2];
+dates[1] = dateFormat.format(cal.getTime());
+cal.add(Calendar.DAY_OF_YEAR, -60);
+dates[0] = dateFormat.format(cal.getTime());
+	\end{lstlisting}
+
+	\item actualizar-estado-sa: Esta operación realiza la actualización de las órdenes de reposición canceladas, en el código \ref{lst:la-validate} muestra el código Java.
+	\begin{enumerate}
+		\item La línea 1 obtiene las órdenes de reposición canceladas del listado de órdenes de reposición encontradas.
+		\item La línea 2 actualiza el estado de las órdenes de reposición.
+	\end{enumerate}
+	\begin{lstlisting}[language=Java, caption={Actualización de órdenes de reposición canceladas.}, label={lst:la-validate}]
+	List<Orden> ordenes = xmlReader.getCancelled(htmlTable);
+	persistence.updateSaiStatus(ordenes, status);
+	\end{lstlisting}
 \end{enumerate}
 
 
@@ -293,9 +350,6 @@ ordenesDAO.insertOrden(orden);
 \end{enumerate}
 }
 
-\textcolor{blue}{
-	Acá un diagrama que muestra las partes importantes del componente
-}
 
 \subsection{Sistema de archivos}
 	\paragraph{Configuración\\}
