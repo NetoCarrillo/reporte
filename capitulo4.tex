@@ -41,6 +41,32 @@ El concepto de Java tiene varios componentes, para efectos de este proyecto se m
 	\item Ambiente de Ejecución de Java JRE (Java Runtime Environment): es la herramienta encargada de la creación y administración de instancias de la máquina virtual de Java.
 \end{enumerate}
 
+\subsubsection{Java Data Base Controller}\label{sec-jdbc}
+\textcolor{blue}{Vale por un resumen que explica lo que es el JDBC.}
+
+\subsection{Spring}\label{sec-spring}
+\textcolor{blue}{Vale por un resumen que explica lo que es Spring:
+\begin{enumerate}
+	\item Contenedor de ``beanes''.
+	\item Patrón de inversión de control.
+	\item Patrón de inyección de dependencia.
+	\item Patrón Factory (opcional).
+	\item Patrón Singleton (opcional).
+\end{enumerate}
+}
+
+\subsubsection{Spring JPA}\label{sec-spring-jpa}
+\textcolor{blue}{Vale por un resumen que explica lo que es el Spring-JPA:
+\begin{enumerate}
+	\item Patrón proxy.
+	\item Concepto de transacción (Tal vez sea bueno explicar esto como subsección de bases de datos relaciones).
+	\item Java Persistence API (Tal vez sea bueno explicar esto como subsección de Java así como se plantea con JDBC.)
+\end{enumerate}
+}
+
+\subsection{iBatis}\label{sec-ibatis}
+\textcolor{blue}{Vale por un resumen que explica lo que es iBatis.}
+
 \subsection{Javascript}\label{sec-javascript}
 \textcolor{blue}{Javascript es un lenguaje que lo único que tiene similar a Java es la sintaxis, y no mucho, así que por favor dejen de tratarlos como sinónimos (odio a los PMs)}\footnote{se recomienda no hacer mucho caso, escribí algo de Javascript nada más para tener texto en la sección.}.
 
@@ -65,10 +91,8 @@ Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas so
 %\subsubsection{Java Enterprise Edition}
 %\subsection{Javascript}
 %\subsection{Sahi}
-%\subsection{iBatis}
 %\subsection{Spring}
 %\subsubsection{Spring MVC}
-%\subsubsection{Spring JPA}
 %\subsubsection{Spring Security}
 
 
@@ -341,51 +365,88 @@ dates[0] = dateFormat.format(cal.getTime());
 
 
 \subsection{Persistencia}
-\subsubsection{Tecnologías utilizadas}
-\textcolor{blue}{
+La implementación del componente de persistencia se enfoca en dar servicio a los componentes de escritorio y web, por esta razón la implementación se ha dividido en dos partes:
 \begin{enumerate}
-	\item JDBC 			(Patrón factory)
-	\item JPA			(Patrón proxy)
-	\item SpringData	(Patrón proxy)
+ 	\item Escritorio: la automatización de rutinas. Dado que estas rutinas son ejecutadas dentro del ambiente de Sahi (que a su vez está en la plataforma de Java) se tomó la biblioteca JDBC (ver sección \ref{sec-jdbc}) por economía en recursos físicos del equipo del operador de la farmacéutica.
+ 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de Spring enfocado a la persistencia, Spring Data (ver sección \ref{sec-spring-jpa}) en conjunción con el marco de trabajo iBatis (ver sección \ref{sec-ibatis})
 \end{enumerate}
-}
+Los siguientes apartados explican la implementación de los servicios para escritorio y web.\\
 
+\textcolor{red}{Karla, en las siguientes subsecciones voy a mostrar la implementación de las operaciones listadas en el capítulo 3 para este componente (Persistencia), también voy a explicar la configuración para el uso de JDBC puro utilizado en las rutinas de automatización y el uso de Spring con iBatis para el ambiente Web.\\
+Creo que es una forma clara de explicarlo, pero no estoy tan seguro ¿alguna recomendación?}
 
-\subsection{Sistema de archivos}
-	\paragraph{Configuración\\}
-		\textbf{obtener-propiedad}
-	\paragraph{Almacenamiento\\}
-		\textbf{guardar-archivo}
+\subsubsection{Persistencia para funcionalidades de escritorio}
 
+\paragraph{\indent Interfaz Almacenamiento\\}
+Implementación de las operaciones para las rutinas de automatización que requieren almacenar o modificar datos:
+\begin{enumerate}
+	\item \textbf{guardar-nueva}: .
+	\item \textbf{cambiar-estado}: .
+	\item \textbf{guardar-respuesta}: .
+	\item \textbf{guardar-folio-acuse}: .
+	\item \textbf{actualizar-estado-sa}: .
+	\item \textbf{registrar-evento}: .
+\end{enumerate}
 
-\subsection{Generador de reportes}
+\paragraph{\indent Interfaz Lectura\\}
+Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos, esto no quiere decir que durante el llamado de estas operaciones no se modifiquen datos (más adelante se dará un ejemplo):
+\begin{enumerate}
+	\item \textbf{siguiente-orden-contestar}: .
+	\item \textbf{siguiente-orden-enviar}: .
+	\item \textbf{obtener-datos-acuse}: .
+\end{enumerate}
 
-\textcolor{blue}{En el diseño debe agregarse un diagrama del funcionamiento de reportes: seleccionar templates... agregar patrones de diseño}\\
-\subsection{Motor de plantillas}
-\textcolor{blue}{aquí platico de volicity y como funciona el motor}\\
-\textcolor{blue}{aquí va la configuración}\\
-\textcolor{blue}{tipos de reporte}
+\subsubsection{Persistencia para funcionalidades Web}
 
-	\paragraph{Acuse\\}
-		\textbf{generar-acuse-envio}
-	\paragraph{Generación\\}
- 		\textbf{generar-reporte-ordenes}
+\paragraph{\indent Interfaz Administración\\}
+Implementación de las operaciones requeridas durante cualquier flujo iniciado en el Portal Web:
+\begin{enumerate}
+	\item \textbf{buscar-credenciales}: .
+	\item \textbf{extraer-reporte}: .
+	\item \textbf{actualizar-catalogo}: .
+	\item \textbf{buscar-ordenes}: .
+	\item \textbf{buscar-orden}: .
+	\item \textbf{actualizar-orden}: .
+\end{enumerate}
 
-
-\subsection{Portal Web}
-\textcolor{blue}{Las secciones de esta parte serán presentadas por capas desde datos hasta la vista}\\
-\textcolor{blue}{Presentar el patron MVC}\\
-\subsection{Acceso}
-\textcolor{blue}{Spring security}\\
-\textcolor{blue}{Cifrado de contraseña}\\
-\subsection{Generación de reportes}
-\subsection{Búsqueda}
-
-\subsection{Administración de catálogos}
-
-\subsection{Visualización de órden de reposición}
-
-\subsection{Edición de órden de reposición}
+%
+%
+%
+%\subsection{Sistema de archivos}
+%	\paragraph{Configuración\\}
+%		\textbf{obtener-propiedad}
+%	\paragraph{Almacenamiento\\}
+%		\textbf{guardar-archivo}
+%
+%
+%\subsection{Generador de reportes}
+%
+%\textcolor{blue}{En el diseño debe agregarse un diagrama del funcionamiento de reportes: seleccionar templates... agregar patrones de diseño}\\
+%\subsection{Motor de plantillas}
+%\textcolor{blue}{aquí platico de volicity y como funciona el motor}\\
+%\textcolor{blue}{aquí va la configuración}\\
+%\textcolor{blue}{tipos de reporte}
+%
+%	\paragraph{Acuse\\}
+%		\textbf{generar-acuse-envio}
+%	\paragraph{Generación\\}
+% 		\textbf{generar-reporte-ordenes}
+%
+%
+%\subsection{Portal Web}
+%\textcolor{blue}{Las secciones de esta parte serán presentadas por capas desde datos hasta la vista}\\
+%\textcolor{blue}{Presentar el patron MVC}\\
+%\subsection{Acceso}
+%\textcolor{blue}{Spring security}\\
+%\textcolor{blue}{Cifrado de contraseña}\\
+%\subsection{Generación de reportes}
+%\subsection{Búsqueda}
+%
+%\subsection{Administración de catálogos}
+%
+%\subsection{Visualización de órden de reposición}
+%
+%\subsection{Edición de órden de reposición}
 
 
 
