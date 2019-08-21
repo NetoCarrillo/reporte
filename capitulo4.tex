@@ -42,18 +42,24 @@ El concepto de Java tiene varios componentes, para efectos de este proyecto se m
 \end{enumerate}
 
 \subsubsection{Java Data Base Controller}\label{sec-jdbc}
-\textcolor{blue}{Vale por un resumen que explica lo que es el JDBC.}
+El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un conjunto de APIs\footnote{\textcolor{red}{Aquí va la definición de API.}} que simplifica la conexión a bases de datos relacionales, cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
 
 \subsection{Spring}\label{sec-spring}
-\textcolor{blue}{Vale por un resumen que explica lo que es Spring:
+\textcolor{blue}{Vale por un resumen que explica lo que es Spring:}
 \begin{enumerate}
 	\item Contenedor de ``beanes''.
 	\item Patrón de inversión de control.
 	\item Patrón de inyección de dependencia.
+
+	\begin{quote}
+	DI is a particular form of IoC, whereby the process of finding your dependencies is
+	outside the direct control of your currently executing code.\cite{WellGroundedJavaDeveloper}
+	\end{quote}
+
 	\item Patrón Factory (opcional).
 	\item Patrón Singleton (opcional).
 \end{enumerate}
-}
+
 
 \subsubsection{Spring JPA}\label{sec-spring-jpa}
 \textcolor{blue}{Vale por un resumen que explica lo que es el Spring-JPA:
@@ -208,7 +214,7 @@ $mapa = new java.util.LinkedHashMap();
 for(var $llave in $orden){
 	$mapa.put($llave, $orden[$llave]);
 }
-$logica.updateOrdenImss($mapa, $idSesion);
+$logica.updateOrden($mapa, $idSesion);
 	\end{lstlisting}
 \end{enumerate}
 
@@ -279,7 +285,7 @@ A continuación se muestran los puntos relevantes de la implementación de las i
 \begin{enumerate}
 	\item guardar-orden-nueva: la implementación de esta operación (ver código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}\footnote{Para evitar redundancia en la explicación de la implementación del sistema AutoSA, en adelante no se mostrará más código que únicamente delegue la operación a otros componentes.}.
 	\begin{lstlisting}[language=Java, caption={Delegación del almacenamiento de una nueva orden de reposición.}, label={lst:la-save-new}]
-OrdenImss orden = new Orden();
+Orden orden = new Orden();
 orden.setContrato(contrato);
 orden.setSolicitud(Long.parseLong(solicitud));
 orden.setOrden(ordenLong);
@@ -327,7 +333,7 @@ public String[] getFechasFab(){
 	\begin{lstlisting}[language=Java, caption={Generación del acuse de envío.}, label={lst:la-acuse}]
 String filename = params.get("numorden");
 String template = properties.getProperty("is.template.html");
-File outhtmldir = new File(properties.getProperty("imss.output.dir"), filename + ".html");
+File outhtmldir = new File(properties.getProperty("is.output.dir"), filename + ".html");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMMM dd", new Locale("es", "MX"));
 String[] date = sdf.format(new Date()).split(" ");
 File outputdir = new File(properties.getProperty("is.output.pdf"), String.format(REPORT_DIR_TMPL, date[0], date[1], date[2]));
@@ -378,22 +384,162 @@ Creo que es una forma clara de explicarlo, pero no estoy tan seguro ¿alguna rec
 \subsubsection{Persistencia para funcionalidades de escritorio}
 
 \paragraph{\indent Interfaz Almacenamiento\\}
-Implementación de las operaciones para las rutinas de automatización que requieren almacenar o modificar datos:
+Implementación de las operaciones para las rutinas de automatización que requieren almacenar o modificar datos, para simplificar la explicación se mostrarán ejemplos de la manipulación de datos en lugar de mostrar la implementación de cada operación de la interfaz:
 \begin{enumerate}
-	\item \textbf{guardar-nueva}: .
-	\item \textbf{cambiar-estado}: .
-	\item \textbf{guardar-respuesta}: .
-	\item \textbf{guardar-folio-acuse}: .
-	\item \textbf{actualizar-estado-sa}: .
-	\item \textbf{registrar-evento}: .
+	\item Inserción: la operación de inserción se ocupa en las operaciones \textbf{guardar-nueva} y \textbf{registrar-evento}, la inserción consiste de los siguientes puntos (en el código \ref{lst:per-insert-order} se muestra la implementación de la operación \textbf{guardar-nueva}):
+	\begin{enumerate}
+		\item Plantilla de la sentencia SQL, línea 1 del código \ref{lst:per-insert-order}.
+		\item Creación de los objetos de la biblioteca JDBC, línea 4 del código \ref{lst:per-insert-order}.
+		\item Agregar datos específicos de la inserción, líneas 5 a 7 del código \ref{lst:per-insert-order}.
+		\item Ejecución de la sentencia, línea 8 del código \ref{lst:per-insert-order}.
+	\end{enumerate}
+
+	\begin{lstlisting}[language=Java, caption={Inserción de una nueva orden de reposición en la base de datos.}, label={lst:per-insert-order}]
+private static final String INSERT_ORDEN = "INSERT INTO ordenes(contrato, solicitud, orden, fecha_expedicion, almacen_destino, url_con, url_env, estatus, id_sesion_insersion, id_sesion_estatus, fecha_estatus) VALUES(?, ?, ?, ?, ?, ?, ?, 1, ?, ?, CURRENT_TIMESTAMP)";
+
+public void insertOrden(Orden orden) throws SQLException{
+    try(PreparedStatement pst = conn.prepareStatement(INSERT_ORDEN)){
+	    pst.setString(1, orden.getContrato());
+	    ...
+	    pst.setLong(9, orden.getIdSesionInsersion());
+	    pst.executeUpdate();
+	}
+}
+	\end{lstlisting}
+
+	\item Actualización: la actualización de datos es utilizada por las operaciones \textbf{cambiar-estado}, \textbf{guardar-respuesta}, \textbf{guardar-folio-acuse} y \textbf{actualizar-estado-sa}, la actualización consiste de los siguientes puntos (en el código \ref{lst:per-update-status} se muestra la implementación de la operación \textbf{cambiar-estado}):
+	\begin{enumerate}
+		\item Plantilla de la sentencia SQL, línea 1 del código \ref{lst:per-update-status}.
+		\item Creación de los objetos de la biblioteca JDBC, línea 4 del código \ref{lst:per-update-status}.
+		\item Agregar datos de la actualización, líneas 5 a 8 del código \ref{lst:per-update-status}.
+		\item Ejecución de la sentencia, línea 9 del código \ref{lst:per-update-status}.
+	\end{enumerate}
+
+	\begin{lstlisting}[language=Java, caption={Actualización del estado de una orden de reposición.}, label={lst:per-update-status}]
+private static final String UPDATE_STATUS = "UPDATE ordenes SET estatus = ?, fecha_estatus = CURRENT_TIMESTAMP, id_sesion_estatus = ? WHERE contrato = ? AND orden = ?";
+
+private void updateEstatus(Orden orden) throws SQLException{
+	try(PreparedStatement pst = conn.prepareStatement(UPDATE_STATUS)){
+		pst.setInt(1, orden.getEstatus());
+		pst.setLong(2, orden.getIdSesionEstatus());
+		pst.setString(3, orden.getContrato());
+		pst.setLong(4, orden.getOrden());
+		pst.executeUpdate();
+	}
+}
+	\end{lstlisting}
 \end{enumerate}
 
 \paragraph{\indent Interfaz Lectura\\}
-Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos, esto no quiere decir que durante el llamado de estas operaciones no se modifiquen datos (más adelante se dará un ejemplo):
+Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos, esto no quiere decir que durante el llamado de estas operaciones no se modifiquen datos.
+Dado que la obtención de los datos se traduce a objetos del dominio del proyecto AutoSA, se ha implementado una solución basada en los patrones de diseño Strategy (ver Apéndice \ref{sec-strategy}) y Singleton (ver Apéndice \ref{sec-singleton}). \\
+En la Figura \ref{fig:dia-class-mapper} se el diagrama de clases de la solución:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-class-mapper}
+	\caption{Diagrama de clase de ResultSetMapperProvider.}
+	\label{fig:dia-class-mapper}
+\end{figure}
+
+La clase \textbf{IResultSetMapper} tiene como función la traducción de la información obtenida por la biblioteca JDBC de la base de datos a objetos del dominio del proyecto AutoSA. El código \ref{lst:per-i-rs-mapper} muestra la definición de la interfaz de Java.
+	\begin{lstlisting}[language=Java, caption={Interfaz IResultSetMapper.}, label={lst:per-i-rs-mapper}]
+public interface IResultSetMapper<E>{
+	E get(ResultSet resultSet) throws SQLException;
+}
+	\end{lstlisting}
+
+La clase \textbf{ResultSetMapperProvider} es la encargada de la construcción y administración de las clases del tipo \textbf{IResultSetMapper}.\\
+El código \ref{lst:per-class-mapper-provider} muestra la declaración del la clase \textbf{ResultSetMapperProvider} donde se observa el uso del patrón de diseño Singleton:
 \begin{enumerate}
-	\item \textbf{siguiente-orden-contestar}: .
-	\item \textbf{siguiente-orden-enviar}: .
-	\item \textbf{obtener-datos-acuse}: .
+	\item Línea 3, instancia privada de la clase.
+	\item Línea 5, constructor de clase privado.
+	\item Línea 9, método para obtener la instancia de clase.
+\end{enumerate}
+
+\begin{lstlisting}[language=Java, caption={Clase ResultSetMapperProvider con patrón de diseño Singleton.}, label={lst:per-class-mapper-provider}]
+public class ResultSetMapperProvider{
+	private final Map<Class<?>, IResultSetMapper<?>> mappers;
+	private static ResultSetMapperProvider instance;
+	
+	private ResultSetMapperProvider(){
+		mappers = new LinkedHashMap<Class<?>, IResultSetMapper<?>>();
+	}
+	
+	public static ResultSetMapperProvider getInstance(){
+		if(instance == null){
+			instance = new ResultSetMapperProvider();
+		}
+		return instance;
+	}
+
+	public <E> IResultSetMapper<E> get(Class<?> beanType){...}
+	private void initMapper(Class<?> beanType){...}
+	private IResultSetMapper<Orden> getOrdenMapper(){...}
+}
+\end{lstlisting}
+
+La clase \textbf{ResultSetMapperProvider} realiza la construcción de los objetos del tipo \textbf{IResultSetMapper} como se muestra en el código \ref{lst:per-get-orden-mapper}:
+\begin{lstlisting}[language=Java, caption={}, label={lst:per-get-orden-mapper}]
+private IResultSetMapper<Orden> getOrdenMapper(){
+	return new IResultSetMapper<Orden>(){
+		public Orden get(ResultSet rs) throws SQLException{
+			Orden orden = new Orden();
+			orden.setId(rs.getLong("id"));
+			...
+			return orden;
+		}
+	};
+}
+\end{lstlisting}
+
+La clase \textbf{ResultSetMapperProvider} da acceso a las instancias de tipo \textbf{IResultSetMapper} mediante el método \textbf{get} como se muestra en las líneas 1 a 6 del código \ref{lst:per-get-rs-mapper}, si no se encuentra una instancia para la clase solicitada, entonces se crea como se muestra en las líneas 2 a 4 y 8 a 20 del código \ref{lst:per-get-rs-mapper}
+\begin{lstlisting}[language=Java, caption={Obtención de instancias de IResultSetMapper.}, label={lst:per-get-rs-mapper}]
+public <E> IResultSetMapper<E> get(Class<?> beanType){
+	if(!mappers.containsKey(beanType)){
+		initMapper(beanType);
+	}
+	return (IResultSetMapper<E>)mappers.get(beanType);
+}
+
+private void initMapper(Class<?> beanType){
+	if(Orden.class.equals(beanType)){
+		mappers.put(beanType, getOrdenMapper());
+	}else if(OrdenPemex.class.equals(beanType)){
+		mappers.put(beanType, getPemexMapper());
+	}else if(ProductoPemex.class.equals(beanType)){
+		mappers.put(beanType, getProductoPemexMapper());
+	}else if(Sesion.class.equals(beanType)){
+		mappers.put(beanType, getSesionMapper());
+	}
+}
+\end{lstlisting}
+
+La solución anterior lleva a la implementación de las operaciones de la interfaz ``Lectura'':
+\begin{enumerate}
+	\item \textbf{siguiente-orden-contestar}, \textbf{siguiente-orden-enviar} y \textbf{obtener-datos-acuse}: todas las operaciones de lectura siguen los mismos pasos (en el código \ref{lst:per-next-orden} se muestra la implementación de la operación \textbf{siguiente-orden-contestar}):
+	\begin{enumerate}
+		\item Plantilla de la sentencia SQL, línea 1 del código \ref{lst:per-next-orden}.
+		\item Creación de los objetos de la biblioteca JDBC, línea 4 del código \ref{lst:per-next-orden}.
+		\item Realizar la consulta a la base de datos, línea 6 del código \ref{lst:per-next-orden}.
+		\item Lectura del resultado de la consulta, líneas 7 a 9 del código \ref{lst:per-next-orden}.
+	\end{enumerate}
+
+	\begin{lstlisting}[language=Java, caption={Lectura de una orden de reposición desde la base de datos.}, label={lst:per-next-orden}]
+private static final String NEXT_TO_MANAGE = "SELECT * FROM ordenes WHERE estatus = ? ORDER BY fecha_insersion LIMIT 1";
+
+public Orden getNextOrden(Integer estatus) throws SQLException{
+	try(PreparedStatement pst = conn.prepareStatement(NEXT_TO_MANAGE)){
+		pst.setInt(1, estatus);
+		try(ResultSet rs = pst.executeQuery()){
+    		if(rs.next()){
+    			IResultSetMapper<Orden> mapper = ResultSetMapperProvider.getInstance().get(Orden.class);
+    			return mapper.get(rs);
+    		}
+		}
+	}
+	return null;
+}
+	\end{lstlisting}
 \end{enumerate}
 
 \subsubsection{Persistencia para funcionalidades Web}

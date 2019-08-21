@@ -8,6 +8,26 @@
 	\item \textbf{Comportamiento}: describen la comunicación entre entidades del sistema
 \end{itemize}
 
+\section{Patrón Singleton}\label{sec-singleton}
+El patrón Singleton pertenece al grupo de patrones de diseño de creación, es una forma de proporcionar acceso global a la instancia de una clase sin dar acceso al constructor de la clase y además garantizar que dicha instancia sea la única de la clase. El patrón Singleton identifica principalmente una clase, la cual es encargada de encapsular la creación de su instancia y proveer acceso a dicha instancia\cite{DesignPatternsLasater, DesignPatterns, OCPJavaSE7}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{dia-class-singleton}
+  \caption{Diagrama UML del patrón Singleton\cite{DesignPatternsLasater}.}
+  \label{fig:dia-class-singleton}
+\end{figure}
+
+\section{Patrón Strategy}\label{sec-strategy}
+El patrón de diseño Strategy es un patrón de diseño de comportamiento, es un grupo de algoritmos encapsulados en clases específicas que pueden ser intercambiadas de modo tal que dependiendo del uso específico se selecciona la clase adecuada. El patrón Stratetegy expone una clase llamada contexto mediante la cual se tiene acceso a las clases con estrategías espíficas que implementan una misma interfaz como se muestra en la Figura \ref{fig:dia-class-strategy} \cite{DesignPatternsLasater, DesignPatterns}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{dia-class-strategy}
+  \caption{Diagrama UML del patrón Strategy\cite{DesignPatternsLasater}.}
+  \label{fig:dia-class-strategy}
+\end{figure}
+
 \section{Patrón Objeto de Acceso a Datos}\label{sec-dao}
 El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etc.) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
 \begin{enumerate}
@@ -32,7 +52,6 @@ Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador
   \caption{Diagrama del patrón MVC\cite{JavaDesignPatternsExamples}.}
   \label{fig:dia-mvc-simple}
 \end{figure}
-
 
 \iffalse
 %\section{Arquitectura 4+1} Organiza cada decisión en el diseño del sistema en cuatro partes llamadas vistas (ver Figura \ref{fig:dia-arq-4-1}), cada vista se encarga de enfocarse en un aspecto del diseño, estas cuatro vistas son unificadas por una cuarta vista de escenarios o casos de uso\cite{ViewModel4plus1}:
