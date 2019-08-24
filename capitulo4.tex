@@ -4,7 +4,7 @@
 \subsection{Base de datos relacional}\label{sec-bd-r}
 Una base de datos relaciones es una colección de tablas relacionadas entre sí. La colección de tablas se describe a sí misma en cuanto a que el significado de los datos contenidos pertenecen a un mismo ámbito\cite{DataBaseConcepts}.\\
 Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (DBMS por sus siglas en inglés), un DBMS es un programa de computadora usado para crear, procesas y administrar bases de datos. El DBMS recibe peticiones en lenguaje SQL (como se describe más adelante) y traduce esas peticiones a acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
-Para el desarrollo del proyecto AutoSA se han ocupado los siguientes conceptos:
+Para el desarrollo del proyecto AutoSA se han usado los siguientes conceptos:
 \begin{enumerate}
 	\item \textbf{Tabla}: una tabla es un conjunto de renglones (registros) y columnas (atributos) que cumple con las siguientes características\cite{DataBaseConcepts}:
 	\begin{enumerate}
@@ -22,7 +22,10 @@ Para el desarrollo del proyecto AutoSA se han ocupado los siguientes conceptos:
 		\item Los atributos de las tablas \textbf{A} y \textbf{B} son del mismo tipo y se corresponden uno a uno.
 		\item Los atributos en la tabla \textbf{B} son exactamente los mismos de la llave primaria de la tabla \textbf{B}.
 	\end{enumerate}
-	\item \textbf{Restricción $NOT$ $NULL$}: indica que el valor del atributo no puede ser nulo\cite{FundamentosSistemasBasesDatos}. 
+	\item \textbf{Restricción de integridad}: son reglas que se utilizan para asegurar que cambios en los datos de las tablas no causen inconsistencia en la información\cite{DatabaseSystemConcepts}.
+	\begin{enumerate}
+		\item NOT NULL: indica que el valor del atributo no puede ser nulo\cite{FundamentosSistemasBasesDatos}.
+	\end{enumerate}
 	\item \textbf{Índice}: es una estructura auxiliar para agilizar la obtención de registros. Los índices proveen rutas de acceso alternativo a los registros de la base de datos sin afectar la colocación física de los registros\cite{FundamentalsOfDBSystems}.
 	\item \textbf{Lenguaje Estructurado de Consulta}\label{sec-sql}: del inglés Structured Query Language (SQL), fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años 70, es un lenguaje de datos orientado a texto, ha sido avalado por el Instituto Nacional de Estándares Americanos (ANSI por sus siglas en inglés) dando así los estándares ANSI para SQL, principalmente para este trabajo el estándar ANSI-92 o SQL-92.
 	\item \textbf{Lenguaje de Definición de Datos}: DDL por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
@@ -42,19 +45,24 @@ El concepto de Java tiene varios componentes, para efectos de este proyecto se m
 \end{enumerate}
 
 \subsubsection{Java Data Base Controller}\label{sec-jdbc}
-El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un conjunto de APIs\footnote{\textcolor{red}{Aquí va la definición de API.}} que simplifica la conexión a bases de datos relacionales, cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
+El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un conjunto de APIs\footnote{API viene del inglés ``Application Programming Interface'' este concepto es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales, cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
 
 \subsection{Spring}\label{sec-spring}
+
+El marco de trabajo Spring es descrito en su sitio de Internet\cite{SpringFramework}:
+\begin{quote}
+	El maco de trabajo Spring provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en Java en cualquier tipo de plataforma de despliegue.
+\end{quote}
+
+Spring está compuesto por los siguientes conceptos:
 \textcolor{blue}{Vale por un resumen que explica lo que es Spring:}
 \begin{enumerate}
-	\item Contenedor de ``beanes''.
-	\item Patrón de inversión de control.
-	\item Patrón de inyección de dependencia.
+	\item Inversión de control: es una técnica que 
+IoC is a technique that externalizes the creation and management of component dependencies. Consider an example in which class Foo depends on an instance of class Bar to perform some kind of processing. Traditionally, Foo creates an instance of Bar by using the new operator or obtains one from some kind of factory class. Using the IoC approach, an instance of Bar (or a subclass) is provided to Foo at runtime by some external process. This behavior, the injection of dependencies at runtime, led to IoC being renamed by Martin Fowler as the much more descriptive dependency injection (DI). Chapter 3 discusses the precise nature of the dependencies managed by DI.
+\cite{ProSpring5}
+	\item Inyección de dependencia: es una forma particular de inversión de control, se refiere a establecer las dependencias de un objeto en tiempo de ejecución.\cite{WellGroundedJavaDeveloper}
 
-	\begin{quote}
-	DI is a particular form of IoC, whereby the process of finding your dependencies is
-	outside the direct control of your currently executing code.\cite{WellGroundedJavaDeveloper}
-	\end{quote}
+	\item Contenedor de ``beanes''.
 
 	\item Patrón Factory (opcional).
 	\item Patrón Singleton (opcional).
@@ -62,6 +70,13 @@ El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un c
 
 
 \subsubsection{Spring JPA}\label{sec-spring-jpa}
+
+\begin{quote}
+	Spring Data JPA, part of the larger Spring Data family, makes it easy to easily implement JPA based repositories. This module deals with enhanced support for JPA based data access layers. It makes it easier to build Spring-powered applications that use data access technologies.
+
+Implementing a data access layer of an application has been cumbersome for quite a while. Too much boilerplate code has to be written to execute simple queries as well as perform pagination, and auditing. Spring Data JPA aims to significantly improve the implementation of data access layers by reducing the effort to the amount that’s actually needed. As a developer you write your repository interfaces, including custom finder methods, and Spring will provide the implementation automatically.
+\end{quote}
+
 \textcolor{blue}{Vale por un resumen que explica lo que es el Spring-JPA:
 \begin{enumerate}
 	\item Patrón proxy.
@@ -70,8 +85,32 @@ El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un c
 \end{enumerate}
 }
 
-\subsection{iBatis}\label{sec-ibatis}
-\textcolor{blue}{Vale por un resumen que explica lo que es iBatis.}
+\subsection{MyBatis}\label{sec-mybatis}
+El sitio oficial de MyBatis\cite{MyBatis} lo describe: 
+\begin{quote}
+MyBatis es un marco de trabajo para persistencia de primera clase con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. MyBatis elimina casi todo el código de JDBC, la configuración manual de parámetros y la recuperación de resultados.
+\end{quote}
+
+
+Prasad Reddy\cite{PersistenceWithMyBatis} resalta los beneficios de MyBatis sobre otros marcos de trabajo para persistencia:
+\begin{quote}
+	\begin{itemize}
+		\item Elimina gran parte del código repetitivo de JDBC.
+		\item Tiene una curva de aprendizaje pequeña (es fácil de aprender).
+		\item Trabaja bien con bases de datos antiguas.
+		\item Adopta SQL.
+		\item Provee integración con marcos de trabajo como Spring y Guice.
+		\item Provee integración con bibliotecas para caché.
+		\item Induce mejoras en el rendimiento.
+	\end{itemize}
+\end{quote}
+
+El uso de MyBatis se resume principalmente a puntos\cite{PersistenceWithMyBatis}:
+\begin{enumerate}
+	\item Crear un archivo de configuración que contiene las sentencias SQL y conversiones de resultados a objetos de Java.
+	\item Crear una interfaz de Java cuyos métodos correspondan a las sentencias SQL del archivo de configuración.
+	\item Crear un objeto \textbf{SqlSession} del cual se obtiene una instancia de la interfaz, por medio de tal instancia se realizan las operaciones a la base de datos.
+\end{enumerate}
 
 \subsection{Javascript}\label{sec-javascript}
 \textcolor{blue}{Javascript es un lenguaje que lo único que tiene similar a Java es la sintaxis, y no mucho, así que por favor dejen de tratarlos como sinónimos (odio a los PMs)}\footnote{se recomienda no hacer mucho caso, escribí algo de Javascript nada más para tener texto en la sección.}.
@@ -107,8 +146,8 @@ El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencial
 La implementación de la base de datos se ve reflejada en las rutinas con sentencias SQL (ver sección \ref{sec-bd-r}) donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas DDL y las rutinas DML.
 
 \subsection{Rutinas de definición de datos}
-Estas rutinas contienen las sentencias DDL (ver sección \ref{sec-bd-r}) para la creación de tablas, llaves primarias, llaves foráneas, índices y restricciones. En el código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de una tabla.
-\begin{lstlisting}[language=SQL, caption={Sentencia para crear una tabla.}, label={lst:sql-create-table}]
+Estas rutinas contienen las sentencias DDL (ver sección \ref{sec-bd-r}) para la creación de tablas, llaves primarias, llaves foráneas, índices y restricciones. En el Código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de la tabla \textit{ordenes\_is}.
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear una tabla.}, captionpos=b, label={lst:sql-create-table}]
 CREATE TABLE ordenes_is(
    id numeric(20,0) PRIMARY KEY NOT NULL,
    orden numeric(20,0) NOT NULL,
@@ -120,9 +159,9 @@ CREATE TABLE ordenes_is(
 );
 \end{lstlisting}
 
-La generación de reportes que se menciona en el caso de uso \textbf{Generar reporte} (ver sección \ref{cu-generar-reporte}), utiliza una vista para la definición de la consulta de los datos del reporte (ver código \ref{lst:sql-create-view}, además se han implementado índices para agilizar tales consultas (ver código \ref{lst:sql-create-index}).
+La generación de reportes que se menciona en el caso de uso \textbf{Generar reporte} (ver sección \ref{cu-generar-reporte}), utiliza una vista para la definición de la consulta de los datos del reporte (ver Código \ref{lst:sql-create-view}, además se han implementado índices para agilizar tales consultas (ver Código \ref{lst:sql-create-index}).
 
-\begin{lstlisting}[language=SQL, caption={Sentencia para crear una vista.}, label={lst:sql-create-view}]
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear una vista.}, captionpos=b, label={lst:sql-create-view}]
 CREATE VIEW ordenes_contestadas AS
      SELECT *
        FROM ordenes_is
@@ -130,14 +169,14 @@ CREATE VIEW ordenes_contestadas AS
         AND estatus = 3
 \end{lstlisting}
 
-\begin{lstlisting}[language=SQL, caption={Sentencia para crear un índice.}, label={lst:sql-create-index}]
+\begin{lstlisting}[language=SQL, caption={Sentencia para crear un índice.}, captionpos=b, label={lst:sql-create-index}]
 CREATE INDEX ordenes_contetadas_idx ON ordenes_is(id_sesion_estatus, estatus);
 \end{lstlisting}
 
 \subsection{Rutinas de modelado de datos}
-Estas rutinas contienen la sentencias DML (ver sección \ref{sec-bd-r}) para insertar la información necesaria para la ejecución del sistema, como son, por ejemplo, los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
+Estas rutinas contienen la sentencias DML (ver sección \ref{sec-bd-r}) para insertar la información necesaria para la ejecución del sistema, como son, por ejemplo, los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
 
-\begin{lstlisting}[language=SQL, caption={Sentencia insertar un registro.}, label={lst:sql-insert}]
+\begin{lstlisting}[language=SQL, caption={Sentencia insertar un registro.}, captionpos=b, label={lst:sql-insert}]
 INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 \end{lstlisting}
 
@@ -148,52 +187,51 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 \section{Implementación de los componentes}
 
 \subsection{Agente}
-La implementación del componente Agente esta escrita en rutinas de Sahi (ver sección \ref{sec-sahi}), primero se mostrarán los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realizar la ejecución mediante la herramienta gráfica de Sahi.
+La implementación del componente Agente está escrito en rutinas de Sahi (ver sección \ref{sec-sahi}), primero se exponen los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realizar la ejecución mediante la herramienta gráfica de Sahi.
 
 \subsubsection{Rutina para automatizar la respuesta de órdenes de reposición}\label{sec-aut-contestar}
-La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso  CU-CONTESTAR que se describe en la sección \ref{cu-contestar}, a continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son los siguientes:
+La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso  CU-CONTESTAR que se describe en la sección \ref{cu-contestar}. A continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son los siguientes:
 \begin{enumerate}
-	\item Ingresar al Sistema de Abastecimiento, en el código \ref{lst:sah-session} se muestra la rutina para iniciar sesión en el Sistema de Abastecimiento:
+	\item Ingresar al Sistema de Abastecimiento, en el Código \ref{lst:sah-session} se muestra la rutina para iniciar sesión en el Sistema de Abastecimiento:
 	\begin{enumerate}
 		\item Las líneas 1 y 2 se llenan los campos de usuario y contraseña.
 		\item La línea 3 se envía el formulario.
 		\item La línea 4 redirige a la pantalla con el listado de órdenes de reposición.  
 	\end{enumerate}
-	\begin{lstlisting}[language=Javascript, caption={Inicio de sesión en el Sistema de Abastecimiento.}, label={lst:sah-session}]
+	\begin{lstlisting}[language=Javascript, caption={Inicio de sesión en el Sistema de Abastecimiento.}, captionpos=b, label={lst:sah-session}]
 _setValue(_textbox("Usuario[1]"), $user);
 _setValue(_password("Contras[1]"), $pwd);
 _click(_submit("Ingresar al Sistema"));
 _click(_image("Normal[2]"));
 	\end{lstlisting}
 
-	\item Recolectar las órdenes de reposición listadas, el código \ref{lst:sah-save-news} muestra un resumen de la automatización para guardar el listado de ordenes de reposición (ver caso de uso en la sección \ref{cu-guardar-nueva}):
+	\item Recolectar las órdenes de reposición listadas, el Código \ref{lst:sah-save-news} muestra un resumen de la automatización para guardar el listado de ordenes de reposición (ver caso de uso en la sección \ref{cu-guardar-nueva}):
 	\begin{enumerate}
 		\item La línea 1 muestra la declaración del ciclo para recorrer el listado de órdenes de reposición.
 		\item Las líneas 2 a 4 muestran como se extrae el valor de los datos de una orden de reposición.
-		\item Las líneas 5 a 8 muestran la obtención de las URLs para contestar y enviar las órdenes de reposición.
-		\item La línea 9 es el almacenamiento de la nueva orden de reposición. 
+		\item Las líneas 5 a 7 muestran la obtención de las URLs para contestar y enviar las órdenes de reposición.
+		\item La línea 8 es el almacenamiento de la nueva orden de reposición. 
 	\end{enumerate}
-	\begin{lstlisting}[language=Javascript, caption={Guardar lista de órdenes de reposición.}, label={lst:sah-save-news}]
+	\begin{lstlisting}[language=Javascript, caption={Guardar lista de órdenes de reposición.}, captionpos=b, label={lst:sah-save-news}]
 for(var $i = 1 + $errores; $i <= $rowCount; $i++){
 	var $contrato = _getText(_table(1).rows[$i].cells[0]);
 	var $solicitud = _getText(_table(1).rows[$i].cells[1]);
 	var $numorden = _getText(_table(1).rows[$i].cells[2]);
 	var $urlcon = "";
-	_log(_table(1).rows[$i].cells[6].childNodes[0].href);
 	_set($urlcon, _table(1).rows[$i].cells[6].childNodes[0].href);
 	var $urlenv = $urlcon.replace("respoOra", "enviaOra");
 	var $inserted = $persistence.insertOrden($contrato, $solicitud, $numorden, $expedicion, $almacen, $urlcon, $urlenv, $idSesion);
 }
 	\end{lstlisting}
 
-	\item Contestar una a una cada orden de reposición, el código \ref{lst:sah-respond} muestra un resumen de la automatización para contestar una orden de reposición (ver caso de uso en la sección \ref{cu-responder-orden}):
+	\item Contestar una a una cada orden de reposición, el Código \ref{lst:sah-respond} muestra un resumen de la automatización para contestar una orden de reposición (ver caso de uso en la sección \ref{cu-responder-orden}):
 	\begin{enumerate}
 		\item Las líneas 1 y 2 muestran como se redirige al explorador a la URL para contestar la orden de reposición.
 		\item  Las líneas 3 muestran como se estable un valor en el formulario para contestar la orden de reposición.
 		\item La línea 4 realiza el envío del formulario.
 		\item La línea 5 manda la actualización de la orden de reposición en la base de datos.
 	\end{enumerate}
-	\begin{lstlisting}[language=Javascript, caption={Responder orden de reposición.}, label={lst:sah-respond}]
+	\begin{lstlisting}[language=Javascript, caption={Responder orden de reposición.}, captionpos=b, label={lst:sah-respond}]
 var $url = $entidad.getUrlCon();
 _navigateTo($url);
 _setValue(_textbox("Lote"), "SL");
@@ -201,13 +239,13 @@ _click(_submit("Agregar Captura"));
 $logica.updateCantidad($contrato, $numorden, $cantidad, $idSesion);
 	\end{lstlisting}
 
-	\item Enviar las órdenes de reposición contestadas, el código \ref{lst:sah-send} muestra un resumen de la automatización para envíar una órden de reposición (ver caso de uso en la sección \ref{cu-enviar-orden}):
+	\item Enviar las órdenes de reposición contestadas, el Código \ref{lst:sah-send} muestra un resumen de la automatización para envíar una órden de reposición (ver caso de uso en la sección \ref{cu-enviar-orden}):
 	\begin{enumerate}
 		\item Las líneas 1 y 2 muestran como se redirige al explorador a la URL para enviar la orden de reposición.
 		\item La líneas 3 a 6 crea un mapa con los datos de la orden de reposición.
 		\item La línea 7 actualiza la orden de reposición en la base de datos. 
 	\end{enumerate}
-	\begin{lstlisting}[language=Javascript, caption={Enviar orden de reposición.}, label={lst:sah-send}]
+	\begin{lstlisting}[language=Javascript, caption={Enviar orden de reposición.}, captionpos=b, label={lst:sah-send}]
 var $url = $entidad.getUrlEnv();
 _navigateTo($url);
 $mapa = new java.util.LinkedHashMap();
@@ -223,14 +261,14 @@ La rutina para automatizar la verificación de órdenes de reposición cancelada
 \begin{enumerate}
 	\item Ingresar al Sistema de Abastecimiento, el ingreso al sistema es idéntico a la rutina mostrada en la sección anterior (sección \ref{sec-aut-contestar}).
 
-	\item Establecer los criterios de búsqueda, el código \ref{lst:sah-search} muestra un resumen de la automatización para :
+	\item Establecer los criterios de búsqueda, el Código \ref{lst:sah-search} muestra un resumen de la automatización para:
 	\begin{enumerate}
 		\item La línea 1 muestra la consulta de las fechas que acotan la búsqueda.
 		\item Las líneas 2 a 5 realizan la búsqueda en el Sistema de Abastecimiento.
 		\item Las líneas 6 y 7 extraen la información de las órdenes de reposición que muestra el Sistema de Abastecimiento como resultado de la búsqueda.
 		\item Las líneas 8 y 9 utilizan el componente \textbf{Lógica de automatización} para actualizar en la base de datos el estado de las órdenes de reposición canceladas.
 	\end{enumerate}
-	\begin{lstlisting}[language=Javascript, caption={Responder orden de reposición.}, label={lst:sah-search}]
+	\begin{lstlisting}[language=Javascript, caption={Responder orden de reposición.}, captionpos=b, label={lst:sah-search}]
 $dateLimits = $logica.getDateLimits('dd/MM/yyyy');
 _setSelected(_select("OrdStt"), "Canceladas");
 _setValue(_textbox("OrdFeD"), $dateLimits[0]);
@@ -245,7 +283,7 @@ $logica.setSaiStatus($html, $estado, $idSesion);
 
 \subsubsection{Ejecución de las rutinas de automatización}
 La ejecución de las rutinas de sahi corresponden a los casos de uso CU-CONTESTAAR y 
-CU-VERIFICAR (ver secciones \ref{cu-contestar} y \ref{cu-verificar} respectivamente), en ambos casos la ejecucuión es  
+CU-VERIFICAR (ver secciones \ref{cu-contestar} y \ref{cu-verificar} respectivamente), en ambos casos la ejecución es  
 dejando la ejecución al usuario por medio de la interfaz gráfica de Sahi:
 \begin{itemize}
 	\item Iniciar Sahi sobre el explorar de Internet (ver Figura \ref{fig:ss-sahi-dashboard})
@@ -272,7 +310,7 @@ dejando la ejecución al usuario por medio de la interfaz gráfica de Sahi:
 
 
 \subsection{Lógica de automatización}
-El componente de lógica de automatización provee de la información necesaria a las rutinas automatizadas, la información puede proceder de fuentes diferentes y cada una se accede de forma diferente:
+El componente de lógica de automatización provee de la información necesaria a las rutinas automatizadas, la información puede proceder de fuentes diferentes y a cada una se accede de forma diferente:
 \begin{enumerate}
  	\item Un archivo en el sistema de archivos del sistema operativo, se obtiene información utilizando el componente \textbf{Sistema de Archivos}.
  	\item Información almacenada en la base de datos, se tiene acceso miente el componente \textbf{Persistencia}.
@@ -283,8 +321,8 @@ La implementación de este componente ha sido escrita en el lenguaje de programa
 A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas en la sección \ref{sec-logica-auto}:
 \paragraph{\indent Interfaz Respuesta}
 \begin{enumerate}
-	\item guardar-orden-nueva: la implementación de esta operación (ver código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}\footnote{Para evitar redundancia en la explicación de la implementación del sistema AutoSA, en adelante no se mostrará más código que únicamente delegue la operación a otros componentes.}.
-	\begin{lstlisting}[language=Java, caption={Delegación del almacenamiento de una nueva orden de reposición.}, label={lst:la-save-new}]
+	\item guardar-orden-nueva: la implementación de esta operación (ver Código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}.
+	\begin{lstlisting}[language=Java, caption={Delegación del almacenamiento de una nueva orden de reposición.}, captionpos=b, label={lst:la-save-new}]
 Orden orden = new Orden();
 orden.setContrato(contrato);
 orden.setSolicitud(Long.parseLong(solicitud));
@@ -300,12 +338,12 @@ orden.setIdSesionEstatus(idSesion);
 ordenesDAO.insertOrden(orden);
 	\end{lstlisting}
 
-	\item obtener-datos-respuesta: la implementación del cálculo de fechas de fabricación y de caducidad descrita en el caso de uso \textbf{CU-RESPONDER-ORDEN} (ver sección \ref{cu-responder-orden}), código \ref{lst:la-dates} muestra el método en lenguaje Java:
+	\item obtener-datos-respuesta: la implementación del cálculo de fechas de fabricación y de caducidad descrita en el caso de uso \textbf{CU-RESPONDER-ORDEN} (ver sección \ref{cu-responder-orden}), Código \ref{lst:la-dates} muestra el método en lenguaje Java:
 	\begin{enumerate}
 		\item En las líneas 2 a 7 se calcula el año para las fechas de fabricación y de caducidad.
 		\item En las líneas 8 a 10 se construyen las fechas de fabricación y de caducidad.
 	\end{enumerate}
-	\begin{lstlisting}[language=Java, caption={Método para calcular las fechas de fabricación y caducidad.}, label={lst:la-dates}]
+	\begin{lstlisting}[language=Java, caption={Método para calcular las fechas de fabricación y caducidad.}, captionpos=b, label={lst:la-dates}]
 public String[] getFechasFab(){
 	Calendar today = GregorianCalendar.getInstance();
 	int anho;
@@ -322,7 +360,7 @@ public String[] getFechasFab(){
 }
 	\end{lstlisting}
 
-	\item obtener-acuse-envio: esta operación principalmente obtiene las rutas en el sistema de archivos para la generación del acuse de envío, posteriormente delega la generación del acuse al componente \textbf{Generación de reportes}. En el código \ref{lst:la-acuse} se muestra el código de Java que realiza los pasos anteriores.
+	\item obtener-acuse-envio: esta operación principalmente obtiene las rutas en el sistema de archivos para la generación del acuse de envío, posteriormente delega la generación del acuse al componente \textbf{Generación de reportes}. En el Código \ref{lst:la-acuse} se muestra el código de Java que realiza los pasos anteriores.
 	\begin{enumerate}
 		\item La línea 1 estable el nombre del archivo como el número de la orden de reposición.
 		\item La línea 2 obtiene la plantilla del acuse de envío para el Instituto de Salud.
@@ -330,7 +368,7 @@ public String[] getFechasFab(){
 		\item Las líneas 4 a 7 construyen la ruta de directorios donde se depositará el acuse de envío.
 		\item La línea 8 utiliza el componente \textbf{Generador de Reportes} para la creación del acuse de envío.
 	\end{enumerate}
-	\begin{lstlisting}[language=Java, caption={Generación del acuse de envío.}, label={lst:la-acuse}]
+	\begin{lstlisting}[language=Java, caption={Generación del acuse de envío.}, captionpos=b, label={lst:la-acuse}]
 String filename = params.get("numorden");
 String template = properties.getProperty("is.template.html");
 File outhtmldir = new File(properties.getProperty("is.output.dir"), filename + ".html");
@@ -340,16 +378,16 @@ File outputdir = new File(properties.getProperty("is.output.pdf"), String.format
 outputdir.mkdirs();
 snapShotService.takeSnapShot(params, filename, template, outhtmldir, outputdir);
 	\end{lstlisting}
-
 \end{enumerate}
+
 \paragraph{\indent Interfaz Verificación}
 \begin{enumerate}
-	\item obtener-rango-fechas-verificar: el código \ref{lst:la-date-search} muestra el cálculo de las fechas necesarias para el formulario de búsqueda de órdenes de reposición.
+	\item obtener-rango-fechas-verificar: el Código \ref{lst:la-date-search} muestra el cálculo de las fechas necesarias para el formulario de búsqueda de órdenes de reposición.
 	\begin{enumerate}
 		\item La línea 5 muestra la obtención de la fecha mayor (día actual).
 		\item La líneas 6 y 7 muestran la obtención de la fecha menor (60 días antes de la fecha actual).
 	\end{enumerate}
-	\begin{lstlisting}[language=Java, caption={Cálculo del rango de fechas para buscar órdenes de reposición canceladas.}, label={lst:la-date-search}]
+	\begin{lstlisting}[language=Java, caption={Cálculo del rango de fechas para buscar órdenes de reposición canceladas.}, captionpos=b, label={lst:la-date-search}]
 DateFormat dateFormat = new SimpleDateFormat(format);
 Calendar cal = GregorianCalendar.getInstance();
 String[] dates = new String[2];
@@ -358,12 +396,12 @@ cal.add(Calendar.DAY_OF_YEAR, -60);
 dates[0] = dateFormat.format(cal.getTime());
 	\end{lstlisting}
 
-	\item actualizar-estado-sa: Esta operación realiza la actualización de las órdenes de reposición canceladas, en el código \ref{lst:la-validate} muestra el código Java.
+	\item actualizar-estado-sa: Esta operación realiza la actualización de las órdenes de reposición canceladas, en el Código \ref{lst:la-validate} muestra el código Java.
 	\begin{enumerate}
 		\item La línea 1 obtiene las órdenes de reposición canceladas del listado de órdenes de reposición encontradas.
 		\item La línea 2 actualiza el estado de las órdenes de reposición.
 	\end{enumerate}
-	\begin{lstlisting}[language=Java, caption={Actualización de órdenes de reposición canceladas.}, label={lst:la-validate}]
+	\begin{lstlisting}[language=Java, caption={Actualización de órdenes de reposición canceladas.}, captionpos=b, label={lst:la-validate}]
 	List<Orden> ordenes = xmlReader.getCancelled(htmlTable);
 	persistence.updateSaiStatus(ordenes, status);
 	\end{lstlisting}
@@ -373,28 +411,24 @@ dates[0] = dateFormat.format(cal.getTime());
 \subsection{Persistencia}
 La implementación del componente de persistencia se enfoca en dar servicio a los componentes de escritorio y web, por esta razón la implementación se ha dividido en dos partes:
 \begin{enumerate}
- 	\item Escritorio: la automatización de rutinas. Dado que estas rutinas son ejecutadas dentro del ambiente de Sahi (que a su vez está en la plataforma de Java) se tomó la biblioteca JDBC (ver sección \ref{sec-jdbc}) por economía en recursos físicos del equipo del operador de la farmacéutica.
- 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de Spring enfocado a la persistencia, Spring Data (ver sección \ref{sec-spring-jpa}) en conjunción con el marco de trabajo iBatis (ver sección \ref{sec-ibatis})
+ 	\item Escritorio: la automatización de rutinas, dado que estas rutinas son ejecutadas dentro del ambiente de Sahi (que a su vez está en la plataforma de Java) se utiliza la biblioteca JDBC (ver sección \ref{sec-jdbc}) por economía en recursos físicos del equipo del operador de la farmacéutica.
+ 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de Spring enfocado a la persistencia, Spring Data (ver sección \ref{sec-spring-jpa}) en conjunción con el marco de trabajo MyBatis (ver sección \ref{sec-mybatis}).
 \end{enumerate}
-Los siguientes apartados explican la implementación de los servicios para escritorio y web.\\
-
-\textcolor{red}{Karla, en las siguientes subsecciones voy a mostrar la implementación de las operaciones listadas en el capítulo 3 para este componente (Persistencia), también voy a explicar la configuración para el uso de JDBC puro utilizado en las rutinas de automatización y el uso de Spring con iBatis para el ambiente Web.\\
-Creo que es una forma clara de explicarlo, pero no estoy tan seguro ¿alguna recomendación?}
+Los siguientes apartados explican la implementación de los servicios para escritorio y web.
 
 \subsubsection{Persistencia para funcionalidades de escritorio}
-
 \paragraph{\indent Interfaz Almacenamiento\\}
 Implementación de las operaciones para las rutinas de automatización que requieren almacenar o modificar datos, para simplificar la explicación se mostrarán ejemplos de la manipulación de datos en lugar de mostrar la implementación de cada operación de la interfaz:
 \begin{enumerate}
-	\item Inserción: la operación de inserción se ocupa en las operaciones \textbf{guardar-nueva} y \textbf{registrar-evento}, la inserción consiste de los siguientes puntos (en el código \ref{lst:per-insert-order} se muestra la implementación de la operación \textbf{guardar-nueva}):
+	\item Inserción: la operación de inserción se ocupa en las operaciones \textbf{guardar-nueva} y \textbf{registrar-evento}, la inserción consiste de los siguientes puntos (en el Código \ref{lst:per-insert-order} se muestra la implementación de la operación \textbf{guardar-nueva}):
 	\begin{enumerate}
-		\item Plantilla de la sentencia SQL, línea 1 del código \ref{lst:per-insert-order}.
-		\item Creación de los objetos de la biblioteca JDBC, línea 4 del código \ref{lst:per-insert-order}.
-		\item Agregar datos específicos de la inserción, líneas 5 a 7 del código \ref{lst:per-insert-order}.
-		\item Ejecución de la sentencia, línea 8 del código \ref{lst:per-insert-order}.
+		\item Plantilla de la sentencia SQL, línea 1 del Código \ref{lst:per-insert-order}.
+		\item Creación de los objetos de la biblioteca JDBC, línea 4 del Código \ref{lst:per-insert-order}.
+		\item Agregar datos específicos de la inserción, líneas 5 a 7 del Código \ref{lst:per-insert-order}.
+		\item Ejecución de la sentencia, línea 8 del Código \ref{lst:per-insert-order}.
 	\end{enumerate}
 
-	\begin{lstlisting}[language=Java, caption={Inserción de una nueva orden de reposición en la base de datos.}, label={lst:per-insert-order}]
+	\begin{lstlisting}[language=Java, caption={Inserción de una nueva orden de reposición en la base de datos.}, captionpos=b, label={lst:per-insert-order}]
 private static final String INSERT_ORDEN = "INSERT INTO ordenes(contrato, solicitud, orden, fecha_expedicion, almacen_destino, url_con, url_env, estatus, id_sesion_insersion, id_sesion_estatus, fecha_estatus) VALUES(?, ?, ?, ?, ?, ?, ?, 1, ?, ?, CURRENT_TIMESTAMP)";
 
 public void insertOrden(Orden orden) throws SQLException{
@@ -407,15 +441,15 @@ public void insertOrden(Orden orden) throws SQLException{
 }
 	\end{lstlisting}
 
-	\item Actualización: la actualización de datos es utilizada por las operaciones \textbf{cambiar-estado}, \textbf{guardar-respuesta}, \textbf{guardar-folio-acuse} y \textbf{actualizar-estado-sa}, la actualización consiste de los siguientes puntos (en el código \ref{lst:per-update-status} se muestra la implementación de la operación \textbf{cambiar-estado}):
+	\item Actualización: la actualización de datos es utilizada por las operaciones \textbf{cambiar-estado}, \textbf{guardar-respuesta}, \textbf{guardar-folio-acuse} y \textbf{actualizar-estado-sa}, la actualización consiste de los siguientes puntos (en el Código \ref{lst:per-update-status} se muestra la implementación de la operación \textbf{cambiar-estado}):
 	\begin{enumerate}
-		\item Plantilla de la sentencia SQL, línea 1 del código \ref{lst:per-update-status}.
-		\item Creación de los objetos de la biblioteca JDBC, línea 4 del código \ref{lst:per-update-status}.
-		\item Agregar datos de la actualización, líneas 5 a 8 del código \ref{lst:per-update-status}.
-		\item Ejecución de la sentencia, línea 9 del código \ref{lst:per-update-status}.
+		\item Plantilla de la sentencia SQL, línea 1 del Código \ref{lst:per-update-status}.
+		\item Creación de los objetos de la biblioteca JDBC, línea 4 del Código \ref{lst:per-update-status}.
+		\item Agregar datos de la actualización, líneas 5 a 8 del Código \ref{lst:per-update-status}.
+		\item Ejecución de la sentencia, línea 9 del Código \ref{lst:per-update-status}.
 	\end{enumerate}
 
-	\begin{lstlisting}[language=Java, caption={Actualización del estado de una orden de reposición.}, label={lst:per-update-status}]
+	\begin{lstlisting}[language=Java, caption={Actualización del estado de una orden de reposición.}, captionpos=b, label={lst:per-update-status}]
 private static final String UPDATE_STATUS = "UPDATE ordenes SET estatus = ?, fecha_estatus = CURRENT_TIMESTAMP, id_sesion_estatus = ? WHERE contrato = ? AND orden = ?";
 
 private void updateEstatus(Orden orden) throws SQLException{
@@ -432,7 +466,7 @@ private void updateEstatus(Orden orden) throws SQLException{
 
 \paragraph{\indent Interfaz Lectura\\}
 Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos, esto no quiere decir que durante el llamado de estas operaciones no se modifiquen datos.
-Dado que la obtención de los datos se traduce a objetos del dominio del proyecto AutoSA, se ha implementado una solución basada en los patrones de diseño Strategy (ver Apéndice \ref{sec-strategy}) y Singleton (ver Apéndice \ref{sec-singleton}). \\
+Dado que la obtención de los datos se convierte a objetos del dominio del proyecto AutoSA, se ha implementado una solución basada en los patrones de diseño Strategy (ver Apéndice \ref{sec-strategy}) y Singleton (ver Apéndice \ref{sec-singleton}). \\
 En la Figura \ref{fig:dia-class-mapper} se el diagrama de clases de la solución:
 \begin{figure}[h]
 	\centering
@@ -441,22 +475,22 @@ En la Figura \ref{fig:dia-class-mapper} se el diagrama de clases de la solución
 	\label{fig:dia-class-mapper}
 \end{figure}
 
-La clase \textbf{IResultSetMapper} tiene como función la traducción de la información obtenida por la biblioteca JDBC de la base de datos a objetos del dominio del proyecto AutoSA. El código \ref{lst:per-i-rs-mapper} muestra la definición de la interfaz de Java.
-	\begin{lstlisting}[language=Java, caption={Interfaz IResultSetMapper.}, label={lst:per-i-rs-mapper}]
+La clase \textbf{IResultSetMapper} tiene como función la conversión de la información obtenida por la biblioteca JDBC de la base de datos a objetos del dominio del proyecto AutoSA. El Código \ref{lst:per-i-rs-mapper} muestra la definición de la interfaz de Java.
+	\begin{lstlisting}[language=Java, caption={Interfaz IResultSetMapper.}, captionpos=b, label={lst:per-i-rs-mapper}]
 public interface IResultSetMapper<E>{
 	E get(ResultSet resultSet) throws SQLException;
 }
 	\end{lstlisting}
 
 La clase \textbf{ResultSetMapperProvider} es la encargada de la construcción y administración de las clases del tipo \textbf{IResultSetMapper}.\\
-El código \ref{lst:per-class-mapper-provider} muestra la declaración del la clase \textbf{ResultSetMapperProvider} donde se observa el uso del patrón de diseño Singleton:
+El Código \ref{lst:per-class-mapper-provider} muestra la declaración del la clase \textbf{ResultSetMapperProvider} donde se observa el uso del patrón de diseño Singleton:
 \begin{enumerate}
 	\item Línea 3, instancia privada de la clase.
 	\item Línea 5, constructor de clase privado.
 	\item Línea 9, método para obtener la instancia de clase.
 \end{enumerate}
 
-\begin{lstlisting}[language=Java, caption={Clase ResultSetMapperProvider con patrón de diseño Singleton.}, label={lst:per-class-mapper-provider}]
+\begin{lstlisting}[language=Java, caption={Clase ResultSetMapperProvider con patrón de diseño Singleton.}, captionpos=b, label={lst:per-class-mapper-provider}]
 public class ResultSetMapperProvider{
 	private final Map<Class<?>, IResultSetMapper<?>> mappers;
 	private static ResultSetMapperProvider instance;
@@ -478,8 +512,8 @@ public class ResultSetMapperProvider{
 }
 \end{lstlisting}
 
-La clase \textbf{ResultSetMapperProvider} realiza la construcción de los objetos del tipo \textbf{IResultSetMapper} como se muestra en el código \ref{lst:per-get-orden-mapper}:
-\begin{lstlisting}[language=Java, caption={}, label={lst:per-get-orden-mapper}]
+La clase \textbf{ResultSetMapperProvider} realiza la construcción de los objetos del tipo \textbf{IResultSetMapper} como se muestra en el Código \ref{lst:per-get-orden-mapper}:
+\begin{lstlisting}[language=Java, caption={}, captionpos=b, label={lst:per-get-orden-mapper}]
 private IResultSetMapper<Orden> getOrdenMapper(){
 	return new IResultSetMapper<Orden>(){
 		public Orden get(ResultSet rs) throws SQLException{
@@ -492,8 +526,8 @@ private IResultSetMapper<Orden> getOrdenMapper(){
 }
 \end{lstlisting}
 
-La clase \textbf{ResultSetMapperProvider} da acceso a las instancias de tipo \textbf{IResultSetMapper} mediante el método \textbf{get} como se muestra en las líneas 1 a 6 del código \ref{lst:per-get-rs-mapper}, si no se encuentra una instancia para la clase solicitada, entonces se crea como se muestra en las líneas 2 a 4 y 8 a 20 del código \ref{lst:per-get-rs-mapper}
-\begin{lstlisting}[language=Java, caption={Obtención de instancias de IResultSetMapper.}, label={lst:per-get-rs-mapper}]
+La clase \textbf{ResultSetMapperProvider} da acceso a las instancias de tipo \textbf{IResultSetMapper} mediante el método \textbf{get} como se muestra en las líneas 1 a 6 del Código \ref{lst:per-get-rs-mapper}, si no se encuentra una instancia para la clase solicitada, entonces se crea como se muestra en las líneas 2 a 4 y 8 a 20 del Código \ref{lst:per-get-rs-mapper}
+\begin{lstlisting}[language=Java, caption={Obtención de instancias de IResultSetMapper.}, captionpos=b, label={lst:per-get-rs-mapper}]
 public <E> IResultSetMapper<E> get(Class<?> beanType){
 	if(!mappers.containsKey(beanType)){
 		initMapper(beanType);
@@ -516,15 +550,15 @@ private void initMapper(Class<?> beanType){
 
 La solución anterior lleva a la implementación de las operaciones de la interfaz ``Lectura'':
 \begin{enumerate}
-	\item \textbf{siguiente-orden-contestar}, \textbf{siguiente-orden-enviar} y \textbf{obtener-datos-acuse}: todas las operaciones de lectura siguen los mismos pasos (en el código \ref{lst:per-next-orden} se muestra la implementación de la operación \textbf{siguiente-orden-contestar}):
+	\item \textbf{siguiente-orden-contestar}, \textbf{siguiente-orden-enviar} y \textbf{obtener-datos-acuse}: todas las operaciones de lectura siguen los mismos pasos (en el Código \ref{lst:per-next-orden} se muestra la implementación de la operación \textbf{siguiente-orden-contestar}):
 	\begin{enumerate}
-		\item Plantilla de la sentencia SQL, línea 1 del código \ref{lst:per-next-orden}.
-		\item Creación de los objetos de la biblioteca JDBC, línea 4 del código \ref{lst:per-next-orden}.
-		\item Realizar la consulta a la base de datos, línea 6 del código \ref{lst:per-next-orden}.
-		\item Lectura del resultado de la consulta, líneas 7 a 9 del código \ref{lst:per-next-orden}.
+		\item Plantilla de la sentencia SQL, línea 1 del Código \ref{lst:per-next-orden}.
+		\item Creación de los objetos de la biblioteca JDBC, línea 4 del Código \ref{lst:per-next-orden}.
+		\item Realizar la consulta a la base de datos, línea 6 del Código \ref{lst:per-next-orden}.
+		\item Lectura del resultado de la consulta, líneas 7 a 9 del Código \ref{lst:per-next-orden}.
 	\end{enumerate}
 
-	\begin{lstlisting}[language=Java, caption={Lectura de una orden de reposición desde la base de datos.}, label={lst:per-next-orden}]
+	\begin{lstlisting}[language=Java, caption={Lectura de una orden de reposición desde la base de datos.}, captionpos=b, label={lst:per-next-orden}]
 private static final String NEXT_TO_MANAGE = "SELECT * FROM ordenes WHERE estatus = ? ORDER BY fecha_insersion LIMIT 1";
 
 public Orden getNextOrden(Integer estatus) throws SQLException{
@@ -543,6 +577,50 @@ public Orden getNextOrden(Integer estatus) throws SQLException{
 \end{enumerate}
 
 \subsubsection{Persistencia para funcionalidades Web}
+Código \ref{lst:per-batis-config}
+\begin{enumerate}
+	\item Línea 1, habilitar contexto para transacciones.
+	\item Línea 2, crear los objetos para manejar la persistencia.
+	\item Línea 3, lectura de las interfaces para crear los objetos de persistencia.
+\end{enumerate}
+\begin{lstlisting}[language=XML, caption={Configuración de MyBatis con Spring.}, captionpos=b, label={lst:per-batis-config}]
+<tx:annotation-driven />
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource" />
+	<property name="mapperLocations" value="classpath:com/meve/surtimiento/persistence/dao/*.xml" />
+</bean>
+<mybatis:scan base-package="com.meve.surtimiento.persistence.dao"/>
+\end{lstlisting}
+
+\begin{enumerate}
+	\item Relación entre tabla de roles y clase Rol.
+	\item Relación entre tabla de usuarios y clase de Usuario.
+	\item Consulta SQL para obtener un usuario.
+\end{enumerate}
+\begin{lstlisting}[language=XML, caption={Definición de relación de MyBatis.}, label={
+lst:per-batis-user}]
+<mapper namespace="com.meve.surtimiento.persistence.dao.IDomainUser">
+  <resultMap id="rol" type="com.meve.surtimiento.domian.RolDomain" autoMapping="true">
+    <id property="rol" column="rol"/>
+  </resultMap>
+  <resultMap id="usuario" type="com.meve.surtimiento.domian.UsuarioDomain" autoMapping="true">
+    <id property="usuario" column="usuario"/>
+    <collection property="roles" resultMap="rol" javaType="ArrayList"/>
+  </resultMap>
+  <select id="getUsuario" resultMap="usuario" useCache="false">
+    SELECT u.*, r.*
+      FROM usuarios u, roles_domain r, usuarios_roles ur
+     WHERE u.usuario = ur.usuario AND r.rol = ur.rol AND u.usuario = #{0};
+  </select>
+</mapper>
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java, caption={Interfaz de Java para la fábrica de MyBatis.}, captionpos=b, label={lst:per-batis-user-interface}]
+public interface IDomainUser{
+	UsuarioDomain getUsuario(String name);
+}
+\end{lstlisting}
+
 
 \paragraph{\indent Interfaz Administración\\}
 Implementación de las operaciones requeridas durante cualquier flujo iniciado en el Portal Web:
