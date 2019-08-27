@@ -29,7 +29,7 @@ El patrón de diseño Strategy es un patrón de diseño de comportamiento, es un
 \end{figure}
 
 \section{Patrón Decorador}
-El patrón Decorador es utilizado para agregar comportamiento adicional a una clase, tiene cuatro partes principales\cite{DesignPatternsLasater}:
+El patrón Decorador es utilizado para agregar comportamiento adicional a una clase, tiene cuatro partes principales\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-decorator}):
 \begin{enumerate}
   \item Componente: es una clase abstracta que contiene la funcionalidad básica para las clases no decoradas y las decoradas.
   \item Componente concreto: es la implementación de la clase Componente.
@@ -44,7 +44,19 @@ El patrón Decorador es utilizado para agregar comportamiento adicional a una cl
   \label{fig:dia-class-decorator}
 \end{figure}
 
-%\section{Patrón Proxy}
+\section{Patrón Proxy}
+El patrón Proxy es una clase que actuá como punto de acceso a otra clase la cual tiene la funcionalidad deseada por algún cliente\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-proxy}):
+\begin{enumerate}
+  \item Tema: define una interfaz en común para el Tema real y el Proxy.
+  \item Tema real: es la clase concreta que representa el Proxy.
+  \item Proxy: mantiene referencia a una instancia de la clase Tema real y actúa como punto de acceso a la misma clase.
+\end{enumerate}
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{dia-class-proxy}
+  \caption{Diagrama UML del patrón Proxy\cite{DesignPatternsLasater}.}
+  \label{fig:dia-class-proxy}
+\end{figure}
 
 \section{Patrón Objeto de Acceso a Datos}\label{sec-dao}
 El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etc.) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
