@@ -1,6 +1,7 @@
 \chapter{Implementación}\label{cap4}
 
 \section{Tecnologías utilizadas}
+%-------------------------------------------------------------------------------
 \subsection{Base de datos relacional}\label{sec-bd-r}
 Una base de datos relaciones es una colección de tablas relacionadas entre sí. La colección de tablas se describe a sí misma en cuanto a que el significado de los datos contenidos pertenecen a un mismo ámbito\cite{DataBaseConcepts}.\\
 Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (DBMS por sus siglas en inglés), un DBMS es un programa de computadora usado para crear, procesas y administrar bases de datos. El DBMS recibe peticiones en lenguaje SQL (como se describe más adelante) y traduce esas peticiones a acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
@@ -32,13 +33,14 @@ Para el desarrollo del proyecto AutoSA se han usado los siguientes conceptos:
 	\item \textbf{Lenguaje de Modelado de Datos}: DML por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
 \end{enumerate}
 
+%-------------------------------------------------------------------------------
 \subsection{Java}\label{sec-java}
 
 El lenguaje de programación Java fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan en 1991 bajo el nombre ``Oak'' y en 1995 cambiaron el nombre a Java. El lenguaje Java está basado en los lenguajes de programación C, de donde deriva su sintaxis y de C++, que se toma como base para las características del paradigma orientado a objetos. Java es un lenguaje orientado a objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
 El concepto de Java tiene varios componentes, para efectos de este proyecto se mencionarán los siguientes\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
 \begin{enumerate}
 	\item Lenguaje de programación Java: previamente descrito, es un lenguaje multiplataforma, estáticamente tipado y orientado a objetos.
-	\item Máquina Virtual de Java: JVM por sus siglas en inglés, es el sistema de ejecución en tiempo real de Java\footnote{\textcolor{red}{Karla, \textbf{Sistem de ejecución en tiempo real de Java} fue lo que me pareció más correcto para traducir ``Java run-time system'' ¿qué opinas, sabes una traducción mejor?}}.
+	\item Máquina Virtual de Java: JVM por sus siglas en inglés, es el sistema de ejecución en tiempo real de Java\footnote{\textcolor{red}{Karla, \textbf{Sistema de ejecución en tiempo real de Java} fue lo que me pareció más correcto para traducir ``Java run-time system'' ¿qué opinas, sabes una traducción mejor?}}.
 	\item Bytecode: es el nombre que recibe el conjunto optimizado de instrucciones diseñadas para ser ejecutadas en la JVM.
 	\item Paquete de Desarrollo de Java JDK (Java Development Kit): es el conjunto de herramientas utilizadas para el desarrollo de software para la máquina virtual de Java.
 	\item Ambiente de Ejecución de Java JRE (Java Runtime Environment): es la herramienta encargada de la creación y administración de instancias de la máquina virtual de Java.
@@ -47,50 +49,28 @@ El concepto de Java tiene varios componentes, para efectos de este proyecto se m
 \subsubsection{Java Data Base Controller}\label{sec-jdbc}
 El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un conjunto de APIs\footnote{API viene del inglés ``Application Programming Interface'' este concepto es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales, cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
 
+%-------------------------------------------------------------------------------
 \subsection{Spring}\label{sec-spring}
-
 El marco de trabajo Spring es descrito en su sitio de Internet\cite{SpringFramework}:
 \begin{quote}
 	El maco de trabajo Spring provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en Java en cualquier tipo de plataforma de despliegue.
 \end{quote}
 
-Spring está compuesto por los siguientes conceptos:
-\textcolor{blue}{Vale por un resumen que explica lo que es Spring:}
+Las funciones principales de Spring, mejor conocido como Spring Core, está construido utilizando los siguientes conceptos\cite{Spring5DesignPatterns, ProSpring5, WellGroundedJavaDeveloper, SpringInAction}:\\
 \begin{enumerate}
-	\item Inversión de control: es una técnica que 
-IoC is a technique that externalizes the creation and management of component dependencies. Consider an example in which class Foo depends on an instance of class Bar to perform some kind of processing. Traditionally, Foo creates an instance of Bar by using the new operator or obtains one from some kind of factory class. Using the IoC approach, an instance of Bar (or a subclass) is provided to Foo at runtime by some external process. This behavior, the injection of dependencies at runtime, led to IoC being renamed by Martin Fowler as the much more descriptive dependency injection (DI). Chapter 3 discusses the precise nature of the dependencies managed by DI.
-\cite{ProSpring5}
-	\item Inyección de dependencia: es una forma particular de inversión de control, se refiere a establecer las dependencias de un objeto en tiempo de ejecución.\cite{WellGroundedJavaDeveloper}
+	\item Inversión de control: es una técnica que externaliza y administra las dependencias de componentes.
 
-	\item Contenedor de ``beanes''.
+	\item Inyección de dependencia: es una forma particular de inversión de control, se refiere a establecer las dependencias de un objeto en tiempo de ejecución.
 
-	\item Patrón Factory (opcional).
-	\item Patrón Singleton (opcional).
+	\item Programación orientada a eventos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes donde cada uno es responsable por un conjunto de funcionalidades afines, a menudo, estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etc.), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación orientada a aspectos en Spring  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales y para esto utiliza los patrones de diseño Decorador y Proxy (ver secciones \ref{sec-decorator} y \ref{sec-proxy}, respectivamente).
 \end{enumerate}
 
-
-\subsubsection{Spring JPA}\label{sec-spring-jpa}
-
-\begin{quote}
-	Spring Data JPA, part of the larger Spring Data family, makes it easy to easily implement JPA based repositories. This module deals with enhanced support for JPA based data access layers. It makes it easier to build Spring-powered applications that use data access technologies.
-
-Implementing a data access layer of an application has been cumbersome for quite a while. Too much boilerplate code has to be written to execute simple queries as well as perform pagination, and auditing. Spring Data JPA aims to significantly improve the implementation of data access layers by reducing the effort to the amount that’s actually needed. As a developer you write your repository interfaces, including custom finder methods, and Spring will provide the implementation automatically.
-\end{quote}
-
-\textcolor{blue}{Vale por un resumen que explica lo que es el Spring-JPA:
-\begin{enumerate}
-	\item Patrón proxy.
-	\item Concepto de transacción (Tal vez sea bueno explicar esto como subsección de bases de datos relaciones).
-	\item Java Persistence API (Tal vez sea bueno explicar esto como subsección de Java así como se plantea con JDBC.)
-\end{enumerate}
-}
-
+%-------------------------------------------------------------------------------
 \subsection{MyBatis}\label{sec-mybatis}
 El sitio oficial de MyBatis\cite{MyBatis} lo describe: 
 \begin{quote}
 MyBatis es un marco de trabajo para persistencia de primera clase con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. MyBatis elimina casi todo el código de JDBC, la configuración manual de parámetros y la recuperación de resultados.
 \end{quote}
-
 
 Prasad Reddy\cite{PersistenceWithMyBatis} resalta los beneficios de MyBatis sobre otros marcos de trabajo para persistencia:
 \begin{quote}
@@ -112,10 +92,11 @@ El uso de MyBatis se resume principalmente a puntos\cite{PersistenceWithMyBatis}
 	\item Crear un objeto \textbf{SqlSession} del cual se obtiene una instancia de la interfaz, por medio de tal instancia se realizan las operaciones a la base de datos.
 \end{enumerate}
 
+%-------------------------------------------------------------------------------
 \subsection{Javascript}\label{sec-javascript}
 \textcolor{blue}{Javascript es un lenguaje que lo único que tiene similar a Java es la sintaxis, y no mucho, así que por favor dejen de tratarlos como sinónimos (odio a los PMs)}\footnote{se recomienda no hacer mucho caso, escribí algo de Javascript nada más para tener texto en la sección.}.
 
-
+%-------------------------------------------------------------------------------
 \subsection{Sahi}\label{sec-sahi}
 La compañía Sahi Pro\textsuperscript{\textcopyright}\cite{SahiPro} describe a su producto del mismo nombre como:
 \begin{quote}
@@ -131,11 +112,8 @@ Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas so
 \label{fig:dia-sahi-arq}
 \end{figure}
 
-%\subsubsection{Java Data Base Controller}
 %\subsubsection{Java IO}
 %\subsubsection{Java Enterprise Edition}
-%\subsection{Javascript}
-%\subsection{Sahi}
 %\subsection{Spring}
 %\subsubsection{Spring MVC}
 %\subsubsection{Spring Security}
@@ -145,6 +123,7 @@ Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas so
 El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencialidad no se hace mención específica del nombre y versión del sistema administrador de bases de datos.}(ver sección \ref{sec-bd-r}) para almacenar la información requerida en los casos de uso (ver sección \ref{sec:casos-uso}).\\
 La implementación de la base de datos se ve reflejada en las rutinas con sentencias SQL (ver sección \ref{sec-bd-r}) donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas DDL y las rutinas DML.
 
+%-------------------------------------------------------------------------------
 \subsection{Rutinas de definición de datos}
 Estas rutinas contienen las sentencias DDL (ver sección \ref{sec-bd-r}) para la creación de tablas, llaves primarias, llaves foráneas, índices y restricciones. En el Código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de la tabla \textit{ordenes\_is}.
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear una tabla.}, captionpos=b, label={lst:sql-create-table}]
@@ -173,6 +152,7 @@ CREATE VIEW ordenes_contestadas AS
 CREATE INDEX ordenes_contetadas_idx ON ordenes_is(id_sesion_estatus, estatus);
 \end{lstlisting}
 
+%-------------------------------------------------------------------------------
 \subsection{Rutinas de modelado de datos}
 Estas rutinas contienen la sentencias DML (ver sección \ref{sec-bd-r}) para insertar la información necesaria para la ejecución del sistema, como son, por ejemplo, los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
 
@@ -186,6 +166,7 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 
 \section{Implementación de los componentes}
 
+%-------------------------------------------------------------------------------
 \subsection{Agente}
 La implementación del componente Agente está escrito en rutinas de Sahi (ver sección \ref{sec-sahi}), primero se exponen los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realizar la ejecución mediante la herramienta gráfica de Sahi.
 
@@ -308,7 +289,7 @@ dejando la ejecución al usuario por medio de la interfaz gráfica de Sahi:
 	\end{figure}
 \end{itemize}
 
-
+%-------------------------------------------------------------------------------
 \subsection{Lógica de automatización}
 El componente de lógica de automatización provee de la información necesaria a las rutinas automatizadas, la información puede proceder de fuentes diferentes y a cada una se accede de forma diferente:
 \begin{enumerate}
@@ -407,7 +388,7 @@ dates[0] = dateFormat.format(cal.getTime());
 	\end{lstlisting}
 \end{enumerate}
 
-
+%-------------------------------------------------------------------------------
 \subsection{Persistencia}
 La implementación del componente de persistencia se enfoca en dar servicio a los componentes de escritorio y web, por esta razón la implementación se ha dividido en dos partes:
 \begin{enumerate}
@@ -577,7 +558,8 @@ public Orden getNextOrden(Integer estatus) throws SQLException{
 \end{enumerate}
 
 \subsubsection{Persistencia para funcionalidades Web}
-Código \ref{lst:per-batis-config}
+La interfaz del componente Persistencia dedicado a las funcionalidades ofrecidas mediante la interfaz web utiliza MyBatis cuya implementación sigue los pasos mencionados en la sección \ref{sec-mybatis}.\\
+\indent 1. En el Código \ref{lst:per-batis-config} se muestra la configuración del objeto \textbf{SqlSessionFactoryBean}: 
 \begin{enumerate}
 	\item Línea 1, habilitar contexto para transacciones.
 	\item Línea 2, crear los objetos para manejar la persistencia.
@@ -587,11 +569,12 @@ Código \ref{lst:per-batis-config}
 <tx:annotation-driven />
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	<property name="dataSource" ref="dataSource" />
-	<property name="mapperLocations" value="classpath:com/meve/surtimiento/persistence/dao/*.xml" />
+	<property name="mapperLocations" value="classpath:com/surtimiento/persistence/dao/*.xml" />
 </bean>
-<mybatis:scan base-package="com.meve.surtimiento.persistence.dao"/>
+<mybatis:scan base-package="com.surtimiento.persistence.dao"/>
 \end{lstlisting}
 
+\indent 2. El Código \ref{lst:per-batis-user} muestra la configuración para el manejo de usuarios de la interfaz web:
 \begin{enumerate}
 	\item Relación entre tabla de roles y clase Rol.
 	\item Relación entre tabla de usuarios y clase de Usuario.
@@ -615,33 +598,20 @@ lst:per-batis-user}]
 </mapper>
 \end{lstlisting}
 
+\indent 3. Por último se el Código \ref{lst:per-batis-user-interface} muestra la interfaz de Java para utilizar las consultas del paso anterior.
 \begin{lstlisting}[language=Java, caption={Interfaz de Java para la fábrica de MyBatis.}, captionpos=b, label={lst:per-batis-user-interface}]
 public interface IDomainUser{
 	UsuarioDomain getUsuario(String name);
 }
 \end{lstlisting}
 
+%-------------------------------------------------------------------------------
+\subsection{Sistema de archivos}
+	\paragraph{Configuración\\}
+		\textbf{obtener-propiedad}
+	\paragraph{Almacenamiento\\}
+		\textbf{guardar-archivo}
 
-\paragraph{\indent Interfaz Administración\\}
-Implementación de las operaciones requeridas durante cualquier flujo iniciado en el Portal Web:
-\begin{enumerate}
-	\item \textbf{buscar-credenciales}: .
-	\item \textbf{extraer-reporte}: .
-	\item \textbf{actualizar-catalogo}: .
-	\item \textbf{buscar-ordenes}: .
-	\item \textbf{buscar-orden}: .
-	\item \textbf{actualizar-orden}: .
-\end{enumerate}
-
-%
-%
-%
-%\subsection{Sistema de archivos}
-%	\paragraph{Configuración\\}
-%		\textbf{obtener-propiedad}
-%	\paragraph{Almacenamiento\\}
-%		\textbf{guardar-archivo}
-%
 %
 %\subsection{Generador de reportes}
 %
