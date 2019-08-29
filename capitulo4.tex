@@ -49,9 +49,6 @@ El concepto de Java tiene varios componentes, para efectos de este proyecto se m
 \subsubsection{Java Data Base Controller}\label{sec-jdbc}
 El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un conjunto de APIs\footnote{API viene del inglés ``Application Programming Interface'' este concepto es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales, cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
 
-\subsubsection{Java Entrada/Salida}\label{sec-java-io}
-\textcolor{blue}{Vale por la descripción del paquete Java IO.}
-
 %-------------------------------------------------------------------------------
 \subsection{Spring}\label{sec-spring}
 El marco de trabajo Spring es descrito en su sitio de Internet\cite{SpringFramework}:
@@ -96,6 +93,22 @@ El uso de MyBatis se resume principalmente a puntos\cite{PersistenceWithMyBatis}
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
+\subsection{Velocity}\label{sec-velocity}
+Gradecki\ref{MasteringApacheVelocity} describe a Velocity:
+
+\begin{quote}
+	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de Java como puente entre el modelo y la vista (hablando del patrón MVC como se muestra en el Apéndice \ref{sec-mvc}).
+\end{quote}
+
+%-------------------------------------------------------------------------------
+\subsection{Flying Saucer}\label{sec-flying-saucer}
+La herramienta Flying Saucer es descrita en su página de Internet\ref{FlyingSaucer} como:
+\begin{quote}
+	Flying Saucer es una biblioteca puramente escrita en Java para traducir documentos XML o XHTML con CCS a formatos de gráficos de Java, PDF e imágenes.
+\end{quote}
+
+
+%-------------------------------------------------------------------------------
 \subsection{Javascript}\label{sec-javascript}
 \textcolor{blue}{Javascript es un lenguaje que lo único que tiene similar a Java es la sintaxis, y no mucho, así que por favor dejen de tratarlos como sinónimos (odio a los PMs)}\footnote{se recomienda no hacer mucho caso, escribí algo de Javascript nada más para tener texto en la sección.}.
 
@@ -115,12 +128,14 @@ Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas so
 \label{fig:dia-sahi-arq}
 \end{figure}
 
-%\subsubsection{Java IO}
 %\subsubsection{Java Enterprise Edition}
 %\subsection{Spring}
 %\subsubsection{Spring MVC}
 %\subsubsection{Spring Security}
 
+%================================================================================
+%
+%================================================================================
 
 \section{Implementación de base de datos}
 El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencialidad no se hace mención específica del nombre y versión del sistema administrador de bases de datos.}(ver sección \ref{sec-bd-r}) para almacenar la información requerida en los casos de uso (ver sección \ref{sec:casos-uso}).\\
@@ -172,5 +187,5 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 \input{capitulo4-2-2-logic}
 \input{capitulo4-2-3-persistence}
 \input{capitulo4-2-4-files}
-%\input{capitulo4-2-5-reporter}
-%\input{capitulo4-2-6-web}
+\input{capitulo4-2-5-reporter}
+\input{capitulo4-2-6-web}
