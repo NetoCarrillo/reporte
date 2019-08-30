@@ -14,7 +14,7 @@ La implementación de la generación de acuse de envío se resume en los siguien
 
 \subsubsection{Generación de reportes}
 La generación de reportes utiliza el patrón de diseño Estrategia (ver Apéndice \ref{sec-strategy}) mediante el cual se ofrece un punto de entrada a la generación de reportes, internamente se delega la generación del reporte a la clase correspondiente dependiendo del tipo de reporte, es así que se tienen dos clases, una para la generación de reportes en formato CSV\footnote{Del inglés \textit{Comma Separated Values}, es un formato de texto plano para almacenar matrices, cada linea del archivo equivale a un renglón de la matriz, y dentro de los renglones, los valores que equivalen a las columnas de la matriz se separan por el símbolo coma ``,''.} y otra para el formato Excel\textsuperscript{\textcopyright}.\\
-La implementación aplica dos veces el patrón Estrategia, primero en la selección del formato del reporte y después para el tipo de reporte. A continuación se explicarán las clases principales que se muestran en la Figura \ref{dia-class-report-service}:
+La implementación aplica dos veces el patrón Estrategia, primero en la selección del formato del reporte y después para el tipo de reporte. A continuación se explicarán las clases principales que se muestran en la Figura \ref{fig:dia-class-report-service}:
 
 \begin{figure}[h]
 	\centering

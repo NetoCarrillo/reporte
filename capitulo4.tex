@@ -45,24 +45,31 @@ Spasovski\cite{OAuth2Identity} complementa la descripción de OAuth 2.0:
 	OAuth 2.0 provee autorización para que un cliente (aplicación o sistema) pueda, a su vez, autorizar peticiones a recursos protegidos de un servicio a nombre del dueño (usuario de la aplicación).
 \end{quote}
 
-Para comprender mejor la definición de Spasovski el mismo enuncia los siguientes conceptos\cite{OAuth2Identity}:
+La proposición de estándar industrial de OAuth 2.0 \cite{OAuthRFC} especifica cuatro roles que intervienen en el flujo del protocolo de autorización y acceso a recursos protegidos:
 \begin{enumerate}
-	\item Dueño del recurso: es la entidad que es capás de otorgar acceso a recursos protegidos.
-	\item Servidor de autorizaciones: verifica con el dueño del recurso que el cliente tenga acceso a recursos protegidos, de ser así, el servidor entrega un token de acceso.
-	\item Servidor de recursos: sirve los recursos protegidos que son consultados mediante una petición autorizada desde la aplicación del cliente.
-	\item Token: es un identificador único que está asociado con el usuario y es utilizado como credencial para acceder a recursos protegidos.
-	\item Cliente: es una aplicación que hace peticiones al servidor de recursos a nombre del dueño de los recursos, 
-	\item Aplicación cliente: puede cualquier aplicación web o de escritorio, la especificación de OAuth 2.0 no impone limitaciones en el ambiente de ejecución del cliente.
+	\item Dueño del recurso: una entidad que es capás de otorgar acceso a recursos protegidos, cuando el dueño del recurso es una persona puede ser referido como usuario final.
+	\item Servidor de recursos: el servidor que contiene los recursos protegidos, es capas de aceptar y responder a peticiones de recursos protegidos utilizando un token de acceso.
+	\item Cliente: es una aplicación que hace peticiones a recursos protegidos a nombre y con autorización del dueño del recurso. El término \textit{cliente} no implica características particulares de implementación (es decir que la aplicación se puede ejecutar en un servidor, en un escritorio, una dispositivo móvil o en cualquier otro tipo de dispositivo).
+	\item Servidor de autorizaciones: el servidor que genera tokens de acceso a los clientes después de autenticar exitosamente al dueño del recurso y haber obtenido autorización.
+\end{enumerate}
+La interacción entre el servidor de autorizaciones y el servidor de recursos está fuera del alcance de la especificación de OAtuh 2.0. El servidor de autorizaciones podría ser el mismo que el servidor de recursos o ser entidades separadas. Un servidor de autorizaciones puede generar tokens de acceso para múltiples servidores de recursos\cite{OAuthRFC}.\\
+La definición de los roles utiliza el concepto de token de acceso que es definido en el estándar \cite{OAuthRFC} de la siguiente forma:
+\begin{quote}
+	Token de acceso\footnote{De ahora en adelante referido únicamente como token} es una cadena que representa la autorización hecha al cliente. Usualmente la cadena no tiene un significado claro para el cliente. Los tokens representan alcance y duración específicos otorgados por el dueño del recurso y respaldados por el servidor de recursos y el servidor de autorizaciones.
+\end{quote}
+
+OAuth define varios escenarios del flujo de autorización, para fines del proyecto AutoSA nada más se hará mención del flujo de autorización con identificador de usuario y contraseña\cite{OAuthRFC, OAuth2Identity}, el diagrama del flujo se muestra en la Figura \ref{fig:dia-seq-oauth-flow}:
+\begin{enumerate}
+	\item El cliente envía sus credenciales y las credenciales de dueño del recurso (en este caso credenciales se refiere a un identificador y contraseña).
+	\item El servidor de autorizaciones valida las credenciales del cliente.
+	\item El servidor de autorizaciones valida las credenciales del dueño del recurso.
+	\item El servidor de autorizaciones pide la generación de un token.
+	\item El servidor de autorizaciones entrega el token al cliente.
+	\item El cliente hace la petición de un recurso (acompañado del token) al servidor de recursos.
+	\item El servidor de recursos valida el token de la petición. 
+	\item El servidor de recursos valida entrega el recurso al cliente.
 \end{enumerate}
 
-OAuth define varios escenarios del flujo de autorización, para fines del proyecto AutoSA nada más se hará mención del flujo de autorización con identificador de usuario y contraseña\cite{OAuth2Identity}:
-\begin{enumerate}
-	\item El cliente envía identificador de usuario y contraseña.
-	\item El servidor de autorizaciones valida la petición del cliente y entrega un token de acceso.
-	\item El cliente hace una petición al servidor de recursos, al petición incluye el token de acceso.
-	\item El servidor de recursos valida el token de acceso y entrega el recurso al cliente.
-\end{enumerate}
-El procedimiento anterior se ejemplifica en la Figura \ref{fig:dia-seq-oauth-flow}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{dia-seq-oauth-flow}
@@ -142,7 +149,7 @@ El uso de MyBatis se resume principalmente a puntos\cite{PersistenceWithMyBatis}
 
 %-------------------------------------------------------------------------------
 \subsection{Velocity}\label{sec-velocity}
-Gradecki\ref{MasteringApacheVelocity} describe a Velocity:
+Gradecki\cite{MasteringApacheVelocity} describe a Velocity:
 
 \begin{quote}
 	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de Java como puente entre el modelo y la vista (hablando del patrón MVC como se muestra en el Apéndice \ref{sec-mvc}).
@@ -150,7 +157,7 @@ Gradecki\ref{MasteringApacheVelocity} describe a Velocity:
 
 %-------------------------------------------------------------------------------
 \subsection{Flying Saucer}\label{sec-flying-saucer}
-La herramienta Flying Saucer es descrita en su página de Internet\ref{FlyingSaucer} como:
+La herramienta Flying Saucer es descrita en su página de Internet\cite{FlyingSaucer} como:
 \begin{quote}
 	Flying Saucer es una biblioteca puramente escrita en Java para traducir documentos XML o XHTML con CCS a formatos de gráficos de Java, PDF e imágenes.
 \end{quote}
@@ -159,6 +166,10 @@ La herramienta Flying Saucer es descrita en su página de Internet\ref{FlyingSau
 %-------------------------------------------------------------------------------
 \subsection{Javascript}\label{sec-javascript}
 \textcolor{blue}{Javascript es un lenguaje que lo único que tiene similar a Java es la sintaxis, y no mucho, así que por favor dejen de tratarlos como sinónimos (odio a los PMs)}\footnote{se recomienda no hacer mucho caso, escribí algo de Javascript nada más para tener texto en la sección.}.
+
+%-------------------------------------------------------------------------------
+\subsection{AngularJS}\label{sec-angularjs}
+\textcolor{blue}{Vale por la descripción de angularjs}.
 
 %-------------------------------------------------------------------------------
 \subsection{Sahi}\label{sec-sahi}
@@ -175,11 +186,6 @@ Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas so
 \caption{Diagrama de flujo de Sahi\cite{SahiPro}.}
 \label{fig:dia-sahi-arq}
 \end{figure}
-
-%\subsubsection{Java Enterprise Edition}
-%\subsection{Spring}
-%\subsubsection{Spring MVC}
-%\subsubsection{Spring Security}
 
 %================================================================================
 %

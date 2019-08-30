@@ -2,7 +2,7 @@
 La implementación del componente de persistencia se enfoca en dar servicio a los componentes de escritorio y web, por esta razón la implementación se ha dividido en dos partes:
 \begin{enumerate}
  	\item Escritorio: la automatización de rutinas, dado que estas rutinas son ejecutadas dentro del ambiente de Sahi (que a su vez está en la plataforma de Java) se utiliza la biblioteca JDBC (ver sección \ref{sec-jdbc}) por economía en recursos físicos del equipo del operador de la farmacéutica.
- 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de Spring enfocado a la persistencia, Spring Data (ver sección \ref{sec-spring-jpa}) en conjunción con el marco de trabajo MyBatis (ver sección \ref{sec-mybatis}).
+ 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de Spring en conjunción con el marco de trabajo MyBatis (ver sección \ref{sec-mybatis}).
 \end{enumerate}
 Los siguientes apartados explican la implementación de los servicios para escritorio y web.
 

@@ -4,7 +4,7 @@ El componente Sistema de archivos es el encargado de actuar como medio de comuni
 	\item Lectura de configuración: leer un archivo de propiedades en formato llave valor.
 	\item Escritura de archivos: escribir un flujo de bytes al sistema de archivos del sistema operativo
 \end{enumerate}
-Para las funciones anteriores se ha utilizado el API I/O (ver sección \ref{sec-java-io}) de Java, en los siguientes apartados se mostrará la implementación de las funciones descritas anteriormente.
+Para las funciones anteriores se ha utilizado las bibliotecas de Java para la lectura y escritura de archivos, en los siguientes apartados se mostrará la implementación de las funciones descritas anteriormente.
 
 \subsubsection{Lectura de configuración}
 La lectura de valores de configuración se hace mediante la lectura del archivo de propiedades dentro de un objeto de la clase \textbf{Properties} del paquete \textbf{java.util}, la lectura de la información del archivo de propiedades se logra utilizando el paquete Java IO, a continuación se detalla la descripción anterior explicando el Código \ref{lst:fs-read}:
@@ -34,7 +34,7 @@ Lo anterior se ejemplifica con los siguientes códigos:
 	Path contentPath = Paths.get(props.getProperty("is.report.out.path"), contentTmpl.getFileName().toString());
 	\end{lstlisting}
 
-	\item Utilizando la clases de Java dedicadas al manejo de lectura y escritura se copia la plantilla, tal como se aprecia en el Código \ref{fs-copy}.
+	\item Utilizando la clases de Java dedicadas al manejo de lectura y escritura se copia la plantilla, tal como se aprecia en el Código \ref{lst:fs-copy}.
 	\begin{lstlisting}[language=Java, caption={Copia de archivos.}, captionpos=b, label={lst:fs-copy}]
 	//Copiar plantillas
 	try(FileOutputStream hfos = new FileOutputStream(headersPath.toFile(), false);
