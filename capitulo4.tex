@@ -35,7 +35,40 @@ Para el desarrollo del proyecto AutoSA se han usado los siguientes conceptos:
 
 %-------------------------------------------------------------------------------
 \subsection{OAuth 2.0}\label{sec-oauth}
-\textcolor{blue}{Vale por la definición de OAuth 2.0}\footnote{La especificación de OAuth 2.0 incluye varios caso de uso, para fines de explicar el desarrollo del proyecto AutoSA únicamente se hará mención de los casos de uso que fueron aplicados en dicho proyecto.}
+Bihis\cite{MasteringOAuth2} describe de manera a OAuth 2.0:
+\begin{quote}
+	OAuth 2.0 es in protocolo que permite compartir información y recursos a aplicaciones distintas de manera segura y confiable.
+\end{quote}
+
+Spasovski\cite{OAuth2Identity} complementa la descripción de OAuth 2.0:
+\begin{quote}
+	OAuth 2.0 provee autorización para que un cliente (aplicación o sistema) pueda, a su vez, autorizar peticiones a recursos protegidos de un servicio a nombre del dueño (usuario de la aplicación).
+\end{quote}
+
+Para comprender mejor la definición de Spasovski el mismo enuncia los siguientes conceptos\cite{OAuth2Identity}:
+\begin{enumerate}
+	\item Dueño del recurso: es la entidad que es capás de otorgar acceso a recursos protegidos.
+	\item Servidor de autorizaciones: verifica con el dueño del recurso que el cliente tenga acceso a recursos protegidos, de ser así, el servidor entrega un token de acceso.
+	\item Servidor de recursos: sirve los recursos protegidos que son consultados mediante una petición autorizada desde la aplicación del cliente.
+	\item Token: es un identificador único que está asociado con el usuario y es utilizado como credencial para acceder a recursos protegidos.
+	\item Cliente: es una aplicación que hace peticiones al servidor de recursos a nombre del dueño de los recursos, 
+	\item Aplicación cliente: puede cualquier aplicación web o de escritorio, la especificación de OAuth 2.0 no impone limitaciones en el ambiente de ejecución del cliente.
+\end{enumerate}
+
+OAuth define varios escenarios del flujo de autorización, para fines del proyecto AutoSA nada más se hará mención del flujo de autorización con identificador de usuario y contraseña\cite{OAuth2Identity}:
+\begin{enumerate}
+	\item El cliente envía identificador de usuario y contraseña.
+	\item El servidor de autorizaciones valida la petición del cliente y entrega un token de acceso.
+	\item El cliente hace una petición al servidor de recursos, al petición incluye el token de acceso.
+	\item El servidor de recursos valida el token de acceso y entrega el recurso al cliente.
+\end{enumerate}
+El procedimiento anterior se ejemplifica en la Figura \ref{fig:dia-seq-oauth-flow}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-seq-oauth-flow}
+	\caption{Diagrama de flujo de OAuth 2.0.}
+	\label{fig:dia-seq-oauth-flow}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{Java}\label{sec-java}
