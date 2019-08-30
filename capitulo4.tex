@@ -112,13 +112,32 @@ Las funciones principales de Spring, mejor conocido como Spring Core, está cons
 Dentro del proyecto de Spring existen proyectos que se enfocan a áreas específicas, a continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
 
 \subsubsection{Spring boot}\label{sec-spring-boot}
-\textcolor{blue}{Descripción de Spring Boot}\cite{SpringBootInAction}
+Es un proyecto de Spring que ofrece un ambiente de desarrollo y despliegue para aplicaciones desarrolladas con Spring y ofrece las siguientes prestaciones\cite{SpringBootInAction}:
+\begin{enumerate}
+	\item Iniciadores: agregar grupos comunes de dependencias en una sola dependencia que puede ser agregada al administrador de proyectos.
+	\item Auto-configuración: alivia la carga de configuración estableciendo valores por defecto y además soporta configuración condicional.
+	\item Solenoide: agrega características de administración a las aplicaciones.
+\end{enumerate}
 
 \subsubsection{Spring security}\label{sec-spring-security}
-\textcolor{blue}{Descripción de Spring Security}\cite{ProSpringSecurity}
+El proyecto Spring security es descrito en su página de Internet\cite{SpringSecurity}:
+\begin{quote}
+	Spring security es un marco de trabajo poderoso y altamente adaptable para procesos de autenticación y control de acceso. Es el estándar de seguridad para aplicaciones basadas en Spring.\\
+	Spring security es un marco de trabajo enfocado en proveer a aplicaciones de Java funciones de auntenticación y autorización.
+\end{quote}
 
-\subsubsection{Spring Web}\label{sec-spring-web}
-\textcolor{blue}{Descripción de Spring Web}\cite{SpringInAction}
+Scarioni\cite{ProSpringSecurity} describe el flujo de Spring security de la siguiente forma:
+\begin{quote}
+	El modelo de interceptación de seguridad de Spring security aplica a dos áreas principales de una aplicación: URLs y llamados a métodos. Spring security se envuelve al rededor de estos dos puntos de entrada de la aplicación y permite el acceso cuando las restricciones de seguridad son cumplidas. Ambos, la llamada a métodos y la cadena de filtros de seguridad dependen de la instancia de ScurityInterceptor donde la lógica principal reside en tomar la decisión de conceder o no el acceso.
+\end{quote}
+En al Figura \ref{fig:dia-spring-security} se muestra un diagrama del manejo que Spring security da a las peticiones.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{dia-spring-security}
+	\caption{Diagrama de manejo de peticiones de Spring security\cite{ProSpringSecurity}.}
+	\label{fig:dia-spring-security}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{MyBatis}\label{sec-mybatis}
