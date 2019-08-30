@@ -34,6 +34,10 @@ Para el desarrollo del proyecto AutoSA se han usado los siguientes conceptos:
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
+\subsection{OAuth 2.0}\label{sec-oauth}
+\textcolor{blue}{Vale por la definición de OAuth 2.0}\footnote{La especificación de OAuth 2.0 incluye varios caso de uso, para fines de explicar el desarrollo del proyecto AutoSA únicamente se hará mención de los casos de uso que fueron aplicados en dicho proyecto.}
+
+%-------------------------------------------------------------------------------
 \subsection{Java}\label{sec-java}
 
 El lenguaje de programación Java fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan en 1991 bajo el nombre ``Oak'' y en 1995 cambiaron el nombre a Java. El lenguaje Java está basado en los lenguajes de programación C, de donde deriva su sintaxis y de C++, que se toma como base para las características del paradigma orientado a objetos. Java es un lenguaje orientado a objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
@@ -56,7 +60,7 @@ El marco de trabajo Spring es descrito en su sitio de Internet\cite{SpringFramew
 	El maco de trabajo Spring provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en Java en cualquier tipo de plataforma de despliegue.
 \end{quote}
 
-Las funciones principales de Spring, mejor conocido como Spring Core, está construido utilizando los siguientes conceptos\cite{Spring5DesignPatterns, ProSpring5, WellGroundedJavaDeveloper, SpringInAction}:\\
+Las funciones principales de Spring, mejor conocido como Spring Core, está construido utilizando los siguientes conceptos\cite{Spring5DesignPatterns, ProSpring5, WellGroundedJavaDeveloper, SpringInAction}:
 \begin{enumerate}
 	\item Inversión de control: es una técnica que externaliza y administra las dependencias de componentes.
 
@@ -64,6 +68,17 @@ Las funciones principales de Spring, mejor conocido como Spring Core, está cons
 
 	\item Programación orientada a eventos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes donde cada uno es responsable por un conjunto de funcionalidades afines, a menudo, estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etc.), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación orientada a aspectos en Spring  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales y para esto utiliza los patrones de diseño Decorador y Proxy (ver secciones \ref{sec-decorator} y \ref{sec-proxy}, respectivamente).
 \end{enumerate}
+
+Dentro del proyecto de Spring existen proyectos que se enfocan a áreas específicas, a continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
+
+\subsubsection{Spring boot}\label{sec-spring-boot}
+\textcolor{blue}{Descripción de Spring Boot}\cite{SpringBootInAction}
+
+\subsubsection{Spring security}\label{sec-spring-security}
+\textcolor{blue}{Descripción de Spring Security}\cite{ProSpringSecurity}
+
+\subsubsection{Spring Web}\label{sec-spring-web}
+\textcolor{blue}{Descripción de Spring Web}\cite{SpringInAction}
 
 %-------------------------------------------------------------------------------
 \subsection{MyBatis}\label{sec-mybatis}

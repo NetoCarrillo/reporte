@@ -1,13 +1,240 @@
 \subsection{Portal Web}
+La implementación del portal Web se realizó bajo la arquitectura orientada a servicios (ver Apéndice \ref{sec-soa}), lo cual implica una división del portal Web de la siguiente forma:
+\begin{itemize}
+	\item [Backend]: la parte del portal ofrece los servicios Web, con tiene los servicios de autenticación, administración de órdenes de reposición y generación de reportes.
+	\item [Frontend]: la parte del portal que consume los servicios Web y muestra una interfaz gráfica al usuario, contiene las páginas de HTML y rutinas para consumir los servicios del Backend.
+\end{itemize}
 
-\textcolor{blue}{Hablar de spring boot}
+\subsubsection{Implementación del Backend}
+La implementación del Backend está implementada utilizando el marco de trabajo Spring y sus bibliotecas:
+\begin{itemize}
+ 	\item Spring boot: provee un ambiente de desarrollo y ejecución para aplicaciones basadas en el marco de trabajo Spring (ver sección \ref{sec-spring-boot}). 
+ 	\item Spring security: biblioteca para los servicios de autenticación y autorización de usuarios (ver sección \ref{sec-spring-security}).
+ 	\item Spring Web: biblioteca para exponer servicios Web (ver sección \ref{sec-spring-web}).
+\end{itemize}
 
-\subsubsection{Autenticación}
+\paragraph{Implementación de los servicios de seguridad\\}
+Los servicios para autenticar y validar usuarios se implementaron siguiendo la especificación OAtuh 2.0 (ver sección \ref{sec-oauth}), el marco de trabajo Spring con sus bibliotecas Spring boot y Spring security.\\
+La implementación de la seguridad utilizando Spring Security se divide en tres tareas:
+\begin{enumerate}
+	\item Habilitar filtros de seguridad, en el Código \ref{lst:enable-oauth} se muestra la configuración de necesaria:
+	\begin{enumerate}
+		\item Línea 2: habilita el uso de la especificación OAuth2.
+		\item Línea 7: configuración principal de Spring security para no interponerse con los filtros de OAuth.
+		\item Línea 12: creación del filtro de OAuth.
+	\end{enumerate}
+\begin{lstlisting}[language=Java, caption={Clase para habilitar los filtros de seguridad.}, captionpos=b, label={lst:enable-oauth}]
+@Configuration
+@EnableOAuth2Client
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-\subsubsection{Servicios Web}
-\paragraph{Implementación\\}
-\paragraph{Consumo\\}
+	@Override
+	protected void configure(HttpSecurity http) throws Exception{
+		http.antMatcher("/**").authorizeRequests().anyRequest().authenticated().and().logout().logoutSuccessUrl("/").permitAll().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable();
+		http.authenticationProvider(authenticationProvider);
+	}
+	
+	@Bean
+	public FilterRegistrationBean oauth2ClientFilterRegistration(
+			OAuth2ClientContextFilter filter){
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(filter);
+		registration.setOrder(-100);
+		return registration;
+	}
+}	
+\end{lstlisting}
 
-\subsubsection{Contenido estático}
-\paragraph{Páginas HTML}
-\paragraph{Rutinas de Javascript}
+	\item Habilitar servicios de autorización: se refiere a dar un token de acceso (como lo especifica OAuth 2.0), en el código \ref{lst:enable-auth-server} se muestra la declaración de una clase para la configuración de un servidor de autorización:
+
+\begin{lstlisting}[language=Java, caption={Clase de autenticación de usuarios.}, captionpos=b, label={lst:enable-auth-server}]
+@Configuration
+@EnableAuthorizationServer
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
+}
+\end{lstlisting}
+
+	En el Código \ref{lst:user-auth} se muestra la configuración necesaria para autenticar usuarios:
+	\begin{enumerate}
+		\item Línea 2: inyección del bean que realiza la autenticación de usuarios.
+		\item Línea 4: creación del bean encargado de almacenar los tokens de los usuarios.
+		\item Línea 10: configuración del punto de entrada para autenticación.
+		\item Línea 11: se establece la referencia al bean que autentica usuarios.
+		\item Línea 12: se establece la referencia al bean que administra los tokens de los usuarios.
+	\end{enumerate}
+
+\begin{lstlisting}[language=Java, caption={Configuración de autenticación de usuarios.}, captionpos=b, label={lst:user-auth}]
+@Autowired
+private AuthenticationManager authenticationManager;
+
+@Bean
+public TokenStore tokenStore(){
+	TokenStore tokenStore = new InMemoryTokenStore();
+	return tokenStore;
+}
+
+@Override
+public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception{
+	endpoints.authenticationManager(authenticationManager);
+	endpoints.tokenStore(tokenStore());
+}
+\end{lstlisting}
+
+	En el Código \ref{lst:client-auth} se muestra la configuración para la autenticación del cliente (Frontend):
+
+	\begin{enumerate}
+		\item Líneas 1 a 4: lectura de las credencia les del cliente.
+		\item Línea 10: configuración del protocolo para la autenticación del cliente. 
+	\end{enumerate}
+
+\begin{lstlisting}[language=Java, caption={Clase de autenticación de cliente.}, captionpos=b, label={lst:client-auth}]
+@Value("${oauth.server.client.id}")
+private String clientId;
+@Value("${oauth.server.client.secret}")
+private String clientSecret;
+
+@Autowired
+private EncodedClientDetailsService ecds;
+
+@Override
+public void configure(ClientDetailsServiceConfigurer clients) throws Exception{
+	BaseClientDetails details = new BaseClientDetails();
+	details.setClientId(clientId);
+	details.setClientSecret(clientSecret);
+	details.setAuthorizedGrantTypes(Arrays.asList("password"));
+	ecds.addClientDetails(details);
+	clients.withClientDetails(ecds);
+}
+\end{lstlisting}
+
+
+	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de Internet, es decir, rutinas de javascript, páginas HTML, hojas de estilo e imágenes; o el consumo de servicios Web en el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
+
+	\begin{enumerate}
+		\item Línea 2: habilitar el servidor de recursos.
+		\item Línea 5: configuración del servidor de recursos.
+		\item Línea 7: enunciación de las URLs públicas.
+		\item Línea 8: enunciación de las URLs que requieren de un usuarios autorizado. 
+	\end{enumerate}
+
+\begin{lstlisting}[language=Java, caption={Clase de configuración de servidor de recursos.}, captionpos=b, label={lst:enable-resource-server}]
+@Configuration
+@EnableResourceServer
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
+	@Override
+	public void configure(HttpSecurity http) throws Exception{
+		http.authorizeRequests()
+			.antMatchers(PUBLIC_URLS).permitAll()
+			.anyRequest().authenticated();
+	}
+}
+\end{lstlisting}
+\end{enumerate}
+
+\paragraph{Implementación de los servicios Web de administración\\}
+Los servicios web de administración fueron divididos en dos controles REST de Spring, 
+\begin{enumerate}
+	\item \textbf{DataController}: expone servicios referentes a la gestión de órdenes de reposición, en el Código \ref{lst:data-controller} se muestra la estructura principal de esta clase:
+	\begin{enumerate}
+		\item Línea 1: indicación para crear un un bean que expone servicios REST.
+		\item Línea 3: inyección del bean de MyBatis para administrar órdenes de reposición.
+	\end{enumerate}
+
+\begin{lstlisting}[language=Java, caption={Controlador para exponer servicios Web de órdenes de reposición.}, captionpos=b, label={lst:data-controller}]
+@RestController
+public class DataController{
+	@Autowired
+	private IOrdernesDao ordenesDao;
+}
+\end{lstlisting}
+
+	Dentro de la clase declara como un bean que exponen servicios web se declaran métodos que serán expuestos como un servicio web, en el Código \ref{lst:data-controller} se muestra el servicio web para obtener una orden de reposición:
+	\begin{enumerate}
+		\item Línea 1: la anotación \textbf{RequestMapping} indica como se debe asociar el método URLs por medio de sus parámetros:
+		\begin{enumerate}
+			\item value: URL con la cuál es asociada el método, el parámetro entre corchetes indica que es variable.
+			\item method: método de HTTP al cuál es asociado el método. 
+		\end{enumerate}
+		\item Línea 3: la anotación \textbf{PathVariable} indica que el valor del parámetro es tomado de la URL, en este caso se refiere al número identificador de la orden de reposición buscada.
+		\item Línea 5: obtención de la orden de reposición.
+	\end{enumerate}
+
+\begin{lstlisting}[language=Java, caption={Servicio Web para obtener una orden de reposición.}, captionpos=b, label={lst:data-controller}]
+@RequestMapping(value = "/_data_/orden/{id}",
+				method = RequestMethod.GET)
+public OrdenImss getOrden(@PathVariable("id") Long id) throws SQLException{
+
+	return ordenesDao.getOrdenById(id);
+
+}
+\end{lstlisting}
+
+	\item \textbf{ReportController}: expone servicios referentes a la generación de reportes, en el Código \ref{lst:report-controller} se muestra la estructura principal de esta clase:
+\begin{lstlisting}[language=Java, caption={Controlador para exponer servicios Web de generación de reportes.}, captionpos=b, label={lst:report-controller}]
+@Controller
+public class ReportController{
+	@Autowired
+	private IOrdenesDao ordenesDao;
+	
+	@Autowired
+	private IReportService reportService;
+}
+\end{lstlisting}
+
+	En el Código \ref{lst:report-controller-gen} se muestra el servicio web para la generación de reportes:
+	\begin{enumerate}
+		\item Línea 1: la anotación \textbf{RequestMapping} indica como se debe asociar el método URLs por medio de sus parámetros:
+		\begin{enumerate}
+			\item value: URL con la cuál es asociada el método.
+			\item method: método de HTTP al cuál es asociado el método.
+			\item produces: indica el formato de respuesta, en este caso es un flujo de datos.
+		\end{enumerate}
+		\item Líneas 12 y 13: traducción de las fechas que acotan el reporte a un objeto Date.
+		\item Línea 15: delegación de la generación del reporte al servicio de generación de reportes.
+		\item Línea 16: si el reporte no es vacío, entonces se manda el reporte como flujo de bytes.
+		\item Línea 17: si el reporte es vacío se manda un mensaje de error.
+	\end{enumerate}
+
+\begin{lstlisting}[language=Java, caption={Servicio Web para generar un reporte.}, captionpos=b, label={lst:report-controller-gen}]
+@RequestMapping(value = "/_report_/generate",
+				method = RequestMethod.GET,
+				produces = "application/octet-stream")
+public void generateReport(HttpServletRequest request,
+						   HttpServletResponse response,
+						   @RequestParam("reporte") ReportType rType,
+						   @RequestParam("fecIni") String fecIni,
+						   @RequestParam("fecFin") String fecFin,
+						   @RequestParam("horIni") String horIni,
+						   @RequestParam("horFin") String horFin)
+					throws IOException{
+	Date low = parseDate(fecIni, horIni);
+	Date high = parseDate(fecFin, horFin);
+	
+	String pathfile = reportService.generate(rType, low, high);
+	if(pathfile !=null && !pathfile.isEmpty()){
+		writeOut(pathfile, request, response);
+	}else{
+		Writer out = response.getWriter();
+		out.append("No se han encontrado resultados");
+		out.flush();
+	}
+}
+\end{lstlisting}
+
+\end{enumerate}
+
+
+\subsubsection{Implementación del Fronend}
+
+Los servicios para la gestión de órdenes de reposición y reportes.
+
+\paragraph{autenticación de usuario\\}
+
+\paragraph{Consumo de servicios web\\}
+
+\paragraph{Contenido estático\\}
+\begin{enumerate}
+	\item Páginas HTML
+	\item Rutinas de Javascript
+\end{enumerate}
