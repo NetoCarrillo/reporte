@@ -10,7 +10,6 @@ La implementación del Backend está implementada utilizando el marco de trabajo
 \begin{itemize}
  	\item Spring boot: provee un ambiente de desarrollo y ejecución para aplicaciones basadas en el marco de trabajo Spring (ver sección \ref{sec-spring-boot}). 
  	\item Spring security: biblioteca para los servicios de autenticación y autorización de usuarios (ver sección \ref{sec-spring-security}).
- 	\item Spring Web: biblioteca para exponer servicios Web (ver sección \ref{sec-spring-web}).
 \end{itemize}
 
 \paragraph{Implementación de los servicios de seguridad\\}
@@ -226,10 +225,18 @@ public void generateReport(HttpServletRequest request,
 
 
 \subsubsection{Implementación del Fronend}
+El Frontend es conocido desde el servidor de aplicaciones como contenido estático, se compone de elementos estructurales y elementos de comportamiento.
+\begin{itemize}
+	\item Estructurales: documentos HTML, hojas de estilo e imágenes, definen como se muestra la información al usuario.
+	\item Comportamiento: rutinas de Javascript, estas rutinas pueden modificar la estructura del HTML durante la ejecución, pero tales cambios no son persistentes, también se encargan de realizar peticiones al servidores de autorizaciones y al servidor de recursos.
+\end{itemize}
+
+La implementación del Frontend está basada en AngularJS, 
+
 
 Los servicios para la gestión de órdenes de reposición y reportes.
 
-\paragraph{autenticación de usuario\\}
+\paragraph{Autenticación de usuario\\}
 
 \paragraph{Consumo de servicios web\\}
 

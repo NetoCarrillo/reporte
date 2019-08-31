@@ -188,7 +188,27 @@ La herramienta Flying Saucer es descrita en su página de Internet\cite{FlyingSa
 
 %-------------------------------------------------------------------------------
 \subsection{AngularJS}\label{sec-angularjs}
-\textcolor{blue}{Vale por la descripción de angularjs}.
+
+Soni\cite{FullStackAngularJS} describe al proyecto AngularJS:
+\begin{quote}
+	AngularJS es una biblioteca escrita en Javascript para desarrollar aplicaciones Web, mantenida por Google\textsuperscript{\textcopyright}\footnote{Karla, no se si Google se debe escribir con el símbolo de copyright \textcopyright o trademark \texttrademark ¿Sabes como se decide eso?}. Es un marco de trabajo de código abierto y se enfoca en los retos de aplicaciones de una página. Una aplicación Web basada en AgularJS sigue el patrón de diseño MVC, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares.
+\end{quote}
+
+\subsubsection{Componente básicos de AngularJS}
+Al seguir el patrón MVC, AngularJS permite dividir la aplicación componentes, a continuación se enlistan los componentes más importantes para entender una aplicación basada en AngularJS\cite{FullStackAngularJS, LearningAngularJS, AngularJSEssentials}:
+\begin{enumerate}
+	\item Módulo \textit{(module)}: es el contenedor para los demás componentes de AngularJS, cada módulo tiene su propia estructura de directorios para cada tipo de componente de AngularJS, y cada página en AngularJS tiene un módulo.
+	\item Alcance \textit{(scope)}: es una representación en Javascript de datos usados para llenar una vista en una página Web. Los datos puede de cualquier fuente como una base de datos o un servicio Web.
+	\item Vista \textit{(view)}: es la orquestación de plantillas (HTML) y directivas, las vistas son construidas dinámicamente en tiempo de ejecución al mezclas las plantillas con los datos del alcance, el resultado es código HTML puro.
+	\item Plantilla \textit{(template)}: son fragmentos de código HTML con directivas y expresiones.
+	\item Directiva \textit{(directive)}: es una extensión al vocabulario de HTML que permite definir nuevos comportamientos, entonces permite desarrollar componentes reutilizables.
+	\item Expresión \textit{(expression)}: las expresiones son un lenguaje especial de AngularJS para ligar datos del alcance dentro de una plantilla HTML.
+	\item Controlador \textit{(controller)}: es el control de patrón de diseño MVC, contiene la lógica de negocio y su función principal es exponer los datos a la vista utilizando el alcance.
+	\item Ligado de datos \textit{(data binding)}: es el proceso de ligar datos del modelo a la vista en ambos sentidos, es decir, un cambio originado en una parte implica el cambio en la otra parte.
+	\item Modelo \textit{(model)}: es el modelo del patrón de diseño MVC, es decir, son los datos.
+	\item Servicio \textit{(service)}: son objetos que single el patrón de diseño Singleton y proveen funcionalidad específica a la aplicación Web.
+	\item Inyección de dependencias \textit{(dependency injection)}: es el proceso de inyectar dependencias en tiempo de ejecución, es utilizado para consumir los servicios.
+\end{enumerate}
 
 %-------------------------------------------------------------------------------
 \subsection{Sahi}\label{sec-sahi}
