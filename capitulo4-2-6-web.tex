@@ -225,23 +225,200 @@ public void generateReport(HttpServletRequest request,
 
 
 \subsubsection{Implementación del Fronend}
-El Frontend es conocido desde el servidor de aplicaciones como contenido estático, se compone de elementos estructurales y elementos de comportamiento.
-\begin{itemize}
-	\item Estructurales: documentos HTML, hojas de estilo e imágenes, definen como se muestra la información al usuario.
-	\item Comportamiento: rutinas de Javascript, estas rutinas pueden modificar la estructura del HTML durante la ejecución, pero tales cambios no son persistentes, también se encargan de realizar peticiones al servidores de autorizaciones y al servidor de recursos.
-\end{itemize}
-
-La implementación del Frontend está basada en AngularJS, 
-
-
-Los servicios para la gestión de órdenes de reposición y reportes.
-
-\paragraph{Autenticación de usuario\\}
-
-\paragraph{Consumo de servicios web\\}
-
-\paragraph{Contenido estático\\}
+La implementación del Frontend está basada en el marco de trabajo AngularJS (ver sección \ref{sec-angular}), en el Código \ref{lst:portal-js} como se muestra la implementación de la aplicación con AngularJS:
 \begin{enumerate}
-	\item Páginas HTML
-	\item Rutinas de Javascript
+	\item Línea 1: creación del módulo de AngularJS.
+	\item Líneas 2 a 19: configuración de las vistas y rutas.
 \end{enumerate}
+\begin{lstlisting}[language=Javascript, caption={Módulo de AngularJS para el portalWeb}, captionpos=b, label={lst:portal-js}]
+var app = angular.module('portalApp', ['ngRoute', 'ui.bootstrap']);
+portal.config(function($routeProvider, $httpProvider){
+	$routeProvider
+		.when('/',
+			{templateUrl : 'login.html', controller : 'loginCtrl'})
+		.when('/login',
+			{templateUrl : 'login.html', controller : 'loginCtrl'})
+		.when('/layout',
+			{templateUrl: 'layout.html', controller: 'layoutCtrl'})
+		.when('/catalog',
+			{templateUrl: 'catalogos.html', controller: 'catalogosCtrl'})
+		.when('/search',
+			{templateUrl: 'ordenesFind.html', controller: 'ordenesFinderCtrl'})
+		.when('/ordenesList',
+			{templateUrl: 'ordenesList.html', controller: 'ordenesListCtrl'})
+		.when('/ordenesEdit/:ordenId',
+			{templateUrl : 'ordenesEdit.html', controller : 'ordenesEditCtrl'})
+		.otherwise({redirectTo : '/'});
+});
+\end{lstlisting}
+
+El Frontend cuenta con las siguientes vistas:
+
+\paragraph{1. Vista Acceso\\}
+Los flujos de autenticación y autorización del sistema AutoSA se hacen siguiendo la especificación de OAuth (ver sección \ref{sec-oauth}). La autenticación se muestra al usuario mediante la plantilla del Código \ref{lst:longin-view} donde se ligan el nombre de usuario y la contraseña con el modelo de angular.
+
+\begin{lstlisting}[language=HTML, caption={Plantilla HTML de acceso.}, captionpos=b, label={lst:longin-view}]
+<form role="form" ng-submit="login()">
+	<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" class="form-control" id="username" name="username" ng-model="credentials.username"/>
+	</div>
+	<div class="form-group">
+		<label for="password">Password:</label>
+		<input type="password" class="form-control" id="password" name="password" ng-model="credentials.password"/>
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+\end{lstlisting}
+
+
+Como se aprecia en la Figura \ref{lst:longin-view} se liga función \consolatext{login} al evento de envío de la forma, la implementación de la función se muestra en el Código \ref{lst:login-ctrl-js}:
+\begin{enumerate}
+	\item Línea 1, llamada a la función \consolatext{login} del servicio de autenticación, \consolatext{LoginService},
+	\item Líneas 2 y 3, en caso de que la llamada sea exitosa se agrega el token de acceso a los encabezados de las llamadas a servicios Web, con este paso no es necesario hacer de manera explícita la autorización a recursos.
+\end{enumerate}
+
+\begin{lstlisting}[language=Javascript, caption={Uso del servicio que optine un token de acceso.}, captionpos=b, label={lst:login-ctrl-js}]
+LoginService.login($scope.credentials)
+	.success(function(data){
+		$http.defaults.headers.common.Authorization = 'Bearer ' + data.access_token;
+		$rootScope.authenticated = true;
+		$location.path('/layout').replace();
+		$scope.error = false;
+})
+\end{lstlisting}
+
+El servicio \consolatext{LoginService} es el encargado de efectuar la llamada al servicio Web de token de acceso, el Código \ref{lst:login-service-js} se muestra la implementación de tal servicio:
+\begin{enumerate}
+	\item Línea 1: declaración del servicio \consolatext{LoginService}.
+	\item Línea 2: declaración de la función \consolatext{login}, esta función es la encargada de llamar al servicio Web para obtener un token de acceso.
+	\item Línea 3: mapa de configuración para la llamada al servicio Web de token de acceso, se muestran únicamente las propiedades más relevantes.
+	\item Línea 4: URL del servicio Web.
+	\item Línea 7: encabezado con las credenciales del cliente de OAuth.
+	\item Línea 10: nombre de usuario.
+	\item Línea 11: contraseña codificada del usuario.
+	\item Línea 12: identificador del cliente de OAuth.
+	\item Línea 13: tipo de flujo de OAuth.
+	\item Línea 16: llamada al servicio Web de token de acceso.
+\end{enumerate}
+\begin{lstlisting}[language=Javascript, caption={Servicio en AngularJS para obtener un token de acceso.}, captionpos=b, label={lst:login-service-js}]
+portalSrvc.service('LoginService', function($http, $q){
+	this.login = function(credentials){
+		var settings = {
+			"url": "http://localhost:8080/oauth/token",
+			"method": "POST",
+			"headers": {
+				"Authorization": "Basic YWNtZTphY21lc2VjcmV0",
+			},
+			"params": {
+				"username": credentials.username,
+				"password": btoa(credentials.password),
+				"client_id": "acme",
+				"grant_type": "password"
+			}
+		};
+		return $http(settings);
+	};
+});
+\end{lstlisting}
+
+\paragraph{2. Vista Reportes\\}
+
+Servicio de angular para consumir el servicio Web que ofrece la generación de reportes.
+
+Código \ref{lst:report-service-js}
+\begin{enumerate}
+	\item Línea 1: declaración del servicio de reportes.
+	\item Línea 2: declaración de la función que llama al servicio Web.
+	\item Línea 3: construcción de los parámetros para la URL del servicio Web.
+	\item Línea 4: consulta del servicio Web en una nueva página del explorador de Internet.
+\end{enumerate}
+\begin{lstlisting}[language=Javascript, caption={Servicio en AngularJS para pedir la generación de un reporte.}, captionpos=b, label={lst:report-service-js}]
+app.service('ReportService', function($http, $q, $window){
+	this.buildReport = function(filtro){
+		var params = 'fecIni=' + encodeURIComponent(filtro.fecIni.toJSON()) + "&" + 'fecFin=' + encodeURIComponent(filtro.fecFin.toJSON()) + "&" + 'horIni=' + encodeURIComponent(filtro.horIni.toJSON()) + "&" + 'horFin=' + encodeURIComponent(filtro.horFin.toJSON()) + "&" + 'reporte=' + encodeURIComponent(filtro.reporte.key);
+		$window.open("_report_/generate?" + params);
+	};
+});
+\end{lstlisting}
+
+
+Controlador para la vista de generación de reportes. 
+Código \ref{lst:report-ctrl-js}
+\begin{enumerate}
+	\item Línea 1: declaración del controlador
+	\item Línea 2: definición de los valores iniciales del modelo.
+	\item Línea 9: función que consume el servicio de generación de reportes.
+\end{enumerate}
+\begin{lstlisting}[language=Javascript, caption={Servicio en AngularJS para pedir la generación de un reporte.}, captionpos=b, label={lst:report-ctrl-js}]
+app.controller('reportCtrl', function($scope, $window, $http, $timeout, ReportService){
+	$scope.filtro = {
+		fecIni: new Date(),
+		horIni: new Date(0, 0, 0, 0, 0, 0, 0),
+		fecFin: new Date(),
+		horFin: new Date(0, 0, 0, 23, 59, 0, 0),
+	};
+	
+	$scope.generate = function($event){
+		ReportService.buildReport($scope.filtro);
+	};
+});
+\end{lstlisting}
+
+Declaración del formulario para la generación de reportes.
+Código \ref{lst:view-report-form}
+\begin{enumerate}
+	\item Línea 1: uso de la directiva \consolatext{ng-form} para la generación.
+	\item Línea 3: en este espacio se encuentran los campos del formulario.
+	\item Líneas 4 y 5: botón para enviar el formulario.
+	\begin{enumerate}
+		\item La directiva \consolatext{ng-click} liga el evento de pulsar el botón con la función del controlador.
+		\item La directiva \consolatext{ng-disabled} estable que el botón será habilitado cuando se cumpla la expresión que contiene, en este caso, que la forma tenga datos válidos.
+	\end{enumerate}
+\end{enumerate}
+\begin{lstlisting}[language=HTML, captionpos=b, caption={}, label={lst:view-report-form}]
+<ng-form name="reportForm">
+	<h3>Generaci&oacute;n de <i>layout</i></h3>
+	...
+	<input type="submit" value="Generar" class="btn btn-primary"
+			ng-click="generate($event)" ng-disabled="reportForm.$invalid"/>	
+</ng-form>
+\end{lstlisting}
+
+Control para seleccionar el tipo de reporte.
+Código \ref{lst:view-report-type-select}
+\begin{enumerate}
+	\item \consolatext{ng-model} liga al valor de la lista con el modelo.
+	\item \consolatext{ng-options} genera las opciones de la lista.
+	\item \consolatext{ng-required} indica que es necesario seleccionar un elemento de la lista.
+\end{enumerate}
+\begin{lstlisting}[language=HTML, captionpos=b, caption={}, label={lst:view-report-type-select}]
+<select ng-model="filtro.reporte" name="reporte"
+		ng-options="item.name for item in reportTypes"
+		ng-required="true"
+		class="form-control"></select>
+\end{lstlisting}
+
+Control para seleccionar fecha y hora de inicio (la selección para la fecha y hora de término es idéntico salvo que cambia la referencia al modelo).
+Código \ref{lst:view-report-datetime}
+\begin{enumerate}
+	\item Línea 1: la directiva \consolatext{datepicker-popup} prepara el elemento para manejar el formato de fecha.
+	\item Línea 7: la directiva \consolatext{timepicker} agrega el comportamiento para seleccionar la hora del día.
+\end{enumerate}
+\begin{lstlisting}[language=HTML, captionpos=b, caption={}, label={lst:view-report-datetime}]
+<input class="form-control" type="text" datepicker-popup="dd/MM/yyyy" ng-model="filtro.fecIni" is-open="startDateOpen" ng-required="true" starting-day="1" />
+
+<button type="button" class="btn btn-default" ng-click="openStartDate($event)">
+	<i class="glyphicon glyphicon-calendar"></i>
+</button>
+
+<timepicker ng-model="filtro.horIni" minute-step="30" ng-class="form-control"></timepicker>
+\end{lstlisting}
+
+\paragraph{3. Vista Catálogos\\}
+
+\paragraph{4. Vista Búsqueda\\}
+
+\paragraph{5. Vista Orden\\}
+En esta vista se ofrece al usuario la visualización de una orden de reposición, la modificación de los datos de la misma y la generación del acuse de envío.
+
