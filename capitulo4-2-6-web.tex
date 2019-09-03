@@ -235,15 +235,15 @@ var app = angular.module('portalApp', ['ngRoute', 'ui.bootstrap']);
 portal.config(function($routeProvider, $httpProvider){
 	$routeProvider
 		.when('/',
-			{templateUrl : 'login.html', controller : 'loginCtrl'})
+			{templateUrl : 'acceso.html', controller : 'loginCtrl'})
 		.when('/login',
-			{templateUrl : 'login.html', controller : 'loginCtrl'})
-		.when('/layout',
-			{templateUrl: 'layout.html', controller: 'layoutCtrl'})
-		.when('/catalog',
+			{templateUrl : 'acceso.html', controller : 'loginCtrl'})
+		.when('/reportes',
+			{templateUrl: 'reportes.html', controller: 'reportesCtrl'})
+		.when('/catalogo',
 			{templateUrl: 'catalogos.html', controller: 'catalogosCtrl'})
-		.when('/search',
-			{templateUrl: 'ordenesFind.html', controller: 'ordenesFinderCtrl'})
+		.when('/buscar',
+			{templateUrl: 'busqueda.html', controller: 'ordenesFinderCtrl'})
 		.when('/ordenesList',
 			{templateUrl: 'ordenesList.html', controller: 'ordenesListCtrl'})
 		.when('/ordenesEdit/:ordenId',
@@ -323,10 +323,80 @@ portalSrvc.service('LoginService', function($http, $q){
 \end{lstlisting}
 
 \paragraph{2. Vista Reportes\\}
+La vista Reportes ofrece al usuario la generación de reportes, pudiendo seleccionar fechas y horas de los días en los que se atendieron las órdenes de reposición que conforman el reporte.\\
+La plantilla HTML tiene una forma como elemento principal, en el Código \ref{lst:view-report-form} se muestra la declaración de la forma y el botón para enviar el formulario, el botón está ligado a la función \consolatext{generate} del controlador \consolatext{reportesCtrl}:
 
-Servicio de angular para consumir el servicio Web que ofrece la generación de reportes.
+\begin{enumerate}
+	\item Línea 1: uso de la directiva \consolatext{ng-form} para la generación.
+	\item Línea 3: en este espacio se encuentran los campos del formulario.
+	\item Líneas 4 y 5: botón para enviar el formulario.
+	\begin{enumerate}
+		\item La directiva \consolatext{ng-click} liga el evento de pulsar el botón con la función del controlador.
+		\item La directiva \consolatext{ng-disabled} estable que el botón será habilitado cuando se cumpla la expresión que contiene, en este caso, que la forma tenga datos válidos.
+	\end{enumerate}
+\end{enumerate}
 
-Código \ref{lst:report-service-js}
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Forma de generación de reportes}, label={lst:view-report-form}]
+<ng-form name="reportForm">
+	<h3>Generaci&oacute;n de <i>layout</i></h3>
+	...
+	<input type="submit" value="Generar" class="btn btn-primary"
+			ng-click="generate($event)" ng-disabled="reportForm.$invalid"/>	
+</ng-form>
+\end{lstlisting}
+
+La forma contiene un control para seleccionar el tipo de reporte como se muestra en el Código \ref{lst:view-report-type-select}:
+\begin{enumerate}
+	\item \consolatext{ng-model} liga al valor de la lista con el modelo.
+	\item \consolatext{ng-options} genera las opciones de la lista.
+	\item \consolatext{ng-required} indica que es necesario seleccionar un elemento de la lista.
+\end{enumerate}
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Lista para seleccionar el tipo de reporte.}, label={lst:view-report-type-select}]
+<select ng-model="filtro.reporte" name="reporte"
+		ng-options="item.name for item in reportTypes"
+		ng-required="true"
+		class="form-control"></select>
+\end{lstlisting}
+
+La forma tiene dos controles para seleccionar fecha y hora de inicio y término, en el Código \ref{lst:view-report-datetime} se muestra el control para la fecha y hora de inicio (la selección para la fecha y hora de término es idéntico salvo que cambia la referencia al modelo):
+\begin{enumerate}
+	\item Línea 1: la directiva \consolatext{datepicker-popup} prepara el elemento para manejar el formato de fecha.
+	\item Línea 7: la directiva \consolatext{timepicker} agrega el comportamiento para seleccionar la hora del día.
+\end{enumerate}
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Controles para seleccionar fecha y hora en la generación de reportes.}, label={lst:view-report-datetime}]
+<input class="form-control" type="text" datepicker-popup="dd/MM/yyyy" ng-model="filtro.fecIni" is-open="startDateOpen" ng-required="true" starting-day="1" />
+
+<button type="button" class="btn btn-default" ng-click="openStartDate($event)">
+	<i class="glyphicon glyphicon-calendar"></i>
+</button>
+
+<timepicker ng-model="filtro.horIni" minute-step="30" ng-class="form-control"></timepicker>
+\end{lstlisting}
+
+La forma de generación está ligada al control \consolatext{reportesCtrl} cuya implementación principal se muestra en el Código \ref{lst:report-ctrl-js}:
+
+\begin{enumerate}
+	\item Línea 1: declaración del controlador
+	\item Línea 2: definición de los valores iniciales del modelo.
+	\item Línea 9: función que consume el servicio \consolatext{ReportService} para pedir la generación del reporte.
+\end{enumerate}
+
+\begin{lstlisting}[language=Javascript, caption={Servicio en AngularJS para pedir la generación de un reporte.}, captionpos=b, label={lst:report-ctrl-js}]
+app.controller('reporteCtrl', function($scope, $window, $http, $timeout, ReportService){
+	$scope.filtro = {
+		fecIni: new Date(),
+		horIni: new Date(0, 0, 0, 0, 0, 0, 0),
+		fecFin: new Date(),
+		horFin: new Date(0, 0, 0, 23, 59, 0, 0),
+	};
+	
+	$scope.generar = function($event){
+		ReportService.buildReport($scope.filtro);
+	};
+});
+\end{lstlisting}
+
+El Código \ref{lst:report-service-js} muestra la implementación del servicio \consolatext{ReportService}:
 \begin{enumerate}
 	\item Línea 1: declaración del servicio de reportes.
 	\item Línea 2: declaración de la función que llama al servicio Web.
@@ -342,83 +412,84 @@ app.service('ReportService', function($http, $q, $window){
 });
 \end{lstlisting}
 
-
-Controlador para la vista de generación de reportes. 
-Código \ref{lst:report-ctrl-js}
-\begin{enumerate}
-	\item Línea 1: declaración del controlador
-	\item Línea 2: definición de los valores iniciales del modelo.
-	\item Línea 9: función que consume el servicio de generación de reportes.
-\end{enumerate}
-\begin{lstlisting}[language=Javascript, caption={Servicio en AngularJS para pedir la generación de un reporte.}, captionpos=b, label={lst:report-ctrl-js}]
-app.controller('reportCtrl', function($scope, $window, $http, $timeout, ReportService){
-	$scope.filtro = {
-		fecIni: new Date(),
-		horIni: new Date(0, 0, 0, 0, 0, 0, 0),
-		fecFin: new Date(),
-		horFin: new Date(0, 0, 0, 23, 59, 0, 0),
-	};
-	
-	$scope.generate = function($event){
-		ReportService.buildReport($scope.filtro);
-	};
-});
-\end{lstlisting}
-
-Declaración del formulario para la generación de reportes.
-Código \ref{lst:view-report-form}
-\begin{enumerate}
-	\item Línea 1: uso de la directiva \consolatext{ng-form} para la generación.
-	\item Línea 3: en este espacio se encuentran los campos del formulario.
-	\item Líneas 4 y 5: botón para enviar el formulario.
-	\begin{enumerate}
-		\item La directiva \consolatext{ng-click} liga el evento de pulsar el botón con la función del controlador.
-		\item La directiva \consolatext{ng-disabled} estable que el botón será habilitado cuando se cumpla la expresión que contiene, en este caso, que la forma tenga datos válidos.
-	\end{enumerate}
-\end{enumerate}
-\begin{lstlisting}[language=HTML, captionpos=b, caption={}, label={lst:view-report-form}]
-<ng-form name="reportForm">
-	<h3>Generaci&oacute;n de <i>layout</i></h3>
-	...
-	<input type="submit" value="Generar" class="btn btn-primary"
-			ng-click="generate($event)" ng-disabled="reportForm.$invalid"/>	
+\paragraph{3. Vista Catálogos\\}
+La vista \textbf{Catálogos} ofrece al usuario la operación para actualizar catálogos. La tiene componente principal el formulario con la opciones para seleccionar el catálogo. En el Código \ref{lst:view-catalog-tmpl} se muestra la estructura principal de la plantilla:\\
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Plantilla de la vista que muestra los catálogos.}, label={lst:view-catalog-tmpl}]
+<ng-form>
+	<h3>Cat&aacute;logos</h3>
 </ng-form>
 \end{lstlisting}
 
-Control para seleccionar el tipo de reporte.
-Código \ref{lst:view-report-type-select}
+El contenido del formulario (ver Código \ref{lst:view-catalog-componentes} muestra los siguientes componentes:
 \begin{enumerate}
-	\item \consolatext{ng-model} liga al valor de la lista con el modelo.
-	\item \consolatext{ng-options} genera las opciones de la lista.
-	\item \consolatext{ng-required} indica que es necesario seleccionar un elemento de la lista.
+	\item Una lista para seleccionar el catálogo.
+	\item Un componente para seleccionar el archivo que se utilizará para actualizar la información del catálogo seleccionado.
+	\item Un botón realizar la actualización del catálogo.
 \end{enumerate}
-\begin{lstlisting}[language=HTML, captionpos=b, caption={}, label={lst:view-report-type-select}]
-<select ng-model="filtro.reporte" name="reporte"
-		ng-options="item.name for item in reportTypes"
-		ng-required="true"
-		class="form-control"></select>
-\end{lstlisting}
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Componentes del formulario para seleccionar catálogo.}, label={lst:view-catalog-componentes}]
+<select ng-model="filtro.catalogo" ng-options="catalogo.name for catalogo in catalogos" class="form-control">
+</select>
 
-Control para seleccionar fecha y hora de inicio (la selección para la fecha y hora de término es idéntico salvo que cambia la referencia al modelo).
-Código \ref{lst:view-report-datetime}
-\begin{enumerate}
-	\item Línea 1: la directiva \consolatext{datepicker-popup} prepara el elemento para manejar el formato de fecha.
-	\item Línea 7: la directiva \consolatext{timepicker} agrega el comportamiento para seleccionar la hora del día.
-\end{enumerate}
-\begin{lstlisting}[language=HTML, captionpos=b, caption={}, label={lst:view-report-datetime}]
-<input class="form-control" type="text" datepicker-popup="dd/MM/yyyy" ng-model="filtro.fecIni" is-open="startDateOpen" ng-required="true" starting-day="1" />
+<label class="col-sm-2 label-control">Archivo</label>
+<div class="col-sm-3">
+	<input type="file" file-model="filtro.archivo" class="form-control"/>
+</div>
 
-<button type="button" class="btn btn-default" ng-click="openStartDate($event)">
-	<i class="glyphicon glyphicon-calendar"></i>
+<button class="btn btn-primary" ng-click="update()">
+	<span class="glyphicon glyphicon-ok"></span>
+	Cargar
 </button>
-
-<timepicker ng-model="filtro.horIni" minute-step="30" ng-class="form-control"></timepicker>
 \end{lstlisting}
 
-\paragraph{3. Vista Catálogos\\}
+La vista está relacionada con el control \consolatext{catalogosCtrl}, por su parte el botón para actualizar el catálogo seleccionado está ligado a la función \consolatext{update}, en el Código \ref{lst:catalogo-ctrl-js} se muestra la implementación del control de la vista:
+
+\begin{enumerate}
+	\item Línea 1: creación del control. 
+	\item Línea 2: creación de la función \consolatext{update}, esta función está encargada de utilizar el servicio de catálogos para realizar la actualización del catálogo.
+	\item Línea 3: Llamada al servicio \consolatext{CatalogService}.
+\end{enumerate}
+
+\begin{lstlisting}[language=Javascript, caption={Controlador de la vista Catálogo.}, captionpos=b, label={lst:catalogo-ctrl-js}]
+portalCtrl.controller('catalogosCtrl', function($scope, CatalogService){
+	$scope.update = function(){
+		CatalogService.updateCatalog($scope.filtro.archivo, $scope.filtro.catalogo.name);
+	};
+});
+
+\end{lstlisting}
+
+
+El Código \ref{lst:catalogo-service-js} muestra la implementación del servicio \consolatext{CatalogService}:
+\begin{enumerate}
+	\item Línea 1: creación del servicio \consolatext{CatalogService}.
+	\item Línea 2: declaración de la función \consolatext{updateCatalog}.
+	\item Líneas 3 y 4: agregar el documento con el contenido del catálogo actualizado a la llamada al servicio Web para actualizar el catálogo.
+	\item Línea 5: llamada el servicio Web que actualiza el catálogo.
+\end{enumerate}
+\begin{lstlisting}[language=Javascript, caption={Servicio en AngularJS actualizar un catálogo.}, captionpos=b, label={lst:catalogo-service-js}]
+portalSrvc.service('CatalogService', function($http){
+	this.updateCatalog = function(file, catalog){
+		var fd = new FormData();
+		fd.append('file', file);
+		$http.post('_data_/catalog/load/' + catalog, fd, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		})
+		.success(function(data){
+			window.alert(data);
+		})
+		.error(function(data){
+			window.alert("fail");
+		});
+    };	
+});
+\end{lstlisting}
 
 \paragraph{4. Vista Búsqueda\\}
+\textbf{Búsqueda}
+\textbf{Lista de órdenes}
 
 \paragraph{5. Vista Orden\\}
+
 En esta vista se ofrece al usuario la visualización de una orden de reposición, la modificación de los datos de la misma y la generación del acuse de envío.
 
