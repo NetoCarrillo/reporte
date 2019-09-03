@@ -43,7 +43,7 @@
 
 % Incluir subsubsection en el índice
 \setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
+\setcounter{tocdepth}{2}
 
 % Landscape pages on demand
 \usepackage{lscape}
@@ -57,56 +57,32 @@
 \renewcommand{\lstlistingname}{Código}
 \renewcommand{\lstlistlistingname}{Índice de códigos}
 \lstset{ %Formatting for code in appendix
-%    language=Matlab,
-%    basicstyle=\footnotesize,
 	basicstyle = \small \ttfamily , %% Sets listing font and size.
 	breaklines=true,
 	breakatwhitespace=false,
-	frame = trBL,
+	frame = single, %trBL
 	numberstyle = \tiny,
 	numbers=left,
 	showstringspaces=false,
 	stepnumber=1,
 	tabsize=4,
 }
+
 \renewcommand{\lstlistoflistings}{
 	\begingroup
 		\tocfile{\lstlistlistingname}{lol}
 	\endgroup
 }
-%\definecolor{darkgray}{rgb}{.4,.4,.4}
-%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
 
 \lstdefinelanguage{JavaScript}{
   keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
-%  keywordstyle=\color{blue}\bfseries,
   ndkeywords={class, export, boolean, throw, implements, import, this},
-%  ndkeywordstyle=\color{darkgray}\bfseries,
-%  identifierstyle=\color{black},
   sensitive=false,
   comment=[l]{//},
   morecomment=[s]{/*}{*/},
-%  commentstyle=\color{purple}\ttfamily,
-%  stringstyle=\color{red}\ttfamily,
   morestring=[b]',
   morestring=[b]"
 }
-
-%\lstset{
-%   language=JavaScript,
-%   backgroundcolor=\color{lightgray},
-%   extendedchars=true,
-%   basicstyle=\footnotesize\ttfamily,
-%   showstringspaces=false,
-%   showspaces=false,
-%   numbers=left,
-%   numberstyle=\footnotesize,
-%   numbersep=9pt,
-%   tabsize=2,
-%   breaklines=true,
-%   showtabs=false,
-%   captionpos=b
-%}
 
 % Estilos
 \newenvironment{consolaenv}{\fontfamily{pcr}\selectfont}{\par}

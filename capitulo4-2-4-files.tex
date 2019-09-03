@@ -1,0 +1,47 @@
+\subsection{Sistema de archivos}
+El componente Sistema de archivos es el encargado de actuar como medio de comunicación entre el sistema AutoSA y el sistema de archivos del sistema operativo donde se ejecuta el sistema AutoSA. En particular este componente cumple con dos funciones:
+\begin{enumerate}
+	\item Lectura de configuración: leer un archivo de propiedades en formato llave valor.
+	\item Escritura de archivos: escribir un flujo de bytes al sistema de archivos del sistema operativo
+\end{enumerate}
+Para las funciones anteriores se ha utilizado las bibliotecas de Java para la lectura y escritura de archivos, en los siguientes apartados se mostrará la implementación de las funciones descritas anteriormente.
+
+\subsubsection{Lectura de configuración}
+La lectura de valores de configuración se hace mediante la lectura del archivo de propiedades dentro de un objeto de la clase \textbf{Properties} del paquete \textbf{java.util}, la lectura de la información del archivo de propiedades se logra utilizando el paquete Java IO, a continuación se detalla la descripción anterior explicando el Código \ref{lst:fs-read}:
+
+\begin{enumerate}
+ 	\item Línea 1: creación de la instancia de la clase Properties.
+ 	\item Línea 2: apertura del flujo de datos del sistema de archivos.
+ 	\item Línea 3: lectura de los datos dentro del objeto Properties.
+ \end{enumerate}
+
+\begin{lstlisting}[language=Java, caption={Lectura de un archivo de propiedades.}, captionpos=b, label={lst:fs-read}]
+Properties props = new Properties();
+try(InputStream is = new FileInputStream(new File(CONFIG_PATH, CONFIG_FILENAME));){
+	props.load(is);
+}
+\end{lstlisting}
+
+\subsubsection{Almacenamiento}
+El almacenamiento de archivos en el proyecto AutoSA se utiliza cuando se desea generar un reporte, para esto es necesario contar con la plantilla del reporte y copiarla a un archivo nuevo con el fin de que posteriormente sea utilizado para vaciar el contenido del reporte.\\
+Lo anterior se ejemplifica con los siguientes códigos:
+\begin{enumerate}
+	\item Obtener la ruta de las plantillas en el sistema operativo como se muestra en el Código \ref{lst:fs-read-prop}.
+	\begin{lstlisting}[language=Java, caption={Obtención de las rutas de las plantillas.}, captionpos=b, label={lst:fs-read-prop}]
+	Path headersTmpl = Paths.get(props.getProperty("is.report.headers.tmpl"));
+	Path contentTmpl = Paths.get(props.getProperty("is.report.content.tmpl"));
+	Path headersPath = Paths.get(props.getProperty("is.report.out.path"), headersTmpl.getFileName().toString());
+	Path contentPath = Paths.get(props.getProperty("is.report.out.path"), contentTmpl.getFileName().toString());
+	\end{lstlisting}
+
+	\item Utilizando la clases de Java dedicadas al manejo de lectura y escritura se copia la plantilla, tal como se aprecia en el Código \ref{lst:fs-copy}.
+	\begin{lstlisting}[language=Java, caption={Copia de archivos.}, captionpos=b, label={lst:fs-copy}]
+	//Copiar plantillas
+	try(FileOutputStream hfos = new FileOutputStream(headersPath.toFile(), false);
+		FileOutputStream lfos = new FileOutputStream(contentPath.toFile(), false)){
+		
+		Files.copy(headersTmpl, hfos);
+		Files.copy(contentTmpl, lfos);
+	}
+	\end{lstlisting}
+\end{enumerate}

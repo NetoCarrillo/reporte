@@ -78,5 +78,32 @@ Un diagrama de secuencia utiliza la siguiente notación\cite{UMLClassroom, Softw
 \end{figure}
 
 
-%\section{Diagrama de clases}\label{sec-uml-class}
-%\textcolor{blue}{lalalalalala}
+\section{Diagrama de clases}\label{sec-uml-class}
+Una diagrama de clase, como su nombre lo indica, representa la estructura y relaciones que tiene una clase\cite{UMLClassroom, SoftwareEngineeringUML}.\\
+Un diagrama de clase utiliza la siguiente notación\cite{UMLClassroom, SoftwareEngineeringUML} (ver Figura \ref{fig:uml-nota-class}):
+\begin{enumerate}
+  \item \textbf{Clase}: es un rectángulo dividido en tres secciones horizontales:
+  \begin{enumerate}
+     \item[1.] \textbf{Nombre}: nombre de la clase, la tipografía normal es con letras gruesas, si se utilizan letras delgadas indica que se trata de un tipo de dato abstracto. 
+     \item[2.] \textbf{Atributos}: son los atributos de la clase, se presentan en formato \textit{[nombre]:[tipo]}; al inicio se incluye el alcance:
+     \begin{itemize}
+       \item [+] público.
+       \item [\#] protegido.
+       \item [-] privado.
+     \end{itemize}
+     \item[3.] \textbf{Métodos}: métodos de la clase, descripción similar a los atributos salvo que después del nombre se escriben los parámetros entre paréntesis:
+     \begin{center}
+       \textit{[alcance] [nombre]([[nombre parámetro]: [tipo parámetro]]*): [tipo]}
+     \end{center}
+   \end{enumerate} 
+  \item \textbf{Clase sin atributos}: similar al punto 1, pero no contiene la sección de atributos.
+  \item \textbf{Herencia}: es una flecha con punta cerrada, la dirección de la flecha indica la clase de cual se hereda.
+  \item \textbf{Composición}: es una flecha con punta en rombo, indica que una clase contiene referencia a otra clase.
+\end{enumerate}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{uml-nota-class}
+  \caption{Notación para diagramas de clase\cite{SoftwareEngineeringUML}.}
+  \label{fig:uml-nota-class}
+\end{figure}
