@@ -243,11 +243,9 @@ portal.config(function($routeProvider, $httpProvider){
 		.when('/catalogo',
 			{templateUrl: 'catalogos.html', controller: 'catalogosCtrl'})
 		.when('/buscar',
-			{templateUrl: 'busqueda.html', controller: 'ordenesFinderCtrl'})
-		.when('/ordenesList',
-			{templateUrl: 'ordenesList.html', controller: 'ordenesListCtrl'})
+			{templateUrl: 'busqueda.html', controller: 'busquedaCtrl'})
 		.when('/ordenesEdit/:ordenId',
-			{templateUrl : 'ordenesEdit.html', controller : 'ordenesEditCtrl'})
+			{templateUrl : 'orden.html', controller : 'edicionCtrl'})
 		.otherwise({redirectTo : '/'});
 });
 \end{lstlisting}
@@ -436,8 +434,7 @@ El contenido del formulario (ver Código \ref{lst:view-catalog-componentes} mues
 </div>
 
 <button class="btn btn-primary" ng-click="update()">
-	<span class="glyphicon glyphicon-ok"></span>
-	Cargar
+	<span class="glyphicon glyphicon-ok"></span> Cargar
 </button>
 \end{lstlisting}
 
@@ -486,10 +483,79 @@ portalSrvc.service('CatalogService', function($http){
 \end{lstlisting}
 
 \paragraph{4. Vista Búsqueda\\}
-\textbf{Búsqueda}
-\textbf{Lista de órdenes}
+La vista \textbf{Búsqueda} se compone de dos elementos:
+\begin{itemize}
+	\item \textbf{Formulario de búsqueda}: muestra un formulario con opciones para buscar órdenes de reposición.
+	\item \textbf{Lista de órdenes}: despliega las órdenes de reposición que han resultado de la búsqueda y brinda acceso a la vista \textbf{Orden} en la cual se muestran los datos de la orden de reposición. En el Código \ref{lst:view-search-list} se muestra el código HTML del listado.
+\end{itemize}
+
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Plantilla que muestra el resultado de la búsqueda de órdenes de reposición.}, label={lst:view-search-list}]
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Contrato</th><th>Solicitud</th><th>Orden</th><th>Estatus</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="orden in ordenes" ng-click="mostrarOrden(orden.id, $event)">
+			<td>{{orden.contrato}}</td>
+			<td>{{orden.solicitud}}</td>
+			<td>{{orden.orden}}</td>
+			<td>{{orden.estatus}}</td>
+		</tr>
+	</tbody>
+</table>
+\end{lstlisting}
+
+Si bien la viste tiene dos componentes principales que se encargan de buscar y mostrar órdenes de reposición, el controlador \consolatext{busquedaCtrl} ofrece la funcionalidad a esos componentes mediante las operaciones:
+\begin{itemize}
+	\item \consolatext{buscar}: realiza la llamada al servicio que consume el servicio Web para buscar órdenes de reposición (ver Código \ref{lst:find-serach-ctrl-js}).
+\begin{lstlisting}[language=Javascript, caption={Función para llamar el servicio de búsqueda de órdenes de reposición.}, captionpos=b, label={lst:find-serach-ctrl-js}]
+$scope.buscar = function($event){
+	var promise = OrdenService.buscar($scope.filtro);
+	promise.then(function(data){
+		$scope.ordenes = data;
+	});
+};
+\end{lstlisting}
+
+	\item \consolatext{mostrarOrden}: cambia a la vista \textbf{Orden} donde se muestran los datos de la orden de reposición seleccionada (ver Código \ref{lst:show-serach-ctrl-js}).
+\begin{lstlisting}[language=Javascript, caption={Función para mostrar la vista de una orden de reposición.}, captionpos=b, label={lst:show-search-ctrl-js}]
+$scope.mostrarOrden = function(id, $event){
+	$location.path("/ordenesEdit/" + id);
+};
+\end{lstlisting}
+\end{itemize}
+
+El servicio \consolatext{OrdenService} contiene la función para la invocación del servicio Web que realiza la búsqueda de órdenes de reposición, en el Código \ref{lst:search-service-js} se muestra la implementación del servicio:
+\begin{enumerate}
+	\item Línea 2: crea un objeto para contener la respuesta de la llamada al servicio Web.
+	\item Línea 3: llamada al servio Web para buscar órdenes de reposición.
+	\item Líneas 8 y 9: en caso que la llamada al servicio Web sea exitosa se guarda la respuesta en el objeto del punto 1 indicando que fue una llamada exitosa.
+	\item Línea 10 y 11: en caso contrario al punto anterior, la respuesta del servicio Web se guarda indicando que hubo un error en la llamada.
+\end{enumerate}
+
+\begin{lstlisting}[language=Javascript, caption={Servicio de AngularJS para buscar órdenes de reposición.}, captionpos=b, label={lst:search-service-js}]
+this.buscar = function(filtro){
+	var d = $q.defer();
+	$http({
+		method: 'POST',
+		url: '_data_/orden/imss/find',
+		headers: {'Content-Type': 'application/json'},
+		data: filtro
+	}).success(function(data){
+		d.resolve(data);
+	}).error(function(error){
+		d.reject(error);
+	});
+	
+	return d.promise;
+};
+\end{lstlisting}
 
 \paragraph{5. Vista Orden\\}
+\textbf{Mostrar orden}\\
+\textbf{Editar orden}\\
 
 En esta vista se ofrece al usuario la visualización de una orden de reposición, la modificación de los datos de la misma y la generación del acuse de envío.
 
