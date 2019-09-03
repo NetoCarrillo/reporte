@@ -162,7 +162,7 @@ public class DataController{
 \begin{lstlisting}[language=Java, caption={Servicio Web para obtener una orden de reposición.}, captionpos=b, label={lst:data-controller}]
 @RequestMapping(value = "/_data_/orden/{id}",
 				method = RequestMethod.GET)
-public OrdenImss getOrden(@PathVariable("id") Long id) throws SQLException{
+public Orden getOrden(@PathVariable("id") Long id) throws SQLException{
 
 	return ordenesDao.getOrdenById(id);
 
@@ -225,7 +225,7 @@ public void generateReport(HttpServletRequest request,
 
 
 \subsubsection{Implementación del Fronend}
-La implementación del Frontend está basada en el marco de trabajo AngularJS (ver sección \ref{sec-angular}), en el Código \ref{lst:portal-js} como se muestra la implementación de la aplicación con AngularJS:
+La implementación del Frontend está basada en el marco de trabajo AngularJS (ver sección \ref{sec-angularjs}), en el Código \ref{lst:portal-js} como se muestra la implementación de la aplicación con AngularJS:
 \begin{enumerate}
 	\item Línea 1: creación del módulo de AngularJS.
 	\item Líneas 2 a 19: configuración de las vistas y rutas.
@@ -519,7 +519,7 @@ $scope.buscar = function($event){
 };
 \end{lstlisting}
 
-	\item \consolatext{mostrarOrden}: cambia a la vista \textbf{Orden} donde se muestran los datos de la orden de reposición seleccionada (ver Código \ref{lst:show-serach-ctrl-js}).
+	\item \consolatext{mostrarOrden}: cambia a la vista \textbf{Orden} donde se muestran los datos de la orden de reposición seleccionada (ver Código \ref{lst:show-search-ctrl-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para mostrar la vista de una orden de reposición.}, captionpos=b, label={lst:show-search-ctrl-js}]
 $scope.mostrarOrden = function(id, $event){
 	$location.path("/ordenesEdit/" + id);
@@ -540,7 +540,7 @@ this.buscar = function(filtro){
 	var d = $q.defer();
 	$http({
 		method: 'POST',
-		url: '_data_/orden/imss/find',
+		url: '_data_/orden/find',
 		headers: {'Content-Type': 'application/json'},
 		data: filtro
 	}).success(function(data){
@@ -554,8 +554,111 @@ this.buscar = function(filtro){
 \end{lstlisting}
 
 \paragraph{5. Vista Orden\\}
-\textbf{Mostrar orden}\\
-\textbf{Editar orden}\\
+Esta vista cumple con 3 funciones:
+\begin{itemize}
+	\item Mostrar la información de una orden de reposición.
+	\item Hacer cambios en la información de la orden de reposición.
+	\item Obtener el acuse de envío de la orden de reposición.
+\end{itemize}
+En el Código \ref{lst:view-show-buttons}
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Controles de la vista de orden de reposición.}, label={lst:view-show-buttons}]
+<button class="btn btn-danger" ng-click="acuse($event)">PDF</button>
+<button class="btn btn-default" ng-click="cancelar($event)">Cancelar</button>
+<button class="btn btn-primary" ng-click="actualizar($event)">Guardar</button>
+\end{lstlisting}
 
-En esta vista se ofrece al usuario la visualización de una orden de reposición, la modificación de los datos de la misma y la generación del acuse de envío.
+El control \consolatext{edicionCtrl} de esta vista tiene las funciones que utiliza la vista \textbf{Orden}:
+\begin{enumerate}
+	\item \consolatext{obtener}: obtiene los datos de la orden de reposición y actualiza el modelo con el fin de mostrar tales datos en la vista (ver Código \ref{lst:show-orden-ctrl-js})
+\begin{lstlisting}[language=Javascript, caption={Función del controlador para llenar los datos de la vista de orden de reposición.}, captionpos=b, label={lst:show-orden-ctrl-js}]
+$scope.obtener = function(id, $event){
+	var promise = OrdenService.getOrden(id);
+	promise.then(function(data){
+		$scope.orden = data;
+		$scope.orden.estatus = $scope.estatusOrd[data.estatus - 1];
+	});
+};
+\end{lstlisting}
+
+	\item \consolatext{acutalizar}: manda el modelo al servicio \consolatext{OrdenService} para actualizar la orden de reposición (ver Código \ref{lst:update-orden-ctrl-js}).
+\begin{lstlisting}[language=Javascript, caption={Función del controlador de AngularJS para actualizar una orden de reposición.}, captionpos=b, label={lst:update-orden-ctrl-js}]
+$scope.actualizar = function($event){
+	var promise = OrdenService.update($scope.orden);
+	promise.then(function(data){
+		$scope.actualizado = data;
+	});
+};
+\end{lstlisting}
+
+	\item \consolatext{cancelar}: vuelve a cargar los datos de la orden de reposición con el fin de cancelar los cambios hechos a la orden de reposición (ver Código \ref{lst:cancel-orden-ctrl-js}).
+\begin{lstlisting}[language=Javascript, caption={Función del controlador de AngularJS cancelar los cambios en una orden de reposición}, captionpos=b, label={lst:cancel-orden-ctrl-js}]
+$scope.reset = function($event){
+	$scope.getOrden($routeParams.ordenId);
+};
+\end{lstlisting}
+
+	\item \consolatext{acuse}: llama al servicio \consolatext{OrdenService} para generar el acuse de envío, como resultado muestra la ruta donde se generó dicho acuse de envío (ver Código \ref{lst:acuse-orden-ctrl-js}).
+\begin{lstlisting}[language=Javascript, caption={Función del controlador de AngularJS para generar el acuse de envío de la orden de reposición.}, captionpos=b, label={lst:acuse-orden-ctrl-js}]
+$scope.genPdf = function($event){
+	var promise = OrdenService.acuse($routeParams.ordenId);
+	promise.then(function(data){
+		$window.alert("Se ha generado el documento en la ruta:\n" + data);
+	});
+};
+\end{lstlisting}
+
+\end{enumerate}
+
+En la descripción anterior de las funciones del control \consolatext{edicionCtrl} se muestran las llamadas al servicio \consolatext{OrdenService}, a continuación se muestra la implementación de dichas funciones:
+
+\begin{enumerate}
+	\item \consolatext{getOrden}: consume el servicio Web para obtener los datos de una orden de reposición (ver Código \ref{lst:get-orden-service-js}).
+\begin{lstlisting}[language=Javascript, caption={Función para consumir el servicio Web que obtiene los datos de una orden de reposición.}, captionpos=b, label={lst:get-orden-service-js}]
+this.getOrden = function(id){
+	var d = $q.defer();
+	$http.get('_data_/orden/' + id)
+		.success(function(data){
+			d.resolve(data);
+		})
+		.error(function(error){
+			d.reject(error);
+		});
+	
+	return d.promise;
+};
+\end{lstlisting}
+
+	\item \consolatext{update}: manda los datos actualizados de una orden de reposición al servicio Web que realiza actualizaciones en órdenes de reposición(ver Código \ref{lst:update-orden-service-js}).
+\begin{lstlisting}[language=Javascript, caption={Función para actualizar los datos de una orden de reposición}, captionpos=b, label={lst:update-orden-service-js}]
+this.update = function(orden){
+	var d = $q.defer();
+	$http.post('_data_/orden/update', orden)
+		.success(function(data){
+			d.resolve(data);
+		})
+		.error(function(error){
+			d.reject(error);
+		});
+	
+	return d.promise;
+};
+\end{lstlisting}
+
+	\item \consolatext{acuse}: consume el servicio Web que ofrece la generación del acuse de envío (ver Código \ref{lst:acuse-orden-service-js}).
+\begin{lstlisting}[language=Javascript, caption={Función para mandar la generación del acuse de envío de una orden de reposición.}, captionpos=b, label={lst:acuse-orden-service-js}]
+this.acuse = function(ordenId){
+	var d = $q.defer();
+	$http.get('_report_/orden/pdf/' + ordenId)
+		.success(function(data){
+			d.resolve(data);
+		})
+		.error(function(error){
+			d.reject(error);
+		});
+	
+	return d.promise;
+};
+\end{lstlisting}
+
+\end{enumerate}
 
