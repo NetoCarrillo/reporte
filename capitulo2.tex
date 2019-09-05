@@ -5,7 +5,7 @@ En este capítulo se establecen los requerimientos que satisfacen las necesidade
 %===============================================================================
 
 
-\section{Análisis de requerimientos}
+\section{Análisis de requerimientos}\label{sec-req-ana}
 En general, los requerimientos deben reflejar lo que un usuario espera de una aplicación, tales requerimientos se clasifican en requerimientos funcionales y no funcionales:
 \begin{itemize}
 \item \textbf{Requerimientos funcionales}: descripciones detalladas de las funciones deseadas del proyecto\cite{WileyBegSE}.
@@ -45,11 +45,11 @@ Los riesgos identificados para este proyecto se listan a continuación:
 \begin{enumerate}
   \item Dado que no se cuenta con un ambiente de pruebas del Sistema de Abastecimiento todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
   \item La herramienta de automatización Sahi está basada en la estructura de las páginas del sistema Sistema de Abastecimiento. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
-  \item La herramienta Sahi en su versión libre\footnote{El uso de la versión libre de Sahi es requerido por la farmacéutica, ver sección \ref{sec:nonfunctional-req}.} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
+  \item La herramienta Sahi en su versión libre\footnote{El uso de la versión libre de Sahi es requerido por la farmacéutica, ver sección \ref{sec-nonfunctional-req}.} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
 \end{enumerate}
 
 
-\subsection{Requerimientos funcionales}
+\subsection{Requerimientos funcionales}\label{sec-req-fun}
 \subsubsection{Automatización del proceso para contestar órdenes de reposición}
 Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza utilizando el Sistema de Abastecimiento.} para contestar las órdenes de reposición, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-contestar}\footnote{Ver también la Figura \ref{fig:flow-proc-contestar}.}, esto implica almacenar los datos de las órdenes de reposición, los cuales son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes.
 
@@ -127,7 +127,7 @@ Cargar de forma masiva, mediante un archivo separado por comas (ver Figura \ref{
 \subsubsection{Actualización de estatus de órdenes de reposición canceladas}
 Para realizar la actualización del estatus de las órdenes de reposición canceladas, el usuario carga al sistema un archivo de texto separado por comas, similar a la actualización de catálogos (ver Figura \ref{fig:dia-estados-orden}), con los números de las órdenes de reposición que han sido canceladas y se ha notificado al área correspondiente de la farmacéutica para cancelar la atención de dichas órdenes.
 
-\subsection{Navegación dentro de la interfaz web}
+\subsubsection{Navegación dentro de la interfaz web}
 La interfaz web muestra en todo momento un menú que permite la navegación entre las siguientes secciones (ver Figura \ref{fig:dia-nav-flow}):
 \begin{enumerate}
   \item Generación de reportes.
@@ -142,7 +142,7 @@ La interfaz web muestra en todo momento un menú que permite la navegación entr
 \end{figure}
 
 
-\subsection{Requerimientos no funcionales}\label{sec:nonfunctional-req}
+\subsection{Requerimientos no funcionales}\label{sec-nonfunctional-req}
 El cliente ha solicitado que el proyecto se apegue a su infraestructura, para conservar el acuerdo de confidencialidad y evitar exponer al cliente a riesgos de seguridad informática por lo que el sistema debe de contar con\footnote{Por políticas de seguridad de la farmacéutica no se enunciarán las herramientas e infraestructura utilizada, así como las versiones de las mismas.}:
 \begin{enumerate}
 \item Sistema operativo capaz de ejecutar el software Java Virtual Machine (JVM).

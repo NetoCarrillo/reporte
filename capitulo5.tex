@@ -1,0 +1,59 @@
+\chapter{Conclusiones}\label{cap5}
+
+A lo largo de este trabajo se ha mostrado el proceso de desarrollo del Sistema AutoSA, en este capítulo se dará cierre al desarrollo mostrando como el sistema satisface los requerimientos del capítulo 2 y cumple con los objetivos del capítulo 1.
+
+\section{Cumplimiento de requerimientos}
+El en la sección \ref{sec-req-ana} se expusieron los requerimientos para el sistema AutoSA, estos requerimientos se presentan en dos grupos, funcionales y no funcionales. A continuación se mostrará evidencia del cumplimiento de tales requerimientos.
+
+\subsection{Cumplimiento de requerimientos funcionales}
+En la sección \ref{sec-req-fun} se enlistan los requerimientos funcionales que a continuación serán verificados:
+\begin{enumerate}
+	\item \textit{Automatización del proceso para contestar órdenes de reposición}: 
+	\item \textit{Automatización del proceso para cotejar órdenes de reposición canceladas}: 
+	\item \textit{Interfaz WEB para la administración de órdenes de reposición contestadas}: 
+	\item \textit{Búsqueda de órdenes de reposición}: 
+	\item \textit{Visualización de orden de reposición}: 
+	\item \textit{Edición de órdenes de reposición}: 
+	\item \textit{Generación de reporte de órdenes de reposición contestadas}: 
+	\item \textit{Generación de formato de salida}: 
+	\item \textit{Generación de reporte con las órdenes de reposición canceladas recientemente}: 
+	\item \textit{Actualización de catálogos}: 
+	\item \textit{Actualización de estatus de órdenes de reposición canceladas}: 
+	\item \textit{Navegación dentro de la interfaz web}: 
+\end{enumerate}
+
+\subsection{Cumplimiento de requerimientos no funcionales}
+En la sección \ref{sec-nonfunctional-req} se enlistan los requerimientos no funcionales que a continuación serán verificados.
+\begin{enumerate}
+	\item \textit{Sistema operativo capaz de ejecutar la máquina virtual de Java}: el sistema operativo fue provisto por la farmacéutica, quien aseguró la correcta ejecución de la máquina virtual de Java.
+	\item \textit{Base de datos relacional SQL}: Al igual que el sistema operativo, la base de datos fue proporcionada por la farmacéutica.
+	\item \textit{Uso de la herramienta Sahi para automatizar interacción con Sistema de Abastecimiento}: en el cumplimiento de los requerimientos funcionales 1 y 2 de la sección anterior y en la sección \ref{sec-agente} se muestra la implementación del módulo \textbf{Agente} utilizando Sahi.
+	\item \textit{Las contraseñas de los usuarios para el acceso a la interfaz web deben ser almacenadas utilizando un algoritmo de cifrado}: en la sección \ref{sec-backend} se muestra la verificación y cifrado de la contraseña de un usuario\footnote{\textcolor{red}{Esto falta, se debe mostrar el cifrado utilizando algún estándar de salt o algún algoritmo de cifrado}}.
+\end{enumerate}
+
+\section{Resultados}
+
+\subsection{Cumplimiento de objetivos principales}
+El objetivo principal del proyecto AutoSA, definido en la sección \ref{sec-objetivo-principal}, es lograr reducir el tiempo que le toma a la farmacéutica contestar las órdenes de reposición en el Sistema de Abastecimiento y detectar con mayor rapidez las órdenes que han sido canceladas por el Instituto de Salud.\\
+Gracias a la liberación del sistema AutoSA se logró reducir el tiempo de atención de 24 horas hombre al día a 2 horas hombre al día. Mientra que la detección de órdenes de reposición canceladas antes del sistema AutoSA se efectuaba cada tercer día, ahora con el sistema AutoSA se efectúa a diario por lo que la ventana de tiempo para impedir el envío de medicamentos no solicitados ha aumentado tres veces.
+
+\subsection{Cumplimiento de objetivos secundarios}
+
+\begin{enumerate}
+	\item Reducción del error humano en relación a la manipulación de la información.
+	\item Ahorro de recursos en la entrega de medicamentos no solicitados.
+	\item Reducción de tiempo en cuanto a la respuesta de órdenes de reposición.
+	\item Consistencia en los datos respecto a la generación de reportes estadísticos sobre las órdenes de reposición procesadas.
+\end{enumerate}
+Por lo anterior los afiliados del Instituto se verán beneficiados, pues los medicamentos estarán disponibles con mayor frecuencia en las clínicas y hospitales.
+
+\section{Trabajo futuro}
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\section{Conclusiones finales}
+
+\textcolor{blue}{Por favor, por favor, ya déjenme titular.}
+
+Durante este proyecto y toda mi carrera profesional he aplicado los conocimientos que adquirí en la Facultad de Ciencias sobre programación y paradigmas de programación, lógica, bases de datos, redes de computadoras, ingeniería de software, análisis y diseño de algoritmos, teoría de códigos, álgebra lineal. También adquirí habilidades y costumbres como buscar y aprender por mi mismo nuevas tecnologías, esto me ha apoyado para mantenerme en constante actualización haciendo que hasta la fecha sea un buen elemento en mis equipos de trabajo\footnote{\textcolor{red}{¿Muy cursi? podría hacerlo más recordando lo bien que lo pasé en la Facultad de Ciencias, que muchos de mis amigos, los buenos amigos, los conocí en la UNAM.}}.
