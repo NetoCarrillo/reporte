@@ -148,7 +148,7 @@ public class DataController{
 }
 \end{lstlisting}
 
-	Dentro de la clase declara como un bean que exponen servicios web se declaran métodos que serán expuestos como un servicio web, en el Código \ref{lst:data-controller} se muestra el servicio web para obtener una orden de reposición:
+	Dentro de la clase declara como un bean que exponen servicios web se declaran métodos que serán expuestos como un servicio web, en el Código \ref{lst:get-orden-data-controller} se muestra el servicio web para obtener una orden de reposición:
 	\begin{enumerate}
 		\item Línea 1: la anotación \textbf{RequestMapping} indica como se debe asociar el método URLs por medio de sus parámetros:
 		\begin{enumerate}
@@ -159,7 +159,7 @@ public class DataController{
 		\item Línea 5: obtención de la orden de reposición.
 	\end{enumerate}
 
-\begin{lstlisting}[language=Java, caption={Servicio Web para obtener una orden de reposición.}, captionpos=b, label={lst:data-controller}]
+\begin{lstlisting}[language=Java, caption={Servicio Web para obtener una orden de reposición.}, captionpos=b, label={lst:get-orden-data-controller}]
 @RequestMapping(value = "/_data_/orden/{id}",
 				method = RequestMethod.GET)
 public Orden getOrden(@PathVariable("id") Long id) throws SQLException{
