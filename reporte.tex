@@ -26,17 +26,16 @@
 
 %Espacio de interlineado
 \usepackage{setspace}
-\thispagestyle{empty}
 \doublespacing
 %\onehalfspacing
 
 %Tamaño de márgenes
-\usepackage[left=1.05in, right=1.05in]{geometry}
+\usepackage[left=1.0in, right=1.0in]{geometry}
 \usepackage{layout}
 %\usepackage{showframe}
 \setlength{\marginparwidth}{0pt}
 \setlength{\marginparsep}{0pt}
-\setlength{\textheight}{610pt}
+\setlength{\textheight}{640pt}
 
 %Colores en el texto
 \usepackage{xcolor}
@@ -89,6 +88,7 @@
 \DeclareTextFontCommand{\consolatext}{\consolaenv}
 
 \begin{document}
+\thispagestyle{empty}
 %\layout
 
 \begin{center}
@@ -125,6 +125,8 @@ Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
 \include{capitulo3}
 
 \include{capitulo4}
+
+\include{capitulo5}
 
 \renewcommand{\appendixname}{Apéndice}
 \renewcommand{\appendixtocname}{Apéndices}

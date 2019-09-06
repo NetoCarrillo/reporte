@@ -1,8 +1,8 @@
-\subsection{Persistencia}
+\subsection{Persistencia}\label{sec:persistence}
 La implementación del componente de persistencia se enfoca en dar servicio a los componentes de escritorio y web, por esta razón la implementación se ha dividido en dos partes:
 \begin{enumerate}
- 	\item Escritorio: la automatización de rutinas, dado que estas rutinas son ejecutadas dentro del ambiente de Sahi (que a su vez está en la plataforma de Java) se utiliza la biblioteca JDBC (ver sección \ref{sec-jdbc}) por economía en recursos físicos del equipo del operador de la farmacéutica.
- 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de Spring en conjunción con el marco de trabajo MyBatis (ver sección \ref{sec-mybatis}).
+ 	\item Escritorio: la automatización de rutinas, dado que estas rutinas son ejecutadas dentro del ambiente de Sahi (que a su vez está en la plataforma de Java) se utiliza la biblioteca JDBC (ver sección \ref{sec:jdbc}) por economía en recursos físicos del equipo del operador de la farmacéutica.
+ 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de Spring en conjunción con el marco de trabajo MyBatis (ver sección \ref{sec:mybatis}).
 \end{enumerate}
 Los siguientes apartados explican la implementación de los servicios para escritorio y web.
 
@@ -56,7 +56,7 @@ private void updateEstatus(Orden orden) throws SQLException{
 
 \paragraph{\indent Interfaz Lectura\\}
 Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos, esto no quiere decir que durante el llamado de estas operaciones no se modifiquen datos.
-Dado que la obtención de los datos se convierte a objetos del dominio del proyecto AutoSA, se ha implementado una solución basada en los patrones de diseño Estrategia (ver Apéndice \ref{sec-strategy}) y Singleton (ver Apéndice \ref{sec-singleton}). \\
+Dado que la obtención de los datos se convierte a objetos del dominio del proyecto AutoSA, se ha implementado una solución basada en los patrones de diseño Estrategia (ver Apéndice \ref{sec:strategy}) y Singleton (ver Apéndice \ref{sec:singleton}). \\
 En la Figura \ref{fig:dia-class-mapper} se el diagrama de clases de la solución:
 \begin{figure}[h]
 	\centering
@@ -166,8 +166,8 @@ public Orden getNextOrden(Integer estatus) throws SQLException{
 	\end{lstlisting}
 \end{enumerate}
 
-\subsubsection{Persistencia para funcionalidades Web}
-La interfaz del componente Persistencia dedicado a las funcionalidades ofrecidas mediante la interfaz web utiliza MyBatis cuya implementación sigue los pasos mencionados en la sección \ref{sec-mybatis}.\\
+\subsubsection{Persistencia para funcionalidades Web}\label{sec:persistence-web}
+La interfaz del componente Persistencia dedicado a las funcionalidades ofrecidas mediante la interfaz web utiliza MyBatis cuya implementación sigue los pasos mencionados en la sección \ref{sec:mybatis}.\\
 \indent 1. En el Código \ref{lst:per-batis-config} se muestra la configuración del objeto \textbf{SqlSessionFactoryBean}: 
 \begin{enumerate}
 	\item Línea 1, habilitar contexto para transacciones.

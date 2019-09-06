@@ -27,7 +27,7 @@ En el listado de órdenes de reposición de la sección \textit{Contestación a 
 El proveedor\footnote{Quien requiere automatizar la interacción con el Sistema de Abastecimiento para el envío de las órdenes de reposición y la verificación de órdenes canceladas.} representa a la compañía farmacéutica, por lo que en este documento nos referiremos al proveedor como a la compañía farmacéutica, o simplemente farmacéutica de manera indistinta. Los requerimientos funcionales del proveedor son la automatización de las tareas de interacción del operador con el Sistema de Abastecimiento y la elaboración de reportes estadísticos sobre las órdenes de reposición procesadas durante la automatización.
 
 \section{Objetivos}
-\subsection{Objetivo principal}
+\subsection{Objetivo principal}\label{sec:objetivo-principal}
 Realizar un sistema de cómputo, de ahora en adelante llamado \textbf{AutoSA}, que reduzca el tiempo para contestar las órdenes de reposición, ayudando a mejorar, a su vez el tiempo que toma a la farmacéutica atender las órdenes de reposición, esto implica una reducción en tiempo desde que la orden es publicada en el Sistema de Abastecimiento hasta que el medicamento es entregado físicamente al Instituto.\\
 El uso del sistema AutoSA evita el envío de medicamentos que ya no son solicitados, minimizando el consumo de recursos innecesarios, así como el tiempo que toma retirar del Instituto tales medicamentos cancelados.\\
 Dado que la farmacéutica atiende las órdenes de reposición del Instituto en el doble de tiempo que su competencia, en particular contestar estas órdenes en el Sistema de Abastecimiento requiere de tres personas dedicadas exclusivamente a ello, y un día completo el terminar esta parte del proceso. La solución propuesta para acelerar la respuesta y verificación de órdenes de reposición del Sistema de Abastecimiento se encuentra programado por agentes\footnote{Agente dentro de este trabajo se refiere a las rutinas que automatizan los procesos realizados por los operadores del Sistema de Abastecimiento.}, cada agente se dedica a emular las acciones del operador de la farmacéutica, el cual es el responsable de contestar o verificar las órdenes de reposición. El sistema AutoSA cuenta con una base de datos donde se almacenen los datos capturados por lo agentes durante la respuesta de órdenes, y una interfaz gráfica donde los trabajadores de la farmacéutica puedan realizar tareas de administración como son: la búsqueda, edición de órdenes de reposición y generación de reportes de las órdenes atendidas por los agentes.
@@ -40,7 +40,7 @@ Dado que la farmacéutica atiende las órdenes de reposición del Instituto en e
 \end{enumerate}
 Por lo anterior los afiliados del Instituto se verán beneficiados, pues los medicamentos estarán disponibles con mayor frecuencia en las clínicas y hospitales.
 
-\section{Descripción general de trabajo}
+\section{Descripción general de trabajo}\label{sec:desc-general}
 La farmacéutica dedica diariamente un equipo constituido por tres personas durante toda la jornada laboral, dependiendo del volumen de órdenes de reposición emitidas por el Instituto se puede agregar una persona más al equipo, para completar las tareas de envío de órdenes de reposición y verificar las órdenes de reposición canceladas dentro del Sistema de Abastecimiento.\\
 A través del proyecto de automatización se pretenden optimizar los siguientes puntos:
 \begin{itemize}
