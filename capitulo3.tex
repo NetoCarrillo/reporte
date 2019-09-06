@@ -17,7 +17,7 @@ Bourque\cite{SWEBOOK} define la arquitectura de software como:
 \begin{quote}
 	El conjunto de estructuras necesarias para la comprensión de un sistema en el cual se comprometen elementos de software, relaciones entre ellos y sus propiedades.
 \end{quote}
-En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como los patrones de diseño (ver Apéndice \ref{sec-patrones}) \cite{SWEBOOK, SoftwareArchitectureInAction}.
+En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como los patrones de diseño (ver Apéndice \ref{sec:patrones}) \cite{SWEBOOK, SoftwareArchitectureInAction}.
 
 Siguiendo el concepto de arquitectura, se muestran los componentes del sistema y su respectiva solución a los casos de uso del Capítulo \ref{sec:casos-uso}.
 
@@ -33,7 +33,7 @@ El diagrama de componentes sirve para visualizar los componentes en los que se d
 \subsubsection{Agente}
 El componente que contiene y ejecuta las rutinas de automatización, esto es mediante una interfaz con el usuario en la cual puede seleccionar el proceso a ser ejecutado. No ofrece interfaces a los demás componentes, consume exclusivamente el componente de \textbf{Lógica de Automatización}.
 
-\subsubsection{Lógica de automatización}\label{sec-logica-auto}
+\subsubsection{Lógica de automatización}\label{sec:logica-auto}
 La función de este componente es de ejecutar las reglas de negocio necesarias para en los flujos de los procesos de automatización, ofrece las interfaces de respuesta y verificación.
 \paragraph{\indent Interfaz Respuesta\\}
 Provee el acceso a las reglas de negocio del proceso de respuesta de órdenes de reposición (ver caso de uso \ref{cu-contestar}). Esta interfaz expone las siguientes operaciones:
@@ -55,7 +55,7 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 \end{enumerate}
 
 \subsubsection{Persistencia}
-El componente de persistencia está basado en el patrón de diseño \textit{DAO} (ver Apéndice \ref{sec-dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
+El componente de persistencia está basado en el patrón de diseño \textit{DAO} (ver Apéndice \ref{sec:dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
 El componente de persistencia de el proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
 \paragraph{\indent Interfaz Almacenamiento\\}
 Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \ref{cu-contestar}, \ref{cu-guardar-nueva}, \ref{cu-responder-orden}, \ref{cu-enviar-orden} y \ref{cu-actualizar-estatus-sa}.}. Esta interfaz expone las siguientes operaciones:
@@ -89,7 +89,7 @@ Son las operaciones que permiten modificar datos específicos de las órdenes de
 
 \subsubsection{Sistema de Archivos}
 El componente Sistema de Archivos es el único que se comunica con el sistema de archivos del sistema operativo\footnote{En este documento se utilizará de forma indistinta el término Sistema de archivos para referirse tanto al componente del sistema AutoSA como al propio del sistema operativo.}, tiene la función de realizar la lectura de archivos de configuración, el almacenamiento de los acuses de envío  y los reportes de las órdenes de reposición.\\
-Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver Apéndice \ref{sec-dao}.}.
+Este componente también está diseñado siguiendo el patrón DAO\footnote{Ver Apéndice \ref{sec:dao}.}.
 \paragraph{\indent Interfaz Configuración\\}
 Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos. Esta interfaz expone las siguientes operaciones:
 
@@ -116,13 +116,13 @@ El generador de reportes, como su nombre lo indica, tiene la función de generar
 \end{enumerate}
 
 \subsubsection{Portal Web}
-Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC (ver sección \ref{sec-mvc}). Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
+Es componente que ofrece al usuario las funcionalidades de una interfaz web, está diseñado siguiendo el patrón MVC (ver sección \ref{sec:mvc}). Utiliza el componente de persistencia como el modelo, mientras que la vista se toma en dos partes: las pantallas que se muestran al usuario y los reportes, para esta última toma las funciones del componente de Generación de Reportes y Sistema de Archivos.\\
 No ofrece interfaces a los demás componentes, al igual que el componente Agente.
 
 
 
 \subsection{Solución a casos de uso}
-A continuación se presentan las soluciones a los casos de uso utilizando los componentes descritos en la sección anterior, para este fin se utilizan diagramas de secuencia UML (ver sección \ref{sec-uml-seq}).
+A continuación se presentan las soluciones a los casos de uso utilizando los componentes descritos en la sección anterior, para este fin se utilizan diagramas de secuencia UML (ver sección \ref{sec:uml-seq}).
 
 \subsubsection{Contestar órdenes}
 El diseño de la solución al caso de uso \textbf{CU-CONTESTAR} (sección \ref{cu-contestar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización}. La solución sigue la siguiente secuencia (ver diagrama de la Figura \ref{fig:dia-seq-cu-contestar}\footnote{Por cuestión del tamaño de la figura y conservar el texto dentro de ella de tamaño legible únicamente se mostrarán los mensajes más importantes entre componentes.}):

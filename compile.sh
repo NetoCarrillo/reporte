@@ -29,9 +29,12 @@ function build_chapter(){
 	local JOB_NAME=${FILE_NAME}_${CHAPTER_NAME}
 	echo $JOB_NAME
 	pdflatex -jobname=$JOB_NAME "\includeonly{$CHAPTER_NAME}\input{$FILE_NAME}"
-	bibtex $JOB_NAME
-	pdflatex -jobname=$JOB_NAME "\includeonly{$CHAPTER_NAME}\input{$FILE_NAME}"
-	pdflatex -jobname=$JOB_NAME "\includeonly{$CHAPTER_NAME}\input{$FILE_NAME}"
+
+	if $COMPILE_BIB; then
+		bibtex $JOB_NAME
+		pdflatex -jobname=$JOB_NAME "\includeonly{$CHAPTER_NAME}\input{$FILE_NAME}"
+		pdflatex -jobname=$JOB_NAME "\includeonly{$CHAPTER_NAME}\input{$FILE_NAME}"
+	fi
 }
 
 function build_bib(){
@@ -54,6 +57,11 @@ elif [[ $1 == 'simple' ]]; then
 	build
 elif [[ $1 == 'chapter' ]]; then
 	CHAPTER_NAME=$3
+	COMPILE_BIB=true
+	build_chapter
+elif [[ $1 == 'simple_chapter' ]]; then
+	CHAPTER_NAME=$3
+	COMPILE_BIB=false
 	build_chapter
 elif [[ $1 == 'bib' ]]; then
 	build_bib

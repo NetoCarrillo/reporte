@@ -5,9 +5,9 @@ El componente de lógica de automatización provee de la información necesaria 
  	\item Información almacenada en la base de datos, se tiene acceso miente el componente \textbf{Persistencia}.
  	\item Cálculos que corresponde a la lógica de negocio, estos datos se obtienen mediante la aplicación de reglas implementadas dentro del componente \textbf{Lógica de automatización}.
 \end{enumerate}
-La implementación de este componente ha sido escrita en el lenguaje de programación Java (ver sección \ref{sec-java}).\\
+La implementación de este componente ha sido escrita en el lenguaje de programación Java (ver sección \ref{sec:java}).\\
 %Dado que la implementación a los datos en el sistema de archivos del sistema operativo y los almacenados en la base de datos son adquiridos mediante otros componentes, únicamente haré mención de la implementación de los datos que se obtienen por medio de reglas de negocio.
-A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas en la sección \ref{sec-logica-auto}:
+A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas en la sección \ref{sec:logica-auto}:
 \paragraph{\indent Interfaz Respuesta}
 \begin{enumerate}
 	\item guardar-orden-nueva: la implementación de esta operación (ver Código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}.

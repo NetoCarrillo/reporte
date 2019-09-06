@@ -1,4 +1,4 @@
-\chapter{Técnicas de Diseño}\label{sec-patrones}
+\chapter{Técnicas de Diseño}\label{sec:patrones}
 
 \section{Patrones de Diseño}
 ``Un patrón describe un problema recurrente sobre un ambiente, y entonces describe la técnica que soluciona el problema de forma tal que puede ser utilizado sobre cualquier instancia del problema''\cite{DesignPatterns}, es decir, que dados los requerimientos funcionales del sistema es posible analizar la comunicación entre sus distintas partes y de esta forma saber lo patrones que son útiles para dar solución. Los patrones son organizados en tres categorías\cite{DesignPatterns}:
@@ -8,7 +8,7 @@
 	\item \textbf{Comportamiento}: describen la comunicación entre entidades del sistema
 \end{itemize}
 
-\section{Patrón Singleton}\label{sec-singleton}
+\section{Patrón Singleton}\label{sec:singleton}
 El patrón Singleton pertenece al grupo de patrones de diseño de creación, es una forma de proporcionar acceso global a la instancia de una clase sin dar acceso al constructor de la clase y además garantizar que dicha instancia sea la única de la clase. El patrón Singleton identifica principalmente una clase, la cual es encargada de encapsular la creación de su instancia y proveer acceso a dicha instancia\cite{DesignPatternsLasater, DesignPatterns, OCPJavaSE7}.
 
 \begin{figure}[h]
@@ -18,7 +18,7 @@ El patrón Singleton pertenece al grupo de patrones de diseño de creación, es 
   \label{fig:dia-class-singleton}
 \end{figure}
 
-\section{Patrón Estrategia}\label{sec-strategy}
+\section{Patrón Estrategia}\label{sec:strategy}
 El patrón de diseño Estrategia es un patrón de diseño de comportamiento, es un grupo de algoritmos encapsulados en clases específicas que pueden ser intercambiadas de modo tal que dependiendo del uso específico se selecciona la clase adecuada. El patrón Estrategia expone una clase llamada contexto mediante la cual se tiene acceso a las clases con estrategias específicas que implementan una misma interfaz como se muestra en la Figura \ref{fig:dia-class-strategy} \cite{DesignPatternsLasater, DesignPatterns}.
 
 \begin{figure}[h]
@@ -28,7 +28,7 @@ El patrón de diseño Estrategia es un patrón de diseño de comportamiento, es 
   \label{fig:dia-class-strategy}
 \end{figure}
 
-\section{Patrón Decorador}\label{sec-decorator}
+\section{Patrón Decorador}\label{sec:decorator}
 El patrón Decorador es utilizado para agregar comportamiento adicional a una clase, tiene cuatro partes principales\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-decorator}):
 \begin{enumerate}
   \item Componente: es una clase abstracta que contiene la funcionalidad básica para las clases no decoradas y las decoradas.
@@ -44,7 +44,7 @@ El patrón Decorador es utilizado para agregar comportamiento adicional a una cl
   \label{fig:dia-class-decorator}
 \end{figure}
 
-\section{Patrón Proxy}\label{sec-proxy}
+\section{Patrón Proxy}\label{sec:proxy}
 El patrón Proxy es una clase que actuá como punto de acceso a otra clase la cual tiene la funcionalidad deseada por algún cliente\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-proxy}):
 \begin{enumerate}
   \item Tema: define una interfaz en común para el Tema real y el Proxy.
@@ -58,7 +58,7 @@ El patrón Proxy es una clase que actuá como punto de acceso a otra clase la cu
   \label{fig:dia-class-proxy}
 \end{figure}
 
-\section{Patrón Objeto de Acceso a Datos}\label{sec-dao}
+\section{Patrón Objeto de Acceso a Datos}\label{sec:dao}
 El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etc.) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
 \begin{enumerate}
 	\item [] \textbf{buscar}: realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
@@ -69,10 +69,10 @@ El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y 
 \end{enumerate}
 
 
-\section{Patrón Modelo-Vista-Controlador}\label{sec-mvc}
+\section{Patrón Modelo-Vista-Controlador}\label{sec:mvc}
 Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador (MVC) es un patrón de arquitectura que consiste de tres grandes componentes: Modelo, Vista y Controlador. El Controlador conduce la comunicación entre la Vista y el Modelo, en la Figura \ref{fig:dia-mvc-simple} se muestra el flujo de comunicación entre los componentes MVC.
 \begin{enumerate}
-	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del patrón DAO (ver sección \ref{sec-dao}) para el manejo de datos.
+	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del patrón DAO (ver sección \ref{sec:dao}) para el manejo de datos.
 	\item \textbf{Vista}: es la capa de presentación, es responsable de mostrar los datos al actor\footnote{Puede ser una persona u otro sistema} que use el sistema.
 	\item \textbf{Controlador}: es el intermediario entre la Vista y el Modelo: comunica las peticiones de la vista al modelo y los datos del modelo a la vista.
 \end{enumerate}
@@ -83,7 +83,7 @@ Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador
   \label{fig:dia-mvc-simple}
 \end{figure}
 
-\section{Arquitectura Orientada a Servicios}\label{sec-soa}
+\section{Arquitectura Orientada a Servicios}\label{sec:soa}
 Thomas Erl describe la Arquitectura Orientada a Servicios (\textbf{SOA} por sus siglas en inglés) como el modelo arquitectónico del cómputo orientado a servicios\cite{SOAWithRest}, a continuación se muestran las definiciones de Erl\cite{SOAWithRest} sobre los conceptos de Orientación a Servicios:
 \begin{quote}
 La \textbf{Orientación a Servicios} es el paradigma de diseño dedicado para la creación de unidades lógicas de solución que son moldeados individualmente para que puedan ser utilizados colectiva y repetidamente para la realización de objetivos estratégicos y beneficios asociados con el cómputo orientado a servicios.\\

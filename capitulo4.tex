@@ -2,7 +2,7 @@
 
 \section{Tecnologías utilizadas}
 %-------------------------------------------------------------------------------
-\subsection{Base de datos relacional}\label{sec-bd-r}
+\subsection{Base de datos relacional}\label{sec:bd-r}
 Una base de datos relaciones es una colección de tablas relacionadas entre sí. La colección de tablas se describe a sí misma en cuanto a que el significado de los datos contenidos pertenecen a un mismo ámbito\cite{DataBaseConcepts}.\\
 Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (DBMS por sus siglas en inglés), un DBMS es un programa de computadora usado para crear, procesas y administrar bases de datos. El DBMS recibe peticiones en lenguaje SQL (como se describe más adelante) y traduce esas peticiones a acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
 Para el desarrollo del proyecto AutoSA se han usado los siguientes conceptos:
@@ -28,13 +28,13 @@ Para el desarrollo del proyecto AutoSA se han usado los siguientes conceptos:
 		\item NOT NULL: indica que el valor del atributo no puede ser nulo\cite{FundamentosSistemasBasesDatos}.
 	\end{enumerate}
 	\item \textbf{Índice}: es una estructura auxiliar para agilizar la obtención de registros. Los índices proveen rutas de acceso alternativo a los registros de la base de datos sin afectar la colocación física de los registros\cite{FundamentalsOfDBSystems}.
-	\item \textbf{Lenguaje Estructurado de Consulta}\label{sec-sql}: del inglés Structured Query Language (SQL), fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años 70, es un lenguaje de datos orientado a texto, ha sido avalado por el Instituto Nacional de Estándares Americanos (ANSI por sus siglas en inglés) dando así los estándares ANSI para SQL, principalmente para este trabajo el estándar ANSI-92 o SQL-92.
+	\item \textbf{Lenguaje Estructurado de Consulta}\label{sec:sql}: del inglés Structured Query Language (SQL), fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años 70, es un lenguaje de datos orientado a texto, ha sido avalado por el Instituto Nacional de Estándares Americanos (ANSI por sus siglas en inglés) dando así los estándares ANSI para SQL, principalmente para este trabajo el estándar ANSI-92 o SQL-92.
 	\item \textbf{Lenguaje de Definición de Datos}: DDL por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
 	\item \textbf{Lenguaje de Modelado de Datos}: DML por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
-\subsection{OAuth 2.0}\label{sec-oauth}
+\subsection{OAuth 2.0}\label{sec:oauth}
 Bihis\cite{MasteringOAuth2} describe de manera a OAuth 2.0:
 \begin{quote}
 	OAuth 2.0 es in protocolo que permite compartir información y recursos a aplicaciones distintas de manera segura y confiable.
@@ -78,7 +78,7 @@ OAuth define varios escenarios del flujo de autorización, para fines del proyec
 \end{figure}
 
 %-------------------------------------------------------------------------------
-\subsection{Java}\label{sec-java}
+\subsection{Java}\label{sec:java}
 
 El lenguaje de programación Java fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan en 1991 bajo el nombre ``Oak'' y en 1995 cambiaron el nombre a Java. El lenguaje Java está basado en los lenguajes de programación C, de donde deriva su sintaxis y de C++, que se toma como base para las características del paradigma orientado a objetos. Java es un lenguaje orientado a objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
 El concepto de Java tiene varios componentes, para efectos de este proyecto se mencionarán los siguientes\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
@@ -90,11 +90,11 @@ El concepto de Java tiene varios componentes, para efectos de este proyecto se m
 	\item Ambiente de Ejecución de Java JRE (Java Runtime Environment): es la herramienta encargada de la creación y administración de instancias de la máquina virtual de Java.
 \end{enumerate}
 
-\subsubsection{Java Data Base Controller}\label{sec-jdbc}
+\subsubsection{Java Data Base Controller}\label{sec:jdbc}
 El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un conjunto de APIs\footnote{API viene del inglés ``Application Programming Interface'' este concepto es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales, cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
 
 %-------------------------------------------------------------------------------
-\subsection{Spring}\label{sec-spring}
+\subsection{Spring}\label{sec:spring}
 El marco de trabajo Spring es descrito en su sitio de Internet\cite{SpringFramework}:
 \begin{quote}
 	El maco de trabajo Spring provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en Java en cualquier tipo de plataforma de despliegue.
@@ -106,12 +106,12 @@ Las funciones principales de Spring, mejor conocido como Spring Core, está cons
 
 	\item Inyección de dependencia: es una forma particular de inversión de control, se refiere a establecer las dependencias de un objeto en tiempo de ejecución.
 
-	\item Programación orientada a eventos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes donde cada uno es responsable por un conjunto de funcionalidades afines, a menudo, estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etc.), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación orientada a aspectos en Spring  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales y para esto utiliza los patrones de diseño Decorador y Proxy (ver secciones \ref{sec-decorator} y \ref{sec-proxy}, respectivamente).
+	\item Programación orientada a eventos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes donde cada uno es responsable por un conjunto de funcionalidades afines, a menudo, estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etc.), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación orientada a aspectos en Spring  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales y para esto utiliza los patrones de diseño Decorador y Proxy (ver secciones \ref{sec:decorator} y \ref{sec:proxy}, respectivamente).
 \end{enumerate}
 
 Dentro del proyecto de Spring existen proyectos que se enfocan a áreas específicas, a continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
 
-\subsubsection{Spring boot}\label{sec-spring-boot}
+\subsubsection{Spring boot}\label{sec:spring-boot}
 Es un proyecto de Spring que ofrece un ambiente de desarrollo y despliegue para aplicaciones desarrolladas con Spring y ofrece las siguientes prestaciones\cite{SpringBootInAction}:
 \begin{enumerate}
 	\item Iniciadores: agregar grupos comunes de dependencias en una sola dependencia que puede ser agregada al administrador de proyectos.
@@ -119,7 +119,7 @@ Es un proyecto de Spring que ofrece un ambiente de desarrollo y despliegue para 
 	\item Solenoide: agrega características de administración a las aplicaciones.
 \end{enumerate}
 
-\subsubsection{Spring security}\label{sec-spring-security}
+\subsubsection{Spring security}\label{sec:spring-security}
 El proyecto Spring security es descrito en su página de Internet\cite{SpringSecurity}:
 \begin{quote}
 	Spring security es un marco de trabajo poderoso y altamente adaptable para procesos de autenticación y control de acceso. Es el estándar de seguridad para aplicaciones basadas en Spring.\\
@@ -140,7 +140,7 @@ En al Figura \ref{fig:dia-spring-security} se muestra un diagrama del manejo que
 \end{figure}
 
 %-------------------------------------------------------------------------------
-\subsection{MyBatis}\label{sec-mybatis}
+\subsection{MyBatis}\label{sec:mybatis}
 El sitio oficial de MyBatis\cite{MyBatis} lo describe: 
 \begin{quote}
 MyBatis es un marco de trabajo para persistencia de primera clase con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. MyBatis elimina casi todo el código de JDBC, la configuración manual de parámetros y la recuperación de resultados.
@@ -167,15 +167,15 @@ El uso de MyBatis se resume principalmente a puntos\cite{PersistenceWithMyBatis}
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
-\subsection{Velocity}\label{sec-velocity}
+\subsection{Velocity}\label{sec:velocity}
 Gradecki\cite{MasteringApacheVelocity} describe a Velocity:
 
 \begin{quote}
-	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de Java como puente entre el modelo y la vista (hablando del patrón MVC como se muestra en el Apéndice \ref{sec-mvc}).
+	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de Java como puente entre el modelo y la vista (hablando del patrón MVC como se muestra en el Apéndice \ref{sec:mvc}).
 \end{quote}
 
 %-------------------------------------------------------------------------------
-\subsection{Flying Saucer}\label{sec-flying-saucer}
+\subsection{Flying Saucer}\label{sec:flying-saucer}
 La herramienta Flying Saucer es descrita en su página de Internet\cite{FlyingSaucer} como:
 \begin{quote}
 	Flying Saucer es una biblioteca puramente escrita en Java para traducir documentos XML o XHTML con CCS a formatos de gráficos de Java, PDF e imágenes.
@@ -183,11 +183,11 @@ La herramienta Flying Saucer es descrita en su página de Internet\cite{FlyingSa
 
 
 %-------------------------------------------------------------------------------
-\subsection{Javascript}\label{sec-javascript}
+\subsection{Javascript}\label{sec:javascript}
 Javascript es un lenguaje de programación de rutinas, en un principio diseñado para utilizarse en exploradores de Internet, se le ha dado otro tipo de aplicaciones como es el desarrollo de aplicaciones de escritorio y servidores de aplicaciones. Un programa desarrollado con Javascript no depende de un compilador, un intérprete de Javascript ejecuta el código tal y como está escrito. Además Javascript no maneja declaración explícita de tipos.\cite{LearningWebDesign}
 
 %-------------------------------------------------------------------------------
-\subsection{AngularJS}\label{sec-angularjs}
+\subsection{AngularJS}\label{sec:angularjs}
 
 Soni\cite{FullStackAngularJS} describe al proyecto AngularJS:
 \begin{quote}
@@ -211,7 +211,7 @@ Al seguir el patrón MVC, AngularJS permite dividir la aplicación componentes, 
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
-\subsection{Sahi}\label{sec-sahi}
+\subsection{Sahi}\label{sec:sahi}
 La compañía Sahi Pro\textsuperscript{\textcopyright}\cite{SahiPro} describe a su producto del mismo nombre como:
 \begin{quote}
 	Sahi es una herramienta enfocada a la automatización de pruebas para servicios Web, plataformas Web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de Java.
@@ -231,12 +231,12 @@ Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas so
 %================================================================================
 
 \section{Implementación de base de datos}
-El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencialidad no se hace mención específica del nombre y versión del sistema administrador de bases de datos.}(ver sección \ref{sec-bd-r}) para almacenar la información requerida en los casos de uso (ver sección \ref{sec:casos-uso}).\\
-La implementación de la base de datos se ve reflejada en las rutinas con sentencias SQL (ver sección \ref{sec-bd-r}) donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas DDL y las rutinas DML.
+El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencialidad no se hace mención específica del nombre y versión del sistema administrador de bases de datos.}(ver sección \ref{sec:bd-r}) para almacenar la información requerida en los casos de uso (ver sección \ref{sec:casos-uso}).\\
+La implementación de la base de datos se ve reflejada en las rutinas con sentencias SQL (ver sección \ref{sec:bd-r}) donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas DDL y las rutinas DML.
 
 %-------------------------------------------------------------------------------
 \subsection{Rutinas de definición de datos}
-Estas rutinas contienen las sentencias DDL (ver sección \ref{sec-bd-r}) para la creación de tablas, llaves primarias, llaves foráneas, índices y restricciones. En el Código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de la tabla \textit{ordenes\_is}.
+Estas rutinas contienen las sentencias DDL (ver sección \ref{sec:bd-r}) para la creación de tablas, llaves primarias, llaves foráneas, índices y restricciones. En el Código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de la tabla \textit{ordenes\_is}.
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear una tabla.}, captionpos=b, label={lst:sql-create-table}]
 CREATE TABLE ordenes_is(
    id numeric(20,0) PRIMARY KEY NOT NULL,
@@ -265,7 +265,7 @@ CREATE INDEX ordenes_contetadas_idx ON ordenes_is(id_sesion_estatus, estatus);
 
 %-------------------------------------------------------------------------------
 \subsection{Rutinas de modelado de datos}
-Estas rutinas contienen la sentencias DML (ver sección \ref{sec-bd-r}) para insertar la información necesaria para la ejecución del sistema, como son, por ejemplo, los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
+Estas rutinas contienen la sentencias DML (ver sección \ref{sec:bd-r}) para insertar la información necesaria para la ejecución del sistema, como son, por ejemplo, los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
 
 \begin{lstlisting}[language=SQL, caption={Sentencia insertar un registro.}, captionpos=b, label={lst:sql-insert}]
 INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');

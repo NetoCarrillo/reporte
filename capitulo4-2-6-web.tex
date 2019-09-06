@@ -1,19 +1,19 @@
-\subsection{Portal Web}
-La implementación del portal Web se realizó bajo la arquitectura orientada a servicios (ver Apéndice \ref{sec-soa}), lo cual implica una división del portal Web de la siguiente forma:
+\subsection{Portal Web}\label{sec:web-portal}
+La implementación del portal Web se realizó bajo la arquitectura orientada a servicios (ver Apéndice \ref{sec:soa}), lo cual implica una división del portal Web de la siguiente forma:
 \begin{itemize}
 	\item [Backend]: la parte del portal ofrece los servicios Web, con tiene los servicios de autenticación, administración de órdenes de reposición y generación de reportes.
 	\item [Frontend]: la parte del portal que consume los servicios Web y muestra una interfaz gráfica al usuario, contiene las páginas de HTML y rutinas para consumir los servicios del Backend.
 \end{itemize}
 
-\subsubsection{Implementación del Backend}\label{sec-backend}
+\subsubsection{Implementación del Backend}\label{sec:backend}
 La implementación del Backend está implementada utilizando el marco de trabajo Spring y sus bibliotecas:
 \begin{itemize}
- 	\item Spring boot: provee un ambiente de desarrollo y ejecución para aplicaciones basadas en el marco de trabajo Spring (ver sección \ref{sec-spring-boot}). 
- 	\item Spring security: biblioteca para los servicios de autenticación y autorización de usuarios (ver sección \ref{sec-spring-security}).
+ 	\item Spring boot: provee un ambiente de desarrollo y ejecución para aplicaciones basadas en el marco de trabajo Spring (ver sección \ref{sec:spring-boot}). 
+ 	\item Spring security: biblioteca para los servicios de autenticación y autorización de usuarios (ver sección \ref{sec:spring-security}).
 \end{itemize}
 
-\paragraph{Implementación de los servicios de seguridad\\}
-Los servicios para autenticar y validar usuarios se implementaron siguiendo la especificación OAtuh 2.0 (ver sección \ref{sec-oauth}), el marco de trabajo Spring con sus bibliotecas Spring boot y Spring security.\\
+\paragraph{1. Implementación de los servicios de seguridad\\}
+Los servicios para autenticar y validar usuarios se implementaron siguiendo la especificación OAtuh 2.0 (ver sección \ref{sec:oauth}), el marco de trabajo Spring con sus bibliotecas Spring boot y Spring security.\\
 La implementación de la seguridad utilizando Spring Security se divide en tres tareas:
 \begin{enumerate}
 	\item Habilitar filtros de seguridad, en el Código \ref{lst:enable-oauth} se muestra la configuración de necesaria:
@@ -131,7 +131,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 \end{lstlisting}
 \end{enumerate}
 
-\paragraph{Implementación de los servicios Web de administración\\}
+\paragraph{2. Implementación de los servicios Web de administración\\}
 Los servicios web de administración fueron divididos en dos controles REST de Spring, 
 \begin{enumerate}
 	\item \textbf{DataController}: expone servicios referentes a la gestión de órdenes de reposición, en el Código \ref{lst:data-controller} se muestra la estructura principal de esta clase:
@@ -224,8 +224,8 @@ public void generateReport(HttpServletRequest request,
 \end{enumerate}
 
 
-\subsubsection{Implementación del Fronend}
-La implementación del Frontend está basada en el marco de trabajo AngularJS (ver sección \ref{sec-angularjs}), en el Código \ref{lst:portal-js} como se muestra la implementación de la aplicación con AngularJS:
+\subsubsection{Implementación del Fronend}\label{sec:frontend}
+La implementación del Frontend está basada en el marco de trabajo AngularJS (ver sección \ref{sec:angularjs}), en el Código \ref{lst:portal-js} como se muestra la implementación de la aplicación con AngularJS:
 \begin{enumerate}
 	\item Línea 1: creación del módulo de AngularJS.
 	\item Líneas 2 a 19: configuración de las vistas y rutas.
@@ -250,10 +250,28 @@ portal.config(function($routeProvider, $httpProvider){
 });
 \end{lstlisting}
 
-El Frontend cuenta con las siguientes vistas:
+Así mismo, la aplicación cuenta con un control principal que asume la función de controlar la barra de navegación, esta barra permite al usuario salir de la aplicaión y navegar entre las vistas (en el Código \ref{lst:view-nav-bar}):
+\begin{enumerate}
+	\item Reportes.
+	\item Catálogos.
+	\item Búsqueda.
+\end{enumerate}
+
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Barra de navegación}, label={lst:view-nav-bar}]
+<div ng-show="authenticated" ng-controller="navigation" class="container">
+	<ul class="nav nav-pills" role="tablist">
+		<li><a href="#/layout">Reportes</a></li>
+			<li><a href="#/catalog">Cat&aacute;logos</a></li> 
+		<li><a href="#/search">B&uacute;squeda</a></li>
+		<li><a href="" ng-click="logout()">logout</a></li>
+	</ul>
+</div>
+\end{lstlisting}
+
+A continuación se hace una descripción detalladas de la implementación de las vistas que ofrece el Frontend:
 
 \paragraph{1. Vista Acceso\\}
-Los flujos de autenticación y autorización del sistema AutoSA se hacen siguiendo la especificación de OAuth (ver sección \ref{sec-oauth}). La autenticación se muestra al usuario mediante la plantilla del Código \ref{lst:longin-view} donde se ligan el nombre de usuario y la contraseña con el modelo de angular.
+Los flujos de autenticación y autorización del sistema AutoSA se hacen siguiendo la especificación de OAuth (ver sección \ref{sec:oauth}). La autenticación se muestra al usuario mediante la plantilla del Código \ref{lst:longin-view} donde se ligan el nombre de usuario y la contraseña con el modelo de angular.
 
 \begin{lstlisting}[language=HTML, caption={Plantilla HTML de acceso.}, captionpos=b, label={lst:longin-view}]
 <form role="form" ng-submit="login()">
