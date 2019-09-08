@@ -10,3 +10,9 @@
 *.lot
 *.lol
 *~
+#glosary
+*.acn
+*.acr
+*.alg
+*.glsdefs
+*.ist

@@ -20,6 +20,7 @@ function build(){
 	pdflatex  $FILE_NAME
 	if $COMPILE_BIB; then
 		bibtex $FILE_NAME
+		makeglossaries $FILE_NAME
 		pdflatex  $FILE_NAME
 		pdflatex  $FILE_NAME
 	fi
@@ -32,6 +33,7 @@ function build_chapter(){
 
 	if $COMPILE_BIB; then
 		bibtex $JOB_NAME
+		makeglossaries $JOB_NAME
 		pdflatex -jobname=$JOB_NAME "\includeonly{$CHAPTER_NAME}\input{$FILE_NAME}"
 		pdflatex -jobname=$JOB_NAME "\includeonly{$CHAPTER_NAME}\input{$FILE_NAME}"
 	fi
@@ -42,7 +44,7 @@ function build_bib(){
 }
 
 function clean_aux_files(){
-	FILES_TO_RM='*.aux *.lof *.log *.lol *.toc *.dvi *.bbl *.blg *.lot'
+	FILES_TO_RM='*.aux *.lof *.log *.lol *.toc *.dvi *.bbl *.blg *.lot *.acn *.acr *.alg *.glsdefs *.ist'
 	rm $FILES_TO_RM 2> /dev/null
 	echo "All clean"
 }
