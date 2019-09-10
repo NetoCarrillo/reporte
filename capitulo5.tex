@@ -101,7 +101,7 @@ En la sección \ref{sec:backend} se muestra la verificación y cifrado de la con
 
 
 \section{Resultados}
-El objetivo principal del proyecto AutoSA, definido en la sección \ref{sec:objetivo-principal}, es automatizar la interacción de los operadores de la farmacéutica con el Sistema de Abastecimiento para contestar y verificar órdenes de reposición del Instituto de Salud. En las primeras semanas desde la liberación del sistema AutoSA se contestaron exitosamente la totalidad de las órdenes de reposición, que en promedio son 400 órdenes por día, el tiempo de atención promedio fue de hora y media. Cabe resaltar que hasta la fecha no se han reportado defectos graves o críticos, así como errores en los datos de la respuesta a las órdenes de reposición. Por lo anterior se puede concluir que el proyecto AutoSA ha cumplido con el objetivo para el cuál fue propuesto.\\
+El objetivo principal del proyecto AutoSA, definido en la sección \ref{sec:objetivo-principal}, es automatizar la interacción de los operadores de la farmacéutica con el Sistema de Abastecimiento para contestar y verificar órdenes de reposición del Instituto de Salud. En las primeras semanas desde la liberación del sistema AutoSA se contestaron exitosamente la totalidad de las órdenes de reposición, que en promedio son 400 órdenes por día, el tiempo de atención promedio fue de hora y media. Cabe resaltar que hasta la fecha no se han reportado defectos graves o críticos, así como errores en los datos de la respuesta a las órdenes de reposición. Por lo anterior se puede concluir que el proyecto AutoSA ha cumplido con el objetivo para el cuál fue propuesto. Posterior a la liberación del sistema AutoSA la consultara dueña del desarrollo del sistema AutoSA ha implantado el sistema AutoSA en otras compañías farmacéuticas teniendo resultados a los obtenidos en la primera compañía farmacéutica.\\
 
 El uso del sistema AutoSA trajo con sigo los beneficios esperados (ver sección \ref{sec:objetivos-secundarios}):
 \begin{enumerate}
@@ -112,12 +112,13 @@ El uso del sistema AutoSA trajo con sigo los beneficios esperados (ver sección 
 	\item Ahorro de recursos en la entrega de medicamentos no solicitados, se redujo la entrega de medicamento no solicitado, la información exacta de esta reducción no ha sido compartido por la compañía farmacéutica.
 \end{enumerate}
 
+
 \section{Trabajo futuro}
 \begin{itemize}
-	\item Actualizar bibliotecas a versiones actuales.
-	\item Ejecución en paralelo.
-	\item Extensión para extraer existencias en bodega.
-	\item Ejecución automática de las rutinas de automatizadas.
+	\item Actualizar bibliotecas, marcos de trabajo y ambientes versiones actuales: han pasado más de 3 años desde la liberación.
+	\item Ejecución en paralelo, acondicionar el sistema AutoSA para ejecutar la rutina automatizada para contestar órdenes de reposición en varias instancias de la herramienta Sahi con el fin de reducir aún más el tiempo de respuesta a las órdenes de reposición.
+	\item Extender el alcance del sistema para interactuar con el sistema de la farmacéutica que maneja el inventario de la bodega de medicamentos, esto quiere decir que al terminar la atención de las órdenes de reposición el sistema AutoSA enviaría el reporte de los medicamentos solicitados directamente a la bodega agilizando así el proceso de entrega de medicamentos a los centros de salud. 
+	\item Ejecución automática de las rutinas de automatizadas, dar la posibilidad a los usuarios de programar el momento del día en que se ejecuten las rutinas automatizadas, de esta forma no se necesitaría un operador que iniciara manualmente las rutinas automatizadas.
 \end{itemize}
 
 \section{Conclusiones finales}
