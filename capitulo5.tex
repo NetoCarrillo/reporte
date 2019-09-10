@@ -97,30 +97,39 @@ Al principio del proyecto, la farmacéutica sentó que de ser necesaria una base
 En el cumplimiento de los requerimientos funcionales 1 y 2 de la sección anterior y en la sección \ref{sec:agente} se muestra la implementación del módulo \textbf{Agente} utilizando Sahi.
 
 \subsubsection{Las contraseñas de los usuarios para el acceso a la interfaz web deben ser almacenadas utilizando un algoritmo de cifrado}
-En la sección \ref{sec:backend} se muestra la verificación y cifrado de la contraseña de un usuario\footnote{\textcolor{red}{Esto falta, se debe mostrar el cifrado utilizando algún estándar de salt o algún algoritmo de cifrado}}.
+En la sección \ref{sec:backend} se muestra la verificación y cifrado de la contraseña de un usuario.
 
 
 \section{Resultados}
+El objetivo principal del proyecto AutoSA, definido en la sección \ref{sec:objetivo-principal}, es automatizar la interacción de los operadores de la farmacéutica con el Sistema de Abastecimiento para contestar y verificar órdenes de reposición del Instituto de Salud. En las primeras semanas desde la liberación del sistema AutoSA se contestaron exitosamente la totalidad de las órdenes de reposición, que en promedio son 400 órdenes por día, el tiempo de atención promedio fue de hora y media. Cabe resaltar que hasta la fecha no se han reportado defectos graves o críticos, así como errores en los datos de la respuesta a las órdenes de reposición. Por lo anterior se puede concluir que el proyecto AutoSA ha cumplido con el objetivo para el cuál fue propuesto. Posterior a la liberación del sistema AutoSA la consultara dueña del desarrollo del sistema AutoSA ha implantado el sistema AutoSA en otras compañías farmacéuticas teniendo resultados a los obtenidos en la primera compañía farmacéutica.\\
 
-\subsection{Cumplimiento de objetivos principales}
-El objetivo principal del proyecto AutoSA, definido en la sección \ref{sec:objetivo-principal}, es lograr reducir el tiempo que le toma a la farmacéutica contestar las órdenes de reposición en el Sistema de Abastecimiento y detectar con mayor rapidez las órdenes que han sido canceladas por el Instituto de Salud.\\
-Gracias a la liberación del sistema AutoSA se logró reducir el tiempo de atención de 24 horas hombre al día a 2 horas hombre al día. Mientra que la detección de órdenes de reposición canceladas antes del sistema AutoSA se efectuaba cada tercer día, ahora con el sistema AutoSA se efectúa a diario por lo que la ventana de tiempo para impedir el envío de medicamentos no solicitados ha aumentado tres veces.
-
-\subsection{Cumplimiento de objetivos secundarios}
-
+El uso del sistema AutoSA trajo con sigo los beneficios esperados (ver sección \ref{sec:objetivos-secundarios}):
 \begin{enumerate}
-	\item Reducción del error humano en relación a la manipulación de la información.
-	\item Ahorro de recursos en la entrega de medicamentos no solicitados.
-	\item Reducción de tiempo en cuanto a la respuesta de órdenes de reposición.
-	\item Consistencia en los datos respecto a la generación de reportes estadísticos sobre las órdenes de reposición procesadas.
+	\item Reducción de tiempo en cuanto a la respuesta de órdenes de reposición, previo al uso del sistema AutoSA, a los operadores de la farmacéutica les tomaba 24 horas hombre al día contestar 400 órdenes de reposición en un día, con el sistema AutoSA el tiempo de respuesta bajó a 1.5 horas, este hecho ocasionó que todo el proceso de la compañía farmacéutica para entregar el medicamento desde que se publicaron las órdenes de reposición en el Sistema de Abastecimiento bajara de uno a dos días.
+	\item Reducción de horas extras en las jornadas laborales de los operadores de la compañía farmacéutica, debido al ahorro de tiempo en la respuesta a las órdenes de reposición, los operadores pueden realizar sus tareas diarias dentro de la jornada laboral de 8 horas.
+	\item Reducción del error humano en relación a la manipulación de la información, hasta la fecho no se han reportado errores o inconsistencias en los datos de las respuestas a las órdenes de reposición.
+	\item Consistencia en los datos respecto a la generación de reportes estadísticos sobre las órdenes de reposición procesadas, del punto anterior es sabido que no existen inconsistencias en los datos de las órdenes de reposición almacenados en la base de datos por lo que los reportes estadísticos muestran datos consistentes y verdaderos.
+	\item Ahorro de recursos en la entrega de medicamentos no solicitados, se redujo la entrega de medicamento no solicitado, la información exacta de esta reducción no ha sido compartido por la compañía farmacéutica.
 \end{enumerate}
-Por lo anterior los afiliados del Instituto se verán beneficiados, pues los medicamentos estarán disponibles con mayor frecuencia en las clínicas y hospitales.
+
 
 \section{Trabajo futuro}
 \begin{itemize}
-	\item 
+	\item Actualizar bibliotecas, marcos de trabajo y ambientes versiones actuales: han pasado más de 3 años desde la liberación.
+	\item Ejecución en paralelo, acondicionar el sistema AutoSA para ejecutar la rutina automatizada para contestar órdenes de reposición en varias instancias de la herramienta Sahi con el fin de reducir aún más el tiempo de respuesta a las órdenes de reposición.
+	\item Extender el alcance del sistema para interactuar con el sistema de la farmacéutica que maneja el inventario de la bodega de medicamentos, esto quiere decir que al terminar la atención de las órdenes de reposición el sistema AutoSA enviaría el reporte de los medicamentos solicitados directamente a la bodega agilizando así el proceso de entrega de medicamentos a los centros de salud. 
+	\item Ejecución automática de las rutinas de automatizadas, dar la posibilidad a los usuarios de programar el momento del día en que se ejecuten las rutinas automatizadas, de esta forma no se necesitaría un operador que iniciara manualmente las rutinas automatizadas.
 \end{itemize}
 
 \section{Conclusiones finales}
-
-Durante este proyecto y toda mi carrera profesional he aplicado los conocimientos que adquirí en la Facultad de Ciencias sobre programación y paradigmas de programación, lógica, bases de datos, redes de computadoras, ingeniería de software, análisis y diseño de algoritmos, teoría de códigos, álgebra lineal. También adquirí habilidades y costumbres como buscar y aprender por mi mismo nuevas tecnologías, esto me ha apoyado para mantenerme en constante actualización haciendo que hasta la fecha sea un buen elemento en mis equipos de trabajo\footnote{\textcolor{red}{¿Muy cursi?}}.
+En el desarrollo de este proyecto y en toda mi carrera profesional he aplicado conocimientos que adquirí en la Facultad de Ciencias sobre programación y paradigmas de programación, lógica, bases de datos, redes de computadoras, ingeniería de software, análisis y diseño de algoritmos, teoría de códigos, álgebra lineal. De igual manera también he utilizado las habilidades y costumbres que adquirí como alumno de la licenciatura en Ciencias de la Computación: buscar y aprender por mi mismo nuevas tecnologías, pensar soluciones alternativas. Todo esto (conocimientos, habilidades y costumbres) me ha apoyado para mantenerme en constante actualización y ser un profesional competente en los equipos de trabajo de los cuales he formado parte.\\
+Este reporte a mostrado el desarrollo del proyecto AutoSA por las etapas, cuya responsabilidad recayó en mi persona, bajo la supervisión de un arquitecto de software de la compañía en la cual se desarrolló este proyecto:
+\begin{itemize}
+ 	\item Presentación del problema y propuesta de solución, capítulo \ref{cap1}. 
+ 	\item Análisis de requerimientos y creación de casos de uso, capítulo \ref{cap2}.
+ 	\item Diseño de arquitectura y componentes, capítulo \ref{cap3}.
+ 	\item Implementación de los componentes, capítulo \ref{cap4}.
+\end{itemize} 
+Durante todas estas etapas se trabajó en constante comunicación con los operadores de la farmacéutica, en primer lugar para copiar exactamente la interacción con el Sistema de Abastecimiento del Instituto de Salud. Posteriormente para la ejecución de pruebas de las rutinas automatizadas, pues al no tener un ambiente en el Sistema de Abastecimiento en el cual realizar pruebas, estás fueron realizadas directamente en producción, entonces la supervisión de los operadores fue necesaria para asegurar que ninguna orden de reposición no fuera atendida por parte de la farmacéutica y además garantizar que los datos de las órdenes fueran almacenados correctamente, que la generación de los acuses de envió fuera correcta así como el contenido del reporte de órdenes atendidas necesario para seguir la atención de las órdenes por parte de otras áreas de la compañía farmacéutica.\\
+El resultado del proyecto AutoSA es un sistema robusto, que si bien tiene puntos mejora, al día de hoy no ha presentado fallos graves o críticos, ha cubierto las necesidades de la compañía farmacéutica superando el ahorro de tiempo previsto, ha reducido costos por errores humanos y costos por errores en logística, además evitar a los operadores de la farmacéutica jornadas laborales de 10 horas.\\
+El proyecto AutoSA ha mostrado ser de utilidad en la industria farmacéutica, tan es así que tras el uso exitoso en la compañía farmacéutica para la cual se desarrolló este proyecto, el sistema AutoSA ha sido requerido por otras compañías farmacéuticas y hasta hoy sigue siendo  utilizando diariamente.
