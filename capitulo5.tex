@@ -97,29 +97,20 @@ Al principio del proyecto, la farmacéutica sentó que de ser necesaria una base
 En el cumplimiento de los requerimientos funcionales 1 y 2 de la sección anterior y en la sección \ref{sec:agente} se muestra la implementación del módulo \textbf{Agente} utilizando Sahi.
 
 \subsubsection{Las contraseñas de los usuarios para el acceso a la interfaz web deben ser almacenadas utilizando un algoritmo de cifrado}
-En la sección \ref{sec:backend} se muestra la verificación y cifrado de la contraseña de un usuario\footnote{\textcolor{red}{Esto falta, se debe mostrar el cifrado utilizando algún estándar de salt o algún algoritmo de cifrado}}.
+En la sección \ref{sec:backend} se muestra la verificación y cifrado de la contraseña de un usuario.
 
 
 \section{Resultados}
+El objetivo principal del proyecto AutoSA, definido en la sección \ref{sec:objetivo-principal}, es automatizar la interacción de los operadores de la farmacéutica con el Sistema de Abastecimiento para contestar y verificar órdenes de reposición del Instituto de Salud. En las primeras semanas desde la liberación del sistema AutoSA se contestaron exitosamente la totalidad de las órdenes de reposición, que en promedio son 400 órdenes por día, el tiempo de atención promedio fue de hora y media. Cabe resaltar que hasta la fecha no se han reportado defectos graves o críticos, así como errores en los datos de la respuesta a las órdenes de reposición. Por lo anterior se puede concluir que el proyecto AutoSA ha cumplido con el objetivo para el cuál fue propuesto.\\
 
-\subsection{Cumplimiento de objetivos principales}
-El objetivo principal del proyecto AutoSA, definido en la sección \ref{sec:objetivo-principal}, es automatizar la interacción de los operadores de la farmacéutica con el Sistema de Abastecimiento para contestar y verificar órdenes de reposición del Instituto de Salud.
-
-
- lograr reducir el tiempo que le toma a la farmacéutica contestar las órdenes de reposición en el Sistema de Abastecimiento y detectar con mayor rapidez las órdenes que han sido canceladas por el Instituto de Salud.\\
-Gracias a la liberación del sistema AutoSA se logró reducir el tiempo de atención de 24 horas hombre al día a 2 horas hombre al día. Mientra que la detección de órdenes de reposición canceladas antes del sistema AutoSA se efectuaba cada tercer día, ahora con el sistema AutoSA se efectúa a diario por lo que la ventana de tiempo para impedir el envío de medicamentos no solicitados ha aumentado tres veces.
-
-\subsection{Cumplimiento de objetivos secundarios}
-
+El uso del sistema AutoSA trajo con sigo los beneficios esperados (ver sección \ref{sec:objetivos-secundarios}):
 \begin{enumerate}
-	\item Reducción del error humano en relación a la manipulación de la información.
-	\item Ahorro de recursos en la entrega de medicamentos no solicitados.
-	\item Reducción de tiempo en cuanto a la respuesta de órdenes de reposición.
-	\item Consistencia en los datos respecto a la generación de reportes estadísticos sobre las órdenes de reposición procesadas.
+	\item Reducción de tiempo en cuanto a la respuesta de órdenes de reposición, previo al uso del sistema AutoSA, a los operadores de la farmacéutica les tomaba 24 horas hombre al día contestar 400 órdenes de reposición en un día, con el sistema AutoSA el tiempo de respuesta bajó a 1.5 horas, este hecho ocasionó que todo el proceso de la compañía farmacéutica para entregar el medicamento desde que se publicaron las órdenes de reposición en el Sistema de Abastecimiento bajara de uno a dos días.
+	\item Reducción de horas extras en las jornadas laborales de los operadores de la compañía farmacéutica, debido al ahorro de tiempo en la respuesta a las órdenes de reposición, los operadores pueden realizar sus tareas diarias dentro de la jornada laboral de 8 horas.
+	\item Reducción del error humano en relación a la manipulación de la información, hasta la fecho no se han reportado errores o inconsistencias en los datos de las respuestas a las órdenes de reposición.
+	\item Consistencia en los datos respecto a la generación de reportes estadísticos sobre las órdenes de reposición procesadas, del punto anterior es sabido que no existen inconsistencias en los datos de las órdenes de reposición almacenados en la base de datos por lo que los reportes estadísticos muestran datos consistentes y verdaderos.
+	\item Ahorro de recursos en la entrega de medicamentos no solicitados, se redujo la entrega de medicamento no solicitado, la información exacta de esta reducción no ha sido compartido por la compañía farmacéutica.
 \end{enumerate}
-Por lo anterior los afiliados del Instituto se verán beneficiados, pues los medicamentos estarán disponibles con mayor frecuencia en las clínicas y hospitales.
-
-
 
 \section{Trabajo futuro}
 \begin{itemize}
