@@ -14,7 +14,7 @@ La implementación del Backend está implementada utilizando el marco de trabajo
 
 \paragraph{1. Implementación de los servicios de seguridad\\}
 Los servicios para autenticar y validar usuarios se implementaron siguiendo la especificación OAtuh 2.0 (ver sección \ref{sec:oauth}), el marco de trabajo Spring con sus bibliotecas Spring boot y Spring security.\\
-La implementación de la seguridad utilizando Spring Security se divide en tres tareas:
+La implementación de la seguridad utilizando Spring Security se divide en cuatro tareas:
 \begin{enumerate}
 	\item Habilitar filtros de seguridad, en el Código \ref{lst:enable-oauth} se muestra la configuración de necesaria:
 	\begin{enumerate}
@@ -104,6 +104,20 @@ public void configure(ClientDetailsServiceConfigurer clients) throws Exception{
 	details.setAuthorizedGrantTypes(Arrays.asList("password"));
 	ecds.addClientDetails(details);
 	clients.withClientDetails(ecds);
+}
+\end{lstlisting}
+
+	\item Verificación de la contraseña de usuario: este punto verifica que la clave derivada de la contraseña (ver Sección \ref{sec:key-derivation}) dada por el usuario coincida con la derivación almacenada en la base de datos, en el Código \ref{lst:kdf} se muestra el méotod para derivar la contraseña:
+	\begin{enumerate}
+		\item Línea 2: creación del objeto que contiene la especificación para la deriviación de la contraseña.
+		\item Línea 3: algoritmo de derivación.
+		\item Línea 4: obtención de la contraseña derivada.
+	\end{enumerate}
+\begin{lstlisting}[language=Java, caption={Derivación de la constraseña de usuario.}, captionpos=b, label={lst:kdf}]
+public byte[] derivate(char[] password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
+	PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, keyLength);
+	SecretKeyFactory skf = SecretKeyFactory.getInstance(algorithm);
+	return skf.generateSecret(spec).getEncoded();
 }
 \end{lstlisting}
 

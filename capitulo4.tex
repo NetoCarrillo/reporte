@@ -77,6 +77,24 @@ OAuth define varios escenarios del flujo de autorización, para fines del proyec
 	\label{fig:dia-seq-oauth-flow}
 \end{figure}
 
+\subsection{Derivación de clave}\label{sec:key-derivation}
+
+Una \textbf{función hash} H acepta una cadena de longitud no acotada $M$ y produce una cadena de tamaño fijo $h=H(M)$. Una buena función hash tiene la propiedad que el resultado de aplicar a un conjunto grande de cadenas produce un conjunto de cadenas con distribución uniforme y aparentemente aleatorias\cite{CryptographyNetworkSecurity}.\\
+El tipo de funciones hash ocupadas en seguridad son referidas como \textbf{funciones hash criptográficas}. Una función hash, $H$, se considera criptográfica si computacionalmente es infactible refutar las siguientes propiedades\cite{CryptographyNetworkSecurity}:
+\begin{itemize}
+	\item \textbf{Libre de colisiones}: para cualquier cadena $m$ no existe una cadena $n$ tal que si $m \neq n \Rightarrow H(m) = H(n)$. Es decir, la función hash no utiliza el mismo código para dos cadenas diferentes.
+	\item \textbf{Un solo sentido}: para toda $s$ en la imagen de $H$, $\forall s \in H(M)$, no es posible encontrar $n$ tal que $f(n) = s$. Esta propiedad significa que no es posible encontrar la cadena $n$ de la cual proviene el código hash $s$.
+\end{itemize}
+
+Un función de derivación de claves, o KDF por sus siglas en inglés, tiene como función elaborar una cadena de un tamaño predeterminado a partir de una cadena de tamaño variable.
+Una función KDF tiene los siguientes parámetros\cite{UnderstandingCryptography, CryptographyTheoryPractice}:
+\begin{itemize}
+	\item contraseña: es una palabra secreta
+	\item cadena aleatoria: es una palabra pública generada en forma aleatoria.
+	\item número iteraciones: número de iteraciones que hará la función KDF.
+\end{itemize}
+La función de derivación concatena la contraseña y la cadena aleatoria, entonces aplica una función hash criptográfica por el número de iteraciones indicada, al resultado de esta función se le conoce como clave derivada\cite{UnderstandingCryptography, CryptographyTheoryPractice}.
+
 %-------------------------------------------------------------------------------
 \subsection{Java}\label{sec:java}
 
