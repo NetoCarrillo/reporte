@@ -87,25 +87,25 @@
 \newenvironment{consolaenv}{\fontfamily{pcr}\selectfont}{\par}
 \DeclareTextFontCommand{\consolatext}{\consolaenv}
 
+%Insertar PDFS
+\usepackage{pdfpages}
+
 \begin{document}
 \thispagestyle{empty}
+\includepdf[pages={1}]{portada.pdf}
 %\layout
-
-\begin{center}
-\begin{Large}
-Universidad Nacional Autónoma de México\\
-Facultad de Ciencias\\*[1ex]
-\end{Large}
-\begin{LARGE}
-Proyecto para la Opción de Titulación por Reporte de Trabajo Profesional\\*[1ex]
-AutoSA: Sistema para automatizar las órdenes de reposición en el Sistema de Abastecimiento del Instituto de Salud Pública de México\\*[2ex]
-\end{LARGE}
-Alumno: Ernesto Carrillo Espinosa - No. de cuenta: 300138647\\
-Tutor: M. en I. Karla Ramírez Pulido\\*[1ex]
-\today
-\end{center}
-
 \clearpage
+
+\thispagestyle{empty}
+\vspace*{250px}
+\begin{flushright}
+	\begin{Large}
+		\textit{El bourbon da mejores ideas que el helado.}\\
+	\end{Large}
+Dr. José Galaviz Casas ``Elogio de la pereza''.
+\end{flushright}
+\clearpage
+
 \pagenumbering{roman}
 
 \tableofcontents
