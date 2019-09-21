@@ -4,69 +4,61 @@
 %-------------------------------------------------------------------------------
 \subsection{Base de datos relacional}\label{sec:bd-r}
 Una base de datos relaciones es una colección de tablas relacionadas entre sí. La colección de tablas se describe a sí misma en cuanto a que el significado de los datos contenidos pertenecen a un mismo ámbito\cite{DataBaseConcepts}.\\
-Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (DBMS por sus siglas en inglés), un DBMS es un programa de computadora usado para crear, procesas y administrar bases de datos. El DBMS recibe peticiones en lenguaje SQL (como se describe más adelante) y traduce esas peticiones a acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
-Para el desarrollo del proyecto AutoSA se han usado los siguientes conceptos:
+Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (en inglés Database Management System, DBMS), un DBMS es un programa de computadora usado para crear, procesar y administrar bases de datos. El DBMS recibe peticiones en el lenguaje de programación SQL (como se describe más adelante) y traduce esas peticiones a acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
+Las siguientes son definiciones de los conceptos más relevantes dentro de esta área de conocimiento:
 \begin{enumerate}
-	\item \textbf{Tabla}: una tabla es un conjunto de renglones (registros) y columnas (atributos) que cumple con las siguientes características\cite{DataBaseConcepts}:
+	\item \textbf{Tabla}: es un conjunto de renglones (registros) y columnas (atributos) que cumplen con las siguientes características\cite{DataBaseConcepts}:
 	\begin{enumerate}
-		\item Los renglones contienen unicamente datos relacionados con la tabla.
+		\item Los renglones contienen únicamente datos relacionados con la tabla.
 		\item Las entradas de una columna contienen un solo valor.
 		\item Todas las entradas de una columna son del mismo tipo.
 		\item Las columnas tienen un nombre único dentro de la tabla.
 		\item El orden de las columnas y los renglones no es relevante.
 		\item No contiene dos renglones idénticos.
 	\end{enumerate}
-	\item \textbf{Vista}: es una tabla derivada de una consulta de otras tablas, estas tablas pueden ser tablas de la base de datos o vistas definidas previamente. Una vista es considerada como tabla virtual porque no necesariamente existe físicamente a diferencia de una tabla de la base cuyas tuplas siempre están almacenadas físicamente en la base de datos\cite{FundamentalsOfDBSystems}.
+	\item \textbf{Vista}: es una tabla derivada de una consulta de otras tablas, éstas tablas pueden ser tablas de la base de datos o vistas definidas previamente. Una vista es considerada como tabla virtual ya que no necesariamente existe físicamente, a diferencia de una tabla de la base cuyas tuplas siempre están almacenadas físicamente en la base de datos\cite{FundamentalsOfDBSystems}.
 	\item \textbf{Llave primaria}: es el conjunto de columnas que identifican de manera unívoca a cada renglón de la tabla.\cite{DataBaseConcepts}
-	\item \textbf{Llave foránea}: define la relación de una tabla, \textbf{A}, hacia otra \textbf{B} y satisface las siguientes condiciones\cite{FundamentalsOfDBSystems, DataBaseConcepts}:
+	\item \textbf{Llave foránea}: define la relación de una tabla \textbf{A}, hacia otra tabla \textbf{B}, la relación satisface las siguientes condiciones\cite{FundamentalsOfDBSystems, DataBaseConcepts}:
 	\begin{enumerate}
-		\item Los atributos de las tablas \textbf{A} y \textbf{B} son del mismo tipo y se corresponden uno a uno.
+		\item Los atributos de las tablas \textbf{A} y \textbf{B} son del mismo tipo y se tiene una correspondencia uno a uno.
 		\item Los atributos en la tabla \textbf{B} son exactamente los mismos de la llave primaria de la tabla \textbf{B}.
 	\end{enumerate}
-	\item \textbf{Restricción de integridad}: son reglas que se utilizan para asegurar que cambios en los datos de las tablas no causen inconsistencia en la información\cite{DatabaseSystemConcepts}.
-	\begin{enumerate}
-		\item NOT NULL: indica que el valor del atributo no puede ser nulo\cite{FundamentosSistemasBasesDatos}.
-	\end{enumerate}
-	\item \textbf{Índice}: es una estructura auxiliar para agilizar la obtención de registros. Los índices proveen rutas de acceso alternativo a los registros de la base de datos sin afectar la colocación física de los registros\cite{FundamentalsOfDBSystems}.
-	\item \textbf{Lenguaje Estructurado de Consulta}\label{sec:sql}: del inglés Structured Query Language (SQL), fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años 70, es un lenguaje de datos orientado a texto, ha sido avalado por el Instituto Nacional de Estándares Americanos (ANSI por sus siglas en inglés) dando así los estándares ANSI para SQL, principalmente para este trabajo el estándar ANSI-92 o SQL-92.
-	\item \textbf{Lenguaje de Definición de Datos}: DDL por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
-	\item \textbf{Lenguaje de Modelado de Datos}: DML por sus siglas en inglés, es un lenguaje de SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
+	\item \textbf{Restricción de integridad}: son reglas que se utilizan para asegurar que cambios en los datos de las tablas no causen inconsistencia en la información\cite{DatabaseSystemConcepts}. En particular el conocido como \texttt{NOT NULL} indica que el valor del atributo no puede ser nulo\cite{FundamentosSistemasBasesDatos}.
+	\item \textbf{Índice}: es una estructura auxiliar para agilizar la obtención de registros. Los índices proveen rutas de acceso alternativo a los registros de la base de datos sin afectar la colocación física de éstos\cite{FundamentalsOfDBSystems}.
+	\item \textbf{Lenguaje Estructurado de Consultas}, traducción del inglés Structured Query Language (SQL): fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años setenta. Es un lenguaje de datos orientado a texto, el cual ha sido avalado por el Instituto Nacional de Estándares Americanos (ANSI por sus siglas en inglés) dando así los estándares ANSI para SQL, principalmente para este trabajo el estándar ANSI-92 o SQL-92.
+	\item \textbf{Lenguaje de Definición de Datos}, traducción del inglés Data Definition Language (DDL): son sentencias de SQL cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
+	\item \textbf{Lenguaje de Modelado de Datos}, traducido del inglés Data Modeling Language (DML): son las sentencias SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
 \subsection{OAuth 2.0}\label{sec:oauth}
-Bihis\cite{MasteringOAuth2} describe de manera a OAuth 2.0:
+Bihis describe de la siguiente manera a OAuth 2.0:
 \begin{quote}
-	OAuth 2.0 es in protocolo que permite compartir información y recursos a aplicaciones distintas de manera segura y confiable.
+	OAuth 2.0 es un protocolo que permite compartir información y recursos a distintas aplicaciones de manera segura y confiable\cite{MasteringOAuth2}.
 \end{quote}
-
-Spasovski\cite{OAuth2Identity} complementa la descripción de OAuth 2.0:
-\begin{quote}
-	OAuth 2.0 provee autorización para que un cliente (aplicación o sistema) pueda, a su vez, autorizar peticiones a recursos protegidos de un servicio a nombre del dueño (usuario de la aplicación).
-\end{quote}
-
-La proposición de estándar industrial de OAuth 2.0 \cite{OAuthRFC} especifica cuatro roles que intervienen en el flujo del protocolo de autorización y acceso a recursos protegidos:
+Spasovski complementa la descripción diciendo que OAuth 2.0 provee autorización para que un cliente pueda a su vez autorizar peticiones a recursos protegidos de un servicio a nombre del dueño (usuario de la aplicación o sistema)\cite{OAuth2Identity}.
+Se especifican cuatro roles que intervienen en el flujo del protocolo de autorización y acceso a recursos protegidos\cite{OAuthRFC}:
 \begin{enumerate}
-	\item Dueño del recurso: una entidad que es capás de otorgar acceso a recursos protegidos, cuando el dueño del recurso es una persona puede ser referido como usuario final.
-	\item Servidor de recursos: el servidor que contiene los recursos protegidos, es capas de aceptar y responder a peticiones de recursos protegidos utilizando un token de acceso.
-	\item Cliente: es una aplicación que hace peticiones a recursos protegidos a nombre y con autorización del dueño del recurso. El término \textit{cliente} no implica características particulares de implementación (es decir que la aplicación se puede ejecutar en un servidor, en un escritorio, una dispositivo móvil o en cualquier otro tipo de dispositivo).
-	\item Servidor de autorizaciones: el servidor que genera tokens de acceso a los clientes después de autenticar exitosamente al dueño del recurso y haber obtenido autorización.
+	\item Dueño del recurso: una entidad que es capaz de otorgar acceso a recursos protegidos, cuando el dueño del recurso es una persona se conoce como usuario final.
+	\item Servidor de recursos: el servidor que contiene los recursos protegidos, es capaz de aceptar y responder a peticiones de recursos protegidos utilizando un lexema (\textit{token}\footnote{A lo largo de este trabajo se hará referencia al lexema por su nombre en inglés \textit{token} ya se acopla mejor al contexto.}) de acceso.
+	\item Cliente: es una aplicación que hace peticiones a recursos protegidos por medio de su nombre y de autorización del dueño del recurso.
+	\item Servidor de autorizaciones: es el servidor que genera lexemas (\textit{tokens}) de acceso a los clientes después de autentificar exitosamente al dueño del recurso y haber obtenido autorización.
 \end{enumerate}
-La interacción entre el servidor de autorizaciones y el servidor de recursos está fuera del alcance de la especificación de OAtuh 2.0. El servidor de autorizaciones podría ser el mismo que el servidor de recursos o ser entidades separadas. Un servidor de autorizaciones puede generar tokens de acceso para múltiples servidores de recursos\cite{OAuthRFC}.\\
-La definición de los roles utiliza el concepto de token de acceso que es definido en el estándar \cite{OAuthRFC} de la siguiente forma:
+La interacción entre el servidor de autorizaciones y el servidor de recursos se encuentra fuera del alcance de la especificación de OAtuh 2.0. El servidor de autorizaciones podría ser el mismo que el servidor de recursos o ser entidades separadas. Un servidor de autorizaciones puede generar \textit{tokens} de acceso para múltiples servidores de recursos\cite{OAuthRFC}.\\
+La definición de los roles utiliza el concepto de \textit{token} de acceso el cuál está definido en el estándar de la siguiente forma\cite{OAuthRFC}:
 \begin{quote}
-	Token de acceso\footnote{De ahora en adelante referido únicamente como token} es una cadena que representa la autorización hecha al cliente. Usualmente la cadena no tiene un significado claro para el cliente. Los tokens representan alcance y duración específicos otorgados por el dueño del recurso y respaldados por el servidor de recursos y el servidor de autorizaciones.
+	\textit{Token} de acceso\footnote{De ahora en adelante referido únicamente como \textit{token}.} es una cadena que representa la autorización hecha al cliente. Usualmente la cadena no tiene un significado claro para el cliente. Los \textit{tokens} representan alcance y duración específicos otorgados por el dueño del recurso y respaldados por el servidor de recursos y el servidor de autorizaciones.
 \end{quote}
 
-OAuth define varios escenarios del flujo de autorización, para fines del proyecto AutoSA nada más se hará mención del flujo de autorización con identificador de usuario y contraseña\cite{OAuthRFC, OAuth2Identity}, el diagrama del flujo se muestra en la Figura \ref{fig:dia-seq-oauth-flow}:
+OAuth define varios escenarios del flujo de autorización, para fines del proyecto AutoSA únicamente se hará mención del flujo de autorización con identificador de usuario y contraseña\cite{OAuthRFC, OAuth2Identity}. El diagrama del flujo se muestra en la Figura \ref{fig:dia-seq-oauth-flow} y en este se puede observar que:
 \begin{enumerate}
-	\item El cliente envía sus credenciales y las credenciales de dueño del recurso (en este caso credenciales se refiere a un identificador y contraseña).
+	\item El cliente envía tanto sus credenciales y como las credenciales de dueño del recurso (en este caso credenciales se refiere a un identificador y contraseña).
 	\item El servidor de autorizaciones valida las credenciales del cliente.
 	\item El servidor de autorizaciones valida las credenciales del dueño del recurso.
-	\item El servidor de autorizaciones pide la generación de un token.
-	\item El servidor de autorizaciones entrega el token al cliente.
-	\item El cliente hace la petición de un recurso (acompañado del token) al servidor de recursos.
-	\item El servidor de recursos valida el token de la petición. 
+	\item El servidor de autorizaciones pide la generación de un \textit{token}.
+	\item El servidor de autorizaciones entrega el \textit{token} al cliente.
+	\item El cliente hace la petición de un recurso (acompañado del \textit{token}) al servidor de recursos.
+	\item El servidor de recursos valida el \textit{token} de la petición. 
 	\item El servidor de recursos valida entrega el recurso al cliente.
 \end{enumerate}
 
@@ -98,57 +90,52 @@ La función de derivación concatena la contraseña y la cadena aleatoria, enton
 %-------------------------------------------------------------------------------
 \subsection{Java}\label{sec:java}
 
-El lenguaje de programación Java fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan en 1991 bajo el nombre ``Oak'' y en 1995 cambiaron el nombre a Java. El lenguaje Java está basado en los lenguajes de programación C, de donde deriva su sintaxis y de C++, que se toma como base para las características del paradigma orientado a objetos. Java es un lenguaje orientado a objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
-El concepto de Java tiene varios componentes, para efectos de este proyecto se mencionarán los siguientes\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
+El lenguaje de programación Java fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan bajo el nombre ``Oak'' y en 1995 se cambió el nombre a Java. El lenguaje Java está basado en los lenguajes de programación C y C++. Java es un lenguaje Orientado a Objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
+Java cuenta con varios componentes, de los cuales únicamente se describirán los más relevantes para el proyecto AutoSA\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
 \begin{enumerate}
-	\item Lenguaje de programación Java: previamente descrito, es un lenguaje multiplataforma, estáticamente tipado y orientado a objetos.
-	\item Máquina Virtual de Java: JVM por sus siglas en inglés, es el sistema de ejecución en tiempo real de Java\footnote{\textcolor{red}{Karla, \textbf{Sistema de ejecución en tiempo real de Java} fue lo que me pareció más correcto para traducir ``Java run-time system'' ¿qué opinas, sabes una traducción mejor?}}.
-	\item Bytecode: es el nombre que recibe el conjunto optimizado de instrucciones diseñadas para ser ejecutadas en la JVM.
-	\item Paquete de Desarrollo de Java JDK (Java Development Kit): es el conjunto de herramientas utilizadas para el desarrollo de software para la máquina virtual de Java.
-	\item Ambiente de Ejecución de Java JRE (Java Runtime Environment): es la herramienta encargada de la creación y administración de instancias de la máquina virtual de Java.
+	\item \textbf{Máquina Virtual de Java}, traducido del inglés Java Virtual Machine (JVM): es el sistema en tiempo de ejecución de Java.
+	\item \textbf{Bytecode}: es el nombre que recibe el conjunto optimizado de instrucciones diseñadas para ser ejecutadas en la JVM.
+	\item \textbf{Paquete de Desarrollo de Java}, traducido del inglés Java Development Kit (JDK): es el conjunto de herramientas utilizadas para el desarrollo de software para la Máquina Virtual de Java.
+	\item \textbf{Ambiente de Ejecución de Java} traducido del inglés Java Runtime Environment (JRE): es la herramienta encargada de la creación y administración de instancias de la Máquina Virtual de Java.
 \end{enumerate}
 
 \subsubsection{Java Data Base Controller}\label{sec:jdbc}
-El controlador de base de datos de Java (JDBC por sus siglas en inglés) es un conjunto de APIs\footnote{API viene del inglés ``Application Programming Interface'' este concepto es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales, cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
+El controlador de base de datos de Java (del inglés Java Database Controller, JDBC) es un conjunto de APIs\footnote{API viene del inglés ``Application Programming Interface'' es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales. Cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
 
 %-------------------------------------------------------------------------------
 \subsection{Spring}\label{sec:spring}
-El marco de trabajo Spring es descrito en su sitio de Internet\cite{SpringFramework}:
 \begin{quote}
-	El maco de trabajo Spring provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en Java en cualquier tipo de plataforma de despliegue.
+	El maco de trabajo Spring provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en Java en cualquier tipo de plataforma de despliegue\cite{SpringFramework}.
 \end{quote}
 
-Las funciones principales de Spring, mejor conocido como Spring Core, está construido utilizando los siguientes conceptos\cite{Spring5DesignPatterns, ProSpring5, WellGroundedJavaDeveloper, SpringInAction}:
+Las funciones principales de Spring, mejor conocido como Spring Core\cite{Spring5DesignPatterns, ProSpring5, WellGroundedJavaDeveloper, SpringInAction}:
 \begin{enumerate}
-	\item Inversión de control: es una técnica que externaliza y administra las dependencias de componentes.
+	\item Inversión de control: es una técnica que externaliza y administra las dependencias entre componentes.
 
 	\item Inyección de dependencia: es una forma particular de inversión de control, se refiere a establecer las dependencias de un objeto en tiempo de ejecución.
 
-	\item Programación orientada a eventos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes donde cada uno es responsable por un conjunto de funcionalidades afines, a menudo, estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etc.), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación orientada a aspectos en Spring  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales y para esto utiliza los patrones de diseño Decorador y Proxy (ver secciones \ref{sec:decorator} y \ref{sec:proxy}, respectivamente).
+	\item Programación Orientada a Eventos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes. Cada uno es responsable de un conjunto de funcionalidades afines, a menudo estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etcétera), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación Orientada a Aspectos en Spring  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales, para lo cual utiliza los patrones de diseño \textit{Decorador} y \textit{Proxy} (ver secciones \ref{sec:decorator} y \ref{sec:proxy}, respectivamente).
 \end{enumerate}
 
-Dentro del proyecto de Spring existen proyectos que se enfocan a áreas específicas, a continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
+Dentro del proyecto de Spring existen proyectos que se enfocan en áreas específicas. A continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
 
 \subsubsection{Spring boot}\label{sec:spring-boot}
-Es un proyecto de Spring que ofrece un ambiente de desarrollo y despliegue para aplicaciones desarrolladas con Spring y ofrece las siguientes prestaciones\cite{SpringBootInAction}:
+Es un proyecto de Spring que ofrece un ambiente de desarrollo y despliegue para aplicaciones desarrolladas con Spring y ofrece las siguientes características\cite{SpringBootInAction}:
 \begin{enumerate}
-	\item Iniciadores: agregar grupos comunes de dependencias en una sola dependencia que puede ser agregada al administrador de proyectos.
-	\item Auto-configuración: alivia la carga de configuración estableciendo valores por defecto y además soporta configuración condicional.
+	\item Iniciadores: agregar grupos comunes de dependencias. Cabe mencionar que en una sola de éstas puede ser agregada al administrador de proyectos.
+	\item Auto-configuración: alivia la carga de configuración estableciendo valores por defecto, soportando configuración condicional.
 	\item Solenoide: agrega características de administración a las aplicaciones.
 \end{enumerate}
 
 \subsubsection{Spring security}\label{sec:spring-security}
-El proyecto Spring security es descrito en su página de Internet\cite{SpringSecurity}:
 \begin{quote}
-	Spring security es un marco de trabajo poderoso y altamente adaptable para procesos de autenticación y control de acceso. Es el estándar de seguridad para aplicaciones basadas en Spring.\\
-	Spring security es un marco de trabajo enfocado en proveer a aplicaciones de Java funciones de auntenticación y autorización.
+	La Seguridad de Spring (\textit{Spring Security}) es un marco de trabajo poderoso y altamente adaptable para procesos de autentificación y control de acceso. Es el estándar de seguridad para aplicaciones basadas en Spring. Enfocado en proveer a aplicaciones de Java funciones de autentificación y autorización\cite{SpringSecurity}.
 \end{quote}
 
-Scarioni\cite{ProSpringSecurity} describe el flujo de Spring security de la siguiente forma:
 \begin{quote}
-	El modelo de interceptación de seguridad de Spring security aplica a dos áreas principales de una aplicación: URLs y llamados a métodos. Spring security se envuelve al rededor de estos dos puntos de entrada de la aplicación y permite el acceso cuando las restricciones de seguridad son cumplidas. Ambos, la llamada a métodos y la cadena de filtros de seguridad dependen de la instancia de ScurityInterceptor donde la lógica principal reside en tomar la decisión de conceder o no el acceso.
+	El modelo de interceptación de seguridad de \textit{Spring security} se puede aplicar a dos áreas principales en una aplicación: URL y llamados a métodos. \textit{Spring security} engloba estos dos puntos de entrada de la aplicación, permitiendo el acceso cuando las restricciones de seguridad son cumplidas. Tanto la llamada a métodos como la cadena de filtros de seguridad dependen de la instancia de \texttt{SecurityInterceptor} donde la lógica principal reside en tomar la decisión de conceder o no el acceso\cite{ProSpringSecurity}.
 \end{quote}
-En al Figura \ref{fig:dia-spring-security} se muestra un diagrama del manejo que Spring security da a las peticiones.
+En al Figura \ref{fig:dia-spring-security} se muestra un diagrama del manejo que \textit{Spring security} brinda a las peticiones al sistema.
 
 \begin{figure}[h]
 	\centering
@@ -159,19 +146,18 @@ En al Figura \ref{fig:dia-spring-security} se muestra un diagrama del manejo que
 
 %-------------------------------------------------------------------------------
 \subsection{MyBatis}\label{sec:mybatis}
-El sitio oficial de MyBatis\cite{MyBatis} lo describe: 
 \begin{quote}
-MyBatis es un marco de trabajo para persistencia de primera clase con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. MyBatis elimina casi todo el código de JDBC, la configuración manual de parámetros y la recuperación de resultados.
+MyBatis es un marco de trabajo para manejar la persistencia con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. MyBatis elimina casi todo el código de JDBC, la configuración manual de parámetros y la recuperación de resultados\cite{MyBatis}.
 \end{quote}
 
-Prasad Reddy\cite{PersistenceWithMyBatis} resalta los beneficios de MyBatis sobre otros marcos de trabajo para persistencia:
+Los beneficios de MyBatis sobre otros marcos de trabajo para persistencia son\cite{PersistenceWithMyBatis}:
 \begin{quote}
 	\begin{itemize}
 		\item Elimina gran parte del código repetitivo de JDBC.
 		\item Tiene una curva de aprendizaje pequeña (es fácil de aprender).
 		\item Trabaja bien con bases de datos antiguas.
-		\item Adopta SQL.
-		\item Provee integración con marcos de trabajo como Spring y Guice.
+		\item Encrustación de sentencias SQL.
+		\item Provee integración con el marco de trabajo \textit{Spring}.
 		\item Provee integración con bibliotecas para caché.
 		\item Induce mejoras en el rendimiento.
 	\end{itemize}
@@ -181,61 +167,55 @@ El uso de MyBatis se resume principalmente a puntos\cite{PersistenceWithMyBatis}
 \begin{enumerate}
 	\item Crear un archivo de configuración que contiene las sentencias SQL y conversiones de resultados a objetos de Java.
 	\item Crear una interfaz de Java cuyos métodos correspondan a las sentencias SQL del archivo de configuración.
-	\item Crear un objeto \textbf{SqlSession} del cual se obtiene una instancia de la interfaz, por medio de tal instancia se realizan las operaciones a la base de datos.
+	\item Crear un objeto \texttt{SqlSession} del cual se obtiene una instancia de la interfaz. Por medio de tal instancia se realizan las operaciones a la base de datos.
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
 \subsection{Velocity}\label{sec:velocity}
-Gradecki\cite{MasteringApacheVelocity} describe a Velocity:
-
 \begin{quote}
-	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de Java como puente entre el modelo y la vista (hablando del patrón MVC como se muestra en el Apéndice \ref{sec:mvc}).
+	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de Java como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (ver Apéndice \ref{sec:mvc}).
 \end{quote}
 
 %-------------------------------------------------------------------------------
 \subsection{Flying Saucer}\label{sec:flying-saucer}
-La herramienta Flying Saucer es descrita en su página de Internet\cite{FlyingSaucer} como:
 \begin{quote}
-	Flying Saucer es una biblioteca puramente escrita en Java para traducir documentos XML o XHTML con CCS a formatos de gráficos de Java, PDF e imágenes.
+	Flying Saucer es una biblioteca escrita en Java para traducir documentos XML o XHTML con CSS\footnote{Hoja de estilos en cascada, traducido del inglés\textit{Cascading Style Sheets}.} a formatos de gráficos de Java, PDF e imágenes\cite{FlyingSaucer}.
 \end{quote}
-
 
 %-------------------------------------------------------------------------------
 \subsection{Javascript}\label{sec:javascript}
-Javascript es un lenguaje de programación de rutinas, en un principio diseñado para utilizarse en exploradores de Internet, se le ha dado otro tipo de aplicaciones como es el desarrollo de aplicaciones de escritorio y servidores de aplicaciones. Un programa desarrollado con Javascript no depende de un compilador, un intérprete de Javascript ejecuta el código tal y como está escrito. Además Javascript no maneja declaración explícita de tipos.\cite{LearningWebDesign}
+Javascript es un lenguaje de programación de rutinas, en un principio fue diseñado para utilizarse en exploradores de Internet, se le ha dado otro tipo de aplicaciones como es el desarrollo de aplicaciones de escritorio y servidores de aplicaciones. Un programa desarrollado con Javascript no depende de un compilador ya que un intérprete de Javascript ejecuta el código tal y como está escrito\cite{LearningWebDesign}.
 
 %-------------------------------------------------------------------------------
 \subsection{AngularJS}\label{sec:angularjs}
 
-Soni\cite{FullStackAngularJS} describe al proyecto AngularJS:
 \begin{quote}
-	AngularJS es una biblioteca escrita en Javascript para desarrollar aplicaciones Web, mantenida por Google\textsuperscript{\textcopyright}\footnote{\textcolor{red}{Karla, no se si Google se debe escribir con el símbolo de copyright \textcopyright o trademark \texttrademark ¿Sabes como se decide eso?}}. Es un marco de trabajo de código abierto y se enfoca en los retos de aplicaciones de una página. Una aplicación Web basada en AgularJS sigue el patrón de diseño MVC, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares.
+	AngularJS es un marco de trabajo escrito en Javascript para desarrollar aplicaciones Web, mantenida por Google\textsuperscript{\textcopyright}\footnote{\textcolor{red}{Karla, no se si Google se debe escribir con el símbolo de copyright \textcopyright o trademark \texttrademark ¿Sabes como se decide eso?}}. Es un marco de trabajo de código abierto, el cual se enfoca en los retos de aplicaciones de una página. Una aplicación Web basada en AgularJS sigue el patrón de diseño MVC, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares\cite{FullStackAngularJS}.
 \end{quote}
 
 \subsubsection{Componente básicos de AngularJS}
-Al seguir el patrón MVC, AngularJS permite dividir la aplicación componentes, a continuación se enlistan los componentes más importantes para entender una aplicación basada en AngularJS\cite{FullStackAngularJS, LearningAngularJS, AngularJSEssentials}:
+Al seguir el patrón MVC, AngularJS permite dividir la aplicación en componentes. A continuación se enlistan los componentes más importantes utilizados para el desarrollo del proyecto AutoSA\cite{FullStackAngularJS, LearningAngularJS, AngularJSEssentials}:
 \begin{enumerate}
-	\item Módulo \textit{(module)}: es el contenedor para los demás componentes de AngularJS, cada módulo tiene su propia estructura de directorios para cada tipo de componente de AngularJS, y cada página en AngularJS tiene un módulo.
+	\item Módulo \textit{(module)}: es el contenedor para los demás componentes de AngularJS. Cada módulo tiene su propia estructura de directorios para cada tipo de componente de AngularJS, y cada página en AngularJS tiene un módulo.
 	\item Alcance \textit{(scope)}: es una representación en Javascript de datos usados para llenar una vista en una página Web. Los datos puede de cualquier fuente como una base de datos o un servicio Web.
-	\item Vista \textit{(view)}: es la orquestación de plantillas (HTML) y directivas, las vistas son construidas dinámicamente en tiempo de ejecución al mezclas las plantillas con los datos del alcance, el resultado es código HTML puro.
+	\item Vista \textit{(view)}: es la composición de plantillas (HTML) y directivas, las vistas son construidas dinámicamente en tiempo de ejecución al mezclar las plantillas con los datos del alcance, el resultado es código HTML puro.
 	\item Plantilla \textit{(template)}: son fragmentos de código HTML con directivas y expresiones.
 	\item Directiva \textit{(directive)}: es una extensión al vocabulario de HTML que permite definir nuevos comportamientos, entonces permite desarrollar componentes reutilizables.
-	\item Expresión \textit{(expression)}: las expresiones son un lenguaje especial de AngularJS para ligar datos del alcance dentro de una plantilla HTML.
+	\item Expresión \textit{(expression)}: las expresiones se utilizan para ligar datos del alcance dentro de una plantilla HTML.
 	\item Controlador \textit{(controller)}: es el control de patrón de diseño MVC, contiene la lógica de negocio y su función principal es exponer los datos a la vista utilizando el alcance.
 	\item Ligado de datos \textit{(data binding)}: es el proceso de ligar datos del modelo a la vista en ambos sentidos, es decir, un cambio originado en una parte implica el cambio en la otra parte.
 	\item Modelo \textit{(model)}: es el modelo del patrón de diseño MVC, es decir, son los datos.
-	\item Servicio \textit{(service)}: son objetos que single el patrón de diseño Singleton y proveen funcionalidad específica a la aplicación Web.
+	\item Servicio \textit{(service)}: son objetos que siguen el \textit{Patrón de Diseño Singleton} y proveen funcionalidad específica a la aplicación Web.
 	\item Inyección de dependencias \textit{(dependency injection)}: es el proceso de inyectar dependencias en tiempo de ejecución, es utilizado para consumir los servicios.
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
 \subsection{Sahi}\label{sec:sahi}
-La compañía Sahi Pro\textsuperscript{\textcopyright}\cite{SahiPro} describe a su producto del mismo nombre como:
 \begin{quote}
-	Sahi es una herramienta enfocada a la automatización de pruebas para servicios Web, plataformas Web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de Java.
+	Sahi es una herramienta enfocada a la automatización de pruebas para servicios Web, plataformas Web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de desarrollo Java\cite{SahiPro}.
 \end{quote}
 
-Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en Sahi logra la ejecución de rutinas es actuando como proxy\footnote{Un proxy es un intermediario entre el cliente (explorador) y el servidor (página Web)\cite{BeginningUbuntuLinux}} entre el sitio Web y el explorador de Internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio Web, Sahi intercepta la comunicación e inserta código de Javascript que ejecuta la rutina automatizada.\cite{WebEng9IntConf, SahiPro}
+Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en Sahi logra la ejecución de rutinas es actuando como proxy\footnote{Un \textit{proxy} es un intermediario entre el cliente (explorador) y el servidor (página Web)\cite{BeginningUbuntuLinux}} entre el sitio Web y el explorador de Internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio Web, Sahi intercepta la comunicación e inserta código de Javascript que ejecuta la rutina automatizada\cite{WebEng9IntConf, SahiPro}.
 
 \begin{figure}[h]
 \centering
