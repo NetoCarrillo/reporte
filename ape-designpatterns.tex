@@ -1,20 +1,23 @@
 \chapter{Técnicas de Diseño}\label{sec:patrones}
 
 \section{Patrones de Diseño}
-``Un patrón describe un problema recurrente sobre un ambiente, y entonces describe la técnica que soluciona el problema de forma tal que puede ser utilizado sobre cualquier instancia del problema''\cite{DesignPatterns}, es decir, que dados los requerimientos funcionales del sistema es posible analizar la comunicación entre sus distintas partes y de esta forma saber lo patrones que son útiles para dar solución. Los patrones son organizados en tres categorías\cite{DesignPatterns}:
+\begin{quote}
+Un patrón describe un problema recurrente sobre un ambiente, y entonces describe la técnica que soluciona el problema de forma tal que puede ser utilizado sobre cualquier instancia del problema\cite{DesignPatterns}.
+\end{quote}
+Es decir, que dados los requerimientos funcionales del sistema es posible analizar la comunicación entre sus distintas partes y de esta forma saber lo patrones que son útiles para dar solución. Los patrones son organizados en tres categorías\cite{DesignPatterns}:
 \begin{itemize}
-	\item \textbf{Creacionales}: describen la forma en que las entidades (objetos si se utiliza el paradigma orientado a objetos) del sistema son creadas.
+	\item \textbf{Creacionales}: describen la forma en que las entidades (objetos si se utiliza el Paradigma Orientado a Objetos) del sistema son creadas.
 	\item \textbf{Estructurales}: describen la organización entre las entidades del sistema.
 	\item \textbf{Comportamiento}: describen la comunicación entre entidades del sistema
 \end{itemize}
 
 \section{Patrón Singleton}\label{sec:singleton}
-El patrón Singleton pertenece al grupo de patrones de diseño de creación, es una forma de proporcionar acceso global a la instancia de una clase sin dar acceso al constructor de la clase y además garantizar que dicha instancia sea la única de la clase. El patrón Singleton identifica principalmente una clase, la cual es encargada de encapsular la creación de su instancia y proveer acceso a dicha instancia\cite{DesignPatternsLasater, DesignPatterns, OCPJavaSE7}.
+El Patrón \textit{Singleton} pertenece al grupo de patrones de diseño de creación, es una forma para proporcionar acceso global a la instancia de una clase sin dar acceso al constructor de la clase y además garantizar que dicha instancia sea la única de la clase. El Patrón \textit{Singleton} identifica principalmente una clase, la cual es encargada de encapsular la creación de su instancia y proveer acceso a dicha instancia\cite{DesignPatternsLasater, DesignPatterns, OCPJavaSE7}.
 
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-class-singleton}
-  \caption{Diagrama UML del patrón Singleton\cite{DesignPatternsLasater}.}
+  \caption{Diagrama UML del Patrón \textit{Singleton}\cite{DesignPatternsLasater}.}
   \label{fig:dia-class-singleton}
 \end{figure}
 
@@ -59,7 +62,7 @@ El patrón Proxy es una clase que actuá como punto de acceso a otra clase la cu
 \end{figure}
 
 \section{Patrón Objeto de Acceso a Datos}\label{sec:dao}
-El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etc.) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
+El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etcétera) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
 \begin{enumerate}
 	\item [] \textbf{buscar}: realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
 	\item [] \textbf{listar}: extrae todos los elementos, el resultado puede utilizar estrategias de paginación.
@@ -70,11 +73,11 @@ El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y 
 
 
 \section{Patrón Modelo-Vista-Controlador}\label{sec:mvc}
-Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador (MVC) es un patrón de arquitectura que consiste de tres grandes componentes: Modelo, Vista y Controlador. El Controlador conduce la comunicación entre la Vista y el Modelo, en la Figura \ref{fig:dia-mvc-simple} se muestra el flujo de comunicación entre los componentes MVC.
+Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador (MVC) es un patrón de arquitectura que consiste de tres grandes componentes: Modelo, Vista y Controlador. El controlador conduce la comunicación entre la Vista y el Modelo, en la Figura \ref{fig:dia-mvc-simple} se muestra el flujo de comunicación entre los componentes MVC.
 \begin{enumerate}
 	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del patrón DAO (ver sección \ref{sec:dao}) para el manejo de datos.
 	\item \textbf{Vista}: es la capa de presentación, es responsable de mostrar los datos al actor\footnote{Puede ser una persona u otro sistema} que use el sistema.
-	\item \textbf{Controlador}: es el intermediario entre la Vista y el Modelo: comunica las peticiones de la vista al modelo y los datos del modelo a la vista.
+	\item \textbf{Controlador}: es el intermediario entre la Vista y el Modelo, el cual comunica las peticiones de la vista al modelo y los datos del modelo a la vista.
 \end{enumerate}
 \begin{figure}[h]
   \centering
@@ -84,11 +87,11 @@ Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador
 \end{figure}
 
 \section{Arquitectura Orientada a Servicios}\label{sec:soa}
-Thomas Erl describe la Arquitectura Orientada a Servicios (\textbf{SOA} por sus siglas en inglés) como el modelo arquitectónico del cómputo orientado a servicios\cite{SOAWithRest}, a continuación se muestran las definiciones de Erl\cite{SOAWithRest} sobre los conceptos de Orientación a Servicios:
+Thomas Erl describe la Arquitectura Orientada a Servicios (\textbf{SOA} por sus siglas en inglés) como el modelo arquitectónico del cómputo orientado a servicios\cite{SOAWithRest}. A continuación se muestran las definiciones de Erl\cite{SOAWithRest} sobre los conceptos de Orientación a Servicios:
 \begin{quote}
-La \textbf{Orientación a Servicios} es el paradigma de diseño dedicado para la creación de unidades lógicas de solución que son moldeados individualmente para que puedan ser utilizados colectiva y repetidamente para la realización de objetivos estratégicos y beneficios asociados con el cómputo orientado a servicios.\\
+La \textbf{Orientación a Servicios} es el paradigma de diseño dedicado para la creación de unidades lógicas de solución que son moldeados individualmente para que puedan ser utilizados colectiva y repetidamente para la realización de objetivos estratégicos y beneficios asociados con el cómputo Orientado a Servicios.\\
 El \textbf{Cómputo Orientado a Servicios} es engloba distintas plataformas de cómputo distribuido. En sí envuelve su propio paradigma y principios de diseño, catálogos de diseño de patrones, lenguajes, modelo arquitectónico junto con sus conceptos relacionados, tecnologías y marcos de trabajo.\\
-La \textbf{Arquitectura Orientada a Servicios} es un modelo de tecnología arquitectónica para soluciones orientadas a servicios con distintas características en apoyo de realizar orientación a servicios y los objetivos estratégicos asociados con el cómputo orientado a servicios.
+La \textbf{Arquitectura Orientada a Servicios} es un modelo de tecnología arquitectónica para soluciones orientadas a servicios con distintas características en apoyo de realizar orientación a servicios y los objetivos estratégicos asociados con el cómputo Orientado a Servicios.
 \end{quote}
 
 
