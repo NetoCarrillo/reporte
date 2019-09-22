@@ -1,8 +1,8 @@
 \subsection{Agente}\label{sec:agente}
-La implementación del componente Agente está escrito en rutinas de Sahi (ver sección \ref{sec:sahi}), primero se exponen los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realizar la ejecución mediante la herramienta gráfica de Sahi.
+La implementación del componente Agente está escrito en rutinas de \textit{Sahi} (ver sección \ref{sec:sahi}). Primero se exponen los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realizar la ejecución mediante la herramienta gráfica de \textit{Sahi}.
 
 \subsubsection{Rutina para automatizar la respuesta de órdenes de reposición}\label{sec:aut-contestar}
-La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso  CU-CONTESTAR que se describe en la sección \ref{cu-contestar}. A continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son los siguientes:
+La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso  CU-CONTESTAR que se describe en la sección \ref{cu-contestar}. A continuación se muestran las secciones de código más relevantes de la rutina que realiza la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son:
 \begin{enumerate}
 	\item Ingresar al Sistema de Abastecimiento, en el Código \ref{lst:sah-session} se muestra la rutina para iniciar sesión en el Sistema de Abastecimiento:
 	\begin{enumerate}
@@ -17,12 +17,12 @@ _click(_submit("Ingresar al Sistema"));
 _click(_image("Normal[2]"));
 	\end{lstlisting}
 
-	\item Recolectar las órdenes de reposición listadas, el Código \ref{lst:sah-save-news} muestra un resumen de la automatización para guardar el listado de ordenes de reposición (ver caso de uso en la sección \ref{cu-guardar-nueva}):
+	\item Recolectar las órdenes de reposición listadas, el Código \ref{lst:sah-save-news} muestra un resumen de la automatización para guardar el listado de órdenes de reposición (ver caso de uso en la sección \ref{cu-guardar-nueva}):
 	\begin{enumerate}
 		\item La línea 1 muestra la declaración del ciclo para recorrer el listado de órdenes de reposición.
 		\item Las líneas 2 a 4 muestran como se extrae el valor de los datos de una orden de reposición.
 		\item Las líneas 5 a 7 muestran la obtención de las URLs para contestar y enviar las órdenes de reposición.
-		\item La línea 8 es el almacenamiento de la nueva orden de reposición. 
+		\item La línea 8 realiza el almacenamiento de la nueva orden de reposición. 
 	\end{enumerate}
 	\begin{lstlisting}[language=Javascript, caption={Guardar lista de órdenes de reposición.}, captionpos=b, label={lst:sah-save-news}]
 for(var $i = 1 + $errores; $i <= $rowCount; $i++){
@@ -36,10 +36,10 @@ for(var $i = 1 + $errores; $i <= $rowCount; $i++){
 }
 	\end{lstlisting}
 
-	\item Contestar una a una cada orden de reposición, el Código \ref{lst:sah-respond} muestra un resumen de la automatización para contestar una orden de reposición (ver caso de uso en la sección \ref{cu-responder-orden}):
+	\item Contestar cada orden de reposición, el Código \ref{lst:sah-respond} muestra un resumen de la automatización para contestar una orden de reposición (ver caso de uso en la sección \ref{cu-responder-orden}):
 	\begin{enumerate}
-		\item Las líneas 1 y 2 muestran como se redirige al explorador a la URL para contestar la orden de reposición.
-		\item  Las líneas 3 muestran como se estable un valor en el formulario para contestar la orden de reposición.
+		\item Las líneas 1 y 2 muestran como se redirige al explorador a la URL para responder la orden de reposición.
+		\item  La línea 3 muestra la asignación de un valor en el formulario para contestar la orden de reposición.
 		\item La línea 4 realiza el envío del formulario.
 		\item La línea 5 manda la actualización de la orden de reposición en la base de datos.
 	\end{enumerate}
@@ -51,10 +51,10 @@ _click(_submit("Agregar Captura"));
 $logica.updateCantidad($contrato, $numorden, $cantidad, $idSesion);
 	\end{lstlisting}
 
-	\item Enviar las órdenes de reposición contestadas, el Código \ref{lst:sah-send} muestra un resumen de la automatización para envíar una órden de reposición (ver caso de uso en la sección \ref{cu-enviar-orden}):
+	\item Enviar las órdenes de reposición contestadas. El Código \ref{lst:sah-send} muestra un resumen de la automatización para enviar una orden de reposición (ver caso de uso en la sección \ref{cu-enviar-orden}):
 	\begin{enumerate}
 		\item Las líneas 1 y 2 muestran como se redirige al explorador a la URL para enviar la orden de reposición.
-		\item La líneas 3 a 6 crea un mapa con los datos de la orden de reposición.
+		\item La líneas 3 a 6 crean un mapa con los datos de la orden de reposición.
 		\item La línea 7 actualiza la orden de reposición en la base de datos. 
 	\end{enumerate}
 	\begin{lstlisting}[language=Javascript, caption={Enviar orden de reposición.}, captionpos=b, label={lst:sah-send}]
@@ -73,11 +73,11 @@ La rutina para automatizar la verificación de órdenes de reposición cancelada
 \begin{enumerate}
 	\item Ingresar al Sistema de Abastecimiento, el ingreso al sistema es idéntico a la rutina mostrada en la sección anterior (sección \ref{sec:aut-contestar}).
 
-	\item Establecer los criterios de búsqueda, el Código \ref{lst:sah-search} muestra un resumen de la automatización para:
+	\item El Código \ref{lst:sah-search} muestra un resumen de la automatización de los criterios de búsqueda:
 	\begin{enumerate}
 		\item La línea 1 muestra la consulta de las fechas que acotan la búsqueda.
-		\item Las líneas 2 a 5 realizan la búsqueda en el Sistema de Abastecimiento.
-		\item Las líneas 6 y 7 extraen la información de las órdenes de reposición que muestra el Sistema de Abastecimiento como resultado de la búsqueda.
+		\item Las líneas 2 a 5 realizan la búsqueda en el \textit{Sistema de Abastecimiento}.
+		\item Las líneas 6 y 7 extraen la información de las órdenes de reposición que muestra el \textit{Sistema de Abastecimiento} como resultado de la búsqueda.
 		\item Las líneas 8 y 9 utilizan el componente \textbf{Lógica de automatización} para actualizar en la base de datos el estado de las órdenes de reposición canceladas.
 	\end{enumerate}
 	\begin{lstlisting}[language=Javascript, caption={Responder orden de reposición.}, captionpos=b, label={lst:sah-search}]
