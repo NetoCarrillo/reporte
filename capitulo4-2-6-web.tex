@@ -6,14 +6,14 @@ La implementación del portal Web se realizó bajo la arquitectura orientada a s
 \end{itemize}
 
 \subsubsection{Implementación del backend}\label{sec:backend}
-La implementación del \textit{backend} está implementada utilizando el marco de trabajo Spring y sus bibliotecas:
+La implementación del \textit{backend} está implementada utilizando el marco de trabajo \textit{Spring} y sus bibliotecas:
 \begin{itemize}
- 	\item Spring boot: provee un ambiente de desarrollo y ejecución para aplicaciones basadas en el marco de trabajo Spring (ver sección \ref{sec:spring-boot}). 
+ 	\item Spring boot: provee un ambiente de desarrollo y ejecución para aplicaciones basadas en el marco de trabajo \textit{Spring} (ver sección \ref{sec:spring-boot}). 
  	\item Spring security: biblioteca para los servicios de autentificación y autorización de usuarios (ver sección \ref{sec:spring-security}).
 \end{itemize}
 
 \paragraph{\indent 1. Implementación de los servicios de seguridad\\}
-Los servicios para autentificar y validar usuarios se implementaron siguiendo la especificación OAtuh 2.0 (ver sección \ref{sec:oauth}), el marco de trabajo Spring con sus bibliotecas \textit{Spring boot} y \textit{Spring security}.\\
+Los servicios para autentificar y validar usuarios se implementaron siguiendo la especificación OAtuh 2.0 (ver sección \ref{sec:oauth}), el marco de trabajo \textit{Spring} con sus bibliotecas \textit{Spring boot} y \textit{Spring security}.\\
 La implementación de la seguridad utilizando \textit{Spring Security} se divide en cuatro tareas:
 \begin{enumerate}
 	\item Habilitar filtros de seguridad, en el Código \ref{lst:enable-oauth} se muestra la configuración de necesaria:
@@ -56,7 +56,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	En el Código \ref{lst:user-auth} se muestra la configuración necesaria para autentificar usuarios:
 	\begin{enumerate}
-		\item Línea 2: inyección del \textit{bean}\footnote{En Spring un bean es un objeto en el contexto de la aplicación\cite{SpringInAction}} que realiza la autentificación de usuarios.
+		\item Línea 2: inyección del \textit{bean}\footnote{En \textit{Spring} un bean es un objeto en el contexto de la aplicación\cite{SpringInAction}} que realiza la autentificación de usuarios.
 		\item Línea 4: creación del \textit{bean} encargado de almacenar los \textit{tokens} de los usuarios.
 		\item Línea 10: configuración del punto de entrada para autentificación.
 		\item Línea 11: se establece la referencia al \textit{bean} que autentifica usuarios.
@@ -122,7 +122,7 @@ public byte[] derivate(char[] password, byte[] salt) throws NoSuchAlgorithmExcep
 \end{lstlisting}
 
 
-	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de Internet, es decir, rutinas de Javascript, páginas HTML, hojas de estilo e imágenes; o el consumo de servicios Web en el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
+	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de Internet, es decir, rutinas de \textit{Javascript}, páginas HTML, hojas de estilo e imágenes; o el consumo de servicios Web en el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
 
 	\begin{enumerate}
 		\item Línea 2: habilitar el servidor de recursos.
@@ -146,12 +146,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 \end{enumerate}
 
 \paragraph{\indent 2. Implementación de los servicios Web de administración\\}
-Los servicios web de administración fueron divididos en dos controles REST de Spring, 
+Los servicios web de administración fueron divididos en dos controles REST de \textit{Spring}, 
 \begin{enumerate}
 	\item \texttt{DataController}: expone servicios referentes a la gestión de órdenes de reposición, en el Código \ref{lst:data-controller} se muestra la estructura principal de esta clase:
 	\begin{enumerate}
 		\item Línea 1: indicación para crear un un \textit{bean} que expone servicios REST.
-		\item Línea 3: inyección del \textit{bean} de MyBatis para administrar órdenes de reposición.
+		\item Línea 3: inyección del \textit{bean} de \textit{MyBatis} para administrar órdenes de reposición.
 	\end{enumerate}
 
 \begin{lstlisting}[language=Java, caption={Controlador para exponer servicios Web de órdenes de reposición.}, captionpos=b, label={lst:data-controller}]

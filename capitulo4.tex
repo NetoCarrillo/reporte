@@ -1,10 +1,10 @@
 \chapter{Implementación}\label{cap4}
-
+El presente capítulo trata de la implementación del sistema AutoSA para el cual se han utilizado diversas tecnologías como lo son lenguajes de programación, estándares industriales, marcos de trabajo y herramientas de software. Es así que primero se hará un recuento de las tecnologías utilizadas para después mostrar la implementación de la base de datos donde y los módulos del sistema AutoSA diseñados en el Capítulo \ref{cap3}.
 \section{Tecnologías utilizadas}
 %-------------------------------------------------------------------------------
 \subsection{Base de datos relacional}\label{sec:bd-r}
 Una base de datos relaciones es una colección de tablas relacionadas entre sí. La colección de tablas se describe a sí misma en cuanto a que el significado de los datos contenidos pertenecen a un mismo ámbito\cite{DataBaseConcepts}.\\
-Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (en inglés Database Management System, DBMS), un DBMS es un programa de computadora usado para crear, procesar y administrar bases de datos. El DBMS recibe peticiones en el lenguaje de programación SQL (como se describe más adelante) y traduce esas peticiones a acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
+Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (en inglés Database Management System, DBMS), un DBMS es un programa de computadora usado para crear, procesar y administrar bases de datos. El DBMS recibe peticiones en el lenguaje de programación \textit{SQL} (como se describe más adelante) y traduce esas peticiones a acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
 Las siguientes son definiciones de los conceptos más relevantes dentro de esta área de conocimiento:
 \begin{enumerate}
 	\item \textbf{Tabla}: es un conjunto de renglones (registros) y columnas (atributos) que cumplen con las siguientes características\cite{DataBaseConcepts}:
@@ -25,9 +25,9 @@ Las siguientes son definiciones de los conceptos más relevantes dentro de esta 
 	\end{enumerate}
 	\item \textbf{Restricción de integridad}: son reglas que se utilizan para asegurar que cambios en los datos de las tablas no causen inconsistencia en la información\cite{DatabaseSystemConcepts}. En particular el conocido como \texttt{NOT NULL} indica que el valor del atributo no puede ser nulo\cite{FundamentosSistemasBasesDatos}.
 	\item \textbf{Índice}: es una estructura auxiliar para agilizar la obtención de registros. Los índices proveen rutas de acceso alternativo a los registros de la base de datos sin afectar la colocación física de éstos\cite{FundamentalsOfDBSystems}.
-	\item \textbf{Lenguaje Estructurado de Consultas}, traducción del inglés Structured Query Language (SQL): fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años setenta. Es un lenguaje de datos orientado a texto, el cual ha sido avalado por el Instituto Nacional de Estándares Americanos (ANSI por sus siglas en inglés) dando así los estándares ANSI para SQL, principalmente para este trabajo el estándar ANSI-92 o SQL-92.
-	\item \textbf{Lenguaje de Definición de Datos}, traducción del inglés Data Definition Language (DDL): son sentencias de SQL cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
-	\item \textbf{Lenguaje de Modelado de Datos}, traducido del inglés Data Modeling Language (DML): son las sentencias SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
+	\item \textbf{Lenguaje Estructurado de Consultas}, traducción del inglés Structured Query Language (SQL): fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años setenta. Es un lenguaje de datos orientado a texto, el cual ha sido avalado por el Instituto Nacional de Estándares Americanos (ANSI por sus siglas en inglés) dando así los estándares \textit{ANSI} para \textit{SQL}, principalmente para este trabajo el estándar \textit{ANSI-92} o \textit{SQL-92}.
+	\item \textbf{Lenguaje de Definición de Datos}, traducción del inglés Data Definition Language (DDL): son sentencias de \textit{SQL} cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
+	\item \textbf{Lenguaje de Modelado de Datos}, traducido del inglés Data Modeling Language (DML): son las sentencias \textit{SQL} cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
@@ -90,8 +90,8 @@ La función de derivación concatena la contraseña y la cadena aleatoria, enton
 %-------------------------------------------------------------------------------
 \subsection{Java}\label{sec:java}
 
-El lenguaje de programación Java fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan bajo el nombre ``Oak'' y en 1995 se cambió el nombre a Java. El lenguaje Java está basado en los lenguajes de programación C y C++. Java es un lenguaje Orientado a Objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
-Java cuenta con varios componentes, de los cuales únicamente se describirán los más relevantes para el proyecto AutoSA\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
+El lenguaje de programación Java fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan bajo el nombre ``Oak'' y en 1995 se cambió el nombre a Java. El lenguaje \textit{Java} está basado en los lenguajes de programación C y C++. \textit{Java} es un lenguaje Orientado a Objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
+\textit{Java} cuenta con varios componentes, de los cuales únicamente se describirán los más relevantes para el proyecto AutoSA\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
 \begin{enumerate}
 	\item \textbf{Máquina Virtual de Java}, traducido del inglés Java Virtual Machine (JVM): es el sistema en tiempo de ejecución de Java.
 	\item \textbf{Bytecode}: es el nombre que recibe el conjunto optimizado de instrucciones diseñadas para ser ejecutadas en la JVM.
@@ -100,15 +100,15 @@ Java cuenta con varios componentes, de los cuales únicamente se describirán lo
 \end{enumerate}
 
 \subsubsection{Java Data Base Controller}\label{sec:jdbc}
-El controlador de base de datos de Java (del inglés Java Database Controller, JDBC) es un conjunto de APIs\footnote{API viene del inglés ``Application Programming Interface'' es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales. Cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
+El controlador de base de datos de Java (del inglés Java Database Controller, JDBC) es un conjunto de APIs\footnote{API viene del inglés ``Application Programming Interface'' es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales. Cabe mencionar que por medio del \textit{API JDBC} también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
 
 %-------------------------------------------------------------------------------
 \subsection{Spring}\label{sec:spring}
 \begin{quote}
-	El maco de trabajo Spring provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en Java en cualquier tipo de plataforma de despliegue\cite{SpringFramework}.
+	El maco de trabajo \textit{Spring} provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en \textit{Java} en cualquier tipo de plataforma de despliegue\cite{SpringFramework}.
 \end{quote}
 
-Las funciones principales de Spring, mejor conocido como Spring Core\cite{Spring5DesignPatterns, ProSpring5, WellGroundedJavaDeveloper, SpringInAction}:
+Las funciones principales de \textit{Spring}, mejor conocido como \textit{Spring Core}\cite{Spring5DesignPatterns, ProSpring5, WellGroundedJavaDeveloper, SpringInAction}:
 \begin{enumerate}
 	\item Inversión de control: es una técnica que externaliza y administra las dependencias entre componentes.
 
@@ -117,10 +117,10 @@ Las funciones principales de Spring, mejor conocido como Spring Core\cite{Spring
 	\item Programación Orientada a Eventos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes. Cada uno es responsable de un conjunto de funcionalidades afines, a menudo estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etcétera), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación Orientada a Aspectos en Spring  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales, para lo cual utiliza los patrones de diseño \textit{Decorador} y \textit{Proxy} (ver secciones \ref{sec:decorator} y \ref{sec:proxy}, respectivamente).
 \end{enumerate}
 
-Dentro del proyecto de Spring existen proyectos que se enfocan en áreas específicas. A continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
+Dentro del proyecto de \textit{Spring} existen proyectos que se enfocan en áreas específicas. A continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
 
 \subsubsection{Spring boot}\label{sec:spring-boot}
-Es un proyecto de Spring que ofrece un ambiente de desarrollo y despliegue para aplicaciones desarrolladas con Spring y ofrece las siguientes características\cite{SpringBootInAction}:
+Es un proyecto de \textit{Spring} que ofrece un ambiente de desarrollo y despliegue para aplicaciones desarrolladas con \textit{Spring} y ofrece las siguientes características\cite{SpringBootInAction}:
 \begin{enumerate}
 	\item Iniciadores: agregar grupos comunes de dependencias. Cabe mencionar que en una sola de éstas puede ser agregada al administrador de proyectos.
 	\item Auto-configuración: alivia la carga de configuración estableciendo valores por defecto, soportando configuración condicional.
@@ -129,7 +129,7 @@ Es un proyecto de Spring que ofrece un ambiente de desarrollo y despliegue para 
 
 \subsubsection{Spring security}\label{sec:spring-security}
 \begin{quote}
-	La Seguridad de Spring (\textit{Spring Security}) es un marco de trabajo poderoso y altamente adaptable para procesos de autentificación y control de acceso. Es el estándar de seguridad para aplicaciones basadas en Spring. Enfocado en proveer a aplicaciones de Java funciones de autentificación y autorización\cite{SpringSecurity}.
+	La Seguridad de \textit{Spring} (\textit{Spring Security}) es un marco de trabajo poderoso y altamente adaptable para procesos de autentificación y control de acceso. Es el estándar de seguridad para aplicaciones basadas en \textit{Spring}. Enfocado en proveer a aplicaciones de \textit{Java} funciones de autentificación y autorización\cite{SpringSecurity}.
 \end{quote}
 
 \begin{quote}
@@ -147,57 +147,57 @@ En al Figura \ref{fig:dia-spring-security} se muestra un diagrama del manejo que
 %-------------------------------------------------------------------------------
 \subsection{MyBatis}\label{sec:mybatis}
 \begin{quote}
-MyBatis es un marco de trabajo para manejar la persistencia con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. MyBatis elimina casi todo el código de JDBC, la configuración manual de parámetros y la recuperación de resultados\cite{MyBatis}.
+MyBatis es un marco de trabajo para manejar la persistencia con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. \textit{MyBatis} elimina casi todo el código de \textit{JDBC}, la configuración manual de parámetros y la recuperación de resultados\cite{MyBatis}.
 \end{quote}
 
-Los beneficios de MyBatis sobre otros marcos de trabajo para persistencia son\cite{PersistenceWithMyBatis}:
+Los beneficios de \textit{MyBatis} sobre otros marcos de trabajo para persistencia son\cite{PersistenceWithMyBatis}:
 \begin{quote}
 	\begin{itemize}
-		\item Elimina gran parte del código repetitivo de JDBC.
+		\item Elimina gran parte del código repetitivo de \textit{JDBC}.
 		\item Tiene una curva de aprendizaje pequeña (es fácil de aprender).
 		\item Trabaja bien con bases de datos antiguas.
-		\item Encrustación de sentencias SQL.
+		\item Encrustación de sentencias \textit{SQL}.
 		\item Provee integración con el marco de trabajo \textit{Spring}.
 		\item Provee integración con bibliotecas para caché.
 		\item Induce mejoras en el rendimiento.
 	\end{itemize}
 \end{quote}
 
-El uso de MyBatis se resume principalmente a puntos\cite{PersistenceWithMyBatis}:
+El uso de \textit{MyBatis} se resume principalmente a puntos\cite{PersistenceWithMyBatis}:
 \begin{enumerate}
-	\item Crear un archivo de configuración que contiene las sentencias SQL y conversiones de resultados a objetos de Java.
-	\item Crear una interfaz de Java cuyos métodos correspondan a las sentencias SQL del archivo de configuración.
+	\item Crear un archivo de configuración que contiene las sentencias \textit{SQL} y conversiones de resultados a objetos de \textit{Java}.
+	\item Crear una interfaz de \textit{Java} cuyos métodos correspondan a las sentencias \textit{SQL} del archivo de configuración.
 	\item Crear un objeto \texttt{SqlSession} del cual se obtiene una instancia de la interfaz. Por medio de tal instancia se realizan las operaciones a la base de datos.
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
 \subsection{Velocity}\label{sec:velocity}
 \begin{quote}
-	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de Java como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (ver Apéndice \ref{sec:mvc}).
+	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de \textit{Java} como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (ver Apéndice \ref{sec:mvc}).
 \end{quote}
 
 %-------------------------------------------------------------------------------
 \subsection{Flying Saucer}\label{sec:flying-saucer}
 \begin{quote}
-	Flying Saucer es una biblioteca escrita en Java para traducir documentos XML o XHTML con CSS\footnote{Hoja de estilos en cascada, traducido del inglés\textit{Cascading Style Sheets}.} a formatos de gráficos de Java, PDF e imágenes\cite{FlyingSaucer}.
+	Flying Saucer es una biblioteca escrita en \textit{Java} para traducir documentos \textit{XML} o \textit{XHTML} con \textit{CSS}\footnote{Hoja de estilos en cascada, traducido del inglés\textit{Cascading Style Sheets}.} a formatos de gráficos de \textit{Java}, \textit{PDF} e imágenes\cite{FlyingSaucer}.
 \end{quote}
 
 %-------------------------------------------------------------------------------
 \subsection{Javascript}\label{sec:javascript}
-Javascript es un lenguaje de programación de rutinas, en un principio fue diseñado para utilizarse en exploradores de Internet, se le ha dado otro tipo de aplicaciones como es el desarrollo de aplicaciones de escritorio y servidores de aplicaciones. Un programa desarrollado con Javascript no depende de un compilador ya que un intérprete de Javascript ejecuta el código tal y como está escrito\cite{LearningWebDesign}.
+Javascript es un lenguaje de programación de rutinas, en un principio fue diseñado para utilizarse en exploradores de Internet, se le ha dado otro tipo de aplicaciones como es el desarrollo de aplicaciones de escritorio y servidores de aplicaciones. Un programa desarrollado con \textit{Javascript} no depende de un compilador ya que un intérprete de \textit{Javascript} ejecuta el código tal y como está escrito\cite{LearningWebDesign}.
 
 %-------------------------------------------------------------------------------
 \subsection{AngularJS}\label{sec:angularjs}
 
 \begin{quote}
-	AngularJS es un marco de trabajo escrito en Javascript para desarrollar aplicaciones Web, mantenida por Google\textsuperscript{\textcopyright}\footnote{\textcolor{red}{Karla, no se si Google se debe escribir con el símbolo de copyright \textcopyright o trademark \texttrademark ¿Sabes como se decide eso?}}. Es un marco de trabajo de código abierto, el cual se enfoca en los retos de aplicaciones de una página. Una aplicación Web basada en AgularJS sigue el patrón de diseño MVC, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares\cite{FullStackAngularJS}.
+	AngularJS es un marco de trabajo escrito en \textit{Javascript} para desarrollar aplicaciones Web, mantenida por Google\textsuperscript{\textcopyright}\footnote{\textcolor{red}{Karla, no se si Google se debe escribir con el símbolo de copyright \textcopyright o trademark \texttrademark ¿Sabes como se decide eso?}}. Es un marco de trabajo de código abierto, el cual se enfoca en los retos de aplicaciones de una página. Una aplicación Web basada en AgularJS sigue el patrón de diseño MVC, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares\cite{FullStackAngularJS}.
 \end{quote}
 
 \subsubsection{Componente básicos de AngularJS}
 Al seguir el patrón MVC, AngularJS permite dividir la aplicación en componentes. A continuación se enlistan los componentes más importantes utilizados para el desarrollo del proyecto AutoSA\cite{FullStackAngularJS, LearningAngularJS, AngularJSEssentials}:
 \begin{enumerate}
 	\item Módulo \textit{(module)}: es el contenedor para los demás componentes de AngularJS. Cada módulo tiene su propia estructura de directorios para cada tipo de componente de AngularJS, y cada página en AngularJS tiene un módulo.
-	\item Alcance \textit{(scope)}: es una representación en Javascript de datos usados para llenar una vista en una página Web. Los datos puede de cualquier fuente como una base de datos o un servicio Web.
+	\item Alcance \textit{(scope)}: es una representación en \textit{Javascript} de datos usados para llenar una vista en una página Web. Los datos puede de cualquier fuente como una base de datos o un servicio Web.
 	\item Vista \textit{(view)}: es la composición de plantillas (HTML) y directivas, las vistas son construidas dinámicamente en tiempo de ejecución al mezclar las plantillas con los datos del alcance, el resultado es código HTML puro.
 	\item Plantilla \textit{(template)}: son fragmentos de código HTML con directivas y expresiones.
 	\item Directiva \textit{(directive)}: es una extensión al vocabulario de HTML que permite definir nuevos comportamientos, entonces permite desarrollar componentes reutilizables.
@@ -212,15 +212,15 @@ Al seguir el patrón MVC, AngularJS permite dividir la aplicación en componente
 %-------------------------------------------------------------------------------
 \subsection{Sahi}\label{sec:sahi}
 \begin{quote}
-	Sahi es una herramienta enfocada a la automatización de pruebas para servicios Web, plataformas Web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de desarrollo Java\cite{SahiPro}.
+	Sahi es una herramienta enfocada a la automatización de pruebas para servicios Web, plataformas Web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de desarrollo \textit{Java}\cite{SahiPro}.
 \end{quote}
 
-Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en Sahi logra la ejecución de rutinas es actuando como proxy\footnote{Un \textit{proxy} es un intermediario entre el cliente (explorador) y el servidor (página Web)\cite{BeginningUbuntuLinux}} entre el sitio Web y el explorador de Internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio Web, Sahi intercepta la comunicación e inserta código de Javascript que ejecuta la rutina automatizada\cite{WebEng9IntConf, SahiPro}.
+\textit{Sahi} incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en \textit{Sahi} logra la ejecución de rutinas es actuando como \textit{proxy}\footnote{Un \textit{proxy} es un intermediario entre el cliente (explorador) y el servidor (página Web)\cite{BeginningUbuntuLinux}} entre el sitio Web y el explorador de Internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio Web, \textit{Sahi} intercepta la comunicación e inserta código de \textit{Javascript} que ejecuta la rutina automatizada\cite{WebEng9IntConf, SahiPro}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{dia-sahi-arq}
-\caption{Diagrama de flujo de Sahi\cite{SahiPro}.}
+\caption{Diagrama de flujo de \textit{Sahi}\cite{SahiPro}.}
 \label{fig:dia-sahi-arq}
 \end{figure}
 
@@ -230,7 +230,7 @@ Sahi incluye un modo de operación que permite ejecutar rutinas automatizadas so
 
 \section{Implementación de base de datos}\label{sec:impl-db}
 El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencialidad no se hace mención específica del nombre y versión del sistema administrador de bases de datos.} para almacenar la información requerida en los casos de uso.\\
-La implementación de la base de datos se ve reflejada en las rutinas con sentencias SQL donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas DDL y las rutinas DML.
+La implementación de la base de datos se ve reflejada en las rutinas con sentencias \textit{SQL} donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas \textit{DDL} y las rutinas \textit{DML}.
 
 %-------------------------------------------------------------------------------
 \subsection{Rutinas de definición de datos}
@@ -292,6 +292,6 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 %================================================================================
 
 \section{Resumen}
-La implementación del sistema AutoSA utiliza el lenguaje de programación Java para todas las bibliotecas que son ejecutadas en el servidor, el lenguaje SQL para realizar consultas a la base de datos y Javascript para las bibliotecas que son ejecutadas en el explorador de Internet del usuario.\\
-La automatización con el Sistema de Abastecimiento se ha realizando utilizando la herramienta Sahi y algunas bibliotecas desarrolladas con el lenguaje de programación Java.\\
-La implementación del Portal Web se ha hecho siguiendo la Arquitectura Orienta a Servicios, lo cual implica que por una parte se tiene un servidor que expone tales servicios a través de la Web, y por otro lado un cliente que los consume. Mientras que la implementación del cliente que consume los servicios Web se ha hecho utilizando el lenguaje Javascript y el marco de trabajo AngularJS, AngularJS sigue el patrón de diseño MVC. El manejo de autentificación y autorización de usuarios se ha hecho siguiendo la especificación OAuth 2.0.
+La implementación del sistema AutoSA utiliza el lenguaje de programación \textit{Java} para todas las bibliotecas que son ejecutadas en el servidor, el lenguaje \textit{SQL} para realizar consultas a la base de datos y \textit{Javascript} para las bibliotecas que son ejecutadas en el explorador de Internet del usuario.\\
+La automatización con el Sistema de Abastecimiento se ha realizando utilizando la herramienta \textit{Sahi} y algunas bibliotecas desarrolladas con el lenguaje de programación \textit{Java}.\\
+La implementación del Portal Web se ha hecho siguiendo la Arquitectura Orienta a Servicios, lo cual implica que por una parte se tiene un servidor que expone tales servicios a través de la Web, y por otro lado un cliente que los consume. Mientras que la implementación del cliente que consume los servicios Web se ha hecho utilizando el lenguaje \textit{Javascript} y el marco de trabajo \textit{AngularJS}, \textit{AngularJS} sigue el patrón de diseño MVC. El manejo de autentificación y autorización de usuarios se ha hecho siguiendo la especificación OAuth 2.0.
