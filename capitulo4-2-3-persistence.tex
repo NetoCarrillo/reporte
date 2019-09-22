@@ -1,7 +1,7 @@
 \subsection{Persistencia}\label{sec:persistence}
 La implementación del componente de persistencia se enfoca en dar servicio a los componentes de escritorio y web, por esta razón la implementación se ha dividido en dos partes:
 \begin{enumerate}
- 	\item Escritorio: la automatización de rutinas, dado que estas rutinas son ejecutadas dentro del ambiente de Sahi (que a su vez está en la plataforma de Java) se utiliza la biblioteca JDBC (ver sección \ref{sec:jdbc}) por economía en recursos físicos del equipo del operador de la farmacéutica.
+ 	\item Escritorio: la automatización de rutinas, dado que estas rutinas son ejecutadas dentro del ambiente de Sahi (que a su vez está en la plataforma de Java) se utiliza la biblioteca JDBC para economizar los recursos físicos del equipo del operador de la farmacéutica.
  	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de Spring en conjunción con el marco de trabajo MyBatis (ver sección \ref{sec:mybatis}).
 \end{enumerate}
 Los siguientes apartados explican la implementación de los servicios para escritorio y web.
@@ -12,10 +12,10 @@ Implementación de las operaciones para las rutinas de automatización que requi
 \begin{enumerate}
 	\item Inserción: la operación de inserción se ocupa en las operaciones \textbf{guardar-nueva} y \textbf{registrar-evento}, la inserción consiste de los siguientes puntos (en el Código \ref{lst:per-insert-order} se muestra la implementación de la operación \textbf{guardar-nueva}):
 	\begin{enumerate}
-		\item Plantilla de la sentencia SQL, línea 1 del Código \ref{lst:per-insert-order}.
-		\item Creación de los objetos de la biblioteca JDBC, línea 4 del Código \ref{lst:per-insert-order}.
-		\item Agregar datos específicos de la inserción, líneas 5 a 7 del Código \ref{lst:per-insert-order}.
-		\item Ejecución de la sentencia, línea 8 del Código \ref{lst:per-insert-order}.
+		\item Plantilla de la sentencia SQL (línea 1).
+		\item Creación de los objetos de la biblioteca JDBC (línea 4).
+		\item Agregar datos específicos de la inserción (líneas 5 a 7).
+		\item Ejecución de la sentencia (línea 8).
 	\end{enumerate}
 
 	\begin{lstlisting}[language=Java, caption={Inserción de una nueva orden de reposición en la base de datos.}, captionpos=b, label={lst:per-insert-order}]
@@ -56,7 +56,7 @@ private void updateEstatus(Orden orden) throws SQLException{
 
 \paragraph{\indent Interfaz Lectura\\}
 Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos, esto no quiere decir que durante el llamado de estas operaciones no se modifiquen datos.
-Dado que la obtención de los datos se convierte a objetos del dominio del proyecto AutoSA, se ha implementado una solución basada en los patrones de diseño Estrategia (ver Apéndice \ref{sec:strategy}) y Singleton (ver Apéndice \ref{sec:singleton}). \\
+Dado que la obtención de los datos se convierte a objetos del dominio del proyecto AutoSA. Se ha implementado una solución basada en los patrones de diseño Estrategia (ver Apéndice \ref{sec:strategy}) y Singleton (ver Apéndice \ref{sec:singleton}). \\
 En la Figura \ref{fig:dia-class-mapper} se el diagrama de clases de la solución:
 \begin{figure}[h]
 	\centering
@@ -170,9 +170,9 @@ public Orden getNextOrden(Integer estatus) throws SQLException{
 La interfaz del componente Persistencia dedicado a las funcionalidades ofrecidas mediante la interfaz web utiliza MyBatis cuya implementación sigue los pasos mencionados en la sección \ref{sec:mybatis}.\\
 \indent 1. En el Código \ref{lst:per-batis-config} se muestra la configuración del objeto \textbf{SqlSessionFactoryBean}: 
 \begin{enumerate}
-	\item Línea 1, habilitar contexto para transacciones.
-	\item Línea 2, crear los objetos para manejar la persistencia.
-	\item Línea 3, lectura de las interfaces para crear los objetos de persistencia.
+	\item Habilitar contexto para transacciones (Línea 1).
+	\item Crear los objetos para manejar la persistencia (Línea 2).
+	\item Lectura de las interfaces para crear los objetos de persistencia (Línea 3).
 \end{enumerate}
 \begin{lstlisting}[language=XML, caption={Configuración de MyBatis con Spring.}, captionpos=b, label={lst:per-batis-config}]
 <tx:annotation-driven />
