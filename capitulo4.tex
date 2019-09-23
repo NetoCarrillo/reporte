@@ -173,7 +173,7 @@ El uso de \textit{MyBatis} se resume principalmente a puntos\cite{PersistenceWit
 %-------------------------------------------------------------------------------
 \subsection{Velocity}\label{sec:velocity}
 \begin{quote}
-	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores Web una forma fácil de presentar información dinámica a los usuarios de un sitio Web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de \textit{Java} como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (ver Apéndice \ref{sec:mvc}).
+	Velocity es un lenguaje de plantillas diseñado para dar a los diseñadores web una forma fácil de presentar información dinámica a los usuarios de un sitio web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de \textit{Java} como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (ver Apéndice \ref{sec:mvc}).
 \end{quote}
 
 %-------------------------------------------------------------------------------
@@ -190,14 +190,14 @@ Javascript es un lenguaje de programación de rutinas, en un principio fue dise�
 \subsection{AngularJS}\label{sec:angularjs}
 
 \begin{quote}
-	AngularJS es un marco de trabajo escrito en \textit{Javascript} para desarrollar aplicaciones Web, mantenida por Google\textsuperscript{\textcopyright}\footnote{\textcolor{red}{Karla, no se si Google se debe escribir con el símbolo de copyright \textcopyright o trademark \texttrademark ¿Sabes como se decide eso?}}. Es un marco de trabajo de código abierto, el cual se enfoca en los retos de aplicaciones de una página. Una aplicación Web basada en AgularJS sigue el patrón de diseño MVC, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares\cite{FullStackAngularJS}.
+	AngularJS es un marco de trabajo escrito en \textit{Javascript} para desarrollar aplicaciones web, mantenida por Google\textsuperscript{\textcopyright}\footnote{\textcolor{red}{Karla, no se si Google se debe escribir con el símbolo de copyright \textcopyright o trademark \texttrademark ¿Sabes como se decide eso?}}. Es un marco de trabajo de código abierto, el cual se enfoca en los retos de aplicaciones de una página. Una aplicación web basada en AgularJS sigue el patrón de diseño MVC, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares\cite{FullStackAngularJS}.
 \end{quote}
 
 \subsubsection{Componente básicos de AngularJS}
 Al seguir el patrón MVC, AngularJS permite dividir la aplicación en componentes. A continuación se enlistan los componentes más importantes utilizados para el desarrollo del proyecto AutoSA\cite{FullStackAngularJS, LearningAngularJS, AngularJSEssentials}:
 \begin{enumerate}
 	\item Módulo \textit{(module)}: es el contenedor para los demás componentes de AngularJS. Cada módulo tiene su propia estructura de directorios para cada tipo de componente de AngularJS, y cada página en AngularJS tiene un módulo.
-	\item Alcance \textit{(scope)}: es una representación en \textit{Javascript} de datos usados para llenar una vista en una página Web. Los datos puede de cualquier fuente como una base de datos o un servicio Web.
+	\item Alcance \textit{(scope)}: es una representación en \textit{Javascript} de datos usados para llenar una vista en una página web. Los datos puede de cualquier fuente como una base de datos o un servicio web.
 	\item Vista \textit{(view)}: es la composición de plantillas (HTML) y directivas, las vistas son construidas dinámicamente en tiempo de ejecución al mezclar las plantillas con los datos del alcance, el resultado es código HTML puro.
 	\item Plantilla \textit{(template)}: son fragmentos de código HTML con directivas y expresiones.
 	\item Directiva \textit{(directive)}: es una extensión al vocabulario de HTML que permite definir nuevos comportamientos, entonces permite desarrollar componentes reutilizables.
@@ -205,17 +205,17 @@ Al seguir el patrón MVC, AngularJS permite dividir la aplicación en componente
 	\item Controlador \textit{(controller)}: es el control de patrón de diseño MVC, contiene la lógica de negocio y su función principal es exponer los datos a la vista utilizando el alcance.
 	\item Ligado de datos \textit{(data binding)}: es el proceso de ligar datos del modelo a la vista en ambos sentidos, es decir, un cambio originado en una parte implica el cambio en la otra parte.
 	\item Modelo \textit{(model)}: es el modelo del patrón de diseño MVC, es decir, son los datos.
-	\item Servicio \textit{(service)}: son objetos que siguen el \textit{Patrón de Diseño Singleton} y proveen funcionalidad específica a la aplicación Web.
+	\item Servicio \textit{(service)}: son objetos que siguen el \textit{Patrón de Diseño Singleton} y proveen funcionalidad específica a la aplicación web.
 	\item Inyección de dependencias \textit{(dependency injection)}: es el proceso de inyectar dependencias en tiempo de ejecución, es utilizado para consumir los servicios.
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
 \subsection{Sahi}\label{sec:sahi}
 \begin{quote}
-	Sahi es una herramienta enfocada a la automatización de pruebas para servicios Web, plataformas Web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de desarrollo \textit{Java}\cite{SahiPro}.
+	Sahi es una herramienta enfocada a la automatización de pruebas para servicios web, plataformas web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de desarrollo \textit{Java}\cite{SahiPro}.
 \end{quote}
 
-\textit{Sahi} incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en \textit{Sahi} logra la ejecución de rutinas es actuando como \textit{proxy}\footnote{Un \textit{proxy} es un intermediario entre el cliente (explorador) y el servidor (página Web)\cite{BeginningUbuntuLinux}} entre el sitio Web y el explorador de Internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio Web, \textit{Sahi} intercepta la comunicación e inserta código de \textit{Javascript} que ejecuta la rutina automatizada\cite{WebEng9IntConf, SahiPro}.
+\textit{Sahi} incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en \textit{Sahi} logra la ejecución de rutinas es actuando como \textit{proxy}\footnote{Un \textit{proxy} es un intermediario entre el cliente (explorador) y el servidor (página web)\cite{BeginningUbuntuLinux}} entre el sitio web y el explorador de Internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio web, \textit{Sahi} intercepta la comunicación e inserta código de \textit{Javascript} que ejecuta la rutina automatizada\cite{WebEng9IntConf, SahiPro}.
 
 \begin{figure}[h]
 \centering
@@ -294,4 +294,4 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 \section{Resumen}
 La implementación del sistema AutoSA utiliza el lenguaje de programación \textit{Java} para todas las bibliotecas que son ejecutadas en el servidor, el lenguaje \textit{SQL} para realizar consultas a la base de datos y \textit{Javascript} para las bibliotecas que son ejecutadas en el explorador de Internet del usuario.\\
 La automatización con el Sistema de Abastecimiento se ha realizando utilizando la herramienta \textit{Sahi} y algunas bibliotecas desarrolladas con el lenguaje de programación \textit{Java}.\\
-La implementación del Portal Web se ha hecho siguiendo la Arquitectura Orienta a Servicios, lo cual implica que por una parte se tiene un servidor que expone tales servicios a través de la Web, y por otro lado un cliente que los consume. Mientras que la implementación del cliente que consume los servicios Web se ha hecho utilizando el lenguaje \textit{Javascript} y el marco de trabajo \textit{AngularJS}, \textit{AngularJS} sigue el patrón de diseño MVC. El manejo de autentificación y autorización de usuarios se ha hecho siguiendo la especificación OAuth 2.0.
+La implementación del \textbf{Portal Web} se ha hecho siguiendo la Arquitectura Orienta a Servicios, lo cual implica que por una parte se tiene un servidor que expone tales servicios a través de la web, y por otro lado un cliente que los consume. Mientras que la implementación del cliente que consume los servicios web se ha hecho utilizando el lenguaje \textit{Javascript} y el marco de trabajo \textit{AngularJS}, \textit{AngularJS} sigue el patrón de diseño MVC. El manejo de autentificación y autorización de usuarios se ha hecho siguiendo la especificación OAuth 2.0.

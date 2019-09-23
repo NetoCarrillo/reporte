@@ -8,7 +8,7 @@ El proveedor realiza dos tipos de procesos:
 \item \textbf{Envío de órdenes de reposición}: un operador debe acceder al Sistema de Abastecimiento, con un usuario y contraseña previamente asignados, posteriormente debe dirigirse a la sección \textit{Contestación a Órdenes de Reposición} que es donde se muestra un listado con las órdenes de reposición emitidas por el Instituto que aún no han sido atendidas. El operador manualmente ingresa en cada orden de reposición los datos requeridos (la cantidad de unidades que enviará, fechas de fabricación y de caducidad), a esto se le conoce como responder la orden reposición.\\
 En el listado de órdenes de reposición de la sección \textit{Contestación a Órdenes de Reposición} se muestra la opción de ``enviar'' cuando una orden de reposición ha sido \textit{contestada}; dicho lo anterior, el operador selecciona la opción ``enviar'' de cada una de las órdenes de reposición que ha contestado, el Sistema de Abastecimiento muestra el formato de acuse de recibo, el operador extrae los datos de interés que se muestran en el acuse y hace una impresión de la pantalla. El flujo descrito anteriormente se muestra en la Figura \ref{fig:flow-proc-contestar}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.3]{flujo-proceso-contestar} 
 \caption{Flujo del proceso para contestar órdenes de reposición.}
@@ -16,7 +16,7 @@ En el listado de órdenes de reposición de la sección \textit{Contestación a 
 \end{figure}
 
 \item \textbf{Verificación de órdenes de reposición canceladas}: dado que el Instituto tiene la facultad de cancelar las órdenes aún cuando ya hayan sido enviadas, es importante para el proveedor evitar el gasto extra que implica el envío de medicamento no solicitado por el Instituto ya que implica un gasto extra el retirarlo. El operador accede al Sistema de Abastecimiento de la misma manera dirigiéndose a la sección de \textit{Consulta de Órdenes} donde el operador provee información para realizar la búsqueda (rango de fechas de emisión\footnote{Fecha en que la orden fue realizada.}, el estado de la orden como ``cancelada'') y como resultado de esta búsqueda se muestra un listado con las órdenes que cumplen con tal filtro, así el operador copia la lista en un documento local en su equipo personal, para posteriormente realizar de forma manual tal filtro, con el fin de obtener las órdenes de reposición que han sido canceladas de las cuales no se tenía conocimiento. En la Figura \ref{fig:flow-proc-verificar} se muestra el proceso para verificar las órdenes de reposición canceladas.
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.3]{flujo-proceso-verificar} 
 \caption{Flujo del proceso para verificar órdenes de reposición canceladas.}

@@ -23,18 +23,18 @@ Los requerimientos funcionales de las secciones \ref{sec:req-contestar} y \ref{s
 	\end{enumerate}
 \end{itemize}
 
-\subsubsection{Interfaz WEB para la administración de órdenes de reposición contestadas}
-La interfaz Web descrita en este requerimiento (ver sección \ref{sec:req-web-ui}) fue elaborada a lo largo de la sección \ref{sec:web-portal}, en particular los servicios de acceso y autorización fueron mostrados en el apartado 1 de la sección \ref{sec:backend}, así mismo, la pantalla de acceso fue descrita en el apartado 1 de la sección \ref{sec:frontend}.\\
-Cabe mencionar que la pantalla de acceso es la primera pantalla que muestra la interfaz Web (ver Figura \ref{fig:ss-login}).
+\subsubsection{Interfaz web para la administración de órdenes de reposición contestadas}
+La interfaz web descrita en este requerimiento (ver sección \ref{sec:req-web-ui}) fue elaborada a lo largo de la sección \ref{sec:web-portal}, en particular los servicios de acceso y autorización fueron mostrados en el apartado 1 de la sección \ref{sec:backend}, así mismo, la pantalla de acceso fue descrita en el apartado 1 de la sección \ref{sec:frontend}.\\
+Cabe mencionar que la pantalla de acceso es la primera pantalla que muestra la interfaz web (ver Figura \ref{fig:ss-login}).
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.8]{ss-login}
-	\caption{Captura de pantalla de acceso a la interfaz Web.}
+	\caption{Captura de pantalla de acceso a la interfaz web.}
 	\label{fig:ss-login}
 \end{figure}
 
 \subsubsection{Búsqueda de órdenes de reposición}
-La pantalla para la búsqueda de órdenes de reposición es como se muestra al usuario la implementación del requerimiento de la sección \ref{sec:req-search}, la implementación de la pantalla y el comportamiento de están descritos en el apartado 4 de la sección \ref{sec:frontend}. Por otra parte, la implementación de los servicios Web que consume la pantalla de búsqueda de órdenes de reposición es mostrada en el apartado 2 de la sección \ref{sec:backend}.\\
+La pantalla para la búsqueda de órdenes de reposición es como se muestra al usuario la implementación del requerimiento de la sección \ref{sec:req-search}, la implementación de la pantalla y el comportamiento de están descritos en el apartado 4 de la sección \ref{sec:frontend}. Por otra parte, la implementación de los servicios web que consume la pantalla de búsqueda de órdenes de reposición es mostrada en el apartado 2 de la sección \ref{sec:backend}.\\
 El la Figura \ref{fig:ss-search} se observa la captura de pantalla de búsqueda de órdenes de reposición.
 \begin{figure}[h]
 	\centering
@@ -44,7 +44,7 @@ El la Figura \ref{fig:ss-search} se observa la captura de pantalla de búsqueda 
 \end{figure}
 
 \subsubsection{Visualización y edición de una orden de reposición}
-Los requerimientos para visualización y edición de una orden de reposición, requerimientos \ref{sec:req-show} y \ref{sec:req-update} respectivamente, son plasmados en los casos de uso CU-VISUALIZAR y CU-EDITAR (secciones \ref{cu-visualizar} y \ref{cu-editar} respectivamente). En la implementación y en la interfaz de usuario se utiliza la misma pantalla, como se muestra en la Figura \ref{fig:ss-edit}, esta vista es descrita en el apartado 5 de la sección \ref{sec:frontend}. La implementación de los servicios Web que consume la pantalla son mostrados en el apartado 2 de la sección \ref{sec:backend}.
+Los requerimientos para visualización y edición de una orden de reposición, requerimientos \ref{sec:req-show} y \ref{sec:req-update} respectivamente, son plasmados en los casos de uso CU-VISUALIZAR y CU-EDITAR (secciones \ref{cu-visualizar} y \ref{cu-editar} respectivamente). En la implementación y en la interfaz de usuario se utiliza la misma pantalla, como se muestra en la Figura \ref{fig:ss-edit}, esta vista es descrita en el apartado 5 de la sección \ref{sec:frontend}. La implementación de los servicios web que consume la pantalla son mostrados en el apartado 2 de la sección \ref{sec:backend}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{ss-edit}
@@ -53,7 +53,7 @@ Los requerimientos para visualización y edición de una orden de reposición, r
 \end{figure}
 
 \subsubsection{Generación de reportes}
-La generación de reportes cumple con los requerimientos de las secciones \ref{sec:req-rep-contestadas}, \ref{sec:req-rep-layout} y \ref{sec:req-rep-canceladas}; mismos que son englobados en el caso de uso CU-GENERAR-REPORTE (ver sección \ref{cu-generar-reporte}). La implementación de la generación de reportes está descrita en la sección \ref{sec:gen-repport} y, a su vez, los servicios Web que exponen esta funcionalidad están en el apartado 2 de la sección \ref{sec:backend}. La vista que se muestra al usuario se encuentra en el apartado 2 de la sección \ref{sec:frontend}, en la Figura \ref{fig:ss-report} se observa la captura de pantalla como se muestra al usuario\footnote{Por acuerdo de confidencialidad no se puede mostrar el contenido de los reportes generados.}. 
+La generación de reportes cumple con los requerimientos de las secciones \ref{sec:req-rep-contestadas}, \ref{sec:req-rep-layout} y \ref{sec:req-rep-canceladas}; mismos que son englobados en el caso de uso CU-GENERAR-REPORTE (ver sección \ref{cu-generar-reporte}). La implementación de la generación de reportes está descrita en la sección \ref{sec:gen-repport} y, a su vez, los servicios web que exponen esta funcionalidad están en el apartado 2 de la sección \ref{sec:backend}. La vista que se muestra al usuario se encuentra en el apartado 2 de la sección \ref{sec:frontend}, en la Figura \ref{fig:ss-report} se observa la captura de pantalla como se muestra al usuario\footnote{Por acuerdo de confidencialidad no se puede mostrar el contenido de los reportes generados.}. 
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.5]{ss-report}
@@ -62,7 +62,7 @@ La generación de reportes cumple con los requerimientos de las secciones \ref{s
 	\end{figure}
 
 \subsubsection{Actualización de catálogos y estatus de órdenes de reposición canceladas}
-Los requerimientos \ref{sec:req-catalogos} y \ref{sec:req-canceladas} son modelados en el caso de eso CU-ACTUALIZAR-CATALOGO (ver sección \ref{cu-actualizar-catalogo}), la implementación de la actualización a los datos es dada en la sección \ref{sec:persistence-web}, y la implementación del servicio Web se encuentra en el apartado 2 de la sección \ref{sec:backend}. La implementación de la vista está dada en el apartado 3 de la sección \ref{sec:frontend}, en la Figura \ref{fig:ss-catalog} se observa la captura de pantalla de la administración de catálogos\footnote{Por acuerdo de confidencialidad no se puede mostrar el contenido de los catálogos.}.
+Los requerimientos \ref{sec:req-catalogos} y \ref{sec:req-canceladas} son modelados en el caso de eso CU-ACTUALIZAR-CATALOGO (ver sección \ref{cu-actualizar-catalogo}), la implementación de la actualización a los datos es dada en la sección \ref{sec:persistence-web}, y la implementación del servicio web se encuentra en el apartado 2 de la sección \ref{sec:backend}. La implementación de la vista está dada en el apartado 3 de la sección \ref{sec:frontend}, en la Figura \ref{fig:ss-catalog} se observa la captura de pantalla de la administración de catálogos\footnote{Por acuerdo de confidencialidad no se puede mostrar el contenido de los catálogos.}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{ss-catalog}

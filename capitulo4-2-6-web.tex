@@ -1,8 +1,8 @@
 \subsection{Portal Web}\label{sec:web-portal}
-La implementación del portal Web se realizó bajo la arquitectura orientada a servicios (ver Apéndice \ref{sec:soa}), lo cual implica una división del portal Web de la siguiente forma:
+La implementación del \textbf{Portal Web} se realizó bajo la arquitectura orientada a servicios (ver Apéndice \ref{sec:soa}), lo cual implica una división del \textbf{Portal Web} de la siguiente forma:
 \begin{itemize}
-	\item \textit{backend}: la parte del portal ofrece los servicios Web, con tiene los servicios de autentificación, administración de órdenes de reposición y generación de reportes.
-	\item \textit{frontend}: la parte del portal que consume los servicios Web y muestra una interfaz gráfica al usuario, contiene las páginas de HTML y rutinas para consumir los servicios del backend.
+	\item \textit{backend}: la parte del portal ofrece los servicios web, con tiene los servicios de autentificación, administración de órdenes de reposición y generación de reportes.
+	\item \textit{frontend}: la parte del portal que consume los servicios web y muestra una interfaz gráfica al usuario, contiene las páginas de HTML y rutinas para consumir los servicios del backend.
 \end{itemize}
 
 \subsubsection{Implementación del backend}\label{sec:backend}
@@ -122,7 +122,7 @@ public byte[] derivate(char[] password, byte[] salt) throws NoSuchAlgorithmExcep
 \end{lstlisting}
 
 
-	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de Internet, es decir, rutinas de \textit{Javascript}, páginas HTML, hojas de estilo e imágenes; o el consumo de servicios Web en el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
+	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de Internet, es decir, rutinas de \textit{Javascript}, páginas HTML, hojas de estilo e imágenes; o el consumo de servicios web en el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
 
 	\begin{enumerate}
 		\item Línea 2: habilitar el servidor de recursos.
@@ -145,7 +145,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 \end{lstlisting}
 \end{enumerate}
 
-\paragraph{\indent 2. Implementación de los servicios Web de administración\\}
+\paragraph{\indent 2. Implementación de los servicios web de administración\\}
 Los servicios web de administración fueron divididos en dos controles REST de \textit{Spring}, 
 \begin{enumerate}
 	\item \texttt{DataController}: expone servicios referentes a la gestión de órdenes de reposición, en el Código \ref{lst:data-controller} se muestra la estructura principal de esta clase:
@@ -154,7 +154,7 @@ Los servicios web de administración fueron divididos en dos controles REST de \
 		\item Línea 3: inyección del \textit{bean} de \textit{MyBatis} para administrar órdenes de reposición.
 	\end{enumerate}
 
-\begin{lstlisting}[language=Java, caption={Controlador para exponer servicios Web de órdenes de reposición.}, captionpos=b, label={lst:data-controller}]
+\begin{lstlisting}[language=Java, caption={Controlador para exponer servicios web de órdenes de reposición.}, captionpos=b, label={lst:data-controller}]
 @RestController
 public class DataController{
 	@Autowired
@@ -173,7 +173,7 @@ public class DataController{
 		\item Línea 5: obtención de la orden de reposición.
 	\end{enumerate}
 
-\begin{lstlisting}[language=Java, caption={Servicio Web para obtener una orden de reposición.}, captionpos=b, label={lst:get-orden-data-controller}]
+\begin{lstlisting}[language=Java, caption={Servicio web para obtener una orden de reposición.}, captionpos=b, label={lst:get-orden-data-controller}]
 @RequestMapping(value = "/_data_/orden/{id}",
 				method = RequestMethod.GET)
 public Orden getOrden(@PathVariable("id") Long id) throws SQLException{
@@ -184,7 +184,7 @@ public Orden getOrden(@PathVariable("id") Long id) throws SQLException{
 \end{lstlisting}
 
 	\item \texttt{ReportController}: expone servicios referentes a la generación de reportes, en el Código \ref{lst:report-controller} se muestra la estructura principal de esta clase:
-\begin{lstlisting}[language=Java, caption={Controlador para exponer servicios Web de generación de reportes.}, captionpos=b, label={lst:report-controller}]
+\begin{lstlisting}[language=Java, caption={Controlador para exponer servicios web de generación de reportes.}, captionpos=b, label={lst:report-controller}]
 @Controller
 public class ReportController{
 	@Autowired
@@ -209,7 +209,7 @@ public class ReportController{
 		\item Línea 17: si el reporte es vacío se manda un mensaje de error.
 	\end{enumerate}
 
-\begin{lstlisting}[language=Java, caption={Servicio Web para generar un reporte.}, captionpos=b, label={lst:report-controller-gen}]
+\begin{lstlisting}[language=Java, caption={Servicio web para generar un reporte.}, captionpos=b, label={lst:report-controller-gen}]
 @RequestMapping(value = "/_report_/generate",
 				method = RequestMethod.GET,
 				produces = "application/octet-stream")
@@ -244,7 +244,7 @@ La implementación del \textit{frontend} está basada en el marco de trabajo \te
 	\item Línea 1: creación del módulo de \textit{AngularJS}.
 	\item Líneas 2 a 19: configuración de las vistas y rutas.
 \end{enumerate}
-\begin{lstlisting}[language=Javascript, caption={Módulo de \textit{AngularJS} para el portalWeb}, captionpos=b, label={lst:portal-js}]
+\begin{lstlisting}[language=Javascript, caption={Módulo de \textit{AngularJS} para el \textbf{Portal Web}}, captionpos=b, label={lst:portal-js}]
 var app = angular.module('portalApp', ['ngRoute', 'ui.bootstrap']);
 portal.config(function($routeProvider, $httpProvider){
 	$routeProvider
@@ -300,7 +300,7 @@ Los flujos de autentificación y autorización del sistema AutoSA se hacen sigui
 Como se aprecia en la Figura \ref{lst:longin-view} se liga función \texttt{login} al evento de envío de la forma, la implementación de la función se muestra en el Código \ref{lst:login-ctrl-js}:
 \begin{enumerate}
 	\item Línea 1, llamada a la función \texttt{login} del servicio de autentificación, \texttt{LoginService},
-	\item Líneas 2 y 3, en caso de que la llamada sea exitosa se agrega el \textit{token} de acceso a los encabezados de las llamadas a servicios Web, con este paso no es necesario hacer de manera explícita la autorización a recursos.
+	\item Líneas 2 y 3, en caso de que la llamada sea exitosa se agrega el \textit{token} de acceso a los encabezados de las llamadas a servicios web, con este paso no es necesario hacer de manera explícita la autorización a recursos.
 \end{enumerate}
 
 \begin{lstlisting}[language=Javascript, caption={Uso del servicio que optine un \textit{token} de acceso.}, captionpos=b, label={lst:login-ctrl-js}]
@@ -313,18 +313,18 @@ LoginService.login($scope.credentials)
 })
 \end{lstlisting}
 
-El servicio \texttt{LoginService} es el encargado de efectuar la llamada al servicio Web de \textit{token} de acceso, el Código \ref{lst:login-service-js} se muestra la implementación de tal servicio:
+El servicio \texttt{LoginService} es el encargado de efectuar la llamada al servicio web de \textit{token} de acceso, el Código \ref{lst:login-service-js} se muestra la implementación de tal servicio:
 \begin{enumerate}
 	\item Línea 1: declaración del servicio \texttt{LoginService}.
-	\item Línea 2: declaración de la función \texttt{login}, esta función es la encargada de llamar al servicio Web para obtener un \textit{token} de acceso.
-	\item Línea 3: mapa de configuración para la llamada al servicio Web de \textit{token} de acceso, se muestran únicamente las propiedades más relevantes.
-	\item Línea 4: URL del servicio Web.
+	\item Línea 2: declaración de la función \texttt{login}, esta función es la encargada de llamar al servicio web para obtener un \textit{token} de acceso.
+	\item Línea 3: mapa de configuración para la llamada al servicio web de \textit{token} de acceso, se muestran únicamente las propiedades más relevantes.
+	\item Línea 4: URL del servicio web.
 	\item Línea 7: encabezado con las credenciales del cliente de OAuth.
 	\item Línea 10: nombre de usuario.
 	\item Línea 11: contraseña codificada del usuario.
 	\item Línea 12: identificador del cliente de OAuth.
 	\item Línea 13: tipo de flujo de OAuth.
-	\item Línea 16: llamada al servicio Web de \textit{token} de acceso.
+	\item Línea 16: llamada al servicio web de \textit{token} de acceso.
 \end{enumerate}
 \begin{lstlisting}[language=Javascript, caption={Servicio en \textit{AngularJS} para obtener un \textit{token} de acceso.}, captionpos=b, label={lst:login-service-js}]
 portalSrvc.service('LoginService', function($http, $q){
@@ -424,9 +424,9 @@ app.controller('reporteCtrl', function($scope, $window, $http, $timeout, ReportS
 El Código \ref{lst:report-service-js} muestra la implementación del servicio \texttt{ReportService}:
 \begin{enumerate}
 	\item Línea 1: declaración del servicio de reportes.
-	\item Línea 2: declaración de la función que llama al servicio Web.
-	\item Línea 3: construcción de los parámetros para la URL del servicio Web.
-	\item Línea 4: consulta del servicio Web en una nueva página del explorador de Internet.
+	\item Línea 2: declaración de la función que llama al servicio web.
+	\item Línea 3: construcción de los parámetros para la URL del servicio web.
+	\item Línea 4: consulta del servicio web en una nueva página del explorador de Internet.
 \end{enumerate}
 \begin{lstlisting}[language=Javascript, caption={Servicio en \textit{AngularJS} para pedir la generación de un reporte.}, captionpos=b, label={lst:report-service-js}]
 app.service('ReportService', function($http, $q, $window){
@@ -487,8 +487,8 @@ El Código \ref{lst:catalogo-service-js} muestra la implementación del servicio
 \begin{enumerate}
 	\item Línea 1: creación del servicio \texttt{CatalogService}.
 	\item Línea 2: declaración de la función \texttt{updateCatalog}.
-	\item Líneas 3 y 4: agregar el documento con el contenido del catálogo actualizado a la llamada al servicio Web para actualizar el catálogo.
-	\item Línea 5: llamada el servicio Web que actualiza el catálogo.
+	\item Líneas 3 y 4: agregar el documento con el contenido del catálogo actualizado a la llamada al servicio web para actualizar el catálogo.
+	\item Línea 5: llamada el servicio web que actualiza el catálogo.
 \end{enumerate}
 \begin{lstlisting}[language=Javascript, caption={Servicio en \textit{AngularJS} actualizar un catálogo.}, captionpos=b, label={lst:catalogo-service-js}]
 portalSrvc.service('CatalogService', function($http){
@@ -536,7 +536,7 @@ La vista \textbf{Búsqueda} se compone de dos elementos:
 
 Si bien la viste tiene dos componentes principales que se encargan de buscar y mostrar órdenes de reposición, el controlador \texttt{busquedaCtrl} ofrece la funcionalidad a esos componentes mediante las operaciones:
 \begin{itemize}
-	\item \texttt{buscar}: realiza la llamada al servicio que consume el servicio Web para buscar órdenes de reposición (ver Código \ref{lst:find-serach-ctrl-js}).
+	\item \texttt{buscar}: realiza la llamada al servicio que consume el servicio web para buscar órdenes de reposición (ver Código \ref{lst:find-serach-ctrl-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para llamar el servicio de búsqueda de órdenes de reposición.}, captionpos=b, label={lst:find-serach-ctrl-js}]
 $scope.buscar = function($event){
 	var promise = OrdenService.buscar($scope.filtro);
@@ -554,12 +554,12 @@ $scope.mostrarOrden = function(id, $event){
 \end{lstlisting}
 \end{itemize}
 
-El servicio \texttt{OrdenService} contiene la función para la invocación del servicio Web que realiza la búsqueda de órdenes de reposición, en el Código \ref{lst:search-service-js} se muestra la implementación del servicio:
+El servicio \texttt{OrdenService} contiene la función para la invocación del servicio web que realiza la búsqueda de órdenes de reposición, en el Código \ref{lst:search-service-js} se muestra la implementación del servicio:
 \begin{enumerate}
-	\item Línea 2: crea un objeto para contener la respuesta de la llamada al servicio Web.
-	\item Línea 3: llamada al servio Web para buscar órdenes de reposición.
-	\item Líneas 8 y 9: en caso que la llamada al servicio Web sea exitosa se guarda la respuesta en el objeto del punto 1 indicando que fue una llamada exitosa.
-	\item Línea 10 y 11: en caso contrario al punto anterior, la respuesta del servicio Web se guarda indicando que hubo un error en la llamada.
+	\item Línea 2: crea un objeto para contener la respuesta de la llamada al servicio web.
+	\item Línea 3: llamada al servio web para buscar órdenes de reposición.
+	\item Líneas 8 y 9: en caso que la llamada al servicio web sea exitosa se guarda la respuesta en el objeto del punto 1 indicando que fue una llamada exitosa.
+	\item Línea 10 y 11: en caso contrario al punto anterior, la respuesta del servicio web se guarda indicando que hubo un error en la llamada.
 \end{enumerate}
 
 \begin{lstlisting}[language=Javascript, caption={Servicio de \textit{AngularJS} para buscar órdenes de reposición.}, captionpos=b, label={lst:search-service-js}]
@@ -639,8 +639,8 @@ $scope.genPdf = function($event){
 En la descripción anterior de las funciones del control \texttt{edicionCtrl} se muestran las llamadas al servicio \texttt{OrdenService}, a continuación se muestra la implementación de dichas funciones:
 
 \begin{enumerate}
-	\item \texttt{getOrden}: consume el servicio Web para obtener los datos de una orden de reposición (ver Código \ref{lst:get-orden-service-js}).
-\begin{lstlisting}[language=Javascript, caption={Función para consumir el servicio Web que obtiene los datos de una orden de reposición.}, captionpos=b, label={lst:get-orden-service-js}]
+	\item \texttt{getOrden}: consume el servicio web para obtener los datos de una orden de reposición (ver Código \ref{lst:get-orden-service-js}).
+\begin{lstlisting}[language=Javascript, caption={Función para consumir el servicio web que obtiene los datos de una orden de reposición.}, captionpos=b, label={lst:get-orden-service-js}]
 this.getOrden = function(id){
 	var d = $q.defer();
 	$http.get('_data_/orden/' + id)
@@ -655,7 +655,7 @@ this.getOrden = function(id){
 };
 \end{lstlisting}
 
-	\item \texttt{update}: manda los datos actualizados de una orden de reposición al servicio Web que realiza actualizaciones en órdenes de reposición(ver Código \ref{lst:update-orden-service-js}).
+	\item \texttt{update}: manda los datos actualizados de una orden de reposición al servicio web que realiza actualizaciones en órdenes de reposición(ver Código \ref{lst:update-orden-service-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para actualizar los datos de una orden de reposición}, captionpos=b, label={lst:update-orden-service-js}]
 this.update = function(orden){
 	var d = $q.defer();
@@ -671,7 +671,7 @@ this.update = function(orden){
 };
 \end{lstlisting}
 
-	\item \texttt{acuse}: consume el servicio Web que ofrece la generación del acuse de envío (ver Código \ref{lst:acuse-orden-service-js}).
+	\item \texttt{acuse}: consume el servicio web que ofrece la generación del acuse de envío (ver Código \ref{lst:acuse-orden-service-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para mandar la generación del acuse de envío de una orden de reposición.}, captionpos=b, label={lst:acuse-orden-service-js}]
 this.acuse = function(ordenId){
 	var d = $q.defer();
