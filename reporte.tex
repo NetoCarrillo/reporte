@@ -5,6 +5,7 @@
 %idioma
 \usepackage[spanish]{babel}
 \selectlanguage{spanish}
+\usepackage{bold-extra}
 
 %Apendice
 \usepackage[toc,page]{appendix}
@@ -83,12 +84,11 @@
   morestring=[b]"
 }
 
-% Estilos
-\newenvironment{consolaenv}{\fontfamily{pcr}\selectfont}{\par}
-\DeclareTextFontCommand{\consolatext}{\consolaenv}
-
 %Insertar PDFS
 \usepackage{pdfpages}
+
+% Version de PDF
+\pdfminorversion=7
 
 \begin{document}
 \thispagestyle{empty}
