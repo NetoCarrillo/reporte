@@ -44,8 +44,8 @@ Riesgo es la incertidumbre sobre algunos escenarios que ponen en peligro el éxi
 Los riesgos identificados para este proyecto se listan a continuación:
 \begin{enumerate}
   \item Dado que no se cuenta con un ambiente de pruebas del Sistema de Abastecimiento todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
-  \item La herramienta de automatización Sahi está basada en la estructura de las páginas del sistema Sistema de Abastecimiento. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
-  \item La herramienta Sahi en su versión libre\footnote{El uso de la versión libre de Sahi es requerido por la farmacéutica, ver sección \ref{sec:nonfunctional-req}.} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
+  \item La herramienta de automatización \textit{Sahi} está basada en la estructura de las páginas del sistema Sistema de Abastecimiento. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
+  \item La herramienta \textit{Sahi} en su versión libre\footnote{El uso de la versión libre de \textit{Sahi} es requerido por la farmacéutica, ver sección \ref{sec:nonfunctional-req}.} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
 \end{enumerate}
 
 
@@ -70,7 +70,7 @@ Ver también la Figura \ref{fig:flow-proc-verificar}.}.
   \label{fig:dia-activity-verificar}
 \end{figure}
 
-\subsubsection{Interfaz WEB para la administración de órdenes de reposición contestadas}\label{sec:req-web-ui}
+\subsubsection{Interfaz web para la administración de órdenes de reposición contestadas}\label{sec:req-web-ui}
 Todos los requerimientos de administración de órdenes de reposición y generación de reportes deben ser accedidos mediante una interfaz web protegida por nombre de usuario y contraseña\footnote{Excepto lo referente a los procesos automatizados de los operadores de la farmacéutica.}, como se muestra en la Figura \ref{fig:maq-login}.
 \begin{figure}[h]
   \centering
@@ -89,7 +89,7 @@ En la interfaz web existe la posibilidad de buscar entre las órdenes de reposic
 \end{figure} 
 
 \subsubsection{Visualización de orden de reposición}\label{sec:req-show}
-La interfaz WEB tiene una sección donde se muestra el contenido de una orden de reposición almacenada en la base de datos (ver Figura \ref{fig:maq-crud}), esta vista es individual, (no es posible mostrar el contenido de más de una orden de reposición), además ofrece las opciones para modificar los datos de la orden (ver requerimiento \ref{sec:req-update}) y para generar el acuse de envío.
+La interfaz web tiene una sección donde se muestra el contenido de una orden de reposición almacenada en la base de datos (ver Figura \ref{fig:maq-crud}), esta vista es individual, (no es posible mostrar el contenido de más de una orden de reposición), además ofrece las opciones para modificar los datos de la orden (ver requerimiento \ref{sec:req-update}) y para generar el acuse de envío.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1]{maq-crud} 
@@ -137,7 +137,7 @@ La interfaz web muestra en todo momento un menú que permite la navegación entr
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{dia-nav-flow}
-  \caption{Mapa de navegación en la interfaz Web}
+  \caption{Mapa de navegación en la interfaz web}
   \label{fig:dia-nav-flow}
 \end{figure}
 
@@ -146,8 +146,8 @@ La interfaz web muestra en todo momento un menú que permite la navegación entr
 El cliente ha solicitado que el proyecto se apegue a su infraestructura, para conservar el acuerdo de confidencialidad y evitar exponer al cliente a riesgos de seguridad informática por lo que el sistema debe de contar con\footnote{Por políticas de seguridad de la farmacéutica no se enunciarán las herramientas e infraestructura utilizada, así como las versiones de las mismas.}:
 \begin{enumerate}
 \item Sistema AutoSA debe ser capaz de ser ejecutado en los sistemas operativos más comunes en la industria.
-\item Base de datos relacional SQL.
-\item Uso de la herramienta Sahi para automatizar interacción con Sistema de Abastecimiento.
+\item Base de datos relacional \textit{SQL}.
+\item Uso de la herramienta \textit{Sahi} para automatizar interacción con Sistema de Abastecimiento.
 \item Las contraseñas de los usuarios para el acceso a la interfaz web deben ser almacenadas utilizando un algoritmo de cifrado.
 \end{enumerate}
 
@@ -169,10 +169,10 @@ Un caso de uso es la representación de las posibles interacciones entre el sist
 Con el fin de explicar mejor el flujo de atención de una orden de reposición es necesario mostrar el diagrama de estados de una orden de reposición durante el flujo de \textbf{envío de órdenes de reposición} (ver sección \ref{sec:intro-contexto}).\\
 Los estados que puede tomar una orden (ver Figura \ref{fig:dia-estados-orden}) indican:
 \begin{itemize}
-  \item Si la solicitud está lista para ser procesada: \consolatext{Nueva} o \consolatext{Contestada}.
-  \item Si está siendo procesada: \consolatext{Siendo Contestada} o \consolatext{Siendo Enviada}.
-  \item Si ha terminado el ciclo correctamente: \consolatext{Enviada}.
-  \item Si ha terminado el ciclo con errores: \consolatext{Error}.
+  \item Si la solicitud está lista para ser procesada: \texttt{Nueva} o \texttt{Contestada}.
+  \item Si está siendo procesada: \texttt{Siendo Contestada} o \texttt{Siendo Enviada}.
+  \item Si ha terminado el ciclo correctamente: \texttt{Enviada}.
+  \item Si ha terminado el ciclo con errores: \texttt{Error}.
 \end{itemize} 
 
 \begin{figure}[h]
@@ -431,13 +431,13 @@ Actualizar en forma masiva el estado de atención en el Sistema de Abastecimient
 \end{enumerate}
 
 
-\subsection{Entrar en interfaz Web}\label{cu-entrar-web}
+\subsection{Entrar en interfaz web}\label{cu-entrar-web}
 \paragraph{Identificador:}
 CU-ENTRAR-WEB
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Este caso de uso define el flujo para autorizar la entrada de un usuario a la interfaz Web del sistema, en el diagrama de actividad de la Figura \ref{fig:dia-activity-login} se puede observar que el flujo inicia cuando el sistema muestra la pantalla de acceso (parte superior izquierda del apartado AutoSA). Este es el punto de acceso que tienen los usuarios para hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
+Este caso de uso define el flujo para autorizar la entrada de un usuario a la interfaz web del sistema, en el diagrama de actividad de la Figura \ref{fig:dia-activity-login} se puede observar que el flujo inicia cuando el sistema muestra la pantalla de acceso (parte superior izquierda del apartado AutoSA). Este es el punto de acceso que tienen los usuarios para hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-login}
@@ -530,7 +530,7 @@ CU-ACTUALIZAR-CATALOGO
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz Web, la Figura \ref{fig:dia-activity-cat-update} muestra el diagrama de actividad para este caso de uso donde se puede apreciar que se inicia cuando el usuario solicita la pantalla de administración de catálogos (parte superior del apartado Usuario del diagrama de actividad).
+Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz web, la Figura \ref{fig:dia-activity-cat-update} muestra el diagrama de actividad para este caso de uso donde se puede apreciar que se inicia cuando el usuario solicita la pantalla de administración de catálogos (parte superior del apartado Usuario del diagrama de actividad).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-cat-update}

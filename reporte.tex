@@ -5,6 +5,7 @@
 %idioma
 \usepackage[spanish]{babel}
 \selectlanguage{spanish}
+\usepackage{bold-extra}
 
 %Apendice
 \usepackage[toc,page]{appendix}
@@ -23,6 +24,7 @@
 \graphicspath{{./images/}}
 %\usepackage[font=small,skip=20pt]{caption}
 \setlength{\abovecaptionskip}{15pt plus 5pt minus 2pt}
+\usepackage{float}
 
 %Espacio de interlineado
 \usepackage{setspace}
@@ -83,12 +85,20 @@
   morestring=[b]"
 }
 
-% Estilos
-\newenvironment{consolaenv}{\fontfamily{pcr}\selectfont}{\par}
-\DeclareTextFontCommand{\consolatext}{\consolaenv}
-
 %Insertar PDFS
 \usepackage{pdfpages}
+
+% Version de PDF
+\pdfminorversion=7
+
+%\usepackage{hyperref}
+%\hypersetup{
+%    colorlinks,
+%    citecolor=black,
+%    filecolor=black,
+%    linkcolor=black,
+%    urlcolor=black
+%}
 
 \begin{document}
 \thispagestyle{empty}

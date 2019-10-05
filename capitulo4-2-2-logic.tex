@@ -1,9 +1,9 @@
 \subsection{Lógica de automatización}
-El componente de lógica de automatización provee de la información necesaria a las rutinas automatizadas, la información puede proceder de fuentes diferentes y a cada una se accede de forma diferente:
+El componente de lógica de automatización provee de la información necesaria a las rutinas automatizadas. Esta información puede proceder de diferentes fuentes y a cada fuente corresponde un componente diferente:
 \begin{enumerate}
- 	\item Un archivo en el sistema de archivos del sistema operativo, se obtiene información utilizando el componente \textbf{Sistema de Archivos}.
- 	\item Información almacenada en la base de datos, se tiene acceso miente el componente \textbf{Persistencia}.
- 	\item Cálculos que corresponde a la lógica de negocio, estos datos se obtienen mediante la aplicación de reglas implementadas dentro del componente \textbf{Lógica de automatización}.
+ 	\item Si la fuente es un archivo en el sistema de archivos del sistema operativo, se obtiene la información utilizando el componente \textbf{Sistema de Archivos}.
+ 	\item Si la fuente es una base de datos, se tiene acceso miente el componente \textbf{Persistencia}.
+ 	\item Si la fuente son las reglas de negocio, se tiene acceso mediante el componente \textbf{Lógica de automatización} que es el encargado de aplicar los cálculos correspondientes a la lógica de negocio.
 \end{enumerate}
 La implementación de este componente ha sido escrita en el lenguaje de programación \textit{Java}. A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas.
 \paragraph{\indent Interfaz Respuesta}

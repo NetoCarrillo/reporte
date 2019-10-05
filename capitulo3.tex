@@ -250,15 +250,15 @@ El diseño para la solución del caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA} (
 	\label{fig:dia-seq-cu-actualizar-estatus-sa}
 \end{figure}
 
-\subsubsection{Entrar en interfaz Web}
+\subsubsection{Entrar en interfaz web}
 El diseño de la solución al caso de uso \textbf{CU-ENTRAR-WEB} (sección \ref{cu-entrar-web}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (en el diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web} se muestra el diagrama de secuencia):
 \begin{enumerate}
 	\item \textbf{Usuario}: introduce su nombre de usuario y contraseña \textbf{credenciales} (mensaje 1 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
 	\item \textbf{Portal Web}: envía el nombre de usuario al componente \textbf{Persistencia} que realiza la búsqueda de los datos del usuario (mensaje 2 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
 	\item \textbf{Portal Web}: compara la contraseña con la almacenada en la base de datos.
 	\begin{enumerate}
-		\item Si las credenciales son válidas: el \textbf{Portal Web}regresa al \textbf{Usuario} un código de acceso temporal (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
-		\item Si las credenciales son inválidas: el \textbf{Portal Web}regresa al \textbf{Usuario} un mensaje de error (mensaje 4 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
+		\item Si las credenciales son válidas: el \textbf{Portal Web} regresa al \textbf{Usuario} un código de acceso temporal (mensaje 3 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
+		\item Si las credenciales son inválidas: el \textbf{Portal Web} regresa al \textbf{Usuario} un mensaje de error (mensaje 4 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
 	\end{enumerate}
 \end{enumerate}
 

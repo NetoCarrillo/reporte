@@ -44,7 +44,7 @@ function build_bib(){
 }
 
 function clean_aux_files(){
-	FILES_TO_RM='*.aux *.lof *.log *.lol *.toc *.dvi *.bbl *.blg *.lot *.acn *.acr *.alg *.glsdefs *.ist'
+	FILES_TO_RM='*.aux *.lof *.log *.lol *.toc *.dvi *.bbl *.blg *.lot *.acn *.acr *.alg *.glsdefs *.ist *.out'
 	rm $FILES_TO_RM 2> /dev/null
 	echo "All clean"
 }
