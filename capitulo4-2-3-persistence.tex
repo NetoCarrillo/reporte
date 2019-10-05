@@ -73,14 +73,14 @@ public interface IResultSetMapper<E>{
 	\end{lstlisting}
 
 La clase \textbf{ResultSetMapperProvider} es la encargada de la construcción y administración de las clases del tipo \textbf{IResultSetMapper}.\\
-El Código \ref{lst:per-class-mapper-provider} muestra la declaración del la clase \textbf{ResultSetMapperProvider} donde se observa el uso del patrón de diseño Singleton:
+El Código \ref{lst:per-class-mapper-provider} muestra la declaración del la clase \textbf{ResultSetMapperProvider} donde se observa el uso del patrón de diseño \textit{Singleton}:
 \begin{enumerate}
 	\item Línea 3, instancia privada de la clase.
 	\item Línea 5, constructor de clase privado.
 	\item Línea 9, método para obtener la instancia de clase.
 \end{enumerate}
 
-\begin{lstlisting}[language=Java, caption={Clase ResultSetMapperProvider con patrón de diseño Singleton.}, captionpos=b, label={lst:per-class-mapper-provider}]
+\begin{lstlisting}[language=Java, caption={Clase ResultSetMapperProvider con patrón de diseño \textit{Singleton}.}, captionpos=b, label={lst:per-class-mapper-provider}]
 public class ResultSetMapperProvider{
 	private final Map<Class<?>, IResultSetMapper<?>> mappers;
 	private static ResultSetMapperProvider instance;
