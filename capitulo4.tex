@@ -250,10 +250,8 @@ La generación de reportes que se menciona en el caso de uso \textbf{CU-GENERAR-
 
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear una vista.}, captionpos=b, label={lst:sql-create-view}]
 CREATE VIEW ordenes_contestadas AS
-     SELECT *
-       FROM ordenes_is
-      WHERE id_sesion_estatus = :sesion
-        AND estatus = 3
+     SELECT * FROM ordenes_is
+      WHERE id_sesion_estatus = :sesion AND estatus = 3
 \end{lstlisting}
 
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear un índice.}, captionpos=b, label={lst:sql-create-index}]

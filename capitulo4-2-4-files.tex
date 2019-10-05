@@ -35,8 +35,12 @@ Lo anterior se ejemplifica con los siguientes códigos:
 	\end{lstlisting}
 
 	\item Utilizando la clases de \textit{Java} dedicadas al manejo de lectura y escritura se copia la plantilla, tal como se aprecia en el Código \ref{lst:fs-copy}.
+
+% espaciado
+\pagebreak
+% espaciado
+	
 	\begin{lstlisting}[language=Java, caption={Copia de archivos.}, captionpos=b, label={lst:fs-copy}]
-	//Copiar plantillas
 	try(FileOutputStream hfos = new FileOutputStream(headersPath.toFile(), false);
 		FileOutputStream lfos = new FileOutputStream(contentPath.toFile(), false)){
 		

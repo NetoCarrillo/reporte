@@ -20,7 +20,7 @@ La implementación de la seguridad utilizando \textit{Spring Security} se divide
 	\begin{enumerate}
 		\item Línea 2: habilita el uso de la especificación \textit{OAuth 2.0}.
 		\item Línea 7: configuración principal de \textit{Spring Security} para no interponerse con los filtros de \textit{OAuth 2.0}.
-		\item Línea 12: creación del filtro de \textit{OAuth 2.0}.
+		\item Línea 20: creación del filtro de \textit{OAuth 2.0}.
 	\end{enumerate}
 \begin{lstlisting}[language=Java, caption={Clase para habilitar los filtros de seguridad.}, captionpos=b, label={lst:enable-oauth}]
 @Configuration
@@ -30,10 +30,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
-		http.antMatcher("/**").authorizeRequests().anyRequest().authenticated().and().logout().logoutSuccessUrl("/").permitAll().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable();
+		http.antMatcher("/**").authorizeRequests().anyRequest().authenticated()
+			.and().logout().logoutSuccessUrl("/").permitAll()
+			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and().csrf().disable();
 		http.authenticationProvider(authenticationProvider);
 	}
-	
+
+
+
+
+
+//Continua en la siguiente pagina
 	@Bean
 	public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter){
 		FilterRegistrationBean registration = new FilterRegistrationBean();
@@ -62,6 +70,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		\item Línea 12: se establece la referencia al \textit{bean} que administra los \textit{tokens} de los usuarios.
 	\end{enumerate}
 
+% espaciado
+\pagebreak
+% espaciado
+
 \begin{lstlisting}[language=Java, caption={Configuración de autentificación de usuarios.}, captionpos=b, label={lst:user-auth}]
 @Autowired
 private AuthenticationManager authenticationManager;
@@ -83,7 +95,7 @@ public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws E
 
 	\begin{enumerate}
 		\item Líneas 1 a 4: lectura de las credenciales del cliente.
-		\item Línea 10: configuración del protocolo para la autentificación del cliente. 
+		\item Línea 13: configuración del protocolo para la autentificación del cliente. 
 	\end{enumerate}
 
 \begin{lstlisting}[language=Java, caption={Clase de autentificación de cliente.}, captionpos=b, label={lst:client-auth}]
@@ -95,6 +107,9 @@ private String clientSecret;
 @Autowired
 private EncodedClientDetailsService ecds;
 
+
+
+//Continua en la siguiente pagina
 @Override
 public void configure(ClientDetailsServiceConfigurer clients) throws Exception{
 	BaseClientDetails details = new BaseClientDetails();
@@ -208,6 +223,10 @@ public class ReportController{
 		\item Línea 17: si el reporte es vacío se manda un mensaje de error.
 	\end{enumerate}
 
+% espaciado
+\pagebreak
+% espaciado
+
 \begin{lstlisting}[language=Java, caption={Servicio web para generar un reporte.}, captionpos=b, label={lst:report-controller-gen}]
 @RequestMapping(value = "/_report_/generate",
 				method = RequestMethod.GET,
@@ -302,6 +321,10 @@ Como se aprecia en la Figura \ref{lst:longin-view} se liga función \texttt{logi
 	\item Líneas 2 y 3, en caso de que la llamada sea exitosa se agrega el \textit{token} de acceso a los encabezados de las llamadas a servicios web, con este paso no es necesario hacer de manera explícita la autorización a recursos.
 \end{enumerate}
 
+% espaciado
+\pagebreak
+% espaciado
+
 \begin{lstlisting}[language=Javascript, caption={Petición de un \textit{token} de acceso.}, captionpos=b, label={lst:login-ctrl-js}]
 LoginService.login($scope.credentials)
 	.success(function(data){
@@ -325,6 +348,11 @@ El servicio \texttt{LoginService} es el encargado de efectuar la llamada al serv
 	\item Línea 13: tipo de flujo de \textit{OAuth 2.0}.
 	\item Línea 16: llamada al servicio web de \textit{token} de acceso.
 \end{enumerate}
+
+% espaciado
+\pagebreak
+% espaciado
+
 \begin{lstlisting}[language=Javascript, caption={Servicio en \textit{AngularJS} para obtener un \textit{token} de acceso.}, captionpos=b, label={lst:login-service-js}]
 portalSrvc.service('LoginService', function($http, $q){
 	this.login = function(credentials){
@@ -402,16 +430,14 @@ La forma de generación está ligada al control \texttt{reportesCtrl} cuya imple
 \begin{enumerate}
 	\item Línea 1: declaración del controlador.
 	\item Línea 2: definición de los valores iniciales del modelo.
-	\item Línea 9: función que consume el servicio \texttt{ReportService} para pedir la generación del reporte.
+	\item Línea 7: función que consume el servicio \texttt{ReportService} para pedir la generación del reporte.
 \end{enumerate}
 
 \begin{lstlisting}[language=Javascript, caption={Servicio en \textit{AngularJS} para pedir la generación de un reporte.}, captionpos=b, label={lst:report-ctrl-js}]
-app.controller('reporteCtrl', function($scope, $window, $http, $timeout, ReportService){
+app.controller('reporteCtrl', function($scope, ReportService){
 	$scope.filtro = {
-		fecIni: new Date(),
-		horIni: new Date(0, 0, 0, 0, 0, 0, 0),
-		fecFin: new Date(),
-		horFin: new Date(0, 0, 0, 23, 59, 0, 0),
+		fecIni: new Date(), horIni: new Date(0, 0, 0, 0, 0, 0, 0),
+		fecFin: new Date(), horFin: new Date(0, 0, 0, 23, 59, 0, 0),
 	};
 	
 	$scope.generar = function($event){
@@ -429,8 +455,8 @@ El Código \ref{lst:report-service-js} muestra la implementación del servicio \
 \end{enumerate}
 \begin{lstlisting}[language=Javascript, caption={Servicio en \textit{AngularJS} para pedir la generación de un reporte.}, captionpos=b, label={lst:report-service-js}]
 app.service('ReportService', function($http, $q, $window){
-	this.buildReport = function(filtro){
-		var params = 'fecIni=' + encodeURIComponent(filtro.fecIni.toJSON()) + "&" + 'fecFin=' + encodeURIComponent(filtro.fecFin.toJSON()) + "&" + 'horIni=' + encodeURIComponent(filtro.horIni.toJSON()) + "&" + 'horFin=' + encodeURIComponent(filtro.horFin.toJSON()) + "&" + 'reporte=' + encodeURIComponent(filtro.reporte.key);
+	this.buildReport = function(fltr){
+		var params = 'fecIni=' + encodeURIComponent(fltr.fecIni.toJSON()) + "&" + 'fecFin=' + encodeURIComponent(fltr.fecFin.toJSON()) + "&" + 'horIni=' + encodeURIComponent(fltr.horIni.toJSON()) + "&" + 'horFin=' + encodeURIComponent(fltr.horFin.toJSON()) + "&" + 'reporte=' + encodeURIComponent(fltr.reporte.key);
 		$window.open("_report_/generate?" + params);
 	};
 });
@@ -443,6 +469,10 @@ La vista \textbf{Catálogos} ofrece al usuario la operación para actualizar és
 	<h3>Cat&aacute;logos</h3>
 </ng-form>
 \end{lstlisting}
+
+% espaciado
+\pagebreak
+% espaciado
 
 El formulario (Código \ref{lst:view-catalog-componentes}) contiene los siguientes componentes:
 \begin{enumerate}
@@ -497,16 +527,14 @@ portalSrvc.service('CatalogService', function($http){
 		$http.post('_data_/catalog/load/' + catalog, fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
-		})
-		.success(function(data){
-			window.alert(data);
-		})
-		.error(function(data){
-			window.alert("fail");
 		});
     };	
 });
 \end{lstlisting}
+
+% espaciado
+\pagebreak
+% espaciado
 
 \paragraph{\indent 4. Vista Búsqueda\\}
 La vista \textbf{Búsqueda} se compone de dos elementos:
@@ -560,6 +588,11 @@ El servicio \texttt{OrdenService} contiene la función para la invocación del s
 	\item Líneas 8 y 9: en caso que la llamada al servicio web sea exitosa se guarda la respuesta en el objeto del punto 1 indicando que fue una llamada exitosa.
 	\item Línea 10 y 11: en caso contrario al punto anterior, la respuesta del servicio web se guarda indicando que hubo un error en la llamada.
 \end{enumerate}
+
+
+% espaciado
+\pagebreak
+% espaciado
 
 \begin{lstlisting}[language=Javascript, caption={Servicio de \textit{AngularJS} para buscar órdenes de reposición.}, captionpos=b, label={lst:search-service-js}]
 this.buscar = function(filtro){
