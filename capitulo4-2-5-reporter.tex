@@ -13,7 +13,7 @@ La implementación de la generación de acuse de envío se resume en los siguien
 \end{enumerate}
 
 \subsubsection{Generación de reportes}\label{sec:gen-repport}
-La generación de reportes utiliza el Patrón \textit{Estrategia} (ver Apéndice \ref{sec:strategy}) mediante el cual se ofrece un punto de entrada a la generación de reportes, internamente se delega la generación del reporte a la clase correspondiente (dependiendo del tipo de reporte que se trate).\\
+La generación de reportes utiliza el Patrón \textit{Estrategia} (Apéndice \ref{sec:strategy}) mediante el cual se ofrece un punto de entrada a la generación de reportes, internamente se delega la generación del reporte a la clase correspondiente (dependiendo del tipo de reporte que se trate).\\
 La implementación aplica dos veces el Patrón \textit{Estrategia}, primero en la selección del formato del reporte y después para el tipo de reporte. A continuación se explicarán las clases principales que se muestran en la Figura \ref{fig:dia-class-report-service}:
 
 \begin{figure}[h]

@@ -2,7 +2,7 @@
 La implementación del componente de persistencia se enfoca en dar servicio a los componentes tanto de escritorio como del web, por esta razón la implementación se ha dividido en dos partes:
 \begin{enumerate}
  	\item Escritorio: la automatización de rutinas, dado que éstas son ejecutadas dentro del ambiente de \textit{Sahi} (que a su vez está en la plataforma de \textit{Java}) se utiliza la biblioteca JDBC para economizar los recursos físicos del equipo del operador de la farmacéutica.
- 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de \textit{Spring} en conjunción con el marco de trabajo \textit{MyBatis} (ver sección \ref{sec:mybatis}).
+ 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de \textit{Spring} en conjunción con el marco de trabajo \textit{MyBatis} (sección \ref{sec:mybatis}).
 \end{enumerate}
 Los siguientes apartados explican la implementación de los servicios para escritorio y web.
 
@@ -56,7 +56,7 @@ private void updateEstatus(Orden orden) throws SQLException{
 
 \paragraph{\indent Interfaz Lectura\\}
 Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos, esto no quiere decir que durante la ejecución de estas operaciones no se modifiquen datos.
-Dado que la obtención de los datos se convierte a objetos del dominio del proyecto AutoSA. Se ha implementado una solución basada en los patrones de diseño Estrategia (ver Apéndice \ref{sec:strategy}) y \textit{Singleton} (ver Apéndice \ref{sec:singleton}). \\
+Dado que la obtención de los datos se convierte a objetos del dominio del proyecto AutoSA. Se ha implementado una solución basada en los patrones \texit{Estrategia} y \textit{Singleton} (Apéndices \ref{sec:strategy} y \ref{sec:singleton}). \\
 En la Figura \ref{fig:dia-class-mapper} se aprecia el diagrama de clases de la solución antes descrita:
 \begin{figure}[h]
 	\centering

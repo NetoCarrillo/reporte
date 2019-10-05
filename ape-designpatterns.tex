@@ -32,7 +32,7 @@ El Patrón \textit{Estrategia} es del tipo de patrones de comportamiento, este p
 \end{figure}
 
 \section{Patrón Decorador}\label{sec:decorator}
-El Patrón \textit{Decorador} es utilizado para agregar comportamiento adicional a una clase, tiene cuatro partes principales\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-decorator}):
+El Patrón \textit{Decorador} es utilizado para agregar comportamiento adicional a una clase, tiene cuatro partes principales\cite{DesignPatternsLasater} (Figura \ref{fig:dia-class-decorator}):
 \begin{enumerate}
   \item Componente: es una clase abstracta que contiene la funcionalidad básica para las clases no decoradas y las decoradas.
   \item Componente concreto: es la implementación de la clase Componente.
@@ -48,7 +48,7 @@ El Patrón \textit{Decorador} es utilizado para agregar comportamiento adicional
 \end{figure}
 
 \section{Patrón Proxy}\label{sec:proxy}
-El Patrón \textit{Proxy} es una clase que actuá como punto de acceso a otra clase la cual tiene la funcionalidad deseada por algún cliente\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-proxy}):
+El Patrón \textit{Proxy} es una clase que actuá como punto de acceso a otra clase la cual tiene la funcionalidad deseada por algún cliente\cite{DesignPatternsLasater} (Figura \ref{fig:dia-class-proxy}):
 \begin{enumerate}
   \item Tema: define una interfaz en común para el Tema real y el \textit{Proxy}.
   \item Tema real: es la clase concreta que representa el \textit{Proxy}.
@@ -75,7 +75,7 @@ El Patrón Objeto de Acceso a Datos (nombrado en inglés \textit{Data Access Obj
 \section{Patrón Modelo-Vista-Controlador}\label{sec:mvc}
 Para Sarcar\cite{JavaDesignPatternsExamples} el Patrón \textit{Modelo Vista Controlador} (MVC) es un patrón de arquitectura que consiste de tres grandes componentes: Modelo, Vista y Controlador. El Controlador conduce la comunicación entre la Vista y el Modelo, en la Figura \ref{fig:dia-mvc-simple} se muestra el flujo de comunicación entre los componentes MVC.
 \begin{enumerate}
-	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del Patrón DAO (ver sección \ref{sec:dao}) para el manejo de datos.
+	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del Patrón DAO (sección \ref{sec:dao}) para el manejo de datos.
 	\item \textbf{Vista}: es la capa de presentación, es responsable de mostrar los datos al actor\footnote{Puede ser una persona u otro sistema} que use el sistema.
 	\item \textbf{Controlador}: es el intermediario entre la Vista y el Modelo, el cual comunica las peticiones de la Vista al Modelo y los datos del Modelo a la Vista.
 \end{enumerate}

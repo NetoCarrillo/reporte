@@ -113,7 +113,7 @@ Las funciones principales de \textit{Spring}, mejor conocido como \textit{Spring
 
 	\item Inyección de dependencia: es una forma particular de inversión de control, se refiere a establecer las dependencias de un objeto en tiempo de ejecución.
 
-	\item Programación Orientada a Aspectos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes. Cada uno es responsable de un conjunto de funcionalidades afines, a menudo estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etcétera), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación Orientada a Aspectos en \textit{Spring}  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales, para lo cual utiliza los patrones de diseño \textit{Decorador} y \textit{Proxy} (ver secciones \ref{sec:decorator} y \ref{sec:proxy}, respectivamente).
+	\item Programación Orientada a Aspectos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes. Cada uno es responsable de un conjunto de funcionalidades afines, a menudo estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etcétera), a estos servicios del sistema se les llama intersectoriales. El objetivo de la programación Orientada a Aspectos en \textit{Spring}  es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales, para lo cual utiliza los patrones de diseño \textit{Decorador} y \textit{Proxy} (secciones \ref{sec:decorator} y \ref{sec:proxy}).
 \end{enumerate}
 
 Dentro del proyecto de \textit{Spring} existen proyectos que se enfocan en áreas específicas. A continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
@@ -172,7 +172,7 @@ El uso de \textit{MyBatis} se resume principalmente a puntos\cite{PersistenceWit
 %-------------------------------------------------------------------------------
 \subsection{Velocity}\label{sec:velocity}
 \begin{quote}
-	\textit{Velocity} es un lenguaje de plantillas diseñado para ofrecer a los diseñadores web una forma fácil de presentar información dinámica a los usuarios de un sitio web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de \textit{Java} como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (ver Apéndice \ref{sec:mvc}).
+	\textit{Velocity} es un lenguaje de plantillas diseñado para ofrecer a los diseñadores web una forma fácil de presentar información dinámica a los usuarios de un sitio web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de \textit{Java} como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (Apéndice \ref{sec:mvc}).
 \end{quote}
 
 %-------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ CREATE INDEX ordenes_contetadas_idx ON ordenes_is(id_sesion_estatus, estatus);
 
 %-------------------------------------------------------------------------------
 \subsection{Rutinas de modelado de datos}
-Estas rutinas contienen la sentencias DML para insertar la información necesaria durante la ejecución del sistema, como son los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
+Estas rutinas contienen la sentencias DML para insertar la información necesaria durante la ejecución del sistema, como son los estados posibles de las órdenes de reposición (Figura \ref{fig:dia-estados-orden}), en el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
 
 \begin{lstlisting}[language=SQL, caption={Sentencia insertar un registro.}, captionpos=b, label={lst:sql-insert}]
 INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');

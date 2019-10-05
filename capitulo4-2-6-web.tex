@@ -1,5 +1,5 @@
 \subsection{Portal Web}\label{sec:web-portal}
-La implementación del \textbf{Portal Web} se realizó bajo la arquitectura orientada a servicios (ver Apéndice \ref{sec:soa}), lo cual implica una división del \textbf{Portal Web} de la siguiente forma:
+La implementación del \textbf{Portal Web} se realizó bajo la Arquitectura Orientada a Servicios (Apéndice \ref{sec:soa}), lo cual implica una división del \textbf{Portal Web} de la siguiente forma:
 \begin{itemize}
 	\item \textit{backend}: la parte del portal ofrece los servicios web, con tiene los servicios de autentificación, administración de órdenes de reposición y generación de reportes.
 	\item \textit{frontend}: la parte del portal que consume los servicios web y muestra una interfaz gráfica al usuario, contiene las páginas de HTML y rutinas para consumir los servicios del \textit{backend}.
@@ -106,7 +106,7 @@ public void configure(ClientDetailsServiceConfigurer clients) throws Exception{
 }
 \end{lstlisting}
 
-	\item Verificación de la contraseña de usuario: este punto verifica que la clave derivada de la contraseña (ver Sección \ref{sec:key-derivation}) dada por el usuario coincida con la derivación almacenada en la base de datos, en el Código \ref{lst:kdf} se observa el método para derivar la contraseña:
+	\item Verificación de la contraseña de usuario: este punto verifica que la clave derivada de la contraseña (sección \ref{sec:key-derivation}) dada por el usuario coincida con la derivación almacenada en la base de datos, en el Código \ref{lst:kdf} se observa el método para derivar la contraseña:
 	\begin{enumerate}
 		\item Línea 2: creación del objeto que contiene la especificación para la derivación de la contraseña.
 		\item Línea 3: algoritmo de derivación.
@@ -444,7 +444,7 @@ La vista \textbf{Catálogos} ofrece al usuario la operación para actualizar és
 </ng-form>
 \end{lstlisting}
 
-El formulario (ver Código \ref{lst:view-catalog-componentes}) contiene los siguientes componentes:
+El formulario (Código \ref{lst:view-catalog-componentes}) contiene los siguientes componentes:
 \begin{enumerate}
 	\item Una lista para seleccionar el catálogo.
 	\item Un componente para seleccionar el archivo que se utilizará para actualizar la información del catálogo seleccionado.
@@ -535,7 +535,7 @@ La vista \textbf{Búsqueda} se compone de dos elementos:
 
 Si bien la vista tiene dos componentes principales que se encargan de buscar y mostrar órdenes de reposición, el controlador \texttt{busquedaCtrl} ofrece la funcionalidad a esos componentes mediante las operaciones:
 \begin{itemize}
-	\item \texttt{buscar}: realiza la llamada al servicio que consume el servicio web para buscar órdenes de reposición (ver Código \ref{lst:find-serach-ctrl-js}).
+	\item \texttt{buscar}: realiza la llamada al servicio que consume el servicio web para buscar órdenes de reposición (Código \ref{lst:find-serach-ctrl-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para llamar el servicio de búsqueda de órdenes de reposición.}, captionpos=b, label={lst:find-serach-ctrl-js}]
 $scope.buscar = function($event){
 	var promise = OrdenService.buscar($scope.filtro);
@@ -545,7 +545,7 @@ $scope.buscar = function($event){
 };
 \end{lstlisting}
 
-	\item \texttt{mostrarOrden}: cambia a la vista \textbf{Orden} donde se muestran los datos de la orden de reposición seleccionada (ver Código \ref{lst:show-search-ctrl-js}).
+	\item \texttt{mostrarOrden}: cambia a la vista \textbf{Orden} donde se muestran los datos de la orden de reposición seleccionada (Código \ref{lst:show-search-ctrl-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para mostrar la vista de una orden de reposición.}, captionpos=b, label={lst:show-search-ctrl-js}]
 $scope.mostrarOrden = function(id, $event){
 	$location.path("/ordenesEdit/" + id);
@@ -595,7 +595,7 @@ En el Código \ref{lst:view-show-buttons}
 
 El control \texttt{edicionCtrl} de esta vista tiene las funciones que utiliza la vista \textbf{Orden}:
 \begin{enumerate}
-	\item \texttt{obtener}: obtiene los datos de la orden de reposición y actualiza el modelo con el fin de mostrar tales datos en la vista (ver Código \ref{lst:show-orden-ctrl-js})
+	\item \texttt{obtener}: obtiene los datos de la orden de reposición y actualiza el modelo con el fin de mostrar tales datos en la vista (Código \ref{lst:show-orden-ctrl-js})
 \begin{lstlisting}[language=Javascript, caption={Función del controlador para llenar los datos de la vista de orden de reposición.}, captionpos=b, label={lst:show-orden-ctrl-js}]
 $scope.obtener = function(id, $event){
 	var promise = OrdenService.getOrden(id);
@@ -606,7 +606,7 @@ $scope.obtener = function(id, $event){
 };
 \end{lstlisting}
 
-	\item \texttt{acutalizar}: manda el modelo al servicio \texttt{OrdenService} para actualizar la orden de reposición (ver Código \ref{lst:update-orden-ctrl-js}).
+	\item \texttt{acutalizar}: manda el modelo al servicio \texttt{OrdenService} para actualizar la orden de reposición (Código \ref{lst:update-orden-ctrl-js}).
 \begin{lstlisting}[language=Javascript, caption={Función del controlador de \textit{AngularJS} para actualizar una orden de reposición.}, captionpos=b, label={lst:update-orden-ctrl-js}]
 $scope.actualizar = function($event){
 	var promise = OrdenService.update($scope.orden);
@@ -616,14 +616,14 @@ $scope.actualizar = function($event){
 };
 \end{lstlisting}
 
-	\item \texttt{cancelar}: vuelve a cargar los datos de la orden de reposición con el fin de cancelar los cambios hechos a la orden de reposición (ver Código \ref{lst:cancel-orden-ctrl-js}).
+	\item \texttt{cancelar}: vuelve a cargar los datos de la orden de reposición con el fin de cancelar los cambios hechos a la orden de reposición (Código \ref{lst:cancel-orden-ctrl-js}).
 \begin{lstlisting}[language=Javascript, caption={Función del controlador de \textit{AngularJS} para cancelar los cambios en una orden de reposición}, captionpos=b, label={lst:cancel-orden-ctrl-js}]
 $scope.reset = function($event){
 	$scope.getOrden($routeParams.ordenId);
 };
 \end{lstlisting}
 
-	\item \texttt{acuse}: llama al servicio \texttt{OrdenService} para generar el acuse de envío, como resultado muestra la ruta donde se generó dicho acuse de envío (ver Código \ref{lst:acuse-orden-ctrl-js}).
+	\item \texttt{acuse}: llama al servicio \texttt{OrdenService} para generar el acuse de envío, como resultado muestra la ruta donde se generó dicho acuse de envío (Código \ref{lst:acuse-orden-ctrl-js}).
 \begin{lstlisting}[language=Javascript, caption={Función del controlador de \textit{AngularJS} para generar el acuse de envío de la orden de reposición.}, captionpos=b, label={lst:acuse-orden-ctrl-js}]
 $scope.genPdf = function($event){
 	var promise = OrdenService.acuse($routeParams.ordenId);
@@ -638,7 +638,7 @@ $scope.genPdf = function($event){
 En la descripción anterior de las funciones del control \texttt{edicionCtrl} se muestran las llamadas al servicio \texttt{OrdenService}, a continuación se muestra la implementación de dichas funciones:
 
 \begin{enumerate}
-	\item \texttt{getOrden}: consume el servicio web para obtener los datos de una orden de reposición (ver Código \ref{lst:get-orden-service-js}).
+	\item \texttt{getOrden}: consume el servicio web para obtener los datos de una orden de reposición (Código \ref{lst:get-orden-service-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para consumir el servicio web que obtiene los datos de una orden de reposición.}, captionpos=b, label={lst:get-orden-service-js}]
 this.getOrden = function(id){
 	var d = $q.defer();
@@ -654,7 +654,7 @@ this.getOrden = function(id){
 };
 \end{lstlisting}
 
-	\item \texttt{update}: manda los datos actualizados de una orden de reposición al servicio web que realiza actualizaciones en órdenes de reposición(ver Código \ref{lst:update-orden-service-js}).
+	\item \texttt{update}: manda los datos actualizados de una orden de reposición al servicio web que realiza actualizaciones en órdenes de reposición (Código \ref{lst:update-orden-service-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para actualizar los datos de una orden de reposición}, captionpos=b, label={lst:update-orden-service-js}]
 this.update = function(orden){
 	var d = $q.defer();
@@ -670,7 +670,7 @@ this.update = function(orden){
 };
 \end{lstlisting}
 
-	\item \texttt{acuse}: consume el servicio web que ofrece la generación del acuse de envío (ver Código \ref{lst:acuse-orden-service-js}).
+	\item \texttt{acuse}: consume el servicio web que ofrece la generación del acuse de envío (Código \ref{lst:acuse-orden-service-js}).
 \begin{lstlisting}[language=Javascript, caption={Función para mandar la generación del acuse de envío de una orden de reposición.}, captionpos=b, label={lst:acuse-orden-service-js}]
 this.acuse = function(ordenId){
 	var d = $q.defer();

@@ -8,7 +8,7 @@ El componente de lógica de automatización provee de la información necesaria 
 La implementación de este componente ha sido escrita en el lenguaje de programación \textit{Java}. A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas.
 \paragraph{\indent Interfaz Respuesta}
 \begin{enumerate}
-	\item guardar-orden-nueva: la implementación de esta operación (ver Código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}.
+	\item guardar-orden-nueva: la implementación de esta operación (Código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}.
 	\begin{lstlisting}[language=Java, caption={Delegación del almacenamiento de una nueva orden de reposición.}, captionpos=b, label={lst:la-save-new}]
 Orden orden = new Orden();
 orden.setContrato(contrato);
