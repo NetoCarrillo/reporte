@@ -22,17 +22,17 @@ El Patrón \textit{Singleton} pertenece al grupo de patrones de diseño de creac
 \end{figure}
 
 \section{Patrón Estrategia}\label{sec:strategy}
-El patrón de diseño Estrategia es un patrón de diseño de comportamiento, es un grupo de algoritmos encapsulados en clases específicas que pueden ser intercambiadas de modo tal que dependiendo del uso específico se selecciona la clase adecuada. El patrón Estrategia expone una clase llamada contexto mediante la cual se tiene acceso a las clases con estrategias específicas que implementan una misma interfaz como se muestra en la Figura \ref{fig:dia-class-strategy} \cite{DesignPatternsLasater, DesignPatterns}.
+El Patrón \textit{Estrategia} es del tipo de patrones de comportamiento, este patrón es un grupo de algoritmos encapsulados en clases específicas que pueden ser intercambiadas de modo tal que dependiendo del uso específico se selecciona la clase adecuada. El Patrón \textit{Estrategia} expone una clase llamada contexto mediante la cual se tiene acceso a las clases con estrategias específicas que implementan una misma interfaz como se muestra en la Figura \ref{fig:dia-class-strategy} \cite{DesignPatternsLasater, DesignPatterns}.
 
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-class-strategy}
-  \caption{Diagrama UML del patrón Strategy\cite{DesignPatternsLasater}.}
+  \caption{Diagrama UML del Patrón \textit{Estrategia}\cite{DesignPatternsLasater}.}
   \label{fig:dia-class-strategy}
 \end{figure}
 
 \section{Patrón Decorador}\label{sec:decorator}
-El patrón Decorador es utilizado para agregar comportamiento adicional a una clase, tiene cuatro partes principales\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-decorator}):
+El Patrón \textit{Decorador} es utilizado para agregar comportamiento adicional a una clase, tiene cuatro partes principales\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-decorator}):
 \begin{enumerate}
   \item Componente: es una clase abstracta que contiene la funcionalidad básica para las clases no decoradas y las decoradas.
   \item Componente concreto: es la implementación de la clase Componente.
@@ -43,26 +43,26 @@ El patrón Decorador es utilizado para agregar comportamiento adicional a una cl
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-class-decorator}
-  \caption{Diagrama UML del patrón Decorador\cite{DesignPatternsLasater}.}
+  \caption{Diagrama UML del Patrón Decorador\cite{DesignPatternsLasater}.}
   \label{fig:dia-class-decorator}
 \end{figure}
 
 \section{Patrón Proxy}\label{sec:proxy}
-El patrón Proxy es una clase que actuá como punto de acceso a otra clase la cual tiene la funcionalidad deseada por algún cliente\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-proxy}):
+El Patrón \textit{Proxy} es una clase que actuá como punto de acceso a otra clase la cual tiene la funcionalidad deseada por algún cliente\cite{DesignPatternsLasater} (ver Figura \ref{fig:dia-class-proxy}):
 \begin{enumerate}
-  \item Tema: define una interfaz en común para el Tema real y el Proxy.
-  \item Tema real: es la clase concreta que representa el Proxy.
-  \item Proxy: mantiene referencia a una instancia de la clase Tema real y actúa como punto de acceso a la misma clase.
+  \item Tema: define una interfaz en común para el Tema real y el \textit{Proxy}.
+  \item Tema real: es la clase concreta que representa el \textit{Proxy}.
+  \item \textit{Proxy}: mantiene referencia a una instancia de la clase Tema real y actúa como punto de acceso a la misma clase.
 \end{enumerate}
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-class-proxy}
-  \caption{Diagrama UML del patrón Proxy\cite{DesignPatternsLasater}.}
+  \caption{Diagrama UML del Patrón \textit{Proxy}\cite{DesignPatternsLasater}.}
   \label{fig:dia-class-proxy}
 \end{figure}
 
 \section{Patrón Objeto de Acceso a Datos}\label{sec:dao}
-El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etcétera) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
+El Patrón Objeto de Acceso a Datos (nombrado en inglés \textit{Data Access Object}, DAO) encapsula y abstrae la conexión a una fuente de datos (archivos de texto plano, bases de datos relacionales, bases de datos no relacionales, etcétera) y expone operaciones pertinentes al manejo de tales datos\cite{OCPJavaSE7,OCAPJavaSE7}:
 \begin{enumerate}
 	\item [] \textbf{buscar}: realiza la búsqueda de un único elemento, en caso de no encontrarse tal elemento la respuesta es nula.
 	\item [] \textbf{listar}: extrae todos los elementos, el resultado puede utilizar estrategias de paginación.
@@ -73,21 +73,21 @@ El patrón Objeto de Acceso a Datos (DAO por sus siglas en inglés) encapsula y 
 
 
 \section{Patrón Modelo-Vista-Controlador}\label{sec:mvc}
-Para Sarcar\cite{JavaDesignPatternsExamples} el patrón Modelo Vista Controlador (MVC) es un patrón de arquitectura que consiste de tres grandes componentes: Modelo, Vista y Controlador. El controlador conduce la comunicación entre la Vista y el Modelo, en la Figura \ref{fig:dia-mvc-simple} se muestra el flujo de comunicación entre los componentes MVC.
+Para Sarcar\cite{JavaDesignPatternsExamples} el Patrón \textit{Modelo Vista Controlador} (MVC) es un patrón de arquitectura que consiste de tres grandes componentes: Modelo, Vista y Controlador. El Controlador conduce la comunicación entre la Vista y el Modelo, en la Figura \ref{fig:dia-mvc-simple} se muestra el flujo de comunicación entre los componentes MVC.
 \begin{enumerate}
-	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del patrón DAO (ver sección \ref{sec:dao}) para el manejo de datos.
+	\item \textbf{Modelo}: tiene la responsabilidad de manejar el acceso a los datos persistentes y la lógica de negocio, usualmente se acompaña del Patrón DAO (ver sección \ref{sec:dao}) para el manejo de datos.
 	\item \textbf{Vista}: es la capa de presentación, es responsable de mostrar los datos al actor\footnote{Puede ser una persona u otro sistema} que use el sistema.
-	\item \textbf{Controlador}: es el intermediario entre la Vista y el Modelo, el cual comunica las peticiones de la vista al modelo y los datos del modelo a la vista.
+	\item \textbf{Controlador}: es el intermediario entre la Vista y el Modelo, el cual comunica las peticiones de la Vista al Modelo y los datos del Modelo a la Vista.
 \end{enumerate}
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-mvc-simple}
-  \caption{Diagrama del patrón MVC\cite{JavaDesignPatternsExamples}.}
+  \caption{Diagrama del Patrón MVC\cite{JavaDesignPatternsExamples}.}
   \label{fig:dia-mvc-simple}
 \end{figure}
 
 \section{Arquitectura Orientada a Servicios}\label{sec:soa}
-Thomas Erl describe la Arquitectura Orientada a Servicios (\textbf{SOA} por sus siglas en inglés) como el modelo arquitectónico del cómputo orientado a servicios\cite{SOAWithRest}. A continuación se muestran las definiciones de Erl\cite{SOAWithRest} sobre los conceptos de Orientación a Servicios:
+Thomas Erl describe la \textit{Arquitectura Orientada a Servicios} (nombrado en inglés \textit{Service-Oriented Architecture}, SOA) como el modelo arquitectónico del cómputo orientado a servicios\cite{SOAWithRest}. A continuación se muestran las definiciones de Erl\cite{SOAWithRest} sobre los conceptos de Orientación a Servicios:
 \begin{quote}
 La \textbf{Orientación a Servicios} es el paradigma de diseño dedicado para la creación de unidades lógicas de solución que son moldeados individualmente para que puedan ser utilizados colectiva y repetidamente para la realización de objetivos estratégicos y beneficios asociados con el cómputo Orientado a Servicios.\\
 El \textbf{Cómputo Orientado a Servicios} es engloba distintas plataformas de cómputo distribuido. En sí envuelve su propio paradigma y principios de diseño, catálogos de diseño de patrones, lenguajes, modelo arquitectónico junto con sus conceptos relacionados, tecnologías y marcos de trabajo.\\

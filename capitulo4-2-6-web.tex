@@ -2,7 +2,7 @@
 La implementación del \textbf{Portal Web} se realizó bajo la arquitectura orientada a servicios (ver Apéndice \ref{sec:soa}), lo cual implica una división del \textbf{Portal Web} de la siguiente forma:
 \begin{itemize}
 	\item \textit{backend}: la parte del portal ofrece los servicios web, con tiene los servicios de autentificación, administración de órdenes de reposición y generación de reportes.
-	\item \textit{frontend}: la parte del portal que consume los servicios web y muestra una interfaz gráfica al usuario, contiene las páginas de \textit{HTML} y rutinas para consumir los servicios del backend.
+	\item \textit{frontend}: la parte del portal que consume los servicios web y muestra una interfaz gráfica al usuario, contiene las páginas de HTML y rutinas para consumir los servicios del \textit{backend}.
 \end{itemize}
 
 \subsubsection{Implementación del backend}\label{sec:backend}
@@ -55,7 +55,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	En el Código \ref{lst:user-auth} se muestra la configuración necesaria para autentificar usuarios:
 	\begin{enumerate}
-		\item Línea 2: inyección del \textit{bean}\footnote{En \textit{Spring} un bean es un objeto en el contexto de la aplicación\cite{SpringInAction}} que realiza la autentificación de usuarios.
+		\item Línea 2: inyección del \textit{bean}\footnote{En \textit{Spring} un \textit{bean} es un objeto en el contexto de la aplicación\cite{SpringInAction}} que realiza la autentificación de usuarios.
 		\item Línea 4: creación del \textit{bean} encargado de almacenar los \textit{tokens} de los usuarios.
 		\item Línea 10: configuración del punto de entrada para autentificación.
 		\item Línea 11: se establece la referencia al \textit{bean} que autentifica usuarios.
@@ -121,7 +121,7 @@ public byte[] derivate(char[] password, byte[] salt) throws NoSuchAlgorithmExcep
 \end{lstlisting}
 
 
-	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de Internet, es decir, rutinas de \textit{Javascript}, páginas \textit{HTML}, hojas de estilo e imágenes; o el consumo de servicios web en el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
+	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de Internet, es decir, rutinas de \textit{Javascript}, páginas HTML, hojas de estilo e imágenes; o el consumo de servicios web en el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
 
 	\begin{enumerate}
 		\item Línea 2: habilitar el servidor de recursos.
@@ -168,7 +168,7 @@ public class DataController{
 			\item value: URL con la cual es asociada el método, el parámetro entre corchetes indica que es variable.
 			\item method: método de HTTP al cual es asociado el método. 
 		\end{enumerate}
-		\item Línea 3: la anotación \textbf{PathVariable} indica que el valor del parámetro es tomado de la URL, en este caso se refiere al número identificador de la orden de reposición buscada.
+		\item Línea 3: la anotación \texttt{PathVariable} indica que el valor del parámetro es tomado de la URL, en este caso se refiere al número identificador de la orden de reposición buscada.
 		\item Línea 5: obtención de la orden de reposición.
 	\end{enumerate}
 
@@ -196,11 +196,11 @@ public class ReportController{
 
 	En el Código \ref{lst:report-controller-gen} se muestra el servicio web para la generación de reportes:
 	\begin{enumerate}
-		\item Línea 1: la anotación \textbf{RequestMapping} indica como se debe asociar el método URL por medio de sus parámetros:
+		\item Línea 1: la anotación \texttt{RequestMapping} indica como se debe asociar el método URL por medio de sus parámetros:
 		\begin{enumerate}
-			\item value: URL con la cual es asociada el método.
-			\item method: método de HTTP al cual es asociado el método.
-			\item produces: indica el formato de respuesta, en este caso es un flujo de datos.
+			\item \texttt{value}: URL con la cual es asociada el método.
+			\item \texttt{method}: método de HTTP al cual es asociado el método.
+			\item \texttt{produces}: indica el formato de respuesta, en este caso es un flujo de datos.
 		\end{enumerate}
 		\item Líneas 12 y 13: traducción de las fechas que acotan el reporte a un objeto \texttt{Date}.
 		\item Línea 15: la construcción del reporte es delegada al módulo \textbf{Generación de reportes}.
@@ -281,7 +281,7 @@ A continuación se hace una descripción detallada de la implementación de las 
 \paragraph{\indent 1. Vista Acceso\\}
 Los flujos de autentificación y autorización del sistema AutoSA se hacen siguiendo la especificación de \textit{OAuth 2.0}. La autentificación se muestra al usuario mediante la plantilla del Código \ref{lst:longin-view} donde se ligan el nombre de usuario y la contraseña con el modelo de \textit{AngularJS}.
 
-\begin{lstlisting}[language=HTML, caption={Plantilla \textit{HTML} de acceso.}, captionpos=b, label={lst:longin-view}]
+\begin{lstlisting}[language=HTML, caption={Plantilla HTML de acceso.}, captionpos=b, label={lst:longin-view}]
 <form role="form" ng-submit="login()">
 	<div class="form-group">
 		<label for="username">Username:</label>
@@ -348,7 +348,7 @@ portalSrvc.service('LoginService', function($http, $q){
 
 \paragraph{\indent 2. Vista Reportes\\}
 La vista Reportes ofrece al usuario la generación de reportes, pudiendo seleccionar fechas y horas de los días en los que se atendieron las órdenes de reposición que conforman el reporte.\\
-La plantilla \textit{HTML} tiene una forma como elemento principal, en el Código \ref{lst:view-report-form} se muestra la declaración de la forma y el botón para enviar el formulario, este último está ligado a la función \texttt{generate} del controlador \texttt{reportesCtrl}:
+La plantilla HTML tiene una forma como elemento principal, en el Código \ref{lst:view-report-form} se muestra la declaración de la forma y el botón para enviar el formulario, este último está ligado a la función \texttt{generate} del controlador \texttt{reportesCtrl}:
 
 \begin{enumerate}
 	\item Línea 1: uso de la directiva \texttt{ng-form} para la generación.
@@ -512,7 +512,7 @@ portalSrvc.service('CatalogService', function($http){
 La vista \textbf{Búsqueda} se compone de dos elementos:
 \begin{itemize}
 	\item \textbf{Formulario de búsqueda}: muestra un formulario con opciones para buscar órdenes de reposición.
-	\item \textbf{Lista de órdenes}: despliega las órdenes de reposición que han resultado de la búsqueda y brinda acceso a la vista \textbf{Orden} en la cual se muestran los datos de la orden de reposición. En el Código \ref{lst:view-search-list} se muestra el código \textit{HTML} del listado.
+	\item \textbf{Lista de órdenes}: despliega las órdenes de reposición que han resultado de la búsqueda y brinda acceso a la vista \textbf{Orden} en la cual se muestran los datos de la orden de reposición. En el Código \ref{lst:view-search-list} se muestra el código HTML del listado.
 \end{itemize}
 
 \begin{lstlisting}[language=HTML, captionpos=b, caption={Plantilla que muestra el resultado de la búsqueda de órdenes de reposición.}, label={lst:view-search-list}]

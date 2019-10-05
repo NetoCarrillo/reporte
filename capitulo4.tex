@@ -4,7 +4,7 @@ El presente capítulo trata de la implementación del sistema AutoSA para el cua
 %-------------------------------------------------------------------------------
 \subsection{Base de datos relacional}\label{sec:bd-r}
 Una base de datos relacional es una colección de tablas relacionadas entre sí. La colección de tablas se describe a sí misma de acuerdo al significado de los datos contenidos pertenecientes a un mismo ámbito\cite{DataBaseConcepts}.\\
-Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (en inglés \textit{Database Management System}, \textit{DBMS}). Un \textit{DBMS} es un programa de computadora usado para crear, procesar y administrar bases de datos. El \textit{DBMS} recibe peticiones escritas en el lenguaje de programación \textit{SQL} (como se describe más adelante) y traduce esas peticiones en acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
+Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (en inglés \textit{Database Management System}, DBMS). Un DBMS es un programa de computadora usado para crear, procesar y administrar bases de datos. El DBMS recibe peticiones escritas en el lenguaje de programación SQL (como se describe más adelante) y traduce esas peticiones en acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
 Las siguientes son definiciones de los conceptos más relevantes dentro de esta área de conocimiento que son ocupados en la implementación del sistema AutoSA:
 \begin{enumerate}
 	\item \textbf{Tabla}: es un conjunto de renglones (registros) y columnas (atributos) que cumplen con las siguientes características\cite{DataBaseConcepts}:
@@ -25,9 +25,9 @@ Las siguientes son definiciones de los conceptos más relevantes dentro de esta 
 	\end{enumerate}
 	\item \textbf{Restricciones de integridad}: son reglas que se utilizan para asegurar que cambios en los datos de las tablas no causen inconsistencia en la información\cite{DatabaseSystemConcepts}. En particular \texttt{NOT NULL} indica que el valor del atributo no puede ser nulo\cite{FundamentosSistemasBasesDatos}.
 	\item \textbf{Índice}: es una estructura auxiliar para agilizar la obtención de registros. Los índices proveen rutas de acceso alternativo a los registros de la base de datos sin afectar la colocación física de éstos\cite{FundamentalsOfDBSystems}.
-	\item \textbf{Lenguaje Estructurado de Consultas}: traducción del inglés \textit{Structured Query Language}, \textit{SQL}. Fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años setenta. Es un lenguaje de datos orientado a texto, el cual ha sido avalado por el Instituto Nacional de Estándares Americanos (\textit{ANSI} por sus siglas en inglés) creando así los estándares \textit{ANSI} para \textit{SQL}, principalmente para este trabajo se utilizó el estándar ANSI-92 o SQL-92.
-	\item \textbf{Lenguaje de Definición de Datos}: traducción del inglés \textit{Data Definition Language}, \textit{DDL}. Se refiere a las sentencias de \textit{SQL} cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
-	\item \textbf{Lenguaje de Modelado de Datos}: traducido del inglés \textit{Data Modeling Language}, \textit{DML}. Se refiere a las sentencias \textit{SQL} cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
+	\item \textbf{Lenguaje Estructurado de Consultas}: traducción del inglés \textit{Structured Query Language}, SQL. Fue desarrollado por IBM\textsuperscript{\textcopyright} al final de los años setenta. Es un lenguaje de datos orientado a texto, el cual ha sido avalado por el \textit{Instituto Nacional de Estándares Americanos} (en inglés ANSI{American National Standards Institute}, ANSI) creando así los estándares ANSI para SQL, principalmente para este trabajo se utilizó el estándar \textit{ANSI-92} o \textit{SQL-92}.
+	\item \textbf{Lenguaje de Definición de Datos}: traducción del inglés \textit{Data Definition Language}, DDL. Se refiere a las sentencias de SQL cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
+	\item \textbf{Lenguaje de Modelado de Datos}: traducido del inglés \textit{Data Modeling Language}, DML. Se refiere a las sentencias SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ Se especifican cuatro roles que intervienen en el flujo del protocolo de autoriz
 	\item Cliente: es una aplicación que realiza peticiones a recursos protegidos por medio de su nombre y de autorización del dueño del recurso.
 	\item Servidor de autorizaciones: es el servidor que genera lexemas (\textit{tokens}) de acceso a los clientes después de autentificar exitosamente al dueño del recurso y haber obtenido su autorización.
 \end{enumerate}
-La interacción entre el servidor de autorizaciones y el servidor de recursos se encuentra fuera del alcance de la especificación de OAtuh 2.0. El servidor de autorizaciones podría ser el mismo que el servidor de recursos o ser entidades separadas. Un servidor de autorizaciones puede generar \textit{tokens} de acceso para múltiples servidores de recursos\cite{OAuthRFC}.\\
+La interacción entre el servidor de autorizaciones y el servidor de recursos se encuentra fuera del alcance de la especificación de \textit{OAuth 2.0}. El servidor de autorizaciones podría ser el mismo que el servidor de recursos o ser entidades separadas. Un servidor de autorizaciones puede generar \textit{tokens} de acceso para múltiples servidores de recursos\cite{OAuthRFC}.\\
 El concepto \textit{token de acceso} está definido en el estándar de la siguiente forma\cite{OAuthRFC}:
 \begin{quote}
 	\textit{Token} de acceso\footnote{De ahora en adelante referido únicamente como \textit{token}.} es una cadena que representa la autorización dada al cliente. Usualmente la cadena no tiene un significado claro para el cliente. Los \textit{tokens} representan alcance y duración específicos otorgados por el dueño del recurso y se encuentran respaldados tanto por el servidor de recursos como por el servidor de autorizaciones.
@@ -70,13 +70,13 @@ El concepto \textit{token de acceso} está definido en el estándar de la siguie
 
 \subsection{Derivación de clave}\label{sec:key-derivation}
 
-Una \textbf{función hash} $H$ aplicada a una cadena\footnote{La longitud de la cadena no está acotada} $M$ produce una cadena de tamaño fijo $h=H(M)$. Una buena función hash, desde el punto de vista criptográfico, tiene la propiedad que el resultado de aplicar dicha función a un conjunto grande de cadenas produce un conjunto de cadenas con distribución uniforme y aparentemente aleatorias\cite{CryptographyNetworkSecurity}.\\
-El tipo de funciones hash ocupadas en seguridad son referidas como \textbf{funciones hash criptográficas}. Una función hash $H$ se considera criptográfica si computacionalmente es imposible (con métodos determinísticos) de refutar las siguientes propiedades\cite{CryptographyNetworkSecurity}:
+Una \textbf{función hash} $H$ aplicada a una cadena\footnote{La longitud de la cadena no está acotada} $M$ produce una cadena de tamaño fijo $h=H(M)$. Una buena función \textit{hash}, desde el punto de vista criptográfico, tiene la propiedad que el resultado de aplicar dicha función a un conjunto grande de cadenas produce un conjunto de cadenas con distribución uniforme y aparentemente aleatorias\cite{CryptographyNetworkSecurity}.\\
+El tipo de funciones \textit{hash} ocupadas en seguridad son referidas como \textbf{funciones hash criptográficas}. Una función \textit{hash} $H$ se considera criptográfica si computacionalmente es imposible (con métodos determinísticos) de refutar las siguientes propiedades\cite{CryptographyNetworkSecurity}:
 \begin{itemize}
 	\item \textbf{Libre de colisiones}: para cualquier cadena $m$ no existe una cadena $n$ tal que si\\
 	$m \neq n \Rightarrow H(m) = H(n)$.\\
-	Es decir, la función hash no relaciona cadenas diferentes a un mismo código.
-	\item \textbf{Un solo sentido}: para toda $s$ en la imagen de $H$, $\forall s \in H(M)$, no es posible encontrar una $n$ en el dominio de $H$ tal que $H(n) = s$. Esta propiedad significa que no es posible encontrar la cadena $n$ de la cual proviene el código hash $s$.
+	Es decir, la función \textit{hash} no relaciona cadenas diferentes a un mismo código.
+	\item \textbf{Un solo sentido}: para toda $s$ en la imagen de $H$, $\forall s \in H(M)$, no es posible encontrar una $n$ en el dominio de $H$ tal que $H(n) = s$. Esta propiedad significa que no es posible encontrar la cadena $n$ de la cual proviene el código \textit{hash} $s$.
 \end{itemize}
 Un función de derivación de claves, traducido del inglés \textit{Key Derivation Function}, KDF, tiene como objetivo elaborar una cadena de un tamaño predeterminado a partir de una cadena cuyo tamaño está acotado. Formalmente, una función KDF tiene los siguientes parámetros\cite{UnderstandingCryptography, CryptographyTheoryPractice}:
 \begin{itemize}
@@ -84,22 +84,22 @@ Un función de derivación de claves, traducido del inglés \textit{Key Derivati
 	\item cadena aleatoria: es una palabra pública generada en forma aleatoria.
 	\item número iteraciones: número de iteraciones que hará la función KDF.
 \end{itemize}
-La función de derivación concatena la contraseña y la cadena aleatoria, entonces aplica una función hash criptográfica durante el número de iteraciones indicado, al resultado de esta función se le conoce como clave derivada\cite{UnderstandingCryptography, CryptographyTheoryPractice}.
+La función de derivación concatena la contraseña y la cadena aleatoria, entonces aplica una función \textit{hash} criptográfica durante el número de iteraciones indicado, al resultado de esta función se le conoce como clave derivada\cite{UnderstandingCryptography, CryptographyTheoryPractice}.
 
 %-------------------------------------------------------------------------------
 \subsection{Java}\label{sec:java}
 
-El lenguaje de programación \textit{Java} fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan bajo el nombre ``Oak'' y en 1995 se cambió el nombre a \textit{Java}. El lenguaje \textit{Java} está basado en los lenguajes de programación \textit{C} y \textit{C++}. \textit{Java} es un lenguaje Orientado a Objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
+El lenguaje de programación \textit{Java} fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan bajo el nombre \textit{Oak} y en 1995 se cambió el nombre a \textit{Java}. El lenguaje \textit{Java} está basado en los lenguajes de programación \textit{C} y \textit{C++}. \textit{Java} es un lenguaje Orientado a Objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
 \textit{Java} cuenta con varios componentes, de los cuales únicamente se describirán los más relevantes para el proyecto AutoSA\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
 \begin{enumerate}
-	\item \textbf{Máquina Virtual de Java}: traducido del inglés \textit{Java Virtual Machine}, \textit{JVM}, éste es el sistema en tiempo de ejecución de \textit{Java}.
-	\item \textbf{Bytecode}: es el nombre que recibe el conjunto optimizado de instrucciones diseñadas para ser ejecutadas en la \textit{JVM}.
-	\item \textbf{Paquete de Desarrollo de Java}: traducido del inglés \textit{Java Development Kit}, \textit{JDK}, se refiere al conjunto de herramientas utilizadas para el desarrollo de software para la Máquina Virtual de \textit{Java}.
-	\item \textbf{Ambiente de Ejecución de Java}: traducido del inglés \textit{Java Runtime Environment}, \textit{JRE}, se refiere a la herramienta encargada de la creación y administración de instancias de la Máquina Virtual de \textit{Java}.
+	\item \textbf{Máquina Virtual de Java}: traducido del inglés \textit{Java Virtual Machine}, JVM, éste es el sistema en tiempo de ejecución de \textit{Java}.
+	\item \textbf{Bytecode}: es el nombre que recibe el conjunto optimizado de instrucciones diseñadas para ser ejecutadas en la JVM.
+	\item \textbf{Paquete de Desarrollo de Java}: traducido del inglés \textit{Java Development Kit}, JDK, se refiere al conjunto de herramientas utilizadas para el desarrollo de software para la Máquina Virtual de \textit{Java}.
+	\item \textbf{Ambiente de Ejecución de Java}: traducido del inglés \textit{Java Runtime Environment}, JRE, se refiere a la herramienta encargada de la creación y administración de instancias de la Máquina Virtual de \textit{Java}.
 \end{enumerate}
 
 \subsubsection{Java Data Base Controller}\label{sec:jdbc}
-El controlador de base de datos de \textit{Java} (del inglés \textit{Java Database Controller}, \textit{JDBC}) es un conjunto de \textit{API}\footnote{API viene del inglés \textit{Application Programming Interface} es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales. Cabe mencionar que por medio del \textit{API JDBC} también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
+El controlador de base de datos de \textit{Java} (del inglés \textit{Java Database Controller}, JDBC) es un conjunto de API\footnote{API viene del inglés \textit{Application Programming Interface} es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales. Cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos como los son hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
 
 %-------------------------------------------------------------------------------
 \subsection{Spring}\label{sec:spring}
@@ -146,16 +146,16 @@ En al Figura \ref{fig:dia-spring-security} se muestra un diagrama del manejo que
 %-------------------------------------------------------------------------------
 \subsection{MyBatis}\label{sec:mybatis}
 \begin{quote}
-\textit{MyBatis} es un marco de trabajo para manejar la persistencia con soporte para sentencias \textit{SQL} personalizadas, procedimientos almacenados y conversión avanzada de datos. \textit{MyBatis} elimina casi todo el código de \textit{JDBC}, la configuración manual de parámetros y la recuperación de resultados\cite{MyBatis}.
+\textit{MyBatis} es un marco de trabajo para manejar la persistencia con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. \textit{MyBatis} elimina casi todo el código de JDBC, la configuración manual de parámetros y la recuperación de resultados\cite{MyBatis}.
 \end{quote}
 
 Los beneficios de \textit{MyBatis} sobre otros marcos de trabajo para persistencia son\cite{PersistenceWithMyBatis}:
 \begin{quote}
 	\begin{itemize}
-		\item Elimina gran parte del código repetitivo de \textit{JDBC}.
+		\item Elimina gran parte del código repetitivo de JDBC.
 		\item Tiene una curva de aprendizaje pequeña (es fácil de aprender).
 		\item Trabaja bien con bases de datos antiguas.
-		\item Incrustación de sentencias \textit{SQL}.
+		\item Incrustación de sentencias SQL.
 		\item Provee integración con el marco de trabajo \textit{Spring}.
 		\item Provee integración con bibliotecas para caché.
 		\item Induce mejoras en el rendimiento.
@@ -164,21 +164,21 @@ Los beneficios de \textit{MyBatis} sobre otros marcos de trabajo para persistenc
 
 El uso de \textit{MyBatis} se resume principalmente a puntos\cite{PersistenceWithMyBatis}:
 \begin{enumerate}
-	\item Crear un archivo de configuración que contiene las sentencias \textit{SQL} y conversiones de resultados a objetos de \textit{Java}.
-	\item Crear una interfaz de \textit{Java} cuyos métodos correspondan a las sentencias \textit{SQL} del archivo de configuración.
+	\item Crear un archivo de configuración que contiene las sentencias SQL y conversiones de resultados a objetos de \textit{Java}.
+	\item Crear una interfaz de \textit{Java} cuyos métodos correspondan a las sentencias SQL del archivo de configuración.
 	\item Crear un objeto \texttt{SqlSession} del cual se obtiene una instancia de la interfaz. Por medio de tal instancia se realizan las operaciones a la base de datos.
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
 \subsection{Velocity}\label{sec:velocity}
 \begin{quote}
-	Velocity es un lenguaje de plantillas diseñado para ofrecer a los diseñadores web una forma fácil de presentar información dinámica a los usuarios de un sitio web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de \textit{Java} como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (ver Apéndice \ref{sec:mvc}).
+	\textit{Velocity} es un lenguaje de plantillas diseñado para ofrecer a los diseñadores web una forma fácil de presentar información dinámica a los usuarios de un sitio web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de \textit{Java} como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (ver Apéndice \ref{sec:mvc}).
 \end{quote}
 
 %-------------------------------------------------------------------------------
 \subsection{Flying Saucer}\label{sec:flying-saucer}
 \begin{quote}
-	Flying Saucer es una biblioteca escrita en \textit{Java} para traducir documentos \textit{XML} o \textit{XHTML} con \textit{CSS}\footnote{Hoja de estilos en cascada, traducido del inglés\textit{Cascading Style Sheets}.} a formatos de gráficos de \textit{Java}, \textit{PDF} e imágenes\cite{FlyingSaucer}.
+	\textit{Flying Saucer} es una biblioteca escrita en \textit{Java} para traducir documentos XML\footnote{Lenguaje Marcado Extensible, traducido del inglés\textit{Extensible Markup Language}.} o XHTML\footnote{Lenguaje Marcado Extensible de Hipertexto, traducido del inglés\textit{Extensible HyperText Markup Language}.} con CSS\footnote{Hoja de estilos en cascada, traducido del inglés\textit{Cascading Style Sheets}.} a formatos de gráficos de \textit{Java}, PDF e imágenes\cite{FlyingSaucer}.
 \end{quote}
 
 %-------------------------------------------------------------------------------
@@ -189,29 +189,29 @@ El uso de \textit{MyBatis} se resume principalmente a puntos\cite{PersistenceWit
 \subsection{AngularJS}\label{sec:angularjs}
 
 \begin{quote}
-	\textit{AngularJS} es un marco de trabajo escrito en \textit{Javascript} para desarrollar aplicaciones web, mantenida por Google. Es un marco de trabajo de código abierto, el cual se enfoca en los retos de aplicaciones de una página. Una aplicación web basada en \textit{AngularJS} sigue el patrón de diseño \textit{MVC}, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares\cite{FullStackAngularJS}.
+	\textit{AngularJS} es un marco de trabajo escrito en \textit{Javascript} para desarrollar aplicaciones web, mantenida por \textit{Google}. Es un marco de trabajo de código abierto, el cual se enfoca en los retos de aplicaciones de una página. Una aplicación web basada en \textit{AngularJS} sigue el Patrón \textit{MVC}, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares\cite{FullStackAngularJS}.
 \end{quote}
 
-\subsubsection{Componente básicos de AngularJS}
-Al seguir el patrón \textit{MVC}, \textit{AngularJS} permite dividir la aplicación en componentes. A continuación se enlistan los componentes más importantes utilizados para el desarrollo del proyecto AutoSA\cite{FullStackAngularJS, LearningAngularJS, AngularJSEssentials}:
+\subsubsection{Componentes básicos de AngularJS}
+Al seguir el Patrón \textit{MVC}, \textit{AngularJS} permite dividir la aplicación en componentes. A continuación se enlistan los componentes más importantes utilizados para el desarrollo del proyecto AutoSA\cite{FullStackAngularJS, LearningAngularJS, AngularJSEssentials}:
 \begin{enumerate}
 	\item Módulo \textit{(module)}: es el contenedor para los demás componentes de \textit{AngularJS}. Cada módulo tiene su propia estructura de directorios para cada tipo de componente de \textit{AngularJS}, y cada página en \textit{AngularJS} tiene un módulo.
 	\item Alcance \textit{(scope)}: es una representación en \textit{Javascript} de datos usados para llenar una vista en una página web.
-	\item Vista \textit{(view)}: es la composición de plantillas (\textit{HTML}) y directivas, las vistas son construidas dinámicamente en tiempo de ejecución al mezclar las plantillas con los datos del alcance, el resultado es código \textit{HTML} puro.
-	\item Plantilla \textit{(template)}: son fragmentos de código \textit{HTML} con directivas y expresiones.
-	\item Directiva \textit{(directive)}: es una extensión al vocabulario de \textit{HTML} que permite definir nuevos comportamientos y desarrollar componentes reutilizables.
-	\item Expresión \textit{(expression)}: las expresiones se utilizan para ligar datos del alcance dentro de una plantilla \textit{HTML}.
-	\item Controlador \textit{(controller)}: es el control de patrón de diseño \textit{MVC}, contiene la lógica de negocio y su función principal es exponer los datos a la vista utilizando el alcance.
+	\item Vista \textit{(view)}: es la composición de plantillas (HTML) y directivas, las vistas son construidas dinámicamente en tiempo de ejecución al mezclar las plantillas con los datos del alcance, el resultado es código HTML puro.
+	\item Plantilla \textit{(template)}: son fragmentos de código HTML con directivas y expresiones.
+	\item Directiva \textit{(directive)}: es una extensión al vocabulario de HTML que permite definir nuevos comportamientos y desarrollar componentes reutilizables.
+	\item Expresión \textit{(expression)}: las expresiones se utilizan para ligar datos del alcance dentro de una plantilla HTML.
+	\item Controlador \textit{(controller)}: es el control de Patrón \textit{MVC}, contiene la lógica de negocio y su función principal es exponer los datos a la vista utilizando el alcance.
 	\item Ligado de datos \textit{(data binding)}: es el proceso de ligar datos del modelo a la vista en ambos sentidos, es decir, un cambio originado en una parte implica el cambio en la otra parte.
-	\item Modelo \textit{(model)}: es el modelo del patrón de diseño \textit{MVC}, es decir, son los datos.
-	\item Servicio \textit{(service)}: son objetos que siguen el \textit{Patrón de Diseño Singleton} y proveen funcionalidad específica a la aplicación web.
-	\item Inyección de dependencias \textit{(dependency injection)}: es el proceso para inyectar dependencias en tiempo de ejecución, como lo es establecer los servicios a los controler.
+	\item Modelo \textit{(model)}: es el modelo del Patrón \textit{MVC}, es decir, son los datos.
+	\item Servicio \textit{(service)}: son objetos que siguen el Patrón \textit{Singleton} y proveen funcionalidad específica a la aplicación web.
+	\item Inyección de dependencias \textit{(dependency injection)}: es el proceso para inyectar dependencias en tiempo de ejecución, como lo es establecer los servicios a los controladores.
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
 \subsection{Sahi}\label{sec:sahi}
 \begin{quote}
-	\textit{Sahi} es una herramienta enfocada en la automatización de pruebas para servicios web, plataformas web, móviles, escritorio de Windows\textsuperscript{\textcopyright} y ambientes de desarrollo \textit{Java}\cite{SahiPro}.
+	\textit{Sahi} es una herramienta enfocada en la automatización de pruebas para servicios web, plataformas web, móviles, escritorio de \textit{Windows}\textsuperscript{\textcopyright} o de \textit{Unix} y ambientes de desarrollo \textit{Java}\cite{SahiPro}.
 \end{quote}
 
 \textit{Sahi} incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de Internet, la forma en que \textit{Sahi} logra la ejecución de rutinas es actuando como \textit{proxy}\footnote{Un \textit{proxy} es un intermediario entre el cliente (explorador) y el servidor (página web)\cite{BeginningUbuntuLinux}} entre el sitio web y el explorador de Internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio web, \textit{Sahi} intercepta la comunicación entre estos e inserta código de \textit{Javascript} que ejecuta la rutina automatizada\cite{WebEng9IntConf, SahiPro}.
@@ -229,11 +229,11 @@ Al seguir el patrón \textit{MVC}, \textit{AngularJS} permite dividir la aplicac
 
 \section{Implementación de base de datos}\label{sec:impl-db}
 El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencialidad no se hace mención específica del nombre y versión del sistema administrador de bases de datos.} para almacenar la información requerida en los casos de uso.\\
-La implementación de la base de datos se ve reflejada en las rutinas con sentencias \textit{SQL} donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas \textit{DDL} y las rutinas \textit{DML}.
+La implementación de la base de datos se ve reflejada en las rutinas con sentencias SQL donde se definen los objetos de la base de datos, tales rutinas se separan en dos grupos, las rutinas DDL y las rutinas DML.
 
 %-------------------------------------------------------------------------------
 \subsection{Rutinas de definición de datos}
-Estas rutinas contienen las sentencias \textit{DDL} para la creación de tablas, llaves primarias y foráneas, índices y restricciones. En el Código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de la tabla \textit{ordenes\_is}.
+Estas rutinas contienen las sentencias DDL para la creación de tablas, llaves primarias y foráneas, índices y restricciones. En el Código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de la tabla \textit{ordenes\_is}.
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear una tabla.}, captionpos=b, label={lst:sql-create-table}]
 CREATE TABLE ordenes_is(
    id numeric(20,0) PRIMARY KEY NOT NULL,
@@ -246,7 +246,7 @@ CREATE TABLE ordenes_is(
 );
 \end{lstlisting}
 
-La generación de reportes que se menciona en el caso de uso \textbf{Generar reporte} (ver sección \ref{cu-generar-reporte}), utiliza una vista para la definición de la consulta de los datos del reporte como se muestra en el Código \ref{lst:sql-create-view}, además se han implementado índices para agilizar tales consultas como se puede ver en el Código \ref{lst:sql-create-index}.
+La generación de reportes que se menciona en el caso de uso \textbf{CU-GENERAR-REPORTE} (sección \ref{cu-generar-reporte}), utiliza una vista para la definición de la consulta de los datos del reporte como se muestra en el Código \ref{lst:sql-create-view}, además se han implementado índices para agilizar tales consultas como se puede ver en el Código \ref{lst:sql-create-index}.
 
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear una vista.}, captionpos=b, label={lst:sql-create-view}]
 CREATE VIEW ordenes_contestadas AS
@@ -262,7 +262,7 @@ CREATE INDEX ordenes_contetadas_idx ON ordenes_is(id_sesion_estatus, estatus);
 
 %-------------------------------------------------------------------------------
 \subsection{Rutinas de modelado de datos}
-Estas rutinas contienen la sentencias \textit{DML} para insertar la información necesaria durante la ejecución del sistema, como son los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia \textit{DML} para insertar un registro.
+Estas rutinas contienen la sentencias DML para insertar la información necesaria durante la ejecución del sistema, como son los estados posibles de las órdenes de reposición (ver Figura \ref{fig:dia-estados-orden}), en el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
 
 \begin{lstlisting}[language=SQL, caption={Sentencia insertar un registro.}, captionpos=b, label={lst:sql-insert}]
 INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
@@ -291,6 +291,6 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 %================================================================================
 
 \section{Resumen}
-La implementación del sistema AutoSA utiliza el lenguaje de programación \textit{Java} para todas las bibliotecas que son ejecutadas en el servidor, el lenguaje \textit{SQL} para realizar consultas a la base de datos y \textit{Javascript} para las bibliotecas que son ejecutadas en el explorador de Internet del usuario.\\
-La automatización con el Sistema de Abastecimiento se realiza por medio de la herramienta \textit{Sahi} y algunas bibliotecas desarrolladas con el lenguaje de programación \textit{Java}.\\
-La implementación del \textbf{Portal Web} se ha hecho siguiendo la Arquitectura Orientada a Servicios, lo cual implica que por una parte se tiene un servidor que expone tales servicios a través de la web, y por otro lado un cliente que los consume. Mientras que la implementación del cliente que consume los servicios web se ha hecho utilizando el lenguaje \textit{Javascript} y el marco de trabajo \textit{AngularJS}, los cuales siguen el patrón de diseño \textit{MVC}. El manejo de autentificación y autorización de usuarios se ha hecho siguiendo la especificación \textit{OAuth 2.0}.
+La implementación del sistema AutoSA utiliza el lenguaje de programación \textit{Java} para todas las bibliotecas que son ejecutadas en el servidor, el lenguaje SQL para realizar consultas a la base de datos y \textit{Javascript} para las bibliotecas que son ejecutadas en el explorador de Internet del usuario.\\
+La automatización con el \textit{Sistema de Abastecimiento} se realiza por medio de la herramienta \textit{Sahi} y algunas bibliotecas desarrolladas con el lenguaje de programación \textit{Java}.\\
+La implementación del \textbf{Portal Web} se ha hecho siguiendo la Arquitectura Orientada a Servicios, lo cual implica que por una parte se tiene un servidor que expone tales servicios a través de la web, y por otro lado un cliente que los consume. Mientras que la implementación del cliente que consume los servicios web se ha hecho utilizando el lenguaje \textit{Javascript} y el marco de trabajo \textit{AngularJS}, los cuales siguen el Patrón \textit{MVC}. El manejo de autentificación y autorización de usuarios se ha hecho siguiendo la especificación \textit{OAuth 2.0}.

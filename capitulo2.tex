@@ -23,11 +23,11 @@ Es el proceso de definir todo el trabajo necesario para entregar un producto o s
 \end{quote}
 Para fines del sistema AutoSA, el alcance está acotado en los siguientes puntos:
 \begin{itemize}
-\item Automatizar el proceso para contestar órdenes de reposición en Sistema de Abastecimiento.
+\item Automatizar el proceso para contestar órdenes de reposición en \textit{Sistema de Abastecimiento}.
 \item Almacenamiento de los datos de las órdenes de reposición contestadas.
 \item Generación del formato de salida que se realiza al terminar de responder las órdenes de reposición (ver Figura \ref{fig:flow-proc-contestar})
-\item Automatizar el proceso para verificar las órdenes de reposición canceladas recientemente en Sistema de Abastecimiento.
-\item Actualización de catálogos propios del sistema AutoSA que contienen claves de medicamentos y centros de salud del Instituto.
+\item Automatizar el proceso para verificar las órdenes de reposición canceladas recientemente en el \textit{Sistema de Abastecimiento}.
+\item Actualización de catálogos propios del sistema AutoSA que contienen claves de medicamentos y centros de salud del \textit{Instituto}.
 \item Actualización masiva de las órdenes de reposición que han sido canceladas y notificado al área correspondiente para detener el envío de medicamentos.
 \item Rutinas para la creación de tablas, índices y vistas en la base de datos, queda fuera del alcance la creación de la base de datos, usuarios y asignación de permisos. 
 \item Queda fuera de alcance la verificación de existencia del medicamento en bodega.
@@ -43,15 +43,15 @@ Riesgo es la incertidumbre sobre algunos escenarios que ponen en peligro el éxi
 \end{quote}
 Los riesgos identificados para este proyecto se listan a continuación:
 \begin{enumerate}
-  \item Dado que no se cuenta con un ambiente de pruebas del Sistema de Abastecimiento todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
-  \item La herramienta de automatización \textit{Sahi} está basada en la estructura de las páginas del sistema Sistema de Abastecimiento. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
+  \item Dado que no se cuenta con un ambiente de pruebas del \textit{Sistema de Abastecimiento} todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
+  \item La herramienta de automatización \textit{Sahi} está basada en la estructura de las páginas del sistema \textit{Sistema de Abastecimiento}. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
   \item La herramienta \textit{Sahi} en su versión libre\footnote{El uso de la versión libre de \textit{Sahi} es requerido por la farmacéutica, ver sección \ref{sec:nonfunctional-req}.} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
 \end{enumerate}
 
 
 \subsection{Requerimientos funcionales}\label{sec:req-fun}
 \subsubsection{Automatización del proceso para contestar órdenes de reposición}\label{sec:req-contestar}
-Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza utilizando el Sistema de Abastecimiento.} para contestar las órdenes de reposición, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-contestar}\footnote{Ver también la Figura \ref{fig:flow-proc-contestar}.}, esto implica almacenar los datos de las órdenes de reposición, los cuales son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes.
+Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza utilizando el \textit{Sistema de Abastecimiento}.} para contestar las órdenes de reposición, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-contestar}\footnote{Ver también la Figura \ref{fig:flow-proc-contestar}.}, esto implica almacenar los datos de las órdenes de reposición, los cuales son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes.
 
 \begin{figure}[h]
   \centering
@@ -61,7 +61,7 @@ Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza
 \end{figure}
 
 \subsubsection{Automatización del proceso para cotejar órdenes de reposición canceladas}\label{sec:req-verificar}
-Automatizar la interacción del operador de la farmacéutica para conocer las órdenes de reposición que han sido canceladas recientemente por el Instituto, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-verificar} \footnote{
+Automatizar la interacción del operador de la farmacéutica para conocer las órdenes de reposición que han sido canceladas recientemente por el \textit{Instituto}, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-verificar} \footnote{
 Ver también la Figura \ref{fig:flow-proc-verificar}.}.
 \begin{figure}[h]
   \centering
@@ -146,8 +146,8 @@ La interfaz web muestra en todo momento un menú que permite la navegación entr
 El cliente ha solicitado que el proyecto se apegue a su infraestructura, para conservar el acuerdo de confidencialidad y evitar exponer al cliente a riesgos de seguridad informática por lo que el sistema debe de contar con\footnote{Por políticas de seguridad de la farmacéutica no se enunciarán las herramientas e infraestructura utilizada, así como las versiones de las mismas.}:
 \begin{enumerate}
 \item Sistema AutoSA debe ser capaz de ser ejecutado en los sistemas operativos más comunes en la industria.
-\item Base de datos relacional \textit{SQL}.
-\item Uso de la herramienta \textit{Sahi} para automatizar interacción con Sistema de Abastecimiento.
+\item Base de datos relacional SQL.
+\item Uso de la herramienta \textit{Sahi} para automatizar la interacción con el \textit{Sistema de Abastecimiento}.
 \item Las contraseñas de los usuarios para el acceso a la interfaz web deben ser almacenadas utilizando un algoritmo de cifrado.
 \end{enumerate}
 
@@ -190,27 +190,27 @@ CU-CONTESTAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-El procedimiento principal para contestar las órdenes de reposición listadas en el Sistema de Abastecimiento del Instituto, como se muestra en la Figura \ref{fig:dia-activity-contestar}, inicia con la consulta de la pantalla de acceso al Sistema de Abastecimiento.\\
-El alcance de este caso comprende el acceso al Sistema de Abastecimiento, contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
+El procedimiento principal para contestar las órdenes de reposición listadas en el \textit{Sistema de Abastecimiento} del \textit{Instituto Salud}, como se muestra en la Figura \ref{fig:dia-activity-contestar}, inicia con la consulta de la pantalla de acceso al \textit{Sistema de Abastecimiento}.\\
+El alcance de este caso comprende el acceso al \textit{Sistema de Abastecimiento}, contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
 Queda fuera de alcance la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso Generación de Reportes.
 \paragraph{Precondiciones:}
 \begin{enumerate}
-  \item El Sistema de Abastecimiento se encuentra funcionando correctamente.
-  \item El usuario cuenta con las credenciales para ingresar al Sistema de Abastecimiento.
+  \item El \textit{Sistema de Abastecimiento} se encuentra funcionando correctamente.
+  \item El usuario cuenta con las credenciales para ingresar al \textit{Sistema de Abastecimiento}.
 \end{enumerate}
 \paragraph{Secuencia normal:}
 \begin{enumerate}
-  \item Inicia sesión en Sistema de Abastecimiento: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
+  \item Inicia sesión en el \textit{Sistema de Abastecimiento}: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
   \item Dirige el explorador a la pantalla donde se encuentra el listado con las órdenes de reposición que no han sido contestadas.
-  \item Para cada orden de reposición del listado que se muestra se aplica el caso de uso CU-GUARDAR-NUEVA.
+  \item Para cada orden de reposición del listado que se muestra se aplica el caso de uso \textbf{CU-GUARDAR-NUEVA}.
   \item Para cada solicitud en la base de datos con estado \textbf{Nueva} se aplican los casos de uso:
   \begin{enumerate}
-    \item CU-RESPONDER-ORDEN.
+    \item \textbf{CU-RESPONDER-ORDEN}.
   \end{enumerate}
   \item Para cada solicitud con estatus \textbf{Contestada}:
   \begin{enumerate}
-    \item CU-ENVIAR-ORDEN
-    \item CU-GENERAR-ACUSE
+    \item \textbf{CU-ENVIAR-ORDEN}.
+    \item \textbf{CU-GENERAR-ACUSE}.
   \end{enumerate}
   \item El programa se repite desde el paso 2 hasta terminar las solicitudes sin contar las marcadas con estatus \textbf{Error}.
   \item Registra el fin del procedimiento en la base de datos.
@@ -223,7 +223,7 @@ Queda fuera de alcance la obtención del reporte con las órdenes de reposición
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
-  \item Si en algún momento se detecta la pérdida de sesión en la página Sistema de Abastecimiento, se reinicia el procedimiento desde el paso 1 de este caso de uso.
+  \item Si en algún momento se detecta la pérdida de sesión en la página del \textit{Sistema de Abastecimiento}, se reinicia el procedimiento desde el paso 1 de este caso de uso.
   \item Cualquier error durante la ejecución de este caso de uso será registrado en la bitácora el sistema.
 \end{enumerate}
 
@@ -248,8 +248,8 @@ Una orden de reposición es almacenada por primera vez con la información que s
     \item Número de orden.
     \item Fecha de expedición.
     \item Almacén destino.
-    \item \textit{URL} de respuesta.
-    \item \textit{URL} de envío: generada reemplazando el parámetro en la \textit{URL} de respuesta ``responde'' por ``envia''\footnote{Dado que es una palabra en una URL no es recomendable el uso de acentos, por lo tanto se escribe \textbf{envia} y no \textbf{envía}.}.
+    \item URL de respuesta.
+    \item URL de envío: generada reemplazando el parámetro en la URL de respuesta ``responde'' por ``envia''\footnote{Dado que es una palabra en una URL no es recomendable el uso de acentos, por lo tanto se escribe \textbf{envia} y no \textbf{envía}.}.
   \end{enumerate}
 \end{enumerate}
 \paragraph{Postcondiciones:}
@@ -279,7 +279,7 @@ En la pantalla para contestar una orden de reposición se llenan los formularios
 \paragraph{Secuencia normal:}
 \begin{enumerate}
   \item Obtiene la orden de reposición y cambia el estado a \textbf{Siendo Contestada}, todo en una misma transacción.
-  \item Dirige el explorador a la \textit{URL} de respuesta (ver caso de uso CU-GUARDAR-NUEVA).
+  \item Dirige el explorador a la URL de respuesta (ver caso de uso \textbf{CU-GUARDAR-NUEVA}).
   \item Llena el formulario que se presenta en esta pantalla con las siguientes consideraciones:
   \begin{enumerate}
     \item Fecha de fabricación:
@@ -315,7 +315,7 @@ CU-ENVIAR-ORDEN
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Enviar la orden de reposición contestada de regreso al Sistema de Abastecimiento, este caso de uso corresponde a las actividades 8 y 9 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
+Enviar la orden de reposición contestada de regreso al \textit{Sistema de Abastecimiento}, este caso de uso corresponde a las actividades 8 y 9 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Una orden de reposición registrada en la base de datos.
@@ -363,7 +363,7 @@ Generar el acuse de envío de la orden de reposición, este caso de uso correspo
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
-  \item En caso de algún error se registra el error en la bitácora del sistema (el usuario posteriormente podrá volver a imprimir el acuse, ver caso de uso CU-VISUALIZAR).
+  \item En caso de algún error se registra el error en la bitácora del sistema (el usuario posteriormente podrá volver a imprimir el acuse, ver caso de uso \textbf{CU-VISUALIZAR}).
 \end{enumerate}
 
 
@@ -373,17 +373,17 @@ CU-VERIFICAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas, en la Figura \ref{fig:dia-activity-verificar} se muestra que dicho procedimiento comienza con la actividad de mostrar la página de acceso al Sistema de Abastecimiento para después dirigirse a la página donde se realiza la búsqueda de órdenes de reposición por estado (Contestada, Enviada, Cancelada).\\
-El alcance de este caso de uso comprende el acceso al Sistema de Abastecimiento, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
+Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas, en la Figura \ref{fig:dia-activity-verificar} se muestra que dicho procedimiento comienza con la actividad de mostrar la página de acceso al \textit{Sistema de Abastecimiento} para después dirigirse a la página donde se realiza la búsqueda de órdenes de reposición por estado (Contestada, Enviada, Cancelada).\\
+El alcance de este caso de uso comprende el acceso al \textit{Sistema de Abastecimiento}, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
 Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}, y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
-  \item El Sistema de Abastecimiento se encuentra funcionando correctamente.
-  \item El usuario cuenta con las credenciales para ingresar al Sistema de Abastecimiento.
+  \item El \textit{Sistema de Abastecimiento} se encuentra funcionando correctamente.
+  \item El usuario cuenta con las credenciales para ingresar al \textit{Sistema de Abastecimiento}.
 \end{enumerate}
 \paragraph{Secuencia normal:}
 \begin{enumerate}
-  \item Inicia sesión en Sistema de Abastecimiento: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
+  \item Inicia sesión en el \textit{Sistema de Abastecimiento}: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
   \item Dirige el explorador a la pantalla de búsqueda de órdenes de reposición.
   \item Llena el formulario para el filtro de búsqueda:
   \begin{enumerate}
@@ -395,8 +395,8 @@ Queda fuera de alcance: la actualización masiva del estado de órdenes de repos
 \end{enumerate}
 \paragraph{Postcondiciones:}
 \begin{enumerate}
-  \item Se cuenta con la relación de órdenes de reposición atendidas por el sistema que han sido canceladas en el Sistema de Abastecimiento y no se tenía conocimiento previo.
-  \item Las órdenes de reposición publicadas en el Sistema de Abastecimiento dentro de los últimos siete día a la fecha actual reflejan en la base de datos dentro del campo \textbf{EstadoSA}\footnote{Este campo refleja el estado de atención registrado dentro del Sistema de Abastecimiento.}.
+  \item Se cuenta con la relación de órdenes de reposición atendidas por el sistema que han sido canceladas en el \textit{Sistema de Abastecimiento} y no se tenía conocimiento previo.
+  \item Las órdenes de reposición publicadas en el \textit{Sistema de Abastecimiento} dentro de los últimos siete día a la fecha actual reflejan en la base de datos dentro del campo \textbf{EstadoSA}\footnote{Este campo refleja el estado de atención registrado dentro del \textit{Sistema de Abastecimiento}.}.
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
@@ -410,15 +410,15 @@ CU-ACTUALIZAR-ESTATUS-SA
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Actualizar en forma masiva el estado de atención en el Sistema de Abastecimiento dentro de la base de datos del sistema AutoSA, este caso de uso corresponde a la actividad 6 del diagrama de actividad de la Figura \ref{fig:dia-activity-verificar}.
+Actualizar en forma masiva el estado de atención en el \textit{Sistema de Abastecimiento} dentro de la base de datos del sistema AutoSA, este caso de uso corresponde a la actividad 6 del diagrama de actividad de la Figura \ref{fig:dia-activity-verificar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Se cuenta con una lista de órdenes de reposición.
-  \item Las órdenes listadas tienen estado \textbf{Cancelada} en el Sistema de Abastecimiento. 
+  \item Las órdenes listadas tienen estado \textbf{Cancelada} en el \textit{Sistema de Abastecimiento}. 
 \end{enumerate}
 \paragraph{Secuencia normal:}
 \begin{enumerate}
-  \item Actualiza el estado Sistema de Abastecimiento de las órdenes de reposición en la base de datos.
+  \item Actualiza el estado \texttt{Sistema de Abastecimiento} de las órdenes de reposición en la base de datos.
 \end{enumerate}
 \paragraph{Postcondiciones:}
 \begin{enumerate}
@@ -467,7 +467,7 @@ Este caso de uso define el flujo para autorizar la entrada de un usuario a la in
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
-  \item Los siguientes escenarios se consideran un error de autencación.
+  \item Los siguientes escenarios se consideran un error de autenticación.
   \begin{itemize}
     \item El usuario no existe en la base de datos.
     \item El usuario tiene estado \textbf{deshabilitado}.
@@ -481,7 +481,7 @@ CU-GENERAR-REPORTE
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Este caso de uso ofrece al usuario la generación de reportes, entendiendo como reporte un documento de Excel\textsuperscript{\textcopyright} que contiene el resultado de una consulta a la base de datos.\\
+Este caso de uso ofrece al usuario la generación de reportes, entendiendo como reporte un documento de \textit{Excel}\textsuperscript{\textcopyright} que contiene el resultado de una consulta a la base de datos.\\
 En el diagrama de actividad de la Figura \ref{fig:dia-activity-reporter} se muestra el flujo que sigue este caso de uso, el cual comienza con el usuario solicitando la pantalla para la generación de reportes (parte superior del apartado Usuario del diagrama de actividad).\\
 Es posible que la consulta a la base de datos (primera actividad del apartado AutoSA del diagrama de actividad) haga referencia a catálogos con claves de productos y clientes que cambian constantemente por lo que es necesario considerar la actualización de catálogos, tal funcionalidad es cubierta por el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
 \begin{figure}[h]
@@ -510,13 +510,13 @@ Es posible que la consulta a la base de datos (primera actividad del apartado Au
   \item El sistema ejecuta los siguientes pasos:
   \begin{enumerate}
     \item Realiza la consulta a la base de datos definida para el reporte requerido en 1.a.
-    \item El resultado del paso anterior es escrito en un archivo extendido de Excel\textsuperscript{\textcopyright} y depositado en el sistema de archivos.
+    \item El resultado del paso anterior es escrito en un archivo extendido de \textit{Excel}\textsuperscript{\textcopyright} y depositado en el sistema de archivos.
     \item Muestra al usuario la ruta en el sistema de archivos donde fue depositado el reporte.
   \end{enumerate}
 \end{enumerate}
 \paragraph{Postcondiciones:}
 \begin{enumerate}
-  \item El reporte se encuentra en el sistema de archivos dentro un archivo con formato extendido de Excel\textsuperscript{\textcopyright}.
+  \item El reporte se encuentra en el sistema de archivos dentro un archivo con formato extendido de \textit{Excel}\textsuperscript{\textcopyright}.
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
@@ -540,7 +540,7 @@ Define la actualización masiva de los catálogos en la base de datos mediante u
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (ver caso de uso \textbf{CU-ENTRAR-WEB}).
-  \item El archivo ingresado tiene formato extendido de Excel\textsuperscript{\textcopyright}.
+  \item El archivo ingresado tiene formato extendido de \textit{Excel}\textsuperscript{\textcopyright}.
   \item Los catálogos que pueden ser modificados por este caso de uso son aquellos que contienen códigos de medicamentos y lugares de entrega.
 \end{enumerate}
 \paragraph{Secuencia normal:}
@@ -549,7 +549,7 @@ Define la actualización masiva de los catálogos en la base de datos mediante u
   \item El usuario realiza las siguientes acciones en la pantalla de administración de catálogos:
   \begin{enumerate}
     \item Seleccionar el nombre del catálogo.
-    \item Seleccionar el archivo en formato de Excel\textsuperscript{\textcopyright} que contiene la información para el catálogo.
+    \item Seleccionar el archivo en formato de \textit{Excel}\textsuperscript{\textcopyright} que contiene la información para el catálogo.
     \item Enviar el formulario.
   \end{enumerate}
   \item El sistema sigue los siguientes pasos:
@@ -632,8 +632,8 @@ La forma en que el usuario de la interfaz web es capaz de visualizar los datos d
   \item El usuario navega a la pantalla de visualización de la orden de reposición seleccionada (ver caso de uso \textbf{CU-BUSCAR}).
   \item Se muestra la pantalla con los datos de la orden:
   \begin{enumerate}
-    \item Se muestran todos los datos capturados del Sistema de Abastecimiento durante el procedimiento de atención.
-    \item También se muestran los estados de atención, es decir, el estado en el Sistema de Abastecimiento  y el estado de atención.
+    \item Se muestran todos los datos capturados del \textit{Sistema de Abastecimiento} durante el procedimiento de atención.
+    \item También se muestran los estados de atención, es decir, el estado en el \textit{Sistema de Abastecimiento}  y el estado de atención.
   \end{enumerate}
   \item Se muestran enlaces para que el usuario pueda editar los datos de la orden (ver caso de uso \textbf{CU-EDITAR}) y también para generar el acuse de envío (ver caso de uso \textbf{CU-GENERAR-ACUSE}).
   \item En caso de seleccionar la generación del acuse de envío se ejecuta el caso de uso \textbf{CU-GENERAR-ACUSE}.
@@ -683,5 +683,5 @@ La forma en que el usuario de la interfaz web puede modificar los datos de una o
 \end{enumerate}
 
 \section{Resumen}
-Se han definido el el alcance del proyecto que comprende la automatización de los procesos realizados por los operadores del Sistema de Abastecimiento hasta la generación del formato de salida, el alcance de la interfaz web comprende las tareas de modificación de órdenes de reposición atendidas, generación de reportes y actualización de catálogos.\\
+Se han definido el el alcance del proyecto que comprende la automatización de los procesos realizados por los operadores del \textit{Sistema de Abastecimiento} hasta la generación del formato de salida, el alcance de la interfaz web comprende las tareas de modificación de órdenes de reposición atendidas, generación de reportes y actualización de catálogos.\\
 Bajo los puntos anteriores se han definido los casos de uso que reflejan el comportamiento esperado del sistema para la automatización de procesos y la interfaz web.
