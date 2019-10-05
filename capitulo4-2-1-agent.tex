@@ -1,27 +1,32 @@
 \subsection{Agente}\label{sec:agente}
-La implementación del componente Agente está escrito en rutinas de \textit{Sahi} (ver sección \ref{sec:sahi}). Primero se exponen los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realiza la ejecución mediante la herramienta gráfica de \textit{Sahi}.
+La implementación del componente Agente está escrito en rutinas de \textit{Sahi} (sección \ref{sec:sahi}). Primero se exponen los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realiza la ejecución mediante la herramienta gráfica de \textit{Sahi}.
 
 \subsubsection{Rutina para automatizar la respuesta de órdenes de reposición}\label{sec:aut-contestar}
-La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso  CU-CONTESTAR que se describe en la sección \ref{cu-contestar}. A continuación se muestran las secciones de código más relevantes de la rutina que realiza la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son:
+La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso \textbf{CU-CONTESTAR} que se describe en la sección \ref{cu-contestar}. A continuación se muestran las secciones de código más relevantes de la rutina que realiza la ejecución del caso de uso citado así como los subsecuentes (Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son:
 \begin{enumerate}
-	\item Ingresar al Sistema de Abastecimiento, en el Código \ref{lst:sah-session} se muestra la rutina para iniciar sesión en el Sistema de Abastecimiento:
+	\item Ingresar al \textit{Sistema de Abastecimiento}, en el Código \ref{lst:sah-session} se muestra la rutina para iniciar sesión en el \textit{Sistema de Abastecimiento}:
 	\begin{enumerate}
 		\item Las líneas 1 y 2 se llenan los campos de usuario y contraseña.
 		\item La línea 3 se envía el formulario.
 		\item La línea 4 redirige a la pantalla con el listado de órdenes de reposición.  
 	\end{enumerate}
-	\begin{lstlisting}[language=Javascript, caption={Inicio de sesión en el Sistema de Abastecimiento.}, captionpos=b, label={lst:sah-session}]
+
+% espaciado
+\pagebreak
+% espaciado
+
+	\begin{lstlisting}[language=Javascript, caption={Inicio de sesión en el \textit{Sistema de Abastecimiento}.}, captionpos=b, label={lst:sah-session}]
 _setValue(_textbox("Usuario[1]"), $user);
 _setValue(_password("Contras[1]"), $pwd);
 _click(_submit("Ingresar al Sistema"));
 _click(_image("Normal[2]"));
 	\end{lstlisting}
 
-	\item Recolectar las órdenes de reposición listadas, el Código \ref{lst:sah-save-news} muestra un resumen de la automatización para guardar el listado de órdenes de reposición (ver caso de uso en la sección \ref{cu-guardar-nueva}):
+	\item Recolectar las órdenes de reposición listadas, el Código \ref{lst:sah-save-news} muestra un resumen de la automatización para guardar el listado de órdenes de reposición (caso de uso \textbf{CU-GUARDAR-NUEVA}):
 	\begin{enumerate}
 		\item La línea 1 muestra la declaración del ciclo para recorrer el listado de órdenes de reposición.
 		\item Las líneas 2 a 4 muestran como se extrae el valor de los datos de una orden de reposición.
-		\item Las líneas 5 a 7 muestran la obtención de las URLs para contestar y enviar las órdenes de reposición.
+		\item Las líneas 5 a 7 muestran la obtención de las URL para contestar y enviar las órdenes de reposición.
 		\item La línea 8 realiza el almacenamiento de la nueva orden de reposición. 
 	\end{enumerate}
 	\begin{lstlisting}[language=Javascript, caption={Guardar lista de órdenes de reposición.}, captionpos=b, label={lst:sah-save-news}]
@@ -36,7 +41,7 @@ for(var $i = 1 + $errores; $i <= $rowCount; $i++){
 }
 	\end{lstlisting}
 
-	\item Contestar cada orden de reposición, el Código \ref{lst:sah-respond} muestra un resumen de la automatización para contestar una orden de reposición (ver caso de uso en la sección \ref{cu-responder-orden}):
+	\item Contestar cada orden de reposición, el Código \ref{lst:sah-respond} muestra un resumen de la automatización para contestar una orden de reposición (caso de uso \textbf{CU-RESPONDER-ORDEN}):
 	\begin{enumerate}
 		\item Las líneas 1 y 2 muestran como se redirige al explorador a la URL para responder la orden de reposición.
 		\item  La línea 3 muestra la asignación de un valor en el formulario para contestar la orden de reposición.
@@ -51,7 +56,7 @@ _click(_submit("Agregar Captura"));
 $logica.updateCantidad($contrato, $numorden, $cantidad, $idSesion);
 	\end{lstlisting}
 
-	\item Enviar las órdenes de reposición contestadas. El Código \ref{lst:sah-send} muestra un resumen de la automatización para enviar una orden de reposición (ver caso de uso en la sección \ref{cu-enviar-orden}):
+	\item Enviar las órdenes de reposición contestadas. El Código \ref{lst:sah-send} muestra un resumen de la automatización para enviar una orden de reposición (caso de uso \textbf{CU-ENVIAR-ORDEN}):
 	\begin{enumerate}
 		\item Las líneas 1 y 2 muestran como se redirige al explorador a la URL para enviar la orden de reposición.
 		\item La líneas 3 a 6 crean un mapa con los datos de la orden de reposición.
@@ -69,9 +74,9 @@ $logica.updateOrden($mapa, $idSesion);
 \end{enumerate}
 
 \subsubsection{Rutina para automatizar la verificación de órdenes de reposición canceladas}
-La rutina para automatizar la verificación de órdenes de reposición canceladas refleja el caso de uso  CU-VERIFICAR que se describe en la sección \ref{cu-verificar}, a continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (ver diagrama en la Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son los siguientes:
+La rutina para automatizar la verificación de órdenes de reposición canceladas refleja el caso de uso \textbf{CU-VERIFICAR} que se describe en la sección \ref{cu-verificar}, a continuación se muestran las secciones de código más relevantes de la rutina que realizan la ejecución del caso de uso citado así como los subsecuentes (Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son los siguientes:
 \begin{enumerate}
-	\item Ingresar al Sistema de Abastecimiento, el ingreso al sistema es idéntico a la rutina mostrada en la sección anterior (sección \ref{sec:aut-contestar}).
+	\item Ingresar al \textit{Sistema de Abastecimiento}, el ingreso al sistema es idéntico a la rutina mostrada en la sección anterior (sección \ref{sec:aut-contestar}).
 
 	\item El Código \ref{lst:sah-search} muestra un resumen de la automatización de los criterios de búsqueda:
 	\begin{enumerate}
