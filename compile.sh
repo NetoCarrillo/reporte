@@ -49,6 +49,15 @@ function clean_aux_files(){
 	echo "All clean"
 }
 
+function rename(){
+	d=`date +%Y_%m_%d_%H_%M`
+	c=`git log -1 --pretty=format:"%h"` 
+	name=${FILE_NAME}_${d}_${c}.pdf
+	echo $name
+
+	cp ${FILE_NAME}.pdf $name
+}
+
 echo $FILE_NAME
 
 if [[ $1 == 'all' ]]; then
@@ -69,6 +78,8 @@ elif [[ $1 == 'bib' ]]; then
 	build_bib
 elif [[ $1 == 'clean' ]]; then
 	clean_aux_files
+elif [[ $1 == 'rename' ]]; then
+	rename
 else
 	echo "unknown command: $1"
 fi
