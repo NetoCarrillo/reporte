@@ -9,6 +9,7 @@ La implementación de este componente ha sido escrita en el lenguaje de programa
 \paragraph{\indent Interfaz Respuesta}
 \begin{enumerate}
 	\item guardar-orden-nueva: la implementación de esta operación (Código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}.
+	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Delegación del almacenamiento de una nueva orden de reposición.}, captionpos=b, label={lst:la-save-new}]
 Orden orden = new Orden();
 orden.setContrato(contrato);
@@ -21,12 +22,14 @@ orden.setIdSesionEstatus(idSesion);
 
 ordenesDAO.insertOrden(orden);
 	\end{lstlisting}
+	\end{adjustwidth}
 
 	\item obtener-datos-respuesta: la implementación del cálculo de fechas de fabricación y de caducidad descritas para el caso de uso \textbf{CU-RESPONDER-ORDEN}, el Código \ref{lst:la-dates} muestra el método en lenguaje \textit{Java}:
 	\begin{enumerate}
 		\item En las líneas 2 a 7 se calcula el año para las fechas de fabricación y de caducidad.
 		\item En las líneas 9 a 11 se construyen las fechas de fabricación y de caducidad.
 	\end{enumerate}
+	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Método para calcular las fechas de fabricación y caducidad.}, captionpos=b, label={lst:la-dates}]
 public String[] getFechasFab(){
 	Calendar today = GregorianCalendar.getInstance();
@@ -43,6 +46,7 @@ public String[] getFechasFab(){
 	return fechas;
 }
 	\end{lstlisting}
+	\end{adjustwidth}
 
 	\item obtener-acuse-envio: esta operación principalmente obtiene las rutas en el sistema de archivos para la generación del acuse de envío. Posteriormente delega la generación del acuse al componente \textbf{Generación de Reportes}. En el Código \ref{lst:la-acuse} se muestra el código de \textit{Java} que realiza los pasos anteriores.
 	\begin{enumerate}
@@ -52,6 +56,7 @@ public String[] getFechasFab(){
 		\item Las líneas 4 a 7 construyen la ruta de directorios donde se depositará el acuse de envío.
 		\item La línea 8 utiliza el componente \textbf{Generador de Reportes} para la creación del acuse de envío.
 	\end{enumerate}
+	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Generación del acuse de envío.}, captionpos=b, label={lst:la-acuse}]
 String filename = params.get("numorden");
 String template = properties.getProperty("is.template.html");
@@ -62,6 +67,7 @@ File outputdir = new File(properties.getProperty("is.output.pdf"), String.format
 outputdir.mkdirs();
 snapShotService.takeSnapShot(params, filename, template, outhtmldir, outputdir);
 	\end{lstlisting}
+	\end{adjustwidth}
 \end{enumerate}
 
 \paragraph{\indent Interfaz Verificación}
@@ -71,6 +77,7 @@ snapShotService.takeSnapShot(params, filename, template, outhtmldir, outputdir);
 		\item La línea 5 muestra la obtención de la fecha mayor (día actual).
 		\item La líneas 6 y 7 muestran la obtención de la fecha menor (60 días antes de la fecha actual).
 	\end{enumerate}
+	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Cálculo del rango de fechas para buscar órdenes de reposición canceladas.}, captionpos=b, label={lst:la-date-search}]
 DateFormat dateFormat = new SimpleDateFormat(format);
 Calendar cal = GregorianCalendar.getInstance();
@@ -79,14 +86,17 @@ dates[1] = dateFormat.format(cal.getTime());
 cal.add(Calendar.DAY_OF_YEAR, -60);
 dates[0] = dateFormat.format(cal.getTime());
 	\end{lstlisting}
+	\end{adjustwidth}
 
 	\item actualizar-estado-sa: esta operación realiza la actualización de las órdenes de reposición canceladas, el Código \ref{lst:la-validate} muestra el código escrito en \textit{Java}.
 	\begin{enumerate}
 		\item La línea 1 obtiene las órdenes de reposición canceladas del listado de órdenes de reposición encontradas.
 		\item La línea 2 actualiza el estado de las órdenes de reposición.
 	\end{enumerate}
+	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Actualización de órdenes de reposición canceladas.}, captionpos=b, label={lst:la-validate}]
 	List<Orden> ordenes = xmlReader.getCancelled(htmlTable);
 	persistence.updateSaiStatus(ordenes, status);
 	\end{lstlisting}
+	\end{adjustwidth}
 \end{enumerate}
