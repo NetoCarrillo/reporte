@@ -1,5 +1,5 @@
-\subsection{Sistema de Archivos}
-El componente Sistema de Archivos es el encargado de actuar como medio de comunicación entre el sistema AutoSA y el sistema de archivos del sistema operativo donde se ejecuta el sistema AutoSA. En particular este componente cumple con dos funciones:
+\subsection{Ficheros}
+El componente \textbf{Ficheros} es el encargado de actuar como medio de comunicación entre el sistema AutoSA y el sistema de archivos del sistema operativo donde se ejecuta el sistema AutoSA. En particular este componente cumple con dos funciones:
 \begin{enumerate}
 	\item Lectura de configuración: leer un archivo de propiedades en formato llave valor.
 	\item Escritura de archivos: escribir un flujo de \textit{bytes} al sistema de archivos del sistema operativo
@@ -27,12 +27,14 @@ El almacenamiento de archivos en el proyecto AutoSA se utiliza cuando se desea g
 Lo anterior se ejemplifica con los siguientes códigos:
 \begin{enumerate}
 	\item Obtiene la ruta de las plantillas en el sistema operativo como se muestra en el Código \ref{lst:fs-read-prop}.
+	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Obtención de las rutas de las plantillas.}, captionpos=b, label={lst:fs-read-prop}]
 	Path headersTmpl = Paths.get(props.getProperty("is.report.headers.tmpl"));
 	Path contentTmpl = Paths.get(props.getProperty("is.report.content.tmpl"));
 	Path headersPath = Paths.get(props.getProperty("is.report.out.path"), headersTmpl.getFileName().toString());
 	Path contentPath = Paths.get(props.getProperty("is.report.out.path"), contentTmpl.getFileName().toString());
 	\end{lstlisting}
+	\end{adjustwidth}
 
 	\item Utilizando la clases de \textit{Java} dedicadas al manejo de lectura y escritura se copia la plantilla, tal como se aprecia en el Código \ref{lst:fs-copy}.
 
@@ -40,6 +42,7 @@ Lo anterior se ejemplifica con los siguientes códigos:
 \pagebreak
 % espaciado
 	
+	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Copia de archivos.}, captionpos=b, label={lst:fs-copy}]
 	try(FileOutputStream hfos = new FileOutputStream(headersPath.toFile(), false);
 		FileOutputStream lfos = new FileOutputStream(contentPath.toFile(), false)){
@@ -48,4 +51,5 @@ Lo anterior se ejemplifica con los siguientes códigos:
 		Files.copy(contentTmpl, lfos);
 	}
 	\end{lstlisting}
+	\end{adjustwidth}
 \end{enumerate}
