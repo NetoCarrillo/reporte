@@ -108,7 +108,7 @@ public class ResultSetMapperProvider{
 \end{lstlisting}
 
 La clase \texttt{ResultSetMapperProvider} crea instancias del tipo \texttt{IResultSetMapper} (Código \ref{lst:per-get-orden-mapper}).
-\begin{lstlisting}[language=Java, caption={Creación de un objeto del tipo \texttt{IResultSetMapper}.}, captionpos=b, label={lst:per-get-orden-mapper}]
+\begin{lstlisting}[language=Java, caption={Creación de un objeto del tipo IResultSetMapper.}, captionpos=b, label={lst:per-get-orden-mapper}]
 private IResultSetMapper<Orden> getOrdenMapper(){
 	return new IResultSetMapper<Orden>(){
 		public Orden get(ResultSet rs) throws SQLException{
