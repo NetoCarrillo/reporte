@@ -1,9 +1,9 @@
-\subsection{Lógica de automatización}
-El componente de lógica de automatización provee de la información necesaria a las rutinas automatizadas. Esta información puede proceder de diferentes fuentes y a cada fuente corresponde un componente diferente:
+\subsection{Lógica de Automatización}
+El componente \textbf{Lógica de Automatización} provee de la información necesaria a las rutinas automatizadas. Esta información puede proceder de diferentes fuentes y a cada fuente corresponde un componente diferente:
 \begin{enumerate}
- 	\item Si la fuente es un archivo en el sistema de archivos del sistema operativo, se obtiene la información utilizando el componente \textbf{Sistema de Archivos}.
+ 	\item Si la fuente es un archivo en el sistema de archivos del sistema operativo, se obtiene la información utilizando el componente \textbf{Ficheros}.
  	\item Si la fuente es una base de datos, se tiene acceso miente el componente \textbf{Persistencia}.
- 	\item Si la fuente son las reglas de negocio, se tiene acceso mediante el componente \textbf{Lógica de automatización} que es el encargado de aplicar los cálculos correspondientes a la lógica de negocio.
+ 	\item Si la fuente son las reglas de negocio, se tiene acceso mediante el componente \textbf{Lógica de Automatización} que es el encargado de aplicar los cálculos correspondientes a la lógica de negocio.
 \end{enumerate}
 La implementación de este componente ha sido escrita en el lenguaje de programación \textit{Java}. A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas.
 \paragraph{\indent Interfaz Respuesta}
@@ -44,7 +44,7 @@ public String[] getFechasFab(){
 }
 	\end{lstlisting}
 
-	\item obtener-acuse-envio: esta operación principalmente obtiene las rutas en el sistema de archivos para la generación del acuse de envío. Posteriormente delega la generación del acuse al componente \textbf{Generación de reportes}. En el Código \ref{lst:la-acuse} se muestra el código de \textit{Java} que realiza los pasos anteriores.
+	\item obtener-acuse-envio: esta operación principalmente obtiene las rutas en el sistema de archivos para la generación del acuse de envío. Posteriormente delega la generación del acuse al componente \textbf{Generación de Reportes}. En el Código \ref{lst:la-acuse} se muestra el código de \textit{Java} que realiza los pasos anteriores.
 	\begin{enumerate}
 		\item La línea 1 asigna el nombre del archivo como el número de la orden de reposición.
 		\item La línea 2 obtiene la plantilla del acuse de envío para el \textit{Instituto de Salud}.

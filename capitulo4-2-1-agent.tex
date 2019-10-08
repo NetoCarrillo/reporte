@@ -1,5 +1,5 @@
 \subsection{Agente}\label{sec:agente}
-La implementación del componente Agente está escrito en rutinas de \textit{Sahi} (sección \ref{sec:sahi}). Primero se exponen los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realiza la ejecución mediante la herramienta gráfica de \textit{Sahi}.
+La implementación del componente \textbf{Agente} está escrito en rutinas de \textit{Sahi} (sección \ref{sec:sahi}). Primero se exponen los puntos relevantes en la implementación de las rutinas de respuesta y envío de órdenes de reposición para después señalar como se realiza la ejecución mediante la herramienta gráfica de \textit{Sahi}.
 
 \subsubsection{Rutina para automatizar la respuesta de órdenes de reposición}\label{sec:aut-contestar}
 La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso \textbf{CU-CONTESTAR} que se describe en la sección \ref{cu-contestar}. A continuación se muestran las secciones de código más relevantes de la rutina que realiza la ejecución del caso de uso citado así como los subsecuentes (Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son:
@@ -83,7 +83,7 @@ La rutina para automatizar la verificación de órdenes de reposición cancelada
 		\item La línea 1 muestra la consulta de las fechas que acotan la búsqueda.
 		\item Las líneas 2 a 5 realizan la búsqueda en el \textit{Sistema de Abastecimiento}.
 		\item Las líneas 6 y 7 extraen la información de las órdenes de reposición que muestra el \textit{Sistema de Abastecimiento} como resultado de la búsqueda.
-		\item Las líneas 8 y 9 utilizan el componente \textbf{Lógica de automatización} para actualizar en la base de datos el estado de las órdenes de reposición canceladas.
+		\item Las líneas 8 y 9 utilizan el componente \textbf{Lógica de Automatización} para actualizar en la base de datos el estado de las órdenes de reposición canceladas.
 	\end{enumerate}
 	\begin{lstlisting}[language=Javascript, caption={Responder orden de reposición.}, captionpos=b, label={lst:sah-search}]
 $dateLimits = $logica.getDateLimits('dd/MM/yyyy');

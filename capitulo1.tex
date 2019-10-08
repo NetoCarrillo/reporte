@@ -65,18 +65,18 @@ El conjunto de estructuras necesarias para la comprensión de un sistema en el c
 Esta definición expone que los requerimientos del cliente se traducen en especificaciones técnicas para los desarrolladores. Aplicando la definición anterior al presente proyecto donde tenemos los siguientes componentes (Figura \ref{fig:dia-arq-comp}):
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.45]{dia-arq-comp} 
+\includegraphics[scale=0.5]{dia-arq-comp} 
 \caption{Módulos de la arquitectura.}
 \label{fig:dia-arq-comp}
 \end{figure}
 
 \begin{itemize}
 \item \textbf{Agente (robot)}. Interactúa directamente con el \textit{Sistema de Abastecimiento}, es el componente que automatiza las acciones de los operadores humanos de la farmacéutica.
-\item \textbf{Lógica de negocio}. Son bibliotecas y rutinas que se encargan de prestar los servicios necesarios al agente para su funcionamiento, permite comunicación con la base de datos, guarda las capturas de pantalla en el Sistema de Archivos y provee la configuración de inicio al agente.
-\item \textbf{Base de datos}. Es el componente que se encarga de llevar la persistencia de los datos obtenidos durante la respuesta a las órdenes de reposición.
-\item \textbf{Sistema de archivos}. En el Sistema de Archivos se almacenan las capturas de pantalla al momento de enviar la respuesta de cada orden de reposición.
-\item \textbf{Generador de reportes}. Este módulo está encargado de la generación de reportes tales como: órdenes de reposición atendidas, canceladas y formatos de órdenes de reposición enviadas.
-\item \textbf{Portal web}. Portal mediante el cual los usuarios pueden hacer correcciones a los datos obtenidos de las órdenes de reposición, reimprimir el formato de envío de la orden de reposición  y descargar los reportes generados por el módulo generador de reportes.
+\item \textbf{Lógica de Automatización}. Son bibliotecas y rutinas que se encargan de prestar los servicios necesarios al agente para su funcionamiento, permite comunicación con la base de datos, guarda las capturas de pantalla en el sistema de archivos y provee la configuración de inicio al agente.
+\item \textbf{Persistencia}. Es el componente que se encarga de llevar la persistencia de los datos obtenidos durante la respuesta a las órdenes de reposición.
+\item \textbf{Ficheros}. Este componente es el encargado de manejar operaciones con el sistema de archivos para almacenar las capturas de pantalla al momento de enviar la respuesta de cada orden de reposición.
+\item \textbf{Generador de Reportes}. Este módulo está encargado de la generación de reportes tales como: órdenes de reposición atendidas, canceladas y formatos de órdenes de reposición enviadas.
+\item \textbf{Portal Web}. Portal mediante el cual los usuarios pueden hacer correcciones a los datos obtenidos de las órdenes de reposición, reimprimir el formato de envío de la orden de reposición  y descargar los reportes generados por el módulo generador de reportes.
 \end{itemize}
 
 \subsection{Metodología utilizada}
@@ -84,7 +84,7 @@ El proyecto será abordado con la metodología \textit{Scrum}, el cual es un mar
 La liberación del sistema AutoSA consiste en el despliegue del total de los módulos en el ambiente productivo provisto por la farmacéutica, dando como resultado los siguientes productos:
 \begin{itemize}
 \item Rutinas para la generación de objetos en base de datos.
-\item Rutinas para la creación de la estructura de directorios en el Sistema de Archivos.
+\item Rutinas para la creación de la estructura de directorios en el sistema de archivos.
 \item Archivos de configuración propio de cada módulo.
 \item Herramienta de automatización y del automatización.
 \item Bibliotecas del portal web.

@@ -1,5 +1,5 @@
 \subsection{Persistencia}\label{sec:persistence}
-La implementación del componente de persistencia se enfoca en dar servicio a los componentes tanto de escritorio como del web, por esta razón la implementación se ha dividido en dos partes:
+La implementación del componente \textbf{Persistencia} se enfoca en dar servicio a los componentes tanto de escritorio como del web, por esta razón la implementación se ha dividido en dos partes:
 \begin{enumerate}
  	\item Escritorio: la automatización de rutinas, dado que éstas son ejecutadas dentro del ambiente de \textit{Sahi} (que a su vez está en la plataforma de \textit{Java}) se utiliza la biblioteca JDBC para economizar los recursos físicos del equipo del operador de la farmacéutica.
  	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de \textit{Spring} en conjunción con el marco de trabajo \textit{MyBatis} (sección \ref{sec:mybatis}).
@@ -181,7 +181,7 @@ public Orden getNextOrden(Integer estatus) throws SQLException{
 \end{enumerate}
 
 \subsubsection{Persistencia para funcionalidades web}\label{sec:persistence-web}
-La interfaz del componente Persistencia dedicado a las funcionalidades ofrecidas mediante la interfaz web utiliza \textit{MyBatis} cuya implementación sigue los pasos mencionados en la sección \ref{sec:mybatis}:\\
+La interfaz del componente \textbf{Persistencia} dedicado a las funcionalidades ofrecidas mediante la interfaz web utiliza \textit{MyBatis} cuya implementación sigue los pasos mencionados en la sección \ref{sec:mybatis}:\\
 \indent 1. En el Código \ref{lst:per-batis-config} se muestra la configuración del objeto \texttt{SqlSessionFactoryBean}: 
 \begin{enumerate}
 	{\setlength\itemindent{25pt}\item Habilitar contexto para transacciones (Línea 1).}

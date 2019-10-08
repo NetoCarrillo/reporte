@@ -2,6 +2,7 @@
 ANSI
 CSS
 CSV
+DAO
 DBMS
 DDL
 DML
@@ -101,6 +102,13 @@ CU-
 Internet
 Instituto
 
+#Negritas
+Agente
+Lógica de Automatización
+Persistencia
+Ficheros
+Generador de Reportes
+Portal Web
 
 #ver 
 Figura
