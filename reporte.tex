@@ -96,18 +96,23 @@
 % Version de PDF
 \pdfminorversion=7
 
-%\usepackage{hyperref}
-%\hypersetup{
-%    colorlinks,
-%    citecolor=black,
-%    filecolor=black,
-%    linkcolor=black,
-%    urlcolor=black
-%}
+%Bookmarks
+\usepackage{hyperref}
+\hypersetup{
+	pdftitle={AutoSA: Sistema para Automatizar las Órdenes de Reposición en el Sistema de Abastecimiento del Instituto de Salud Pública de México},
+	pdfauthor={Ernesto Carrillo Espinosa},
+	pdfcreator={Ernesto Carrillo Espinosa},
+	pdfsubject={Ingeniería de Software},
+	bookmarks=true,
+	unicode=true,
+	hidelinks
+}
+\usepackage{bookmark}
 
 \begin{document}
 \thispagestyle{empty}
 \includepdf[pages={1}]{portada.pdf}
+\bookmark[page=1,level=0]{Portada}
 %\layout
 \clearpage
 
@@ -123,6 +128,7 @@ Dr. José Galaviz Casas ``Elogio de la pereza''.
 
 \pagenumbering{roman}
 
+\pdfbookmark[0]{\contentsname}{contents}
 \tableofcontents
 \clearpage
 \listoffigures
