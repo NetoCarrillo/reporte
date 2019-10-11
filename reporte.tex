@@ -103,28 +103,21 @@
 	pdfauthor={Ernesto Carrillo Espinosa},
 	pdfcreator={Ernesto Carrillo Espinosa},
 	pdfsubject={Ingeniería de Software},
-	bookmarks=true,
 	unicode=true,
 	hidelinks
 }
 \usepackage{bookmark}
 
 \begin{document}
+\pagenumbering{alph}
 \thispagestyle{empty}
 \includepdf[pages={1}]{portada.pdf}
 \bookmark[page=1,level=0]{Portada}
 %\layout
 \clearpage
 
-\thispagestyle{empty}
-\vspace*{250px}
-\begin{flushright}
-	\begin{Large}
-		\textit{El bourbon da mejores ideas que el helado.}\\
-	\end{Large}
-Dr. José Galaviz Casas ``Elogio de la pereza''.
-\end{flushright}
-\clearpage
+\include{prefacio}
+
 
 \pagenumbering{roman}
 
