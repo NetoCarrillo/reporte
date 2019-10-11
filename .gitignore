@@ -9,6 +9,7 @@
 *.lof
 *.lot
 *.lol
+*.out
 *~
 #glosary
 *.acn

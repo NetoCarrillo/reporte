@@ -55,10 +55,10 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 \end{enumerate}
 
 \subsubsection{Persistencia}
-Este componente está encargado de las operaciones de persistencia hacia la base de datos, su diseño está basado en el Patrón DAO (Apéndice \ref{sec:dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
+Este componente está encargado de las operaciones de persistencia hacia la base de datos, su diseño está basado en el Patrón DAO (Apéndice \ref{sec:dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará DAO para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
 El componente \textbf{Persistencia} del proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
 \paragraph{\indent Interfaz Almacenamiento\\}
-Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \textbf{CU-CONTESTAR}, \textbf{CU-GUARDAR-NUEVA}, \textbf{CU-RESPONDER-ORDEN}, \textbf{CU-ENVIAR-ORDEN} y \textbf{CU-ACTUALIZAR-ESTATUS-SA}.}. Esta interfaz expone las siguientes operaciones:
+Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Casos de uso CU-CONTESTAR, CU-GUARDAR-NUEVA, CU-RESPONDER-ORDEN, CU-ENVIAR-ORDEN y CU-ACTUALIZAR-ESTATUS-SA.}. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{guardar-nueva}: inserta una nueva orden de reposición en la base de datos.
 	\item \textbf{cambiar-estado}: cambia el estado de atención de una orden de reposición.
