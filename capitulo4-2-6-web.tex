@@ -295,7 +295,7 @@ La implementación del \textit{frontend} está basada en el marco de trabajo \te
 	\item Línea 1: creación del módulo de \textit{AngularJS}.
 	\item Líneas 2 a 19: configuración de las vistas y rutas.
 \end{enumerate}
-\begin{lstlisting}[language=Javascript, caption={Módulo de \textit{AngularJS} para el \textbf{Portal Web}}, captionpos=b, label={lst:portal-js}]
+\begin{lstlisting}[language=Javascript, caption={Módulo de \textit{AngularJS} para el Portal Web.}, captionpos=b, label={lst:portal-js}]
 var app = angular.module('portalApp', ['ngRoute', 'ui.bootstrap']);
 portal.config(function($routeProvider, $httpProvider){
   $routeProvider
@@ -315,7 +315,7 @@ portal.config(function($routeProvider, $httpProvider){
 
 Así mismo, la aplicación cuenta con un control principal que asume la función de atender la barra de navegación. Esta barra permite al usuario salir de la aplicación y navegar entre las vistas reportes, catálogos y búsqueda. en el Código \ref{lst:view-nav-bar} se muestra la implementación.
 
-\begin{lstlisting}[language=HTML, captionpos=b, caption={Barra de navegación}, label={lst:view-nav-bar}]
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Barra de navegación.}, label={lst:view-nav-bar}]
 <div ng-show="authenticated" ng-controller="navigation" class="container">
 	<ul class="nav nav-pills" role="tablist">
 		<li><a href="#/layout">Reportes</a></li>
@@ -424,7 +424,7 @@ La plantilla HTML tiene una forma como elemento principal, en el Código \ref{ls
 \end{enumerate}
 
 \begin{adjustwidth}{\listingfixwidth}{0pt}
-\begin{lstlisting}[language=HTML, captionpos=b, caption={Forma de generación de reportes}, label={lst:view-report-form}]
+\begin{lstlisting}[language=HTML, captionpos=b, caption={Forma de generación de reportes.}, label={lst:view-report-form}]
 <ng-form name="reportForm">
 	<h3>Generaci&oacute;n de <i>layout</i></h3>
 	...
@@ -720,7 +720,7 @@ $scope.actualizar = function($event){
 
 	\item \texttt{cancelar}: vuelve a cargar los datos de la orden de reposición con el fin de cancelar los cambios hechos a la orden de reposición (Código \ref{lst:cancel-orden-ctrl-js}).
 \begin{adjustwidth}{\listingfixlargewidth}{0pt}
-\begin{lstlisting}[language=Javascript, caption={Función del controlador de \textit{AngularJS} para cancelar los cambios en una orden de reposición}, captionpos=b, label={lst:cancel-orden-ctrl-js}]
+\begin{lstlisting}[language=Javascript, caption={Función del controlador de \textit{AngularJS} para cancelar los cambios en una orden de reposición.}, captionpos=b, label={lst:cancel-orden-ctrl-js}]
 $scope.reset = function($event){
 	$scope.getOrden($routeParams.ordenId);
 };
@@ -768,7 +768,7 @@ this.getOrden = function(id){
 
 	\item \texttt{update}: manda los datos actualizados de una orden de reposición al servicio web que realiza actualizaciones en órdenes de reposición (Código \ref{lst:update-orden-service-js}).
 \begin{adjustwidth}{\listingfixlargewidth}{0pt}
-\begin{lstlisting}[language=Javascript, caption={Función para actualizar los datos de una orden de reposición}, captionpos=b, label={lst:update-orden-service-js}]
+\begin{lstlisting}[language=Javascript, caption={Función para actualizar los datos de una orden de reposición.}, captionpos=b, label={lst:update-orden-service-js}]
 this.update = function(orden){
 	var d = $q.defer();
 	$http.post('_data_/orden/update', orden)

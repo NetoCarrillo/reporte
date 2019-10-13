@@ -1,50 +1,52 @@
 \documentclass[letterpaper,11pt]{report}
 
+% Grupo de caracteres
 \usepackage[utf8]{inputenc}
 
-%idioma
+% Idioma
 \usepackage[spanish]{babel}
 \selectlanguage{spanish}
 \usepackage{bold-extra}
 
-%Apendice
+% Apendice
 \usepackage[toc,page]{appendix}
 
-%formato de bibliografia y citas
-\usepackage{cite}
-%\usepackage{apacite}
- 
-\usepackage[nottoc]{tocbibind}
-
+% Índices
 \usepackage{etoc}
+
+% Formato de bibliografia y citas
+\usepackage{cite}
+\usepackage[nottoc]{tocbibind}
 \usepackage{blindtext}
 
-%Imagenes
+% Imagenes
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 %\usepackage[font=small,skip=20pt]{caption}
 \setlength{\abovecaptionskip}{15pt plus 5pt minus 2pt}
 \usepackage{float}
 
-%Espacio de interlineado
+% Espacio de interlineado
 \usepackage{setspace}
 \doublespacing
 %\onehalfspacing
 
-%Tamaño de márgenes
+% Márgenes
 \usepackage[left=1.0in, right=1.0in]{geometry}
 \usepackage{layout}
-%\usepackage{showframe}
 \setlength{\marginparwidth}{0pt}
 \setlength{\marginparsep}{0pt}
 \setlength{\textheight}{640pt}
 
-%margen para casos especiales
+% Mostrar los márgenes
+%\usepackage{showframe}
+
+% margen para casos especiales
 \usepackage{changepage}
 \newcommand\listingfixwidth{-27pt}
 \newcommand\listingfixlargewidth{-51pt}
 
-%Colores en el texto
+% Colores en el texto
 \usepackage{xcolor}
 
 % Incluir subsubsection en el índice
@@ -90,48 +92,61 @@
   morestring=[b]"
 }
 
-%Insertar PDFS
+% Insertar PDFS
 \usepackage{pdfpages}
 
 % Version de PDF
 \pdfminorversion=7
 
-%\usepackage{hyperref}
-%\hypersetup{
-%    colorlinks,
-%    citecolor=black,
-%    filecolor=black,
-%    linkcolor=black,
-%    urlcolor=black
-%}
+% Bookmarks
+\usepackage{hyperref}
+\hypersetup{
+	pdftitle={AutoSA: Sistema para Automatizar las Órdenes de Reposición en el Sistema de Abastecimiento del Instituto de Salud Pública de México},
+	pdfauthor={Ernesto Carrillo Espinosa},
+	pdfcreator={Ernesto Carrillo Espinosa},
+	pdfsubject={Ingeniería de Software},
+	unicode=true,
+	hidelinks
+}
+\usepackage{bookmark}
 
 \begin{document}
+%\layout
+
+%-------------------------------------------------------------------------------
+\pagenumbering{alph}
+% Portada
 \thispagestyle{empty}
 \includepdf[pages={1}]{portada.pdf}
-%\layout
+\bookmark[page=1,level=0]{Portada}
 \clearpage
 
-\thispagestyle{empty}
-\vspace*{250px}
-\begin{flushright}
-	\begin{Large}
-		\textit{El bourbon da mejores ideas que el helado.}\\
-	\end{Large}
-Dr. José Galaviz Casas ``Elogio de la pereza''.
-\end{flushright}
-\clearpage
+%-------------------------------------------------------------------------------
+% Prefacio
+%\include{prefacio}
 
+% Índices
 \pagenumbering{roman}
 
+% Índice general
+\pdfbookmark[0]{\contentsname}{contents}
 \tableofcontents
 \clearpage
+
+% Índice de figuras
 \listoffigures
-%\clearpage
-%\listoftables
 \clearpage
-%\addcontentsline{toc}{chapter}{\lstlistlistingname}
+
+% Índice de tablas
+%\listoftables
+%\clearpage
+
+% Índice de códigos
 \lstlistoflistings
 \clearpage
+
+%-------------------------------------------------------------------------------
+% Capítulos
 \pagenumbering{arabic}
 \include{capitulo1}
 
@@ -143,13 +158,13 @@ Dr. José Galaviz Casas ``Elogio de la pereza''.
 
 \include{capitulo5}
 
+%-------------------------------------------------------------------------------
 %Apéndices
 \include{apendice}
 
+%-------------------------------------------------------------------------------
 %Bibliografia
 \renewcommand{\bibname}{Bibliografía}
-%\nocite{*} 
-%\bibliographystyle{apacite}
 \bibliographystyle{acm}
 \bibliography{Bibliografia}
 \end{document}

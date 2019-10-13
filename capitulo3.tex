@@ -55,10 +55,10 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 \end{enumerate}
 
 \subsubsection{Persistencia}
-Este componente está encargado de las operaciones de persistencia hacia la base de datos, su diseño está basado en el Patrón DAO (Apéndice \ref{sec:dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará \textbf{DAO} para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
+Este componente está encargado de las operaciones de persistencia hacia la base de datos, su diseño está basado en el Patrón DAO (Apéndice \ref{sec:dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará DAO para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
 El componente \textbf{Persistencia} del proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
 \paragraph{\indent Interfaz Almacenamiento\\}
-Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \textbf{CU-CONTESTAR}, \textbf{CU-GUARDAR-NUEVA}, \textbf{CU-RESPONDER-ORDEN}, \textbf{CU-ENVIAR-ORDEN} y \textbf{CU-ACTUALIZAR-ESTATUS-SA}.}. Esta interfaz expone las siguientes operaciones:
+Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Casos de uso CU-CONTESTAR, CU-GUARDAR-NUEVA, CU-RESPONDER-ORDEN, CU-ENVIAR-ORDEN y CU-ACTUALIZAR-ESTATUS-SA.}. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
 	\item \textbf{guardar-nueva}: inserta una nueva orden de reposición en la base de datos.
 	\item \textbf{cambiar-estado}: cambia el estado de atención de una orden de reposición.
@@ -67,6 +67,10 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 	\item \textbf{actualizar-estado-sa}: actualiza el estado de atención en el \textit{Sistema de Abastecimiento} a \textbf{cancelada} de las órdenes de reposición recibidas.
 	\item \textbf{registrar-evento}: registra en la base de datos un evento que ocurre durante los procesos automatizados, el evento puede ser de carácter informativo o de error.
 \end{enumerate}
+
+%espaciado
+\pagebreak
+%espaciado
 
 \paragraph{\indent Interfaz Lectura\\}
 Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes de reposición en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \textbf{CU-CONTESTAR}, \textbf{CU-ENVIAR-ORDEN} y \textbf{CU-GENERAR-ACUSE}.}. Esta interfaz expone las siguientes operaciones:
@@ -141,7 +145,7 @@ El diseño de la solución al caso de uso \textbf{CU-CONTESTAR} (sección \ref{c
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-contestar}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-CONTESTAR}.}
+	\caption{Diagrama de secuencia del caso de uso CU-CONTESTAR.}
 	\label{fig:dia-seq-cu-contestar}
 \end{figure}
 
@@ -158,7 +162,7 @@ El diseño para la solución del caso de uso \textbf{CU-GUARDAR-NUEVA} (sección
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-guardar-nueva}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-GUARDAR-NUEVA}.}
+	\caption{Diagrama de secuencia del caso de uso CU-GUARDAR-NUEVA.}
 	\label{fig:dia-seq-cu-guardar-nueva}
 \end{figure}
 
@@ -178,7 +182,7 @@ El diseño para la solución del caso de uso \textbf{CU-RESPONDER-ORDEN} (secci�
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-responder-orden}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-RESPONDER-ORDEN}.}
+	\caption{Diagrama de secuencia del caso de uso CU-RESPONDER-ORDEN.}
 	\label{fig:dia-seq-cu-responder-orden}
 \end{figure}
 
@@ -198,7 +202,7 @@ El diseño para la solución del caso de uso \textbf{CU-ENVIAR-ORDEN} (sección 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-enviar-orden}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-ENVIAR-ORDEN}.}
+	\caption{Diagrama de secuencia del caso de uso CU-ENVIAR-ORDEN.}
 	\label{fig:dia-seq-cu-enviar-orden}
 \end{figure}
 
@@ -213,7 +217,7 @@ El diseño para la solución del caso de uso \textbf{CU-GENERAR-ACUSE} (sección
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-generar-acuse}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-GENERAR-ACUSE}.}
+	\caption{Diagrama de secuencia del caso de uso CU-GENERAR-ACUSE.}
 	\label{fig:dia-seq-cu-generar-acuse}
 \end{figure}
 
@@ -234,7 +238,7 @@ El diseño de la solución al caso de uso \textbf{CU-VERIFICAR} (sección \ref{c
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-verificar}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-VERIFICAR}.}
+	\caption{Diagrama de secuencia del caso de uso CU-VERIFICAR.}
 	\label{fig:dia-seq-cu-verificar}
 \end{figure}
 
@@ -247,7 +251,7 @@ El diseño para la solución del caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA} (
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-actualizar-estatus-sa}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-ACTUALIZAR-ESTATUS-SA}.}
+	\caption{Diagrama de secuencia del caso de uso CU-ACTUALIZAR-ESTATUS-SA.}
 	\label{fig:dia-seq-cu-actualizar-estatus-sa}
 \end{figure}
 
@@ -272,7 +276,7 @@ El diseño de la solución al caso de uso \textbf{CU-ENTRAR-WEB} (sección \ref{
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-entrar-web}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-ENTRAR-WEB}.}
+	\caption{Diagrama de secuencia del caso de uso CU-ENTRAR-WEB.}
 	\label{fig:dia-seq-cu-entrar-web}
 \end{figure}
 
@@ -291,7 +295,7 @@ El diseño de la solución al caso de uso \textbf{CU-GENERAR-REPORTE} (sección 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-generar-reporte}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-GENERAR-REPORTE}.}
+	\caption{Diagrama de secuencia del caso de uso CU-GENERAR-REPORTE.}
 	\label{fig:dia-seq-cu-generar-reporte}
 \end{figure}
 
@@ -306,7 +310,7 @@ El diseño de la solución al caso de uso \textbf{CU-ACTUALIZAR-CATALOGO} (secci
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-actualizar-catalogo}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.}
+	\caption{Diagrama de secuencia del caso de uso CU-ACTUALIZAR-CATALOGO.}
 	\label{fig:dia-seq-cu-actualizar-catalogo}
 \end{figure}
 
@@ -321,7 +325,7 @@ El diseño de la solución al caso de uso \textbf{CU-BUSCAR} (sección \ref{cu-b
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-buscar}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-BUSCAR}.}
+	\caption{Diagrama de secuencia del caso de uso CU-BUSCAR.}
 	\label{fig:dia-seq-cu-buscar}
 \end{figure}
 
@@ -336,7 +340,7 @@ El diseño de la solución al caso de uso \textbf{CU-VISUALIZAR} (sección \ref{
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-visualizar}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-VISUALIZAR}.}
+	\caption{Diagrama de secuencia del caso de uso CU-VISUALIZAR.}
 	\label{fig:dia-seq-cu-visualizar}
 \end{figure}
 
@@ -351,7 +355,7 @@ El diseño de la solución al caso de uso \textbf{CU-EDITAR} (sección \ref{cu-e
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{dia-seq-cu-editar}
-	\caption{Diagrama de secuencia del caso de uso \textbf{CU-EDITAR}.}
+	\caption{Diagrama de secuencia del caso de uso CU-EDITAR.}
 	\label{fig:dia-seq-cu-editar}
 \end{figure}
 
