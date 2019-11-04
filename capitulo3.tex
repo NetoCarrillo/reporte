@@ -19,7 +19,41 @@ Bourque\cite{SWEBOOK} define la arquitectura de software como:
 \end{quote}
 En las últimas décadas la arquitectura de software ha profundizado en el estudio genérico de las estructuras del software, dando lugar a técnicas como los patrones de diseño (Apéndice \ref{sec:patrones}) \cite{SWEBOOK, SoftwareArchitectureInAction}.
 
-Siguiendo el concepto de arquitectura, se muestran los componentes del sistema y su respectiva solución a los casos de uso del Capítulo \ref{sec:casos-uso}.
+\subsection{Arquitectura en capas}
+Un tipo de arquitectura es la arquitectura en capas que Richards\cite{SoftwareArchitecturePatterns} describe como:
+\begin{quote}
+La arquitectura en capas, conocida también como arquitectura de n-niveles, consiste de componentes organizados en capas horizontales, donde cada capa tiene un rol específico dentro de la aplicación. Una de las propiedades más poderosas de la arquitectura en capas es la separación de responsabilidades entre componentes, es decir, componentes dentro de una misma capa se encargan de la lógica que atañe a dicha capa.
+\end{quote}
+
+El sistema AutoSA consta de dos aplicaciones, una aplicación de escritorio encargada de ejecutar las rutinas de automatización y una aplicación web encargada de ofrecer operaciones de administración sobre las órdenes de reposición atendidas.\\
+En la Figura \ref{fig:dia-layers-auto} se muestra el diagrama de la arquitectura en capas de la aplicación de escritorio, mientras que en la Figura \ref{fig:dia-layers-web} se encuentra el diagrama de la arquitectura en capas de la aplicación web. Ambas arquitecturas constan de las siguientes capas:
+\begin{enumerate}
+	\item Presentación: tiene la responsabilidad de la interfaz de usuario.
+	\item Lógica de negocio: contiene los componentes que implementan las reglas del negocio.
+	\item Servicios: contiene los servicios encargados del acceso a recursos compartidos.
+	\item Acceso a datos: está formado por los componentes que proveen acceso a la lectura y escritura de datos.
+	\item Datos: son los recursos encargados de contener la información persistente del sistema.
+\end{enumerate}
+
+%espaciado
+\pagebreak
+%espaciado
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{dia-layers-auto}
+\caption{Diagrama en capas de la aplicación de escritorio.}
+\label{fig:dia-layers-auto}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{dia-layers-web}
+\caption{Diagrama en capas de la aplicación web.}
+\label{fig:dia-layers-web}
+\end{figure}
+
+%Siguiendo el concepto de arquitectura, se muestran los componentes del sistema y su respectiva solución a los casos de uso del Capítulo \ref{sec:casos-uso}.
 
 \subsection{Componentes del sistema AutoSA}
 El diagrama de componentes sirve para visualizar los componentes en los que se divide el sistema y las interfaces por las cuales se comunican tales componentes. El la Figura \ref{fig:dia-components} se muestra el diagrama de componentes para el sistema AutoSA. En las secciones consecuentes se describe cada componente y las interfaces que ofrece\footnote{Únicamente se mostrarán los diagramas de secuencia más completos que reflejan un comportamiento no trivial.}.
@@ -57,6 +91,7 @@ Provee el acceso a las reglas de negocio del proceso de verificación de órdene
 \subsubsection{Persistencia}
 Este componente está encargado de las operaciones de persistencia hacia la base de datos, su diseño está basado en el Patrón DAO (Apéndice \ref{sec:dao}) para controlar el acceso a la base de datos\footnote{En adelante se utilizará DAO para hacer referencia al patrón y la instancia (objeto) del patrón.}.\\
 El componente \textbf{Persistencia} del proyecto AutoSA presenta las siguientes interfaces de búsqueda y almacenamiento:
+
 \paragraph{\indent Interfaz Almacenamiento\\}
 Conjunto de operaciones diseñadas para responder a las necesidades de almacenamiento en los flujos para responder y verificar órdenes de reposición\footnote{Casos de uso CU-CONTESTAR, CU-GUARDAR-NUEVA, CU-RESPONDER-ORDEN, CU-ENVIAR-ORDEN y CU-ACTUALIZAR-ESTATUS-SA.}. Esta interfaz expone las siguientes operaciones:
 \begin{enumerate}
@@ -67,10 +102,6 @@ Conjunto de operaciones diseñadas para responder a las necesidades de almacenam
 	\item \textbf{actualizar-estado-sa}: actualiza el estado de atención en el \textit{Sistema de Abastecimiento} a \textbf{cancelada} de las órdenes de reposición recibidas.
 	\item \textbf{registrar-evento}: registra en la base de datos un evento que ocurre durante los procesos automatizados, el evento puede ser de carácter informativo o de error.
 \end{enumerate}
-
-%espaciado
-\pagebreak
-%espaciado
 
 \paragraph{\indent Interfaz Lectura\\}
 Conjunto de operaciones diseñadas para las necesidades de lectura de órdenes de reposición en los flujos para responder y verificar órdenes de reposición\footnote{Ver casos de uso \textbf{CU-CONTESTAR}, \textbf{CU-ENVIAR-ORDEN} y \textbf{CU-GENERAR-ACUSE}.}. Esta interfaz expone las siguientes operaciones:
@@ -101,6 +132,10 @@ Da la configuración contenida en archivos de propiedades contenidas en el mismo
 \begin{enumerate}
 	\item \textbf{obtener-propiedad}: obtiene una propiedad de los archivos de configuración.
 \end{enumerate}
+
+%espaciado
+\pagebreak
+%espaciado
 
 \paragraph{\indent Interfaz Almacenamiento\\}
 Almacena archivos (reportes y acuses de envío) en el sistema de archivos. Esta interfaz expone las siguientes operaciones:
@@ -221,6 +256,10 @@ El diseño para la solución del caso de uso \textbf{CU-GENERAR-ACUSE} (sección
 	\label{fig:dia-seq-cu-generar-acuse}
 \end{figure}
 
+%espaciado
+\pagebreak
+%espaciado
+
 \subsubsection{Verificar órdenes}
 El diseño de la solución al caso de uso \textbf{CU-VERIFICAR} (sección \ref{cu-verificar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Agente} \textbf{Lógica de Automatización} tal solución se logra realizando las siguientes llamadas (Figura \ref{fig:dia-seq-cu-verificar}):
 \begin{enumerate}
@@ -269,9 +308,6 @@ El diseño de la solución al caso de uso \textbf{CU-ENTRAR-WEB} (sección \ref{
 		\item Si las credenciales son inválidas: el \textbf{Portal Web} regresa al \textbf{Usuario} un mensaje de error (mensaje 4 del diagrama de la Figura \ref{fig:dia-seq-cu-entrar-web}).
 	\end{enumerate}
 \end{enumerate}
-% espaciado
-\pagebreak
-% espaciado
 
 \begin{figure}[h]
 	\centering
@@ -299,6 +335,10 @@ El diseño de la solución al caso de uso \textbf{CU-GENERAR-REPORTE} (sección 
 	\label{fig:dia-seq-cu-generar-reporte}
 \end{figure}
 
+%espaciado
+\pagebreak
+%espaciado
+
 \subsubsection{Actualizar catálogo}
 El diseño de la solución al caso de uso \textbf{CU-ACTUALIZAR-CATALOGO} (sección \ref{cu-actualizar-catalogo}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (Figura \ref{fig:dia-seq-cu-actualizar-catalogo}):
 \begin{enumerate}
@@ -313,6 +353,10 @@ El diseño de la solución al caso de uso \textbf{CU-ACTUALIZAR-CATALOGO} (secci
 	\caption{Diagrama de secuencia del caso de uso CU-ACTUALIZAR-CATALOGO.}
 	\label{fig:dia-seq-cu-actualizar-catalogo}
 \end{figure}
+
+%espaciado
+\pagebreak
+%espaciado
 
 \subsubsection{Buscar órdenes}
 El diseño de la solución al caso de uso \textbf{CU-BUSCAR} (sección \ref{cu-buscar}) se lleva a cabo entre el actor \textbf{Usuario} y los componentes \textbf{Portal Web} y \textbf{Persistencia} tal solución se logra realizando las siguientes llamadas (Figura \ref{fig:dia-seq-cu-buscar}):
