@@ -4,8 +4,7 @@ Conforme a lo visto en el Capítulo \ref{cap2}, el proyecto AutoSA requiere ser 
  	\item Rutinas automatizadas: se ejecutan a partir del entorno gráfico del sistema operativo.
  	\item Portal de usuario: se ofrece como una página web, la cual depende del servidor web de la farmacéutica y del explorador web del usuario.
 \end{enumerate}
-Por otro lado es necesario contar con una base de datos la cual debe mantener los datos de las órdenes de reposición persistentes, también es necesario mantener el acceso al sistema de archivos para guardar las capturas de pantalla de las órdenes de reposición enviadas.\\
-Por lo que es necesario tener dos ambientes de ejecución, la automatización que será ejecutada exclusivamente en el sistema operativo y la de web, que se ejecuta en el sistema operativo y en el explorador de Internet del usuario.
+Por otro lado es necesario contar con una base de datos, la cual debe mantener los datos de las órdenes de reposición persistentes, también es necesario mantener el acceso al sistema de archivos para guardar las capturas de pantalla de las órdenes de reposición enviadas. Por lo que es necesario tener dos ambientes de ejecución, la automatización que será ejecutada exclusivamente en el sistema operativo y la de web, que se ejecuta en el sistema operativo y en el explorador de Internet del usuario.
 
 
 %===============================================================================
@@ -127,7 +126,7 @@ El componente \textbf{Ficheros} está encargado de la comunicación con el siste
 Este componente, al igual que el componente \textbf{Persistencia}, está diseñado siguiendo el Patrón DAO.
 
 \paragraph{\indent Interfaz Configuración\\}
-Da la configuración contenida en archivos de propiedades contenidas en el mismo sistema de archivos. Esta interfaz expone las siguientes operaciones:
+Da la configuración escrita en archivos de propiedades contenidos en el mismo sistema de archivos. Esta interfaz expone las siguientes operaciones:
 
 \begin{enumerate}
 	\item \textbf{obtener-propiedad}: obtiene una propiedad de los archivos de configuración.
