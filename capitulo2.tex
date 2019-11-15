@@ -1,12 +1,12 @@
 \chapter{Análisis y alcance del proyecto}\label{cap2}
 
-En este capítulo se establecen los requerimientos que satisfacen las necesidades de la farmacéutica planteadas en al capítulo anterior, como se verá más adelante, los requerimientos se clasifican en funcionales y no funcionales, de igual forma se delimita el alcance y los riesgos del proyecto; con los elementos anteriores se redactan los casos de uso, los flujos lógicos que satisfacen los requerimientos dentro del alcance definido.
+En este capítulo se establecen los requerimientos que satisfacen las necesidades de la farmacéutica planteadas en al capítulo anterior, como se verá más adelante, estos se clasifican en funcionales y no funcionales, de igual forma se delimita el alcance y los riesgos del proyecto; con los elementos anteriores se redactan los casos de uso, los flujos lógicos que satisfacen los requerimientos dentro del alcance definido.
 %===============================================================================
 %===============================================================================
 
 
 \section{Análisis de requerimientos}\label{sec:req-ana}
-En general, los requerimientos deben reflejar lo que un usuario espera de una aplicación, tales requerimientos se clasifican en requerimientos funcionales y no funcionales:
+En general, los requerimientos deben reflejar lo que un usuario espera de una aplicación, y se clasifican en funcionales y no funcionales:
 \begin{itemize}
 \item \textbf{Requerimientos funcionales}: descripciones detalladas de las funciones deseadas del proyecto\cite{WileyBegSE}.
 \item \textbf{Requerimientos no funcionales}: descripciones de la calidad y capacidades del comportamiento del proyecto\cite{WileyBegSE}.
@@ -44,7 +44,7 @@ Riesgo es la incertidumbre sobre algunos escenarios que ponen en peligro el éxi
 Los riesgos identificados para este proyecto se listan a continuación:
 \begin{enumerate}
   \item Dado que no se cuenta con un ambiente de pruebas del \textit{Sistema de Abastecimiento} todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
-  \item La herramienta de automatización \textit{Sahi} está basada en la estructura de las páginas del sistema \textit{Sistema de Abastecimiento}. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
+  \item La herramienta de automatización \textit{Sahi}\footnote{En capítulos posteriores se da descripción detallada sobre esta herramienta de automatización.} está basada en la estructura de las páginas del sistema \textit{Sistema de Abastecimiento}. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
   \item La herramienta \textit{Sahi} en su versión libre\footnote{El uso de la versión libre de \textit{Sahi} es requerido por la farmacéutica (sección \ref{sec:nonfunctional-req}).} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
 \end{enumerate}
 
@@ -668,13 +668,16 @@ CU-EDITAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-La forma en que el usuario de la interfaz web puede modificar los datos de una orden de reposición que se muestra en pantalla (caso de uso \textbf{CU-BUSCAR}), en la Figura \ref{fig:dia-activity-edit} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta vista es necesario que el usuario haya ejecutado la visualización de la orden de reposición que desea modificar (primeras dos actividades del Usuario en el diagrama). La dependencia de este caso de uso se muestra en la Figura \ref{fig:dia-casos-uso}.
+La forma en que el usuario de la interfaz web puede modificar los datos de una orden de reposición desplegada en pantalla (caso de uso \textbf{CU-BUSCAR}), en la Figura \ref{fig:dia-activity-edit} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta vista es necesario que el usuario haya ejecutado la visualización de la orden de reposición que desea modificar (primeras dos actividades del Usuario en el diagrama). La dependencia de este caso de uso se observa en la Figura \ref{fig:dia-casos-uso}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-edit}
   \caption{Diagrama de actividad del flujo para la modificar de los datos de una orden de reposición.}
   \label{fig:dia-activity-edit}
 \end{figure}
+%espaciado
+\pagebreak
+%espaciado
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item El usuario ha iniciado sesión correctamente en la interfaz web (caso de uso \textbf{CU-ENTRAR-WEB}).
