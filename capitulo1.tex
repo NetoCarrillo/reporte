@@ -24,12 +24,12 @@ En el listado de órdenes de reposición de la sección \textit{Contestación a 
 \end{figure}
 \end{enumerate}
 
-El proveedor\footnote{Quien requiere automatizar la interacción con el Sistema de Abastecimiento para el envío de las órdenes de reposición y la verificación de órdenes canceladas.} representa a la compañía farmacéutica, por lo que en este documento nos referiremos al proveedor como a la compañía farmacéutica, o simplemente farmacéutica de manera indistinta.\\
-La farmacéutica dedica diariamente un equipo constituido por tres personas durante toda la jornada laboral, dependiendo del volumen de órdenes de reposición emitidas por el \textit{Instituto} se puede agregar una persona más al equipo, para completar las tareas de envío de órdenes de reposición y verificar las órdenes de reposición canceladas dentro del \textit{Sistema de Abastecimiento}.
+En este documento se hará referencia de manera indistinta al proveedor\footnote{Quien requiere automatizar la interacción con el Sistema de Abastecimiento para el envío de las órdenes de reposición y la verificación de órdenes canceladas.} como la compañía farmacéutica o simplemente como farmacéutica.\\
+Para completar las tareas de envío de órdenes de reposición y verificar las órdenes de reposición canceladas dentro del \textit{Sistema de Abastecimiento}, la farmacéutica dedica diariamente un equipo constituido por tres personas durante toda la jornada laboral. Dependiendo del volumen de órdenes de reposición emitidas por el \textit{Instituto} se puede agregar una persona más al equipo.
 
 \section{Objetivos}
 \subsection{Objetivo principal}\label{sec:objetivo-principal}
-Realizar un sistema de cómputo, de ahora en adelante llamado \textbf{AutoSA}, que reduzca el tiempo de interacción entre los operadores de la farmacéutica interactuando con el \textit{Sistema de Abastecimiento}, es así que el sistema AutoSA busca cumplir las siguientes metas:
+Realizar un sistema de cómputo, de ahora en adelante llamado \textbf{AutoSA}, que reduzca el tiempo de interacción entre los operadores de la farmacéutica y el \textit{Sistema de Abastecimiento}. Es así que el sistema AutoSA busca cumplir las siguientes metas:
 \begin{enumerate}
 	\item Reducir el tiempo utilizado para contestar las órdenes de reposición.
 	\item Evitar el envío de medicamentos cuyas órdenes de reposición hayan sido canceladas.
@@ -43,12 +43,15 @@ Realizar un sistema de cómputo, de ahora en adelante llamado \textbf{AutoSA}, q
 \item Reducir el tiempo de respuesta a las órdenes de reposición.
 \item Dar consistencia en los datos respecto a la generación de reportes estadísticos sobre las órdenes de reposición procesadas.
 \end{enumerate}
-Por lo anterior los afiliados del \textit{Instituto} se verán beneficiados, pues los medicamentos estarán disponibles con mayor frecuencia en las clínicas y hospitales.
+Por lo anterior, los afiliados del \textit{Instituto} se verán beneficiados pues los medicamentos estarán disponibles con mayor frecuencia en las clínicas y hospitales.
 
 \section{Descripción general de trabajo}\label{sec:desc-general}
-Dado que la farmacéutica atiende las órdenes de reposición del \textit{Instituto} en el doble de tiempo que su competencia, en particular contestar estas órdenes en el \textit{Sistema de Abastecimiento} requiere de tres personas dedicadas exclusivamente a ello, y un día completo el terminar esta parte del proceso. La solución propuesta para acelerar la respuesta y verificación de órdenes de reposición del \textit{Sistema de Abastecimiento} se encuentra programado por agentes\footnote{Agente dentro de este trabajo se refiere a las rutinas que automatizan los procesos realizados por los operadores del \textit{Sistema de Abastecimiento}.}, cada agente se dedica a emular las acciones del operador de la farmacéutica, el cual es el responsable de contestar o verificar las órdenes de reposición. El sistema AutoSA cuenta con una base de datos donde se almacenen los datos capturados por lo agentes durante la respuesta de órdenes, y una interfaz gráfica donde los trabajadores de la farmacéutica puedan realizar tareas de administración como son: la búsqueda, edición de órdenes de reposición y generación de reportes de las órdenes atendidas por los agentes.\\
-La automatización de los procesos (Figuras \ref{fig:flow-proc-contestar} y \ref{fig:flow-proc-verificar}) antes mencionados pronostican una reducción de costos por devolución de medicamento no solicitado para el cliente y también la disminución de pérdidas en las ventas por solicitudes no atendidas en los rangos de tiempo acordados con el comprador. Dado lo anterior, se plantea un proyecto de software que cubra las necesidades de automatización y pueda ser administrado por usuarios no especializados en computación.\\
+La farmacéutica atiende las órdenes de reposición del \textit{Instituto} en el doble de tiempo que su competencia, en particular contestar estas órdenes en el \textit{Sistema de Abastecimiento} requiere de tres personas dedicadas exclusivamente a ello, y un día completo el terminar esta parte del proceso. La solución propuesta para acelerar la respuesta y verificación de órdenes de reposición del \textit{Sistema de Abastecimiento} se encuentra programado por agentes\footnote{Agente dentro de este trabajo se refiere a las rutinas que automatizan los procesos realizados por los operadores del \textit{Sistema de Abastecimiento}.}. Cada agente se dedica a emular las acciones del operador de la farmacéutica, el cual es el responsable de contestar o verificar las órdenes de reposición. El sistema AutoSA cuenta con una base de datos donde se almacenen los datos capturados por los agentes durante la respuesta de órdenes y una interfaz gráfica donde los trabajadores de la farmacéutica puedan realizar tareas de administración. Estas tareas pueden ser: la búsqueda, edición de órdenes de reposición y generación de reportes de las órdenes atendidas por los agentes.\\
+La automatización de los procesos (Figuras \ref{fig:flow-proc-contestar} y \ref{fig:flow-proc-verificar}) antes mencionados pronostica una reducción de costos por devolución de medicamento no solicitado para el cliente y también la disminución de pérdidas en las ventas por solicitudes no atendidas en los rangos de tiempo acordados con el comprador. Dado lo anterior, se plantea un proyecto de software que cubra las necesidades de automatización y pueda ser administrado por usuarios no especializados en computación.\\
 Para resolver el desarrollo del proyecto, el sistema AutoSA se divide en módulos con funcionalidades específicas que se muestran a continuación:
+% espaciado
+\pagebreak
+% espaciado
 \begin{enumerate}
 \item \textbf{Automatización de interacción con el Sistema de Abastecimiento}. La automatización de la interacción con el \textit{Sistema de Abastecimiento} consiste en replicar los pasos que sigue una persona de la farmacéutica (operador) encargada de llenar y extraer información de las órdenes de reposición del \textit{Sistema de Abastecimiento}, es decir, listar los pasos que sigue el operador cuando contesta las órdenes de reposición, describir las reglas de negocio necesarios para llenar los formularios que presenta el \textit{Sistema de Abastecimiento} al responder una orden de reposición, por último, se identifican las fuentes de los datos que se ocupan para llenar tales formularios y se define la forma de almacenamiento de la información necesaria de cada formulario.
 \item \textbf{Generación de reportes}. La generación de reportes consiste en plasmar la información obtenida de las órdenes de reposición contestadas en el módulo anterior. La farmacéutica tiene ya una plantilla que se utiliza para pasar los pedidos a otras áreas, con el fin de continuar la atención de las órdenes de reposición; además de obtener estadísticas relacionadas con la cantidad de órdenes de reposición atendidas y canceladas.
@@ -67,7 +70,9 @@ Esta definición expone que los requerimientos del cliente se traducen en especi
 \caption{Módulos de la arquitectura.}
 \label{fig:dia-arq-comp}
 \end{figure}
-
+% espaciado
+\pagebreak
+% espaciado
 \begin{itemize}
 \item \textbf{Agente (robot)}. Interactúa directamente con el \textit{Sistema de Abastecimiento}, es el componente que automatiza las acciones de los operadores humanos de la farmacéutica.
 \item \textbf{Lógica de Automatización}. Son bibliotecas y rutinas que se encargan de prestar los servicios necesarios al agente para su funcionamiento, permite comunicación con la base de datos, guarda las capturas de pantalla en el sistema de archivos y provee la configuración de inicio al agente.
