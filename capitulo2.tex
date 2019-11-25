@@ -1,6 +1,6 @@
 \chapter{Análisis y alcance del proyecto}\label{cap2}
 
-En este capítulo se establecen los requerimientos que satisfacen las necesidades de la farmacéutica planteadas en al capítulo anterior, como se verá más adelante, estos se clasifican en funcionales y no funcionales, de igual forma se delimita el alcance y los riesgos del proyecto; con los elementos anteriores se redactan los casos de uso, los flujos lógicos que satisfacen los requerimientos dentro del alcance definido.
+En este capítulo se establecen los requerimientos que satisfacen las necesidades de la farmacéutica planteadas en el capítulo anterior, como se verá más adelante, estos se clasifican en funcionales y no funcionales, de igual forma se delimita el alcance y los riesgos del proyecto. Con los elementos anteriores se redactan los casos de uso, los flujos lógicos que satisfacen los requerimientos dentro del alcance definido.
 %===============================================================================
 %===============================================================================
 
@@ -11,9 +11,9 @@ En general, los requerimientos deben reflejar lo que un usuario espera de una ap
 \item \textbf{Requerimientos funcionales}: descripciones detalladas de las funciones deseadas del proyecto\cite{WileyBegSE}.
 \item \textbf{Requerimientos no funcionales}: descripciones de la calidad y capacidades del comportamiento del proyecto\cite{WileyBegSE}.
 \end{itemize}
-Con las definiciones anteriores es posible ejemplificar sobre la funcionalidad para la generación de reportes: un requerimiento funcional necesita en general, de los datos que deben ser capturados por un usuario para obtener así un reporte (fechas de inicio y término, número de orden, etcétera), mientras que un requerimiento no funcional refleja el formato de salida, verificación de permisos de usuario para generar el reporte,  capacidad del sistema para atender generación simultánea de varios reportes.\\
+Con las definiciones anteriores es posible ejemplificar sobre la funcionalidad para la generación de reportes: un requerimiento funcional necesita en general de los datos que deben ser capturados por un usuario para obtener así un reporte (fechas de inicio y término, número de orden, etcétera); mientras que un requerimiento no funcional refleja el formato de salida, verificación de permisos de usuario para generar el reporte y capacidad del sistema para atender la generación simultánea de varios reportes.\\
 Los requerimientos se ven acotados por el alcance del proyecto, es decir, las funciones que realizará el sistema para completar los procesos y funciones que son automatizadas por el sistema AutoSA\cite{WileyBegSE} (en la sección \ref{sec:alcance} se describen los procesos automatizados). De igual manera, automatizar los procesos de la farmacéutica conlleva ciertos riesgos. Uno de estos riesgos dentro de este contexto se encuentra definido como un fallo o mal funcionamiento del sistema bajo condiciones específicas y que muchas veces escapa al control del sistema.\\
-Por ejemplo: la caída de el servidor de base de datos, en siguientes secciones también se formalizará el concepto de riesgo (sección \ref{sec:riesgos}).
+Por ejemplo: la caída de el servidor de base de datos. En secciones posteriores también se formalizará el concepto de riesgo (sección \ref{sec:riesgos}).
 
 
 \subsection{Alcance del proyecto}\label{sec:alcance}
@@ -28,8 +28,8 @@ Para fines del sistema AutoSA, el alcance está acotado en los siguientes puntos
 \item Generación del formato de salida que se realiza al terminar de responder las órdenes de reposición (Figura \ref{fig:flow-proc-contestar})
 \item Automatizar el proceso para verificar las órdenes de reposición canceladas recientemente en el \textit{Sistema de Abastecimiento}.
 \item Actualización de catálogos propios del sistema AutoSA que contienen claves de medicamentos y centros de salud del \textit{Instituto}.
-\item Actualización masiva de las órdenes de reposición que han sido canceladas y notificado al área correspondiente para detener el envío de medicamentos.
-\item Rutinas para la creación de tablas, índices y vistas en la base de datos, queda fuera del alcance la creación de la base de datos, usuarios y asignación de permisos. 
+\item Actualización masiva de las órdenes de reposición que han sido canceladas y notificación al área correspondiente para detener el envío de medicamentos.
+\item Rutinas para la creación de tablas, índices y vistas en la base de datos. Queda fuera del alcance la creación de la base de datos, usuarios y asignación de permisos. 
 \item Queda fuera de alcance la verificación de existencia del medicamento en bodega.
 \item Queda fuera de alcance la realización de respaldos de la información contenida en la base de datos o en el sistema de archivos.
 \item El sistema no emitirá notificaciones de las órdenes de reposición canceladas recientemente.
@@ -43,15 +43,15 @@ Riesgo es la incertidumbre sobre algunos escenarios que ponen en peligro el éxi
 \end{quote}
 Los riesgos identificados para este proyecto se listan a continuación:
 \begin{enumerate}
-  \item Dado que no se cuenta con un ambiente de pruebas del \textit{Sistema de Abastecimiento} todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
-  \item La herramienta de automatización \textit{Sahi}\footnote{En capítulos posteriores se da descripción detallada sobre esta herramienta de automatización.} está basada en la estructura de las páginas del sistema \textit{Sistema de Abastecimiento}. Si ocurriera un cambio en dicha estructura las rutinas de automatización podrían dejar de funcionar.
-  \item La herramienta \textit{Sahi} en su versión libre\footnote{El uso de la versión libre de \textit{Sahi} es requerido por la farmacéutica (sección \ref{sec:nonfunctional-req}).} no cuenta con soporte bajo demanda por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
+  \item Dado que no se cuenta con un ambiente de pruebas del \textit{Sistema de Abastecimiento}, todos los datos alterados durante la programación de las rutinas de automatización podrían presentar información incorrecta, por lo que es necesario mantener siempre un registro de las órdenes de reposición alteradas durante el desarrollo de las rutinas de automatización.
+  \item La herramienta de automatización \textit{Sahi}\footnote{En capítulos posteriores se da descripción detallada sobre esta herramienta de automatización.} está basada en la estructura de las páginas del \textit{Sistema de Abastecimiento}. Si ocurriera un cambio en dicha estructura, las rutinas de automatización podrían dejar de funcionar.
+  \item La herramienta \textit{Sahi} en su versión libre\footnote{El uso de la versión libre de \textit{Sahi} es requerido por la farmacéutica (sección \ref{sec:nonfunctional-req}).} no cuenta con soporte bajo demanda, por lo que una falla en la herramienta durante el desarrollo del sistema podría causar retrasos en la entrega del sistema AutoSA.
 \end{enumerate}
 
 
 \subsection{Requerimientos funcionales}\label{sec:req-fun}
 \subsubsection{Automatización del proceso para contestar órdenes de reposición}\label{sec:req-contestar}
-Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza utilizando el \textit{Sistema de Abastecimiento}.} para contestar las órdenes de reposición, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-contestar}\footnote{Ver también la Figura \ref{fig:flow-proc-contestar}.}, esto implica almacenar los datos de las órdenes de reposición, los cuales son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes.
+Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza utilizando el \textit{Sistema de Abastecimiento}.} para contestar las órdenes de reposición, como se muestra en el diagrama de proceso de negocio en la Figura \ref{fig:dia-activity-contestar}\footnote{Ver también la Figura \ref{fig:flow-proc-contestar}.}. Esto implica almacenar los datos de las órdenes de reposición, los cuales son utilizados para generar el formato de salida que es entregado al almacén para continuar con la atención de las órdenes.
 
 \begin{figure}[h]
   \centering
@@ -80,7 +80,7 @@ Todos los requerimientos de administración de órdenes de reposición y generac
 \end{figure} 
 
 \subsubsection{Búsqueda de órdenes de reposición}\label{sec:req-search}
-En la interfaz web existe la posibilidad de buscar entre las órdenes de reposición contestadas mediante el número de orden de reposición. Esta opción entrega solo una orden de reposición, o bien se puede utilizar un intervalo de fechas entre las cuales fueron atendidas tales órdenes, entregando un listado de todas las órdenes de reposición que fueron respondidas en dicho intervalo. Las órdenes resultantes de la búsqueda deben ofrecer la opción para visualizar la información almacenada durante el proceso de respuesta, como se muestra en la Figura \ref{fig:maq-search}
+En la interfaz web existe la posibilidad de buscar entre las órdenes de reposición contestadas mediante el número de orden de reposición. Esta opción entrega solo una orden de reposición. O bien, se puede utilizar un intervalo de fechas entre las cuales fueron atendidas tales órdenes, lo que entrega un listado de todas las órdenes de reposición que fueron respondidas en dicho intervalo. Las órdenes resultantes de la búsqueda deben ofrecer la opción para visualizar la información almacenada durante el proceso de respuesta, como se muestra en la Figura \ref{fig:maq-search}
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{maq-search} 
@@ -89,7 +89,7 @@ En la interfaz web existe la posibilidad de buscar entre las órdenes de reposic
 \end{figure} 
 
 \subsubsection{Visualización de orden de reposición}\label{sec:req-show}
-La interfaz web tiene una sección donde se muestra el contenido de una orden de reposición almacenada en la base de datos (Figura \ref{fig:maq-crud}), esta vista es individual, (no es posible mostrar el contenido de más de una orden de reposición), además ofrece las opciones para modificar los datos de la orden (requerimiento \ref{sec:req-update}) y para generar el acuse de envío.
+La interfaz web tiene una sección donde se muestra el contenido de una orden de reposición almacenada en la base de datos (Figura \ref{fig:maq-crud}). Esta vista es individual, (no es posible mostrar el contenido de más de una orden de reposición), además, ofrece las opciones para modificar los datos de la orden (requerimiento \ref{sec:req-update}) y para generar el acuse de envío.
 
 % espaciado
 \pagebreak
@@ -103,10 +103,10 @@ La interfaz web tiene una sección donde se muestra el contenido de una orden de
 \end{figure} 
 
 \subsubsection{Edición de órdenes de reposición}\label{sec:req-update}
-La interfaz web cuenta con una vista (similar a la forma de mostrar la información de una orden de reposición) que permite la modificación de una orden de reposición (Figura \ref{fig:maq-crud}), esta vista es única (no es posible modificar más de una orden de reposición), por lo que no es posible modificar datos el número de orden y fecha de atención.
+La interfaz web cuenta con una vista (similar a la forma de mostrar la información de una orden de reposición) que permite la modificación de una orden de reposición (Figura \ref{fig:maq-crud}). Esta vista es única (no es posible modificar más de una orden de reposición), por lo que no es posible modificar datos el número de orden y fecha de atención.
 
 \subsubsection{Generación de reporte de órdenes de reposición contestadas}\label{sec:req-rep-contestadas}
-El reporte con órdenes de reposición contestadas es acotado entre un par de fechas (con precisión de horas), tal reporte (Figura \ref{fig:maq-report}), como su nombre lo indica, contiene los números de orden de reposición y datos definidos por la farmacéutica\footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en los reportes.}
+El reporte con órdenes de reposición contestadas es acotado entre un par de fechas (con precisión de horas). Tal reporte (Figura \ref{fig:maq-report}), como su nombre lo indica, contiene los números de orden de reposición y datos definidos por la farmacéutica\footnote{Por acuerdo de confidencialidad, no se enunciarán los datos contenidos en los reportes.}
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1.2]{maq-report} 
@@ -115,13 +115,13 @@ El reporte con órdenes de reposición contestadas es acotado entre un par de fe
 \end{figure} 
 
 \subsubsection{Generación de formato de salida}\label{sec:req-rep-layout}
-Este formato contiene los datos de las órdenes de reposición, las claves de los productos, como los nombres de los centros de salud. El reporte (Figura \ref{fig:maq-report})\footnote{Por acuerdo de confidencialidad no se enunciarán los datos contenidos en el formato de salida así como el contenido de los catálogos de claves de producto y centros de salud.} está acotado entre un par de fechas (con precisión de horas).
+Este formato contiene los datos de las órdenes de reposición, las claves de los productos, así como los nombres de los centros de salud. El reporte (Figura \ref{fig:maq-report})\footnote{Por acuerdo de confidencialidad, no se enunciarán los datos contenidos en el formato de salida, tampoco el contenido de los catálogos de claves de producto y centros de salud.} está acotado entre un par de fechas (con precisión de horas).
 
 \subsubsection{Generación de reporte con las órdenes de reposición canceladas recientemente}\label{sec:req-rep-canceladas}
 Genera un reporte con las órdenes de reposición canceladas recientemente (Figura \ref{fig:maq-report}), es decir, las órdenes de reposición que tienen el estado de “cancelada” y no se han marcado como canceladas en el proceso de respuesta.
 
 \subsubsection{Actualización de catálogos}\label{sec:req-catalogos}
-Cargar de forma masiva, mediante un archivo separado por comas (Figura \ref{fig:maq-upload}), los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmacéutica. Los catálogos definidos para la operación del sistema AutoSA no podrán ser actualizados, por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición cuando dentro del flujo de atención (Figura \ref{fig:dia-estados-orden}).
+Carga de forma masiva, mediante un archivo separado por comas (Figura \ref{fig:maq-upload}), los catálogos con claves de medicamentos, centros de salud y claves propias del manejo de la farmacéutica. Los catálogos definidos para la operación del sistema AutoSA no podrán ser actualizados; por ejemplo, los catálogos que contienen los estados posibles de una orden de reposición dentro del flujo de atención (Figura \ref{fig:dia-estados-orden}).
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1.3]{maq-upload}
@@ -148,9 +148,9 @@ La interfaz web muestra en todo momento un menú que permite la navegación entr
 
 
 \subsection{Requerimientos no funcionales}\label{sec:nonfunctional-req}
-El cliente ha solicitado que el proyecto se apegue a su infraestructura, para conservar el acuerdo de confidencialidad y evitar exponer al cliente a riesgos de seguridad informática por lo que el sistema debe de contar con\footnote{Por políticas de seguridad de la farmacéutica no se enunciarán las herramientas e infraestructura utilizada, así como las versiones de las mismas.}:
+Con el fin de evitar riesgos de seguridad informática, el cliente ha solicitado que el proyecto se apegue a su infraestructura\footnote{Por políticas de seguridad de la farmacéutica, no se enunciarán las herramientas e infraestructura utilizada, tampoco las versiones de las mismas.}, además de cumplir con la siguientes especificaciones:
 \begin{enumerate}
-\item Sistema AutoSA debe ser capaz de ser ejecutado en los sistemas operativos más comunes en la industria.
+\item Capacidad del Sistema AutoSA para ser ejecutado en los sistemas operativos más comunes en la industria.
 \item Base de datos relacional SQL.
 \item Uso de la herramienta \textit{Sahi} para automatizar la interacción con el \textit{Sistema de Abastecimiento}.
 \item Las contraseñas de los usuarios para el acceso a la interfaz web deben ser almacenadas utilizando un algoritmo de cifrado.
@@ -162,7 +162,7 @@ El cliente ha solicitado que el proyecto se apegue a su infraestructura, para co
 
 
 \section{Casos de uso}\label{sec:casos-uso}
-Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Así mismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. En la Figura \ref{fig:dia-casos-uso} se muestra el diagrama de casos de uso del sistema AutoSA.
+Un caso de uso es la representación de las posibles interacciones entre el sistema y sus actores, entendiendo un actor como una instancia (usuario u otro sistema). Asimismo, un caso de uso describe la funcionalidad del sistema por medio de mensajes y respuestas entre el actor y el sistema\cite{ApressSE}. En la Figura \ref{fig:dia-casos-uso} se muestra el diagrama de casos de uso del sistema AutoSA.
 
 \begin{figure}[h]
   \centering
@@ -171,7 +171,7 @@ Un caso de uso es la representación de las posibles interacciones entre el sist
   \label{fig:dia-casos-uso}
 \end{figure}
 
-Con el fin de explicar mejor el flujo de atención de una orden de reposición es necesario mostrar el diagrama de estados de una orden de reposición durante el flujo de \textbf{envío de órdenes de reposición} (sección \ref{sec:intro-contexto}).\\
+Con el fin de explicar mejor el flujo de atención de una orden de reposición, es necesario mostrar el diagrama de estados de una orden de reposición durante el flujo de \textbf{envío de órdenes de reposición} (sección \ref{sec:intro-contexto}).\\
 Los estados que puede tomar una orden (Figura \ref{fig:dia-estados-orden}) indican:
 \begin{itemize}
   \item Si la solicitud está lista para ser procesada: \texttt{Nueva} o \texttt{Contestada}.
@@ -183,11 +183,11 @@ Los estados que puede tomar una orden (Figura \ref{fig:dia-estados-orden}) indic
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-estados-orden} 
-  \caption{Diagrama de estados de una orden de reposición durante la ruta de respuesta de órdenes de reposición.}
+  \caption{Diagrama de estados de una orden de reposición durante la rutina de respuesta de órdenes de reposición.}
   \label{fig:dia-estados-orden}
 \end{figure}
 
-Es importante mencionar que en las siguientes descripciones de caso de uso no se hará referencia al contenido exacto de las páginas así como el nombre de los campos, únicamente se hará mención de los campos necesarios para dar una explicación clara del caso.
+Es importante mencionar que en las siguientes descripciones de caso de uso no se hará referencia al contenido exacto de las páginas, ni el nombre de los campos, únicamente se hará mención de los campos necesarios para dar una explicación clara del caso.
 
 \subsection{Contestar órdenes}\label{cu-contestar}
 \paragraph{Identificador:}
@@ -196,8 +196,8 @@ CU-CONTESTAR
 Usuario
 \paragraph{Descripción:}
 El procedimiento principal para contestar las órdenes de reposición listadas en el \textit{Sistema de Abastecimiento} del \textit{Instituto Salud}, como se muestra en la Figura \ref{fig:dia-activity-contestar}, inicia con la consulta de la pantalla de acceso al \textit{Sistema de Abastecimiento}.\\
-El alcance de este caso comprende el acceso al \textit{Sistema de Abastecimiento}, contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
-Queda fuera de alcance la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso Generación de Reportes.
+El alcance de este caso comprende el acceso al \textit{Sistema de Abastecimiento}: contestar y enviar las órdenes de reproducción almacenando los datos y generando la captura de pantalla de dichas órdenes.\\
+Queda fuera de alcance la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente. Es cubierto por el caso de uso Generación de Reportes.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item El \textit{Sistema de Abastecimiento} se encuentra funcionando correctamente.
@@ -205,7 +205,7 @@ Queda fuera de alcance la obtención del reporte con las órdenes de reposición
 \end{enumerate}
 \paragraph{Secuencia normal:}
 \begin{enumerate}
-  \item Inicia sesión en el \textit{Sistema de Abastecimiento}: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
+  \item Inicia sesión en el \textit{Sistema de Abastecimiento}: provee nombre de usuario y solicita al usuario ingresar la contraseña.
   \item Dirige el explorador a la pantalla donde se encuentra el listado con las órdenes de reposición que no han sido contestadas.
   \item Para cada orden de reposición del listado que se muestra se aplica el caso de uso \textbf{CU-GUARDAR-NUEVA}.
   \item Para cada solicitud en la base de datos con estado \textbf{Nueva} se aplican los casos de uso:
@@ -239,7 +239,7 @@ CU-GUARDAR-NUEVA
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Una orden de reposición es almacenada por primera vez con la información que se muestra en el listado de órdenes de reposición, este caso de uso corresponde a la actividad 4 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
+Una orden de reposición es almacenada por primera vez con la información que se muestra en el listado de órdenes de reposición. Este caso de uso corresponde a la actividad 4 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Se tiene indicado un renglón del listado de órdenes de reposición sobre el cual se realizará este caso de uso.
@@ -263,7 +263,7 @@ Una orden de reposición es almacenada por primera vez con la información que s
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
-  \item Si el listado muestra la URL de envío y la orden no ha sido almacenada, entonces la orden es almacenada con estado \textbf{Contestada} y se registra la \textbf{cantidad solicitada} en 0.
+  \item Si el listado muestra la URL de envío y la orden no ha sido almacenada, la orden es almacenada con estado \textbf{Contestada} y se registra \textbf{cantidad solicitada} igual a 0.
   \item Si ocurre algún error la orden es almacenada con estado \textbf{Error}.
 \end{enumerate}
 
@@ -274,7 +274,7 @@ CU-RESPONDER-ORDEN
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-En la pantalla para contestar una orden de reposición se llenan los formularios y se almacena la información de la pantalla en el registro de la base de datos que corresponde a la orden de reposición, este caso de uso corresponde a las actividades 6 y 7 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
+En la pantalla para contestar una orden de reposición se llenan los formularios y se almacena la información de la pantalla en el registro de la base de datos que corresponde a la orden de reposición. Este caso de uso corresponde a las actividades 6 y 7 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Se indica una orden de reposición almacenada en la base de datos sobre la cual se aplica este caso de uso.
@@ -289,18 +289,18 @@ En la pantalla para contestar una orden de reposición se llenan los formularios
   \begin{enumerate}
     \item Fecha de fabricación:
     \begin{itemize}
-      \item Sí el mes de la fecha actual es diciembre, entonces la fecha de fabricación es el 1 de enero del año siguiente.
+      \item Si el mes de la fecha actual es diciembre, entonces la fecha de fabricación es el 1 de enero del año siguiente.
       \item En caso contrario (el mes de la fecha actual no es diciembre), entonces la fecha de fabricación es el 1 de enero del año actual.
     \end{itemize}
-    \item Fecha de caducidad: último día del año en curso si la fecha actual no es del mes de diciembre, en caso contrario se toma el año siguiente.
+    \item Fecha de caducidad: último día del año en curso, si la fecha actual no es del mes de diciembre; en caso contrario se toma el año siguiente.
     \begin{itemize}
-      \item Sí el mes de la fecha actual es diciembre, entonces la fecha de caducidad es el 31 de diciembre del año siguiente.
+      \item Si el mes de la fecha actual es diciembre, entonces la fecha de caducidad es el 31 de diciembre del año siguiente.
       \item En caso contrario (el mes de la fecha actual no es diciembre), entonces la fecha de caducidad es el 31 de diciembre del año actual.
     \end{itemize}
   \end{enumerate}
   \item Almacena en la base de datos los campos de los formularios.
   \item Cambia el estado de la orden a \textbf{Contestada}.
-  \item Activar el botón ``contestar'' del formulario de la orden de reposición.
+  \item Activa el botón ``contestar'' del formulario de la orden de reposición.
 \end{enumerate}
 \paragraph{Postcondiciones:}
 \begin{enumerate}
@@ -320,7 +320,7 @@ CU-ENVIAR-ORDEN
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Enviar la orden de reposición contestada de regreso al \textit{Sistema de Abastecimiento}, este caso de uso corresponde a las actividades 8 y 9 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
+Enviar la orden de reposición contestada de regreso al \textit{Sistema de Abastecimiento}. Este caso de uso corresponde a las actividades 8 y 9 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Una orden de reposición registrada en la base de datos.
@@ -335,7 +335,7 @@ Enviar la orden de reposición contestada de regreso al \textit{Sistema de Abast
 \end{enumerate}
 \paragraph{Postcondiciones:}
 \begin{enumerate}
-  \item El folio de envió de la orden de reposición se encuentra guardado en la base datos.
+  \item El folio de envío de la orden de reposición se encuentra guardado en la base datos.
   \item El estado de la orden en la base de datos es \textbf{Enviada}.
 \end{enumerate}
 \paragraph{Excepciones:}
@@ -350,7 +350,7 @@ CU-GENERAR-ACUSE
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Generar el acuse de envío de la orden de reposición, este caso de uso corresponde a la actividad 10 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
+Generar el acuse de envío de la orden de reposición. Este caso de uso corresponde a la actividad 10 del diagrama de actividad de la Figura \ref{fig:dia-activity-contestar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Una orden de reposición registrada en la base de datos.
@@ -368,7 +368,7 @@ Generar el acuse de envío de la orden de reposición, este caso de uso correspo
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
-  \item En caso de algún error se registra el error en la bitácora del sistema (el usuario posteriormente podrá volver a imprimir el acuse, ver caso de uso \textbf{CU-VISUALIZAR}).
+  \item En caso de algún error, se registra el error en la bitácora del sistema (el usuario posteriormente podrá volver a imprimir el acuse. Ver caso de uso \textbf{CU-VISUALIZAR}).
 \end{enumerate}
 
 
@@ -378,9 +378,9 @@ CU-VERIFICAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas, en la Figura \ref{fig:dia-activity-verificar} se muestra que dicho procedimiento comienza con la actividad de mostrar la página de acceso al \textit{Sistema de Abastecimiento} para después dirigirse a la página donde se realiza la búsqueda de órdenes de reposición por estado (Contestada, Enviada, Cancelada).\\
+Modelar el procedimiento automatizado para verificar órdenes de reposición canceladas. En la Figura \ref{fig:dia-activity-verificar} se muestra que dicho procedimiento comienza con la actividad de mostrar la página de acceso al \textit{Sistema de Abastecimiento} para después dirigirse a la página donde se realiza la búsqueda de órdenes de reposición por estado (Contestada, Enviada, Cancelada).\\
 El alcance de este caso de uso comprende el acceso al \textit{Sistema de Abastecimiento}, búsqueda de órdenes de reposición con estado \textbf{Cancelado} y comparación con la base de datos.\\
-Queda fuera de alcance: la actualización masiva del estado de órdenes de reposición es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}, y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}.
+Quedan fuera de alcance: la actualización masiva del estado de órdenes de reposición (es cubierto en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}) y la obtención del reporte con las órdenes de reposición que han sido canceladas recientemente (es cubierto por el caso de uso \textbf{CU-GENERAR-REPORTE}).
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item El \textit{Sistema de Abastecimiento} se encuentra funcionando correctamente.
@@ -404,7 +404,7 @@ Queda fuera de alcance: la actualización masiva del estado de órdenes de repos
 \paragraph{Postcondiciones:}
 \begin{enumerate}
   \item Se cuenta con la relación de órdenes de reposición atendidas por el sistema que han sido canceladas en el \textit{Sistema de Abastecimiento} y no se tenía conocimiento previo.
-  \item Las órdenes de reposición publicadas en el \textit{Sistema de Abastecimiento} dentro de los últimos siete día a la fecha actual reflejan en la base de datos dentro del campo \textbf{EstadoSA}\footnote{Este campo refleja el estado de atención registrado dentro del \textit{Sistema de Abastecimiento}.}.
+  \item Las órdenes de reposición publicadas en el \textit{Sistema de Abastecimiento} dentro de los últimos siete días a la fecha actual reflejan en la base de datos dentro del campo \textbf{EstadoSA}\footnote{Este campo refleja el estado de atención registrado dentro del \textit{Sistema de Abastecimiento}.}.
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
@@ -418,7 +418,7 @@ CU-ACTUALIZAR-ESTATUS-SA
 \paragraph{Actores:}
 Robot
 \paragraph{Descripción:}
-Actualizar en forma masiva el estado de atención en el \textit{Sistema de Abastecimiento} dentro de la base de datos del sistema AutoSA, este caso de uso corresponde a la actividad 6 del diagrama de actividad de la Figura \ref{fig:dia-activity-verificar}.
+Actualizar en forma masiva el estado de atención en el \textit{Sistema de Abastecimiento} dentro de la base de datos del sistema AutoSA. Este caso de uso corresponde a la actividad 6 del diagrama de actividad de la Figura \ref{fig:dia-activity-verificar}.
 \paragraph{Precondiciones:}
 \begin{enumerate}
   \item Se cuenta con una lista de órdenes de reposición.
@@ -445,7 +445,7 @@ CU-ENTRAR-WEB
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Este caso de uso define el flujo para autorizar la entrada de un usuario a la interfaz web del sistema, en el diagrama de actividad de la Figura \ref{fig:dia-activity-login} se puede observar que el flujo inicia cuando el sistema muestra la pantalla de acceso (parte superior izquierda del apartado AutoSA). Este es el punto de acceso que tienen los usuarios para hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
+Este caso de uso define el flujo para autorizar la entrada de un usuario a la interfaz web del sistema. En el diagrama de actividad de la Figura \ref{fig:dia-activity-login} se puede observar que el flujo inicia cuando el sistema muestra la pantalla de acceso (parte superior izquierda del apartado AutoSA). Este es el punto de acceso que tienen los usuarios para hacer acciones de administración de las órdenes de reposición atendidas por las rutinas de automatización, generación de reportes y actualización de catálogos.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-login}
@@ -467,7 +467,7 @@ Este caso de uso define el flujo para autorizar la entrada de un usuario a la in
     \item Nombre de usuario.
     \item Contraseña.
   \end{enumerate}
-  \item El sistema busca el nombre de usuario en la base de datos
+  \item El sistema busca el nombre de usuario en la base de datos.
   \item El sistema compara la contraseña provista por el usuario con el valor almacenado en la base de datos.
   \item Muestra la pantalla de generación de reportes.
 \end{enumerate}
@@ -478,7 +478,7 @@ Este caso de uso define el flujo para autorizar la entrada de un usuario a la in
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
-  \item Los siguientes escenarios se consideran un error de autenticación.
+  \item Los siguientes escenarios se consideran un error de autenticación:
   \begin{itemize}
     \item El usuario no existe en la base de datos.
     \item El usuario tiene estado \textbf{deshabilitado}.
@@ -494,7 +494,7 @@ Usuario
 \paragraph{Descripción:}
 Este caso de uso ofrece al usuario la generación de reportes, entendiendo como reporte un documento de \textit{Excel}\textsuperscript{\textcopyright} que contiene el resultado de una consulta a la base de datos.\\
 En el diagrama de actividad de la Figura \ref{fig:dia-activity-reporter} se muestra el flujo que sigue este caso de uso, el cual comienza con el usuario solicitando la pantalla para la generación de reportes (parte superior del apartado Usuario del diagrama de actividad).\\
-Es posible que la consulta a la base de datos (primera actividad del apartado AutoSA del diagrama de actividad) haga referencia a catálogos con claves de productos y clientes que cambian constantemente por lo que es necesario considerar la actualización de catálogos, tal funcionalidad es cubierta por el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
+Es posible que la consulta a la base de datos (primera actividad del apartado AutoSA del diagrama de actividad) haga referencia a catálogos con claves de productos y clientes que cambian constantemente, por lo que es necesario considerar la actualización de catálogos. Tal funcionalidad es cubierta por el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-reporter}
@@ -523,7 +523,7 @@ Es posible que la consulta a la base de datos (primera actividad del apartado Au
   \end{enumerate}
   \item El sistema ejecuta los siguientes pasos:
   \begin{enumerate}
-    \item Realiza la consulta a la base de datos definida para el reporte requerido en 1.a.
+    \item Realiza la consulta a la base de datos definida para el reporte requerido en el paso 2.a.
     \item El resultado del paso anterior es escrito en un archivo extendido de \textit{Excel}\textsuperscript{\textcopyright} y depositado en el sistema de archivos.
     \item Muestra al usuario la ruta en el sistema de archivos donde fue depositado el reporte.
   \end{enumerate}
@@ -544,7 +544,7 @@ CU-ACTUALIZAR-CATALOGO
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz web, la Figura \ref{fig:dia-activity-cat-update} muestra el diagrama de actividad para este caso de uso donde se puede apreciar que se inicia cuando el usuario solicita la pantalla de administración de catálogos (parte superior del apartado Usuario del diagrama de actividad).
+Define la actualización masiva de los catálogos en la base de datos mediante un archivo ingresado por un usuario de la interfaz web. La Figura \ref{fig:dia-activity-cat-update} muestra el diagrama de actividad para este caso de uso, donde se puede apreciar que se inicia cuando el usuario solicita la pantalla de administración de catálogos (parte superior del apartado Usuario del diagrama de actividad).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-cat-update}
@@ -591,7 +591,7 @@ CU-BUSCAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-Define el flujo para la búsqueda de órdenes de reposición, la Figura \ref{fig:dia-activity-search} muestra el diagrama de actividad para este caso de uso en ella se puede apreciar que el flujo inicia cuando el usuario solicita la pantalla de búsqueda de órdenes (parte superior izquierda) y termina cuando el sistema muestra el resultado de la búsqueda (parte inferior derecha si la búsqueda tiene al menos una orden).
+Define el flujo para la búsqueda de órdenes de reposición. La Figura \ref{fig:dia-activity-search} muestra el diagrama de actividad para este caso de uso, en ella se puede apreciar que el flujo inicia cuando el usuario solicita la pantalla de búsqueda de órdenes (parte superior izquierda) y termina cuando el sistema muestra el resultado de la búsqueda (parte inferior derecha, si la búsqueda tiene al menos una orden).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-search}
@@ -605,7 +605,7 @@ Define el flujo para la búsqueda de órdenes de reposición, la Figura \ref{fig
 \paragraph{Secuencia normal:}
 \begin{enumerate}
   \item El usuario navega a la pantalla de búsqueda de órdenes de reposición.
-  \item El usuario realiza ingresa los criterios para la búsqueda presentados en el filtro:
+  \item El usuario ingresa los criterios para la búsqueda presentados en el filtro:
   \begin{enumerate}
     \item Número de orden.
     \item Estatus de atención.
@@ -619,7 +619,7 @@ Define el flujo para la búsqueda de órdenes de reposición, la Figura \ref{fig
 \end{enumerate}
 \paragraph{Excepciones:}
 \begin{enumerate}
-  \item En caso de no contar con una conexión a la base de datos se muestra un mensaje de error informando al usuario.
+  \item En caso de no contar con una conexión a la base de datos, se muestra un mensaje de error informando al usuario.
 \end{enumerate}
 
 
@@ -629,7 +629,7 @@ CU-VISUALIZAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición, en la Figura \ref{fig:dia-activity-view} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta sección es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición (caso de uso \textbf{CU-BUSCAR}) y seleccionado la orden para visualizar (correspondiente a las dos actividades del Usuario en el diagrama). La dependencia de este caso de uso se muestra en la Figura \ref{fig:dia-casos-uso}.
+La forma en que el usuario de la interfaz web es capaz de visualizar los datos de una orden de reposición. En la Figura \ref{fig:dia-activity-view} se muestra el diagrama de actividad que sigue este caso de uso. Para llegar a esta sección es necesario que el usuario haya ejecutado la búsqueda de órdenes de reposición (caso de uso \textbf{CU-BUSCAR}) y seleccionado la orden para visualizar (correspondiente a las dos actividades del Usuario en el diagrama). La dependencia de este caso de uso se muestra en la Figura \ref{fig:dia-casos-uso}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-view}
@@ -647,7 +647,7 @@ La forma en que el usuario de la interfaz web es capaz de visualizar los datos d
   \item Se muestra la pantalla con los datos de la orden:
   \begin{enumerate}
     \item Se muestran todos los datos capturados del \textit{Sistema de Abastecimiento} durante el procedimiento de atención.
-    \item También se muestran los estados de atención, es decir, el estado en el \textit{Sistema de Abastecimiento}  y el estado de atención.
+    \item También se muestran los estados de atención, es decir, el estado en el \textit{Sistema de Abastecimiento}  y el estado de atención en el sistema AutoSA.
   \end{enumerate}
   \item Se muestran enlaces para que el usuario pueda editar los datos de la orden (caso de uso \textbf{CU-EDITAR}) y también para generar el acuse de envío (caso de uso \textbf{CU-GENERAR-ACUSE}).
   \item En caso de seleccionar la generación del acuse de envío se ejecuta el caso de uso \textbf{CU-GENERAR-ACUSE}.
@@ -668,7 +668,7 @@ CU-EDITAR
 \paragraph{Actores:}
 Usuario
 \paragraph{Descripción:}
-La forma en que el usuario de la interfaz web puede modificar los datos de una orden de reposición desplegada en pantalla (caso de uso \textbf{CU-BUSCAR}), en la Figura \ref{fig:dia-activity-edit} se muestra el diagrama de actividad que sigue este caso de uso, para llegar a esta vista es necesario que el usuario haya ejecutado la visualización de la orden de reposición que desea modificar (primeras dos actividades del Usuario en el diagrama). La dependencia de este caso de uso se observa en la Figura \ref{fig:dia-casos-uso}.
+La forma en que el usuario de la interfaz web puede modificar los datos de una orden de reposición desplegada en pantalla (caso de uso \textbf{CU-BUSCAR}). En la Figura \ref{fig:dia-activity-edit} se muestra el diagrama de actividad que sigue este caso de uso. Para llegar a esta vista es necesario que el usuario haya ejecutado la visualización de la orden de reposición que desea modificar (primeras dos actividades del Usuario en el diagrama). La dependencia de este caso de uso se observa en la Figura \ref{fig:dia-casos-uso}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{dia-activity-edit}
@@ -687,8 +687,8 @@ La forma en que el usuario de la interfaz web puede modificar los datos de una o
 \paragraph{Secuencia normal:}
 \begin{enumerate}
   \item El usuario navega a la pantalla de edición con la orden de reposición visualizada (caso de uso \textbf{CU-VISUALIZAR}).
-  \item Modificar cualquiera de los campos modificables.
-  \item Seleccionar el botón Guardar.
+  \item Cambia cualquiera de los campos modificables.
+  \item Selecciona el botón Guardar.
 \end{enumerate}
 
 % espaciado
@@ -705,5 +705,5 @@ La forma en que el usuario de la interfaz web puede modificar los datos de una o
 \end{enumerate}
 
 \section{Resumen}
-Se han definido el el alcance del proyecto que comprende la automatización de los procesos realizados por los operadores del \textit{Sistema de Abastecimiento} hasta la generación del formato de salida, el alcance de la interfaz web comprende las tareas de modificación de órdenes de reposición atendidas, generación de reportes y actualización de catálogos.\\
-Bajo los puntos anteriores se han definido los casos de uso que reflejan el comportamiento esperado del sistema para la automatización de procesos y la interfaz web.
+Se ha definido el alcance del proyecto que comprende la automatización de los procesos realizados por los operadores del \textit{Sistema de Abastecimiento} hasta la generación del formato de salida, así como el alcance de la interfaz web comprende las tareas de modificación de órdenes de reposición atendidas, generación de reportes y actualización de catálogos.\\
+A lo largo de este capítulo se han definido los casos de uso que reflejan el comportamiento esperado del sistema para la automatización de procesos y la interfaz web.
