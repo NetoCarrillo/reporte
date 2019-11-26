@@ -1,8 +1,8 @@
 \subsection{Portal Web}\label{sec:web-portal}
-La implementación del \textbf{Portal Web} se realizó bajo la Arquitectura Orientada a Servicios (Apéndice \ref{sec:soa}), lo cual implica una división del \textbf{Portal Web} de la siguiente forma:
+La implementación del componente \textbf{Portal Web} se realizó bajo la Arquitectura Orientada a Servicios (Apéndice \ref{sec:soa}), lo cual implica una división del \textbf{Portal Web} de la siguiente forma:
 \begin{itemize}
-	\item \textit{backend}: la parte del portal ofrece los servicios web, con tiene los servicios de autentificación, administración de órdenes de reposición y generación de reportes.
-	\item \textit{frontend}: la parte del portal que consume los servicios web y muestra una interfaz gráfica al usuario, contiene las páginas de HTML y rutinas para consumir los servicios del \textit{backend}.
+	\item \textit{backend}: la parte del portal ofrece los servicios web. Contiene los servicios de autentificación, administración de órdenes de reposición y generación de reportes.
+	\item \textit{frontend}: la parte del portal que consume los servicios web y muestra una interfaz gráfica al usuario. Contiene las páginas de HTML y rutinas para consumir los servicios del \textit{backend}.
 \end{itemize}
 
 \subsubsection{Implementación del backend}\label{sec:backend}
@@ -75,7 +75,7 @@ public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContext
 % espaciado
 \pagebreak
 % espaciado
-	\item Habilitar servicios de autorización: se refiere a dar un \textit{token} de acceso, en el código \ref{lst:enable-auth-server} se muestra la declaración de una clase para la configuración de un servidor de autorización:
+	\item Habilitar servicios de autorización: se refiere a dar un \textit{token} de acceso. En el código \ref{lst:enable-auth-server} se muestra la declaración de una clase para la configuración de un servidor de autorización:
 
 \begin{adjustwidth}{\listingfixwidth}{0pt}
 \begin{lstlisting}[language=Java, caption={Clase de autentificación de usuarios.}, captionpos=b, label={lst:enable-auth-server}]
@@ -142,7 +142,7 @@ public void configure(ClientDetailsServiceConfigurer clients) throws Exception{
 \end{lstlisting}
 \end{adjustwidth}
 
-	\item Verificación de la contraseña de usuario: este punto verifica que la clave derivada de la contraseña (sección \ref{sec:key-derivation}) dada por el usuario coincida con la derivación almacenada en la base de datos, en el Código \ref{lst:kdf} se observa el método para derivar la contraseña:
+	\item Verificación de la contraseña de usuario: este punto verifica que la clave derivada de la contraseña (sección \ref{sec:key-derivation}) dada por el usuario coincida con la derivación almacenada en la base de datos. En el Código \ref{lst:kdf} se observa el método para derivar la contraseña:
 	\begin{enumerate}
 		\item Línea 2: creación del objeto que contiene la especificación para la derivación de la contraseña.
 		\item Línea 3: algoritmo de derivación.
@@ -159,7 +159,7 @@ public byte[] derivate(char[] password, byte[] salt) throws NoSuchAlgorithmExcep
 \end{lstlisting}
 \end{adjustwidth}
 
-	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de Internet, es decir, rutinas de \textit{Javascript}, páginas HTML, hojas de estilo e imágenes; o el consumo de servicios web en el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
+	\item Habilitar acceso a recursos: estos recursos pueden ser los elementos estáticos que muestra el explorador de internet, es decir, rutinas de \textit{Javascript}, páginas HTML, hojas de estilo e imágenes; o el consumo de servicios web. En el Código \ref{lst:enable-resource-server} se muestra la configuración del servidor de recursos:
 
 	\begin{enumerate}
 		\item Línea 2: habilitar el servidor de recursos.
@@ -185,9 +185,9 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter{
 \end{enumerate}
 
 \paragraph{\noindent Implementación de los servicios web de administración\\}
-Los servicios web de administración fueron divididos en dos controladores REST de \textit{Spring}, 
+Los servicios web de administración fueron divididos en dos controladores REST de \textit{Spring}: 
 \begin{enumerate}
-	\item \texttt{DataController}: expone servicios referentes a la gestión de órdenes de reposición, en el Código \ref{lst:data-controller} se muestra la estructura principal de esta clase:
+	\item \texttt{DataController}: expone servicios referentes a la gestión de órdenes de reposición. En el Código \ref{lst:data-controller} se muestra la estructura principal de esta clase:
 	\begin{enumerate}
 		\item Línea 1: indicación para crear un un \textit{bean} que expone servicios REST.
 		\item Línea 3: inyección del \textit{bean} de \textit{MyBatis} para administrar órdenes de reposición.
@@ -203,14 +203,14 @@ public class DataController{
 \end{lstlisting}
 \end{adjustwidth}
 
-	Dentro de la clase se declara como un \textit{bean} que exponen servicios web se declaran métodos que serán expuestos como un servicio web. En el Código \ref{lst:get-orden-data-controller} se muestra el servicio web para obtener una orden de reposición:
+	Dentro de la clase anotada como \texttt{RestController} se declaran métodos que son expuestos como servicio web. En el Código \ref{lst:get-orden-data-controller} se muestra el servicio web para obtener una orden de reposición:
 	\begin{enumerate}
-		\item Línea 1: la anotación \texttt{RequestMapping} indica como se debe asociar el método URL por medio de sus parámetros:
+		\item Línea 1: la anotación \texttt{RequestMapping} indica cómo se debe asociar el método URL por medio de sus parámetros:
 		\begin{enumerate}
-			\item value: URL con la cual es asociada el método, el parámetro entre corchetes indica que es variable.
-			\item method: método de HTTP al cual es asociado el método. 
+			\item value: URL asociada el método; el parámetro entre corchetes indica que es variable.
+			\item method: método de HTTP asociado el método.
 		\end{enumerate}
-		\item Línea 3: la anotación \texttt{PathVariable} indica que el valor del parámetro es tomado de la URL, en este caso se refiere al número identificador de la orden de reposición buscada.
+		\item Línea 3: la anotación \texttt{PathVariable} indica que el valor del parámetro es tomado de la URL. En este caso se refiere al número identificador de la orden de reposición buscada.
 		\item Línea 5: obtención de la orden de reposición.
 	\end{enumerate}
 %espaciado
@@ -226,7 +226,7 @@ public Orden getOrden(@PathVariable("id") Long id) throws SQLException{
 \end{lstlisting}
 \end{adjustwidth}
 
-	\item \texttt{ReportController}: expone servicios referentes a la generación de reportes, en el Código \ref{lst:report-controller} se muestra la estructura principal de esta clase:
+	\item \texttt{ReportController}: expone servicios referentes a la generación de reportes. En el Código \ref{lst:report-controller} se muestra la estructura principal de esta clase:
 \begin{adjustwidth}{\listingfixwidth}{0pt}
 \begin{lstlisting}[language=Java, caption={Controlador para exponer servicios web de generación de reportes.}, captionpos=b, label={lst:report-controller}]
 @Controller
@@ -244,14 +244,14 @@ public class ReportController{
 	\begin{enumerate}
 		\item Línea 1: la anotación \texttt{RequestMapping} indica como se debe asociar el método URL por medio de sus parámetros:
 		\begin{enumerate}
-			\item \texttt{value}: URL con la cual es asociada el método.
-			\item \texttt{method}: método de HTTP al cual es asociado el método.
-			\item \texttt{produces}: indica el formato de respuesta, en este caso es un flujo de datos.
+			\item \texttt{value}: URL asociada el método.
+			\item \texttt{method}: método de HTTP asociado el método.
+			\item \texttt{produces}: indica el formato de respuesta; en este caso es un flujo de datos.
 		\end{enumerate}
 		\item Líneas 12 y 13: traducción de las fechas que acotan el reporte a un objeto \texttt{Date}.
 		\item Línea 15: la construcción del reporte es delegada al módulo \textbf{Generación de reportes}.
-		\item Línea 16: si el reporte no es vacío, entonces se manda el reporte como flujo de \textit{bytes}.
-		\item Línea 17: si el reporte es vacío se manda un mensaje de error.
+		\item Línea 16: si el reporte no es vacío, se manda el reporte como flujo de \textit{bytes}.
+		\item Línea 17: si el reporte es vacío, se manda un mensaje de error.
 	\end{enumerate}
 
 % espaciado
@@ -290,7 +290,7 @@ public void generateReport(HttpServletRequest request,
 
 
 \subsubsection{Implementación del frontend}\label{sec:frontend}
-La implementación del \textit{frontend} está basada en el marco de trabajo \textit{AngularJS}, en el Código \ref{lst:portal-js} como se muestra la implementación de la aplicación con \textit{AngularJS}:
+La implementación del \textit{frontend} está basada en el marco de trabajo \textit{AngularJS}. En el Código \ref{lst:portal-js} se muestra la implementación de la aplicación con \textit{AngularJS}:
 \begin{enumerate}
 	\item Línea 1: creación del módulo de \textit{AngularJS}.
 	\item Líneas 2 a 19: configuración de las vistas y rutas.
@@ -313,7 +313,7 @@ portal.config(function($routeProvider, $httpProvider){
 });
 \end{lstlisting}
 
-Así mismo, la aplicación cuenta con un control principal que asume la función de atender la barra de navegación. Esta barra permite al usuario salir de la aplicación y navegar entre las vistas reportes, catálogos y búsqueda. en el Código \ref{lst:view-nav-bar} se muestra la implementación.
+Asimismo, la aplicación cuenta con un control principal que asume la función de atender la barra de navegación. Esta barra permite al usuario salir de la aplicación y navegar entre las vistas reportes, catálogos y búsqueda. En el Código \ref{lst:view-nav-bar} se muestra la implementación.
 
 \begin{lstlisting}[language=HTML, captionpos=b, caption={Barra de navegación.}, label={lst:view-nav-bar}]
 <div ng-show="authenticated" ng-controller="navigation" class="container">
@@ -349,10 +349,10 @@ Los flujos de autentificación y autorización del sistema AutoSA se hacen sigui
 \end{adjustwidth}
 
 
-Como se aprecia en la Figura \ref{lst:longin-view} se liga función \texttt{login} al evento de envío de la forma, la implementación de la función se muestra en el Código \ref{lst:login-ctrl-js}:
+Como se aprecia en la Figura \ref{lst:longin-view}, ligar la función \texttt{login} al evento de envío de la forma. La implementación de la función se muestra en el Código \ref{lst:login-ctrl-js}:
 \begin{enumerate}
-	\item Línea 1, llamada a la función \texttt{login} del servicio de autentificación, \texttt{LoginService},
-	\item Líneas 2 y 3, en caso de que la llamada sea exitosa se agrega el \textit{token} de acceso a los encabezados de las llamadas a servicios web, con este paso no es necesario hacer de manera explícita la autorización a recursos.
+	\item Línea 1: llamada a la función \texttt{login} del servicio de autentificación, \texttt{LoginService},
+	\item Líneas 2 y 3: en caso de que la llamada sea exitosa, se agrega el \textit{token} de acceso a los encabezados de las llamadas a servicios web. Con este paso no es necesario hacer de manera explícita la autorización a recursos.
 \end{enumerate}
 
 % espaciado
@@ -370,11 +370,11 @@ LoginService.login($scope.credentials)
 \end{lstlisting}
 \end{adjustwidth}
 
-El servicio \texttt{LoginService} es el encargado de efectuar la llamada al servicio web de \textit{token} de acceso, el Código \ref{lst:login-service-js} se muestra la implementación de tal servicio:
+El servicio \texttt{LoginService} es el encargado de efectuar la llamada al servicio web de \textit{token} de acceso. El Código \ref{lst:login-service-js} muestra la implementación de tal servicio:
 \begin{enumerate}
 	\item Línea 1: declaración del servicio \texttt{LoginService}.
-	\item Línea 2: declaración de la función \texttt{login}, esta función es la encargada de llamar al servicio web para obtener un \textit{token} de acceso.
-	\item Línea 3: mapa de configuración para la llamada al servicio web de \textit{token} de acceso, en ésta se muestran únicamente las propiedades más relevantes.
+	\item Línea 2: declaración de la función \texttt{login}. Esta función es la encargada de llamar al servicio web para obtener un \textit{token} de acceso.
+	\item Línea 3: mapa de configuración para la llamada al servicio web de \textit{token} de acceso. En ésta se muestran únicamente las propiedades más relevantes.
 	\item Línea 4: URL del servicio web.
 	\item Línea 7: encabezado con las credenciales del cliente de \textit{OAuth 2.0}.
 	\item Línea 10: nombre de usuario.
@@ -410,8 +410,8 @@ portalSrvc.service('LoginService', function($http, $q){
 \end{lstlisting}
 \end{adjustwidth}
 \item \textbf{Vista Reportes\\}
-La vista Reportes ofrece al usuario la generación de reportes, pudiendo seleccionar fechas y horas de los días en los que se atendieron las órdenes de reposición que conforman el reporte.\\
-La plantilla HTML tiene una forma como elemento principal, en el Código \ref{lst:view-report-form} se muestra la declaración de la forma y el botón para enviar el formulario, este último está ligado a la función \texttt{generate} del controlador \texttt{reportesCtrl}:
+La vista Reportes ofrece al usuario la generación de reportes, en ella puede seleccionar fechas y horas de los días en los que se atendieron las órdenes de reposición que conforman el reporte.\\
+La plantilla HTML tiene una forma como elemento principal. En el Código \ref{lst:view-report-form} se muestra la declaración de la forma y el botón para enviar el formulario; este último está ligado a la función \texttt{generate} del controlador \texttt{reportesCtrl}:
 
 \begin{enumerate}
 	\item Línea 1: uso de la directiva \texttt{ng-form} para la generación.
@@ -419,7 +419,7 @@ La plantilla HTML tiene una forma como elemento principal, en el Código \ref{ls
 	\item Líneas 4 y 5: botón para enviar el formulario.
 	\begin{enumerate}
 		\item La directiva \texttt{ng-click} liga el evento de pulsar el botón con la función del controlador.
-		\item La directiva \texttt{ng-disabled} estable que el botón es habilitado cuando la forma tenga datos válidos.
+		\item La directiva \texttt{ng-disabled} establece que el botón es habilitado cuando la forma tenga datos válidos.
 	\end{enumerate}
 \end{enumerate}
 
@@ -434,9 +434,9 @@ La plantilla HTML tiene una forma como elemento principal, en el Código \ref{ls
 \end{lstlisting}
 \end{adjustwidth}
 
-La forma contiene un control para seleccionar el tipo de reporte como se muestra en el Código \ref{lst:view-report-type-select}:
+La forma contiene un control para seleccionar el tipo de reporte, como se muestra en el Código \ref{lst:view-report-type-select}:
 \begin{enumerate}
-	\item \texttt{ng-model} liga al valor de la lista con el modelo.
+	\item \texttt{ng-model} liga el valor de la lista con el modelo.
 	\item \texttt{ng-options} genera las opciones de la lista.
 	\item \texttt{ng-required} indica que es necesario seleccionar un elemento de la lista.
 \end{enumerate}
@@ -450,7 +450,7 @@ La forma contiene un control para seleccionar el tipo de reporte como se muestra
 \end{lstlisting}
 \end{adjustwidth}
 
-La forma tiene dos controles para seleccionar fecha, hora de inicio y de término, en el Código \ref{lst:view-report-datetime} se muestra el control para la fecha y hora de inicio (la selección para la fecha y hora de término es idéntico salvo que cambia la referencia al modelo):
+La forma tiene dos controles para seleccionar fecha, hora de inicio y de término. En el Código \ref{lst:view-report-datetime} se muestra el control para la fecha y hora de inicio (la selección para la fecha y hora de término es idéntico, salvo que cambia la referencia al modelo):
 \begin{enumerate}
 	\item Línea 1: la directiva \texttt{datepicker-popup} prepara el elemento para manejar el formato de fecha.
 	\item Línea 7: la directiva \texttt{timepicker} agrega el comportamiento para seleccionar la hora del día.
@@ -467,7 +467,7 @@ La forma tiene dos controles para seleccionar fecha, hora de inicio y de términ
 \end{lstlisting}
 \end{adjustwidth}
 
-La forma de generación está ligada al control \texttt{reportesCtrl} cuya implementación principal se muestra en el Código \ref{lst:report-ctrl-js}:
+La forma de generación está ligada al control \texttt{reportesCtrl}, cuya implementación principal se muestra en el Código \ref{lst:report-ctrl-js}:
 
 \begin{enumerate}
 	\item Línea 1: declaración del controlador.
@@ -495,7 +495,7 @@ El Código \ref{lst:report-service-js} muestra la implementación del servicio \
 	\item Línea 1: declaración del servicio de reportes.
 	\item Línea 2: declaración de la función que llama al servicio web.
 	\item Línea 3: construcción de los parámetros para la URL del servicio web.
-	\item Línea 4: consulta del servicio web en una nueva página del explorador de Internet.
+	\item Línea 4: consulta del servicio web en una nueva página del explorador de internet.
 \end{enumerate}
 \begin{adjustwidth}{\listingfixwidth}{0pt}
 \begin{lstlisting}[language=Javascript, caption={Servicio en \textit{AngularJS} para pedir la generación de un reporte.}, captionpos=b, label={lst:report-service-js}]
@@ -509,7 +509,7 @@ app.service('ReportService', function($http, $q, $window){
 \end{adjustwidth}
 
 \item \textbf{Vista Catálogos\\}
-La vista \textbf{Catálogos} ofrece al usuario la operación para actualizar éstos. Contiene un componente principal en el formulario con la opciones para seleccionar el catálogo. En el Código \ref{lst:view-catalog-tmpl} se muestra la estructura principal de la plantilla:\\
+La vista \textbf{Catálogos} ofrece al usuario la operación para actualizar éstos. Contiene las opciones para seleccionar el catálogo con el cuál se trabajará. En el Código \ref{lst:view-catalog-tmpl} se muestra la estructura principal de la plantilla:\\
 \begin{adjustwidth}{\listingfixwidth}{0pt}
 \begin{lstlisting}[language=HTML, captionpos=b, caption={Plantilla de la vista que muestra los catálogos.}, label={lst:view-catalog-tmpl}]
 <ng-form>
@@ -544,11 +544,11 @@ El formulario (Código \ref{lst:view-catalog-componentes}) contiene los siguient
 \end{lstlisting}
 \end{adjustwidth}
 
-La vista está relacionada con el control \texttt{catalogosCtrl}, por su parte el botón para actualizar el catálogo seleccionado se encuentra ligado a la función \texttt{update}, en el Código \ref{lst:catalogo-ctrl-js} se muestra la implementación del control de la vista:
+La vista está relacionada con el control \texttt{catalogosCtrl}; por su parte, el botón para actualizar el catálogo seleccionado se encuentra ligado a la función \texttt{update}. En el Código \ref{lst:catalogo-ctrl-js} se muestra la implementación del control de la vista:
 
 \begin{enumerate}
 	\item Línea 1: creación del control. 
-	\item Línea 2: creación de la función \texttt{update}, esta función está encargada de utilizar el servicio de catálogos para realizar la actualización del catálogo.
+	\item Línea 2: creación de la función \texttt{update}. Esta función está encargada de utilizar el servicio de catálogos para realizar la actualización del catálogo.
 	\item Línea 3: Llamada al servicio \texttt{CatalogService}.
 \end{enumerate}
 
@@ -573,7 +573,7 @@ El Código \ref{lst:catalogo-service-js} muestra la implementación del servicio
 	\item Línea 5: llamada el servicio web que actualiza el catálogo.
 \end{enumerate}
 \begin{adjustwidth}{\listingfixwidth}{0pt}
-\begin{lstlisting}[language=Javascript, caption={Servicio en \textit{AngularJS} actualizar un catálogo.}, captionpos=b, label={lst:catalogo-service-js}]
+\begin{lstlisting}[language=Javascript, caption={Servicio para actualizar un catálogo en \textit{AngularJS}.}, captionpos=b, label={lst:catalogo-service-js}]
 portalSrvc.service('CatalogService', function($http){
 	this.updateCatalog = function(file, catalog){
 		var fd = new FormData();
@@ -595,7 +595,7 @@ portalSrvc.service('CatalogService', function($http){
 La vista \textbf{Búsqueda} se compone de dos elementos:
 \begin{itemize}
 	\item \textbf{Formulario de búsqueda}: muestra un formulario con opciones para buscar órdenes de reposición.
-	\item \textbf{Lista de órdenes}: despliega las órdenes de reposición que han resultado de la búsqueda y brinda acceso a la vista \textbf{Orden} en la cual se muestran los datos de la orden de reposición. En el Código \ref{lst:view-search-list} se muestran las sentencias HTML del listado.
+	\item \textbf{Lista de órdenes}: despliega las órdenes de reposición que han resultado de la búsqueda y brinda acceso a la vista \textbf{Orden}, en la cual se muestran los datos de la orden de reposición. En el Código \ref{lst:view-search-list} se muestran las sentencias HTML del listado.
 \end{itemize}
 
 \begin{adjustwidth}{\listingfixwidth}{0pt}
@@ -632,7 +632,7 @@ $scope.buscar = function($event){
 \end{lstlisting}
 \end{adjustwidth}
 
-	\item \texttt{mostrarOrden}: cambia a la vista \textbf{Orden} donde se muestran los datos de la orden de reposición seleccionada (Código \ref{lst:show-search-ctrl-js}).
+	\item \texttt{mostrarOrden}: cambia a la vista \textbf{Orden}, donde se muestran los datos de la orden de reposición seleccionada (Código \ref{lst:show-search-ctrl-js}).
 \begin{adjustwidth}{\listingfixlargewidth}{0pt}
 \begin{lstlisting}[language=Javascript, caption={Función para mostrar la vista de una orden de reposición.}, captionpos=b, label={lst:show-search-ctrl-js}]
 $scope.mostrarOrden = function(id, $event){
@@ -642,11 +642,11 @@ $scope.mostrarOrden = function(id, $event){
 \end{adjustwidth}
 \end{itemize}
 
-El servicio \texttt{OrdenService} contiene la función para la invocación del servicio web que realiza la búsqueda de órdenes de reposición, en el Código \ref{lst:search-service-js} se muestra la implementación del servicio:
+El servicio \texttt{OrdenService} contiene la función para la invocación del servicio web que realiza la búsqueda de órdenes de reposición. En el Código \ref{lst:search-service-js} se muestra la implementación del servicio:
 \begin{enumerate}
 	\item Línea 2: crea un objeto para contener la respuesta de la llamada al servicio web.
 	\item Línea 3: llamada al servio web para buscar órdenes de reposición.
-	\item Líneas 8 y 9: en caso que la llamada al servicio web sea exitosa se guarda la respuesta en el objeto del punto 1 indicando que fue una llamada exitosa.
+	\item Líneas 8 y 9: en caso que la llamada al servicio web sea exitosa, se guarda la respuesta en el objeto del punto 1 indicando que fue una llamada exitosa.
 	\item Línea 10 y 11: en caso contrario al punto anterior, la respuesta del servicio web se guarda indicando que hubo un error en la llamada.
 \end{enumerate}
 
@@ -676,13 +676,13 @@ this.buscar = function(filtro){
 \end{adjustwidth}
 
 \paragraph{\indent 5. Vista Orden\\}
-Esta vista cumple con 3 funciones:
+Esta vista cumple 3 funciones:
 \begin{itemize}
 	\item Mostrar la información de una orden de reposición.
 	\item Hacer cambios en la información de la orden de reposición.
 	\item Obtener el acuse de envío de la orden de reposición.
 \end{itemize}
-En el Código \ref{lst:view-show-buttons}
+En el Código \ref{lst:view-show-buttons} está la implementación de los botones que efectúan dichas funciones. 
 \begin{adjustwidth}{\listingfixwidth}{0pt}
 \begin{lstlisting}[language=HTML, captionpos=b, caption={Controles de la vista de orden de reposición.}, label={lst:view-show-buttons}]
 <button class="btn btn-danger" ng-click="acuse($event)">PDF</button>
@@ -693,7 +693,7 @@ En el Código \ref{lst:view-show-buttons}
 
 El control \texttt{edicionCtrl} de esta vista tiene las funciones que utiliza la vista \textbf{Orden}:
 \begin{enumerate}
-	\item \texttt{obtener}: obtiene los datos de la orden de reposición y actualiza el modelo con el fin de mostrar tales datos en la vista (Código \ref{lst:show-orden-ctrl-js})
+	\item \texttt{obtener}: obtiene los datos de la orden de reposición y actualiza el modelo, con el fin de mostrar tales datos en la vista (Código \ref{lst:show-orden-ctrl-js}).
 \begin{adjustwidth}{\listingfixlargewidth}{0pt}
 \begin{lstlisting}[language=Javascript, caption={Función del controlador para llenar los datos de la vista de orden de reposición.}, captionpos=b, label={lst:show-orden-ctrl-js}]
 $scope.obtener = function(id, $event){
@@ -731,7 +731,7 @@ $scope.reset = function($event){
 \pagebreak
 %espaciado
 
-	\item \texttt{acuse}: llama al servicio \texttt{OrdenService} para generar el acuse de envío, como resultado muestra la ruta donde se generó dicho acuse de envío (Código \ref{lst:acuse-orden-ctrl-js}).
+	\item \texttt{acuse}: llama al servicio \texttt{OrdenService} para generar el acuse de envío; como resultado muestra, la ruta donde se generó dicho acuse de envío (Código \ref{lst:acuse-orden-ctrl-js}).
 \begin{adjustwidth}{\listingfixlargewidth}{0pt}
 \begin{lstlisting}[language=Javascript, caption={Función del controlador de \textit{AngularJS} para generar el acuse de envío de la orden de reposición.}, captionpos=b, label={lst:acuse-orden-ctrl-js}]
 $scope.genPdf = function($event){
@@ -745,7 +745,7 @@ $scope.genPdf = function($event){
 
 \end{enumerate}
 
-En la descripción anterior de las funciones del control \texttt{edicionCtrl} se muestran las llamadas al servicio \texttt{OrdenService}, a continuación se muestra la implementación de dichas funciones:
+En la descripción anterior de las funciones del control \texttt{edicionCtrl} se muestran las llamadas al servicio \texttt{OrdenService}. A continuación se muestra la implementación de dichas funciones:
 
 \begin{enumerate}
 	\item \texttt{getOrden}: consume el servicio web para obtener los datos de una orden de reposición (Código \ref{lst:get-orden-service-js}).

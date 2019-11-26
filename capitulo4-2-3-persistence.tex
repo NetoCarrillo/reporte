@@ -1,14 +1,14 @@
 \subsection{Persistencia}\label{sec:persistence}
-La implementación del componente \textbf{Persistencia} se enfoca en dar servicio a los componentes tanto de escritorio como del web, por esta razón la implementación se ha dividido en dos partes:
+La implementación del componente \textbf{Persistencia} se enfoca en dar servicio a los componentes tanto de escritorio como del web. Por esta razón, la implementación se ha dividido en dos partes:
 \begin{enumerate}
- 	\item Escritorio: la automatización de rutinas, dado que éstas son ejecutadas dentro del ambiente de \textit{Sahi} (que a su vez está en la plataforma de \textit{Java}) se utiliza la biblioteca JDBC para economizar los recursos físicos del equipo del operador de la farmacéutica.
- 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo de \textit{Spring} en conjunción con el marco de trabajo \textit{MyBatis} (sección \ref{sec:mybatis}).
+ 	\item Escritorio: la automatización de rutinas. Dado que éstas son ejecutadas dentro del ambiente de \textit{Sahi} (que a su vez está en la plataforma de \textit{Java}), se utiliza la biblioteca JDBC para economizar los recursos físicos del equipo del operador de la farmacéutica.
+ 	\item Web: generación de reportes, administración de órdenes de reposición, administración de catálogos y operaciones de identificación  de usuarios. Para esta parte se utilizó el marco de trabajo \textit{Spring} en conjunción con el marco de trabajo \textit{MyBatis} (sección \ref{sec:mybatis}).
 \end{enumerate}
 Los siguientes apartados explican la implementación de los servicios para escritorio y web.
 
 \subsubsection{Persistencia para funcionalidades de escritorio}
 \paragraph{\indent Interfaz Almacenamiento\\}
-Implementación de las operaciones para las rutinas de automatización que requieren almacenar o modificar datos, para simplificar la explicación se mostrarán ejemplos de la manipulación de datos en lugar de mostrar la implementación de cada operación de la interfaz:
+Implementación de las operaciones para las rutinas de automatización que requieren almacenar o modificar datos. Para simplificar la explicación se mostrarán ejemplos de la manipulación de datos, en lugar de mostrar la implementación de cada operación de la interfaz:
 \begin{enumerate}
 	\item Inserción: la operación de inserción se ocupa en las operaciones \textbf{guardar-nueva} y \textbf{registrar-evento}, ésta consiste de los siguientes puntos (en el Código \ref{lst:per-insert-order} se muestra la implementación de la operación \textbf{guardar-nueva}):
 	\begin{enumerate}
@@ -33,12 +33,12 @@ public void insertOrden(Orden orden) throws SQLException{
 	\end{lstlisting}
 	\end{adjustwidth}
 
-	\item Actualización: la actualización de datos es utilizada por las operaciones \textbf{cambiar-estado}, \textbf{guardar-respuesta}, \textbf{guardar-folio-acuse} y \textbf{actualizar-estado-sa}, ésta consiste de los siguientes puntos (en el Código \ref{lst:per-update-status} se muestra la implementación de la operación \textbf{cambiar-estado}):
+	\item Actualización: la actualización de datos es utilizada por las operaciones \textbf{cambiar-estado}, \textbf{guardar-respuesta}, \textbf{guardar-folio-acuse} y \textbf{actualizar-estado-sa}. Ésta consiste de los siguientes puntos (en el Código \ref{lst:per-update-status} se muestra la implementación de la operación \textbf{cambiar-estado}):
 	\begin{enumerate}
-		\item Plantilla de la sentencia SQL, línea 1 del Código \ref{lst:per-update-status}.
-		\item Creación de los objetos de la biblioteca JDBC, línea 4 del Código \ref{lst:per-update-status}.
-		\item Agregar datos de la actualización, líneas 5 a 8 del Código \ref{lst:per-update-status}.
-		\item Ejecución de la sentencia, línea 9 del Código \ref{lst:per-update-status}.
+		\item Plantilla de la sentencia SQL; línea 1 del Código \ref{lst:per-update-status}.
+		\item Creación de los objetos de la biblioteca JDBC; línea 4 del Código \ref{lst:per-update-status}.
+		\item Agregar datos de la actualización; líneas 5 a 8 del Código \ref{lst:per-update-status}.
+		\item Ejecución de la sentencia; línea 9 del Código \ref{lst:per-update-status}.
 	\end{enumerate}
 
 	\begin{adjustwidth}{\listingfixwidth}{0pt}
@@ -59,7 +59,7 @@ private void updateEstatus(Orden orden) throws SQLException{
 \end{enumerate}
 
 \paragraph{\indent Interfaz Lectura\\}
-Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos, esto no quiere decir que durante la ejecución de estas operaciones no se modifiquen datos.
+Implementación de las operaciones para las rutinas de automatización que tienen como objetivo la obtención de datos. Esto no quiere decir que durante la ejecución de estas operaciones no se modifiquen datos.
 Dado que la obtención de los datos se convierte a objetos del dominio del proyecto AutoSA. Se ha implementado una solución basada en los patrones \textit{Estrategia} y \textit{Singleton} (Apéndices \ref{sec:strategy} y \ref{sec:singleton}). \\
 En la Figura \ref{fig:dia-class-mapper} se aprecia el diagrama de clases de la solución antes descrita:
 
@@ -121,7 +121,7 @@ private IResultSetMapper<Orden> getOrdenMapper(){
 }
 \end{lstlisting}
 
-La clase \texttt{ResultSetMapperProvider} da acceso a las instancias de tipo \texttt{IResultSetMapper} mediante el método \texttt{get}, este método almacena las instancias requeridas de tal forma la creación de estas instancias ocurre una única vez (Código \ref{lst:per-get-rs-mapper}):
+La clase \texttt{ResultSetMapperProvider} da acceso a las instancias de tipo \texttt{IResultSetMapper} mediante el método \texttt{get}. Este método almacena las instancias requeridas de tal forma la creación de estas instancias ocurre una única vez (Código \ref{lst:per-get-rs-mapper}):
 \begin{enumerate}
 	\item Línea 1, define al método \texttt{get} de tipo genérico.
 	\item Líneas 2 a 4, en caso de no contar con la instancia de la clase \texttt{IResultSetMapper} para el tipo del reporte requerido se llama al método que la crea y la agrega tal instancia al en el mapa.
@@ -153,10 +153,10 @@ La solución anterior lleva a la implementación de las operaciones de la interf
 \begin{enumerate}
 	\item \texttt{siguiente-orden-contestar}, \texttt{siguiente-orden-enviar} y \texttt{obtener-datos-acuse}: todas las operaciones de lectura siguen los mismos pasos (en el Código \ref{lst:per-next-orden} se muestra la implementación de la operación \texttt{siguiente-orden-contestar}):
 	\begin{enumerate}
-		\item Plantilla de la sentencia SQL, línea 1 del Código \ref{lst:per-next-orden}.
-		\item Creación de los objetos de la biblioteca JDBC, línea 4 del Código \ref{lst:per-next-orden}.
-		\item Realizar la consulta a la base de datos, línea 6 del Código \ref{lst:per-next-orden}.
-		\item Lectura del resultado de la consulta, líneas 7 a 9 del Código \ref{lst:per-next-orden}.
+		\item Plantilla de la sentencia SQL; línea 1 del Código \ref{lst:per-next-orden}.
+		\item Creación de los objetos de la biblioteca JDBC; línea 4 del Código \ref{lst:per-next-orden}.
+		\item Realizar la consulta a la base de datos; línea 6 del Código \ref{lst:per-next-orden}.
+		\item Lectura del resultado de la consulta; líneas 7 a 9 del Código \ref{lst:per-next-orden}.
 	\end{enumerate}
 
 % espaciado
@@ -184,7 +184,7 @@ public Orden getNextOrden(Integer estatus) throws SQLException{
 \end{enumerate}
 
 \subsubsection{Persistencia para funcionalidades web}\label{sec:persistence-web}
-La interfaz del componente \textbf{Persistencia} dedicado a las funcionalidades ofrecidas mediante la interfaz web utiliza \textit{MyBatis} cuya implementación sigue los pasos mencionados en la sección \ref{sec:mybatis}:\\
+La interfaz del componente \textbf{Persistencia} dedicado a las funcionalidades ofrecidas mediante la interfaz web, utiliza \textit{MyBatis}, cuya implementación sigue los pasos mencionados en la sección \ref{sec:mybatis}:\\
 \indent 1. En el Código \ref{lst:per-batis-config} se muestra la configuración del objeto \texttt{SqlSessionFactoryBean}: 
 \begin{enumerate}
 	{\setlength\itemindent{25pt}\item Habilitar contexto para transacciones (línea 1).}
@@ -210,7 +210,7 @@ La interfaz del componente \textbf{Persistencia} dedicado a las funcionalidades 
 	{\setlength\itemindent{25pt}\item Relación entre tabla de usuarios y clase de Usuario.}
 	{\setlength\itemindent{25pt}\item Consulta SQL para obtener un usuario.}
 \end{enumerate}
-\begin{lstlisting}[language=XML, caption={Definición de relación de \textit{MyBatis}.}, label={
+\begin{lstlisting}[language=XML, caption={Definición de relación de \textit{MyBatis}.}, captionpos=b, label={
 lst:per-batis-user}]
 <mapper namespace="surtimiento.persistence.dao.IDomainUser">
   <resultMap id="rol" type="surtimiento.domian.RolDomain" autoMapping="true">
@@ -228,7 +228,7 @@ lst:per-batis-user}]
 </mapper>
 \end{lstlisting}
 
-\indent 3. Por último se el Código \ref{lst:per-batis-user-interface} muestra la interfaz de \textit{Java} para utilizar las consultas del paso anterior.
+\indent 3. Por último, el Código \ref{lst:per-batis-user-interface} muestra la interfaz de \textit{Java} para utilizar las consultas del paso anterior.
 \begin{lstlisting}[language=Java, caption={Interfaz de \textit{Java} para la fábrica de \textit{MyBatis}.}, captionpos=b, label={lst:per-batis-user-interface}]
 public interface IDomainUser{
 	UsuarioDomain getUsuario(String name);
