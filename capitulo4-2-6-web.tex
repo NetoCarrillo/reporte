@@ -203,7 +203,7 @@ public class DataController{
 \end{lstlisting}
 \end{adjustwidth}
 
-	Dentro de la clase anotada como \texttt{RestController} se declaran métodos que son expuestos como servicio web. En el Código \ref{lst:get-orden-data-controller} se muestra el servicio web para obtener una orden de reposición:
+	Dentro de la clase anotada como \texttt{RestController} se declaran métodos que son expuestos como servicios web. En el Código \ref{lst:get-orden-data-controller} se muestra el servicio web utilizado para obtener una orden de reposición:
 	\begin{enumerate}
 		\item Línea 1: la anotación \texttt{RequestMapping} indica cómo se debe asociar el método URL por medio de sus parámetros:
 		\begin{enumerate}
@@ -509,7 +509,7 @@ app.service('ReportService', function($http, $q, $window){
 \end{adjustwidth}
 
 \item \textbf{Vista Catálogos\\}
-La vista \textbf{Catálogos} ofrece al usuario la operación para actualizar éstos. Contiene las opciones para seleccionar el catálogo con el cuál se trabajará. En el Código \ref{lst:view-catalog-tmpl} se muestra la estructura principal de la plantilla:\\
+La vista \textbf{Catálogos} ofrece al usuario la operación para actualizar éstos. Además contiene las opciones necesarias para seleccionar el catálogo con el cual se trabajará. En el Código \ref{lst:view-catalog-tmpl} se muestra la estructura principal de la plantilla:\\
 \begin{adjustwidth}{\listingfixwidth}{0pt}
 \begin{lstlisting}[language=HTML, captionpos=b, caption={Plantilla de la vista que muestra los catálogos.}, label={lst:view-catalog-tmpl}]
 <ng-form>
@@ -682,7 +682,7 @@ Esta vista cumple 3 funciones:
 	\item Hacer cambios en la información de la orden de reposición.
 	\item Obtener el acuse de envío de la orden de reposición.
 \end{itemize}
-En el Código \ref{lst:view-show-buttons} está la implementación de los botones que efectúan dichas funciones. 
+En el Código \ref{lst:view-show-buttons} se encuentra la implementación de los botones que efectúan dichas funciones. 
 \begin{adjustwidth}{\listingfixwidth}{0pt}
 \begin{lstlisting}[language=HTML, captionpos=b, caption={Controles de la vista de orden de reposición.}, label={lst:view-show-buttons}]
 <button class="btn btn-danger" ng-click="acuse($event)">PDF</button>
