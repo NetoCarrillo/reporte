@@ -1,19 +1,19 @@
 \subsection{Generador de Reportes}
-El componente para la generación de reportes tiene dos funciones principales, la generación de reportes y la impresión de acuse de envío, que corresponden a las interfaces \textbf{Acuse} y \textbf{Generación}.
+El componente para la generación de reportes tiene dos funciones principales: la generación de reportes y la impresión de acuse de envío, que corresponden a las interfaces \textbf{Acuse} y \textbf{Generación}.
 
 \subsubsection{Generación de acuse de envío}\label{sec:gen-acuse}
-La generación del acuse de envío de una orden de reposición es la copia de la página HTML\footnote{Del inglés \textit{Hypertext Markup Language}, es el lenguaje con el que se construyen documentos para la web\cite{HTMLCSSCompleteReference}.} y el acuse de envío debe ser entregado en formato PDF\footnote{Del inglés \textit{Portable Data File}, es un formato utilizado para la generación de documentos\cite{iTextInAction}.}\\
+La generación del acuse de envío de una orden de reposición es la copia de la página HTML\footnote{Del inglés \textit{Hypertext Markup Language}, es el lenguaje con el que se construyen documentos para la web\cite{HTMLCSSCompleteReference}.}. El acuse de envío debe ser entregado en formato PDF\footnote{Del inglés \textit{Portable Data File}, es un formato utilizado para la generación de documentos\cite{iTextInAction}.}.\\
 Por lo anterior, la forma de generar el acuse de envío es creando un archivo con formato HTML que corresponda a la orden de reposición que se ha enviado y posteriormente traducir el archivo HTML a un archivo PDF.\\
 La implementación de la generación de acuse de envío se resume en los siguientes pasos:
 \begin{enumerate}
 	\item Obtener los datos de la orden de reposición.
 	\item Obtener la plantilla de acuse.
-	\item Utilizar la herramienta \textit{Velocity} para insertar los datos de la orden de reposición en la plantilla, este paso genera un archivo HTML.
+	\item Utilizar la herramienta \textit{Velocity} para insertar los datos de la orden de reposición en la plantilla. Este paso genera un archivo HTML.
 	\item Utilizar la herramienta \textit{Flying Saucer} para generar el documento PDF a partir del archivo HTML del paso anterior.
 \end{enumerate}
 
 \subsubsection{Generación de reportes}\label{sec:gen-repport}
-La generación de reportes utiliza el Patrón \textit{Estrategia} (Apéndice \ref{sec:strategy}) mediante el cual se ofrece un punto de entrada a la generación de reportes, internamente se delega la generación del reporte a la clase correspondiente (dependiendo del tipo de reporte que se trate).\\
+La generación de reportes utiliza el Patrón \textit{Estrategia} (Apéndice \ref{sec:strategy}), mediante el cual se ofrece un punto de entrada a la generación de reportes. Internamente se delega la generación del reporte a la clase correspondiente (dependiendo del tipo de reporte que se trate).\\
 La implementación aplica dos veces el Patrón \textit{Estrategia}, primero en la selección del formato del reporte y después para el tipo de reporte. A continuación se explicarán las clases principales que se muestran en la Figura \ref{fig:dia-class-report-service}:
 
 \begin{figure}[h]
@@ -24,11 +24,11 @@ La implementación aplica dos veces el Patrón \textit{Estrategia}, primero en l
 \end{figure}
 
 \begin{enumerate}
-	\item \texttt{IReportService}: el punto de entrada a la generación de reportes, define el método para la generación de los mismos que tiene como parámetros:
+	\item \texttt{IReportService}: el punto de entrada en la generación de reportes, define el método para la generación de los mismos que tiene como parámetros:
 	\begin{itemize}
 	 	\item \texttt{type}: tipo de reporte.
-	 	\item \texttt{start}: fecha de inicio, acota la búsqueda de las órdenes de reposición únicamente incluyendo aquellas órdenes que hayan sido atendidas después de tal fecha.
-	 	\item \texttt{end}: fecha de término, acota la búsqueda de las órdenes de reposición únicamente incluyendo aquellas órdenes que hayan sido atendidas antes de tal fecha.
+	 	\item \texttt{start}: fecha de inicio. Acota la búsqueda de las órdenes de reposición únicamente incluyendo aquellas órdenes que hayan sido atendidas después de tal fecha.
+	 	\item \texttt{end}: fecha de término. Acota la búsqueda de las órdenes de reposición únicamente incluyendo aquellas órdenes que hayan sido atendidas antes de tal fecha.
 	 \end{itemize}
 	\item \texttt{CSVReporter}: es la implementación específica de la generación de reportes en formato CSV.
 	\item \texttt{ExcelReporter}: es la implementación específica de la generación de reportes en formato \textit{Excel}\textsuperscript{\textcopyright}.

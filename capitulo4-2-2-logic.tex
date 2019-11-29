@@ -1,9 +1,9 @@
 \subsection{Lógica de Automatización}
-El componente \textbf{Lógica de Automatización} provee de la información necesaria a las rutinas automatizadas. Esta información puede proceder de diferentes fuentes y a cada fuente corresponde un componente diferente:
+El componente \textbf{Lógica de Automatización} provee la información necesaria a las rutinas automatizadas. Esta información puede proceder de diferentes fuentes y a cada fuente corresponde un componente diferente:
 \begin{enumerate}
- 	\item Si la fuente es un archivo en el sistema de archivos del sistema operativo, se obtiene la información utilizando el componente \textbf{Ficheros}.
- 	\item Si la fuente es una base de datos, se tiene acceso miente el componente \textbf{Persistencia}.
- 	\item Si la fuente son las reglas de negocio, se tiene acceso mediante el componente \textbf{Lógica de Automatización} que es el encargado de aplicar los cálculos correspondientes a la lógica de negocio.
+ 	\item Si la fuente es un archivo en el sistema de archivos del sistema operativo. Se obtiene la información utilizando el componente \textbf{Ficheros}.
+ 	\item Si la fuente es una base de datos. Se tiene acceso mediante el componente \textbf{Persistencia}.
+ 	\item Si la fuente son las reglas de negocio. Se tiene acceso mediante el componente \textbf{Lógica de Automatización} que es el encargado de aplicar los cálculos correspondientes a la lógica de negocio.
 \end{enumerate}
 La implementación de este componente ha sido escrita en el lenguaje de programación \textit{Java}. A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas.
 \paragraph{\indent Interfaz Respuesta}
@@ -24,7 +24,7 @@ ordenesDAO.insertOrden(orden);
 	\end{lstlisting}
 	\end{adjustwidth}
 
-	\item obtener-datos-respuesta: la implementación del cálculo de fechas de fabricación y de caducidad descritas para el caso de uso \textbf{CU-RESPONDER-ORDEN}, el Código \ref{lst:la-dates} muestra el método en lenguaje \textit{Java}:
+	\item obtener-datos-respuesta: la implementación del cálculo de fechas de fabricación y de caducidad descritas para el caso de uso \textbf{CU-RESPONDER-ORDEN}. El Código \ref{lst:la-dates} muestra el método en lenguaje \textit{Java}:
 	\begin{enumerate}
 		\item En las líneas 2 a 7 se calcula el año para las fechas de fabricación y de caducidad.
 		\item En las líneas 9 a 11 se construyen las fechas de fabricación y de caducidad.
