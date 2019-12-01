@@ -10,7 +10,7 @@ Cuando una orden de reposición ha sido \textit{contestada}, en el listado de ó
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{flujo-proceso-contestar} 
+\includegraphics[scale=0.3]{flow-proc-contestar} 
 \caption{Flujo del proceso para contestar órdenes de reposición.}
 \label{fig:flow-proc-contestar}
 \end{figure}
@@ -18,7 +18,7 @@ Cuando una orden de reposición ha sido \textit{contestada}, en el listado de ó
 \item \textbf{Verificación de órdenes de reposición canceladas}. Dado que el \textit{Instituto} tiene la facultad de cancelar las órdenes aun cuando ya hayan sido enviadas, es importante para el proveedor evitar el gasto extra que implica retirar medicamento no solicitado que ya ha sido enviado al \textit{Instituto}. El operador accede al \textit{Sistema de Abastecimiento} de la misma manera como se describe en el punto anterior, se dirige a la sección \textit{Consulta de Órdenes}, donde provee información para realizar la búsqueda: rango de fechas de emisión\footnote{Fecha en que la orden fue realizada.}, el estado de la orden como ``cancelada''. Como resultado de esta búsqueda, se muestra un listado con las órdenes que cumplen con tal filtro. El operador copia la lista en un documento en su equipo personal, para posteriormente extraer las órdenes de reposición que han sido canceladas de las cuales no se tenía conocimiento. En la Figura \ref{fig:flow-proc-verificar} se muestra el proceso para verificar las órdenes de reposición canceladas.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{flujo-proceso-verificar} 
+\includegraphics[scale=0.3]{flow-proc-verificar} 
 \caption{Flujo del proceso para verificar órdenes de reposición canceladas.}
 \label{fig:flow-proc-verificar}
 \end{figure}
@@ -29,7 +29,7 @@ Para completar las tareas de envío de órdenes de reposición y verificar las �
 
 \section{Objetivos}
 \subsection{Objetivo principal}\label{sec:objetivo-principal}
-Realizar un sistema de cómputo --de ahora en adelante llamado \textbf{AutoSA}-- que reduzca el tiempo de interacción entre los operadores de la farmacéutica y el \textit{Sistema de Abastecimiento}. Es así que el sistema AutoSA busca cumplir las siguientes metas:
+Describir un sistema de cómputo --de ahora en adelante llamado \textbf{AutoSA}-- que reduzca el tiempo de interacción entre los operadores de la farmacéutica y el \textit{Sistema de Abastecimiento}. Es así que el sistema AutoSA busca cumplir las siguientes metas:
 \begin{enumerate}
 	\item Reducir el tiempo utilizado para contestar las órdenes de reposición.
 	\item Evitar el envío de medicamentos cuyas órdenes de reposición hayan sido canceladas.
@@ -46,7 +46,7 @@ Realizar un sistema de cómputo --de ahora en adelante llamado \textbf{AutoSA}--
 Por lo anterior, los afiliados del \textit{Instituto} se verán beneficiados pues los medicamentos estarán disponibles con mayor frecuencia en las clínicas y hospitales.
 
 \section{Descripción general de trabajo}\label{sec:desc-general}
-La farmacéutica atiende las órdenes de reposición del \textit{Instituto} en el doble de tiempo que su competencia, en particular contestar estas órdenes en el \textit{Sistema de Abastecimiento} requiere diariamente de tres personas dedicadas durante toda la jornada laboral para terminar esta parte del proceso. La solución propuesta para acelerar la respuesta y verificación de órdenes de reposición del \textit{Sistema de Abastecimiento} se encuentra programado por agentes\footnote{Agente dentro de este trabajo se refiere a las rutinas que automatizan los procesos realizados por los operadores del \textit{Sistema de Abastecimiento}.}. Cada agente se dedica a emular las acciones del operador de la farmacéutica, el cual es el responsable de contestar o verificar las órdenes de reposición. El sistema AutoSA cuenta con una base de datos donde se almacenen los datos capturados por los agentes durante la respuesta de órdenes y una interfaz gráfica donde los trabajadores de la farmacéutica puedan realizar tareas de administración. Estas tareas pueden ser: la búsqueda, la edición de órdenes de reposición y la generación de reportes de las órdenes atendidas por los agentes.\\
+La farmacéutica atiende las órdenes de reposición del \textit{Instituto} en el doble de tiempo que su competencia, en particular contestar estas órdenes en el \textit{Sistema de Abastecimiento} requiere diariamente de tres personas dedicadas durante toda la jornada laboral para terminar esta parte del proceso. La solución propuesta para acelerar la respuesta y verificación de órdenes de reposición del \textit{Sistema de Abastecimiento} se encuentra programado por agentes\footnote{Agente dentro de este trabajo se refiere a las rutinas que automatizan los procesos realizados por los operadores del \textit{Sistema de Abastecimiento}.}. Cada agente se dedica a emular las acciones del operador de la farmacéutica, el cual es el responsable de contestar o verificar las órdenes de reposición. El sistema AutoSA cuenta con una base de datos donde se almacenan los datos capturados por los agentes durante la respuesta de órdenes y una interfaz gráfica donde los trabajadores de la farmacéutica puedan realizar tareas de administración. Estas tareas pueden ser: la búsqueda, la edición de órdenes de reposición y la generación de reportes de las órdenes atendidas por los agentes.\\
 La automatización de los procesos (Figuras \ref{fig:flow-proc-contestar} y \ref{fig:flow-proc-verificar}) antes mencionados pronostica una reducción de costos por devolución de medicamento no solicitado para el cliente y también la disminución de pérdidas en las ventas por solicitudes no atendidas en los rangos de tiempo acordados con el comprador. Dado lo anterior, se plantea un proyecto de software que cubra las necesidades de automatización y pueda ser administrado por usuarios no especializados en computación.\\
 Para resolver el desarrollo del proyecto, el sistema AutoSA se divide en módulos con funcionalidades específicas que se muestran a continuación:
 % espaciado
@@ -63,12 +63,12 @@ Una definición de arquitectura de software es dada por Bourque\cite{SWEBOOK}:
 \begin{quote}
 El conjunto de estructuras necesarias para la comprensión de un sistema en el cual se comprometen elementos de software, relaciones entre ellos y sus propiedades.
 \end{quote}
-Esta definición expone que los requerimientos del cliente se traducen en especificaciones técnicas para los desarrolladores. Aplicando la definición anterior al presente proyecto donde tenemos los siguientes componentes (Figura \ref{fig:dia-arq-comp}):
+Esta definición expone que los requerimientos del cliente se traducen en especificaciones técnicas para los desarrolladores. Aplicando la definición anterior al presente proyecto donde tenemos los siguientes componentes (Figura \ref{fig:dia-package-small}):
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{dia-arq-comp} 
+\includegraphics[scale=0.5]{dia-package-small} 
 \caption{Módulos de la arquitectura.}
-\label{fig:dia-arq-comp}
+\label{fig:dia-package-small}
 \end{figure}
 % espaciado
 \pagebreak

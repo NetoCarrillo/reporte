@@ -107,3 +107,19 @@ Un diagrama de clase utiliza la siguiente notación\cite{UMLClassroom, SoftwareE
   \caption{Notación para diagramas de clase\cite{SoftwareEngineeringUML}.}
   \label{fig:uml-nota-class}
 \end{figure}
+
+
+\section{Diagrama de paquetes}\label{sec:uml-package}
+El diagrama de paquetes agrupa elementos del modelo conforme a propiedades comunes, tal como la función de que realizan dentro del sistema. A menudo los paquetes son integrados por otros paquetes, a lo que se conoce como espacio de nombres\cite{UMLClassroom}.\\
+La notación utilizada dentro de un diagrama de paquetes es la siguiente\cite{UMLClassroom, SoftwareEngineeringUML}:
+\begin{enumerate}
+   \item \textbf{Paquete}: un rectángulo con un rectángulo más pequeño adyacente en la parte superior izquierda, similar a una carpeta \textit{folder}. El nombre del paquete se escribe en el rectángulo grande.
+   \item \textbf{Espacio de nombres}: se representa con la figura de un paquete que contiene otros paquetes, el nombre de este elemento se escribe en el rectángulo pequeño.
+   \item \textbf{Dependencia}: indica la dependencia de un paquete hacia otro mediante una línea punteada con la terminación de flecha en el paquete de la dependencia.
+\end{enumerate} 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{uml-nota-package}
+  \caption{Notación para diagramas de paquete\cite{SoftwareEngineeringUML}.}
+  \label{fig:uml-nota-package}
+\end{figure}

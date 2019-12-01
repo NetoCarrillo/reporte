@@ -270,7 +270,7 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 %
 %================================================================================
 
-\section{Implementación de los componentes}
+\section{Implementación de los componentes}\label{sec:comp-impl}
 \input{capitulo4-2-1-agent}
 \input{capitulo4-2-2-logic}
 \input{capitulo4-2-3-persistence}
@@ -290,5 +290,5 @@ INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 
 \section{Resumen}
 La implementación del sistema AutoSA utiliza el lenguaje de programación \textit{Java} para todas las bibliotecas que son ejecutadas en el servidor; el lenguaje SQL para realizar consultas a la base de datos, y \textit{Javascript} para las bibliotecas que son ejecutadas en el explorador de internet del usuario.\\
-La automatización con el \textit{Sistema de Abastecimiento} se realiza por medio de la herramienta \textit{Sahi} y algunas bibliotecas desarrolladas con el lenguaje de programación \textit{Java}.\\
+La automatización con el \textit{Sistema de Abastecimiento} es realizada por el Agente que está implementado con la herramienta \textit{Sahi} y algunas bibliotecas desarrolladas con el lenguaje de programación \textit{Java}.\\
 La implementación del \textbf{Portal Web} se ha hecho siguiendo la Arquitectura Orientada a Servicios, lo cual implica que, por una parte, se tiene un servidor que expone tales servicios a través de la web, y, por otra, hay clientes que los consume. Mientras que la implementación del cliente que consume los servicios web se ha hecho utilizando el lenguaje \textit{Javascript} y el marco de trabajo \textit{AngularJS}, los cuales siguen el Patrón MVC, el manejo de autentificación y autorización de usuarios se ha hecho siguiendo la especificación \textit{OAuth 2.0}.
