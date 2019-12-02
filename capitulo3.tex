@@ -434,6 +434,11 @@ En estas tablas (Figura \ref{fig:dia-er-ordenes}) se almacenan las órdenes de r
   \caption{Diagrama Entidad Relación para el registro de órdenes de reposición.}
   \label{fig:dia-er-ordenes}
 \end{figure}
+
+% espaciado
+\pagebreak
+% espaciado
+
 \paragraph{ordenes{\textunderscore}is:} contiene el registro de las órdenes de reposición del \textit{Sistema de Abastecimiento} que han sido atendidas por la rutina de automatización.
 \paragraph{cat{\textunderscore}estatus{\textunderscore}orden:} este catálogo no debe ser alterado. Contiene los posibles estados que puede tomar una orden durante el ciclo de vida de la aplicación.
 \paragraph{cat{\textunderscore}estatus{\textunderscore}sa:} este catálogo contiene los estados definidos por el \textit{Sistema de Abastecimiento} para registrar y almacenar una orden de reposición.
@@ -447,6 +452,11 @@ El registro de eventos es todo lo relacionado con la actividad de los actores de
   \caption{Diagrama Entidad Relación para el registro de eventos.}
   \label{fig:dia-er-bitacora}
 \end{figure}
+
+% espaciado
+\pagebreak
+% espaciado
+
 \paragraph{bitacora:} lleva el registro de eventos ocurridos durante la ejecución de las rutinas de automatización. El evento puede estar ligado a una sesión.
 \paragraph{cat{\textunderscore}tipo{\textunderscore}evento:} se refiere al catálogo con los tipos de eventos que pueden ser registrados en la bitácora.
 \paragraph{sesion:} define una sesión bajo la cual se ejecuta una rutina de automatización. La sesión puede definir implícitamente un usuario y un rol.
@@ -460,6 +470,11 @@ Las tablas de este grupo son utilizadas para gestionar el acceso a la interfaz w
   \caption{Diagrama Entidad Relación para el manejo de usuarios.}
   \label{fig:dia-er-web}
 \end{figure}
+
+% espaciado
+\pagebreak
+% espaciado
+
 \paragraph{roles:} contiene los roles (permisos) que los usuarios pueden tener en la interfaz web.
 \paragraph{sesion:} contiene información de las sesiones de los usuarios de la interfaz web.
 \paragraph{usuarios{\textunderscore}web:} contiene la información de los usuarios de la interfaz web.
