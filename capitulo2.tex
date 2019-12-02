@@ -1,6 +1,6 @@
 \chapter{Análisis y alcance del proyecto}\label{cap2}
 
-En este capítulo se establecen los requerimientos que satisfacen las necesidades de la farmacéutica planteadas en el capítulo anterior, como se verá más adelante, estos se clasifican en funcionales y no funcionales, de igual forma se delimita el alcance y los riesgos del proyecto. Con los elementos anteriores se redactan los casos de uso, los flujos lógicos que satisfacen los requerimientos dentro del alcance definido.
+En este capítulo se establecen los requerimientos que satisfacen las necesidades de la farmacéutica, estos se clasifican en funcionales y no funcionales, de igual forma se delimita el alcance y los riesgos del proyecto. Con los elementos anteriores se redactan los casos de uso, los flujos lógicos que satisfacen los requerimientos dentro del alcance definido.
 %===============================================================================
 %===============================================================================
 
@@ -56,7 +56,7 @@ Automatizar la interacción del operador de la farmacéutica\footnote{Se realiza
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{dia-activity-contestar}
-  \caption{Diagrama de proceso de negocio que sigue un operador de la farmacéutica para contestar órdenes de reposición.}
+  \caption{Diagrama del proceso para contestar órdenes de reposición.}
   \label{fig:dia-activity-contestar}
 \end{figure}
 
@@ -69,7 +69,9 @@ Ver también la Figura \ref{fig:flow-proc-verificar}.}.
   \caption{Diagrama de proceso de negocio que sigue un operador de la farmacéutica para verificar órdenes de reposición canceladas.}
   \label{fig:dia-activity-verificar}
 \end{figure}
-
+% espaciado
+\pagebreak
+% espaciado
 \subsubsection{Interfaz web para la administración de órdenes de reposición contestadas}\label{sec:req-web-ui}
 Todos los requerimientos de administración de órdenes de reposición y generación de reportes deben ser accedidos mediante una interfaz web protegida por nombre de usuario y contraseña\footnote{Excepto lo referente a los procesos automatizados de los operadores de la farmacéutica.}, como se muestra en la Figura \ref{fig:maq-login}.
 \begin{figure}[h]
@@ -90,11 +92,9 @@ En la interfaz web existe la posibilidad de buscar entre las órdenes de reposic
 
 \subsubsection{Visualización de orden de reposición}\label{sec:req-show}
 La interfaz web tiene una sección donde se muestra el contenido de una orden de reposición almacenada en la base de datos (Figura \ref{fig:maq-crud}). Esta vista es individual, (no es posible mostrar el contenido de más de una orden de reposición), además, ofrece las opciones para modificar los datos de la orden (requerimiento \ref{sec:req-update}) y para generar el acuse de envío.
-
 % espaciado
-\pagebreak
+%\pagebreak
 % espaciado
-
 \begin{figure}[h]
   \centering
   \includegraphics[scale=1]{maq-crud} 
@@ -117,7 +117,7 @@ El reporte con órdenes de reposición contestadas es acotado entre un par de fe
 \subsubsection{Generación de formato de salida}\label{sec:req-rep-layout}
 Este formato contiene los datos de las órdenes de reposición, las claves de los productos, así como los nombres de los centros de salud. El reporte (Figura \ref{fig:maq-report})\footnote{Por acuerdo de confidencialidad, no se enunciarán los datos contenidos en el formato de salida, tampoco el contenido de los catálogos de claves de producto y centros de salud.} está acotado entre un par de fechas (con precisión de horas).
 
-\subsubsection{Generación de reporte con las órdenes de reposición canceladas recientemente}\label{sec:req-rep-canceladas}
+\subsubsection{Generación de reporte con las órdenes de reposición canceladas \mbox{recientemente}}\label{sec:req-rep-canceladas}
 Genera un reporte con las órdenes de reposición canceladas recientemente (Figura \ref{fig:maq-report}), es decir, las órdenes de reposición que tienen el estado de “cancelada” y no se han marcado como canceladas en el proceso de respuesta.
 
 \subsubsection{Actualización de catálogos}\label{sec:req-catalogos}
@@ -386,9 +386,6 @@ Quedan fuera de alcance: la actualización masiva del estado de órdenes de repo
   \item El \textit{Sistema de Abastecimiento} se encuentra funcionando correctamente.
   \item El usuario cuenta con las credenciales para ingresar al \textit{Sistema de Abastecimiento}.
 \end{enumerate}
-%espaciado
-\pagebreak
-%espaciado
 \paragraph{Secuencia normal:}
 \begin{enumerate}
   \item Inicia sesión en el \textit{Sistema de Abastecimiento}: provee nombre de usuario y le solicita al usuario ingresar la contraseña.
@@ -457,7 +454,7 @@ Este caso de uso define el flujo para autorizar la entrada de un usuario a la in
   \item El usuario solicita la página de acceso al sistema web.
 \end{enumerate}
 %espaciado
-\pagebreak
+%\pagebreak
 %espaciado
 \paragraph{Secuencia normal:}
 \begin{enumerate}
