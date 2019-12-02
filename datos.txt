@@ -1,0 +1,19 @@
+1. Datos del alumno.
+	Autor: Carrillo Espinosa, Ernesto
+	Teléfono: 5534501180
+	Universidad: Universidad Nacional Autónoma de México
+	Facultad o escuela: Facultad de Ciencias
+	Carrera: Ciencias de la Computación
+	Número de cuenta: 300138647
+
+2. Datos del Asesor.
+	M. en I.
+	Ramírez Pulido, Karla.
+
+3. Datos de la tesis.
+	Título: AutoSA: sistema para automatizar las órdenes de reposición en el Sistema de Abastecimiento del Instituto de Salud Pública de México
+	Subtítulo:
+	No. de páginas: 163
+	Año: 2019
+
+4. Palabras clave (temas principales que trata la tesis): automatización, ingeniería de software, diseño de sistema de software.
