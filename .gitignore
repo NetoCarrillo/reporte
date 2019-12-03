@@ -17,3 +17,5 @@
 *.alg
 *.glsdefs
 *.ist
+#package
+package*
