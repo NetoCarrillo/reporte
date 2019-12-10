@@ -95,7 +95,9 @@
 \AtBeginSection[]{
 %\AtBeginSubsection[]{
 	\begin{frame}<beamer>{Índice}
+		\begin{multicols}{2}
 		\tableofcontents[currentsection,currentsubsection]
+		\end{multicols}
 	\end{frame}
 }
 
@@ -134,7 +136,7 @@
 
 \include{presentation-files/sections/intro}
 
-%\include{presentation-files/sections/analysis}
+\include{presentation-files/sections/analysis}
 
 %\include{presentation-files/sections/design}
 
