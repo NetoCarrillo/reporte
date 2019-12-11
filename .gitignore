@@ -17,6 +17,9 @@
 *.alg
 *.glsdefs
 *.ist
+#slides
+*.nav
+*.snm
 #package
 package*
 archive
