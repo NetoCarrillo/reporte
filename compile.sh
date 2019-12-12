@@ -46,7 +46,7 @@ function build_bib(){
 function clean_aux_files(){
 	FILES_TO_RM='*.aux *.lof *.log *.lol *.toc *.dvi *.bbl *.blg *.lot *.acn *.acr *.alg *.glsdefs *.ist *.out *.nav *.snm'
 	rm $FILES_TO_RM 2> /dev/null
-	rn images/*.pdf 2>> /dev/null
+	rm images/*.pdf 2>> /dev/null
 	echo "All clean"
 }
 
