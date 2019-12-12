@@ -1,3 +1,5 @@
+%===============================================================================
+%===============================================================================
 \subsection{Lógica de Automatización}
 El componente \textbf{Lógica de Automatización} provee la información necesaria a las rutinas automatizadas. Esta información puede proceder de diferentes fuentes y a cada fuente corresponde un componente diferente:
 \begin{enumerate}
@@ -6,6 +8,7 @@ El componente \textbf{Lógica de Automatización} provee la información necesar
  	\item Si la fuente son las reglas de negocio. Se tiene acceso mediante el componente \textbf{Lógica de Automatización} que es el encargado de aplicar los cálculos correspondientes a la lógica de negocio.
 \end{enumerate}
 La implementación de este componente ha sido escrita en el lenguaje de programación \textit{Java}. A continuación se muestran los puntos relevantes de la implementación de las interfaces mencionadas.
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \paragraph{\indent Interfaz Respuesta}
 \begin{enumerate}
 	\item guardar-orden-nueva: la implementación de esta operación (Código \ref{lst:la-save-new}) muestra como se delega la aplicación del almacenamiento de una nueva orden de reposición al componente \textbf{Persistencia}.
@@ -23,7 +26,6 @@ orden.setIdSesionEstatus(idSesion);
 ordenesDAO.insertOrden(orden);
 	\end{lstlisting}
 	\end{adjustwidth}
-
 	\item obtener-datos-respuesta: la implementación del cálculo de fechas de fabricación y de caducidad descritas para el caso de uso \textbf{CU-RESPONDER-ORDEN}. El Código \ref{lst:la-dates} muestra el método en lenguaje \textit{Java}:
 	\begin{enumerate}
 		\item En las líneas 2 a 7 se calcula el año para las fechas de fabricación y de caducidad.
@@ -47,7 +49,6 @@ public String[] getFechasFab(){
 }
 	\end{lstlisting}
 	\end{adjustwidth}
-
 	\item obtener-acuse-envio: esta operación principalmente obtiene las rutas en el sistema de archivos para la generación del acuse de envío. Posteriormente delega la generación del acuse al componente \textbf{Generación de Reportes}. En el Código \ref{lst:la-acuse} se muestran las sentencias de \textit{Java} que realiza los pasos anteriores.
 	\begin{enumerate}
 		\item La línea 1 asigna el nombre del archivo como el número de la orden de reposición.
@@ -69,7 +70,7 @@ snapShotService.takeSnapShot(params, filename, template, outhtmldir, outputdir);
 	\end{lstlisting}
 	\end{adjustwidth}
 \end{enumerate}
-
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \paragraph{\indent Interfaz Verificación}
 \begin{enumerate}
 	\item obtener-rango-fechas-verificar: el Código \ref{lst:la-date-search} muestra el cálculo de las fechas necesarias para el formulario de búsqueda de órdenes de reposición.
@@ -87,7 +88,6 @@ cal.add(Calendar.DAY_OF_YEAR, -60);
 dates[0] = dateFormat.format(cal.getTime());
 	\end{lstlisting}
 	\end{adjustwidth}
-
 	\item actualizar-estado-sa: esta operación realiza la actualización de las órdenes de reposición canceladas, el Código \ref{lst:la-validate} muestran las sentencias de \textit{Java}.
 	\begin{enumerate}
 		\item La línea 1 obtiene las órdenes de reposición canceladas del listado de órdenes de reposición encontradas.

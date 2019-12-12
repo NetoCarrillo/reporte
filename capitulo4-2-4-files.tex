@@ -1,3 +1,5 @@
+%===============================================================================
+%===============================================================================
 \subsection{Ficheros}
 El componente \textbf{Ficheros} es el encargado de actuar como medio de comunicación entre el sistema AutoSA y el sistema de archivos del sistema operativo donde se ejecuta el sistema AutoSA. En particular, este componente cumple con dos funciones:
 \begin{enumerate}
@@ -5,23 +7,21 @@ El componente \textbf{Ficheros} es el encargado de actuar como medio de comunica
 	\item Escritura de archivos: escribir un flujo de \textit{bytes} al sistema de archivos del sistema operativo.
 \end{enumerate}
 Para las funciones anteriores se han utilizado las bibliotecas de \textit{Java} para la lectura y escritura de archivos. En los siguientes apartados se mostrará la implementación de las funciones descritas anteriormente.
-
+%-------------------------------------------------------------------------------
 \subsubsection{Lectura de configuración}
 La lectura de valores de configuración se hace mediante la lectura del archivo de propiedades dentro de un objeto de la clase \texttt{Properties} del paquete \texttt{java.util}; la lectura de la información del archivo de propiedades se logra utilizando el paquete \textit{Java IO}. A continuación se detalla la descripción anterior explicando el Código \ref{lst:fs-read}:
-
 \begin{enumerate}
  	\item Creación de la instancia de la clase \texttt{Properties} (línea 1).
  	\item Apertura del flujo de datos del sistema de archivos (línea 2).
  	\item Lectura de los datos dentro del objeto \texttt{Properties} (línea 3).
- \end{enumerate}
-
+\end{enumerate}
 \begin{lstlisting}[language=Java, caption={Lectura de un archivo de propiedades.}, captionpos=b, label={lst:fs-read}]
 Properties props = new Properties();
 try(InputStream is = new FileInputStream(new File(CONFIG_PATH, CONFIG_FILENAME));){
 	props.load(is);
 }
 \end{lstlisting}
-
+%-------------------------------------------------------------------------------
 \subsubsection{Almacenamiento}
 El almacenamiento de archivos en el proyecto AutoSA se utiliza cuando se desea generar un reporte. Para esto es necesario contar con la plantilla del reporte y copiarla a un archivo nuevo, con el fin de que posteriormente sea utilizado para vaciar el contenido del reporte.\\
 Lo anterior se ejemplifica con los siguientes códigos:
@@ -29,27 +29,21 @@ Lo anterior se ejemplifica con los siguientes códigos:
 	\item Obtiene la ruta de las plantillas en el sistema operativo como se muestra en el Código \ref{lst:fs-read-prop}.
 	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Obtención de las rutas de las plantillas.}, captionpos=b, label={lst:fs-read-prop}]
-	Path headersTmpl = Paths.get(props.getProperty("is.report.headers.tmpl"));
-	Path contentTmpl = Paths.get(props.getProperty("is.report.content.tmpl"));
-	Path headersPath = Paths.get(props.getProperty("is.report.out.path"), headersTmpl.getFileName().toString());
-	Path contentPath = Paths.get(props.getProperty("is.report.out.path"), contentTmpl.getFileName().toString());
+Path headersTmpl = Paths.get(props.getProperty("is.report.headers.tmpl"));
+Path contentTmpl = Paths.get(props.getProperty("is.report.content.tmpl"));
+Path headersPath = Paths.get(props.getProperty("is.report.out.path"), headersTmpl.getFileName().toString());
+Path contentPath = Paths.get(props.getProperty("is.report.out.path"), contentTmpl.getFileName().toString());
 	\end{lstlisting}
 	\end{adjustwidth}
-
 	\item Utilizando la clases de \textit{Java} dedicadas al manejo de lectura y escritura, se copia la plantilla, tal como se aprecia en el Código \ref{lst:fs-copy}.
-
-% espaciado
-\pagebreak
-% espaciado
-	
 	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Java, caption={Copia de archivos.}, captionpos=b, label={lst:fs-copy}]
-	try(FileOutputStream hfos = new FileOutputStream(headersPath.toFile(), false);
-		FileOutputStream lfos = new FileOutputStream(contentPath.toFile(), false)){
+try(FileOutputStream hfos = new FileOutputStream(headersPath.toFile(), false);
+	FileOutputStream lfos = new FileOutputStream(contentPath.toFile(), false)){
 		
-		Files.copy(headersTmpl, hfos);
-		Files.copy(contentTmpl, lfos);
-	}
+	Files.copy(headersTmpl, hfos);
+	Files.copy(contentTmpl, lfos);
+}
 	\end{lstlisting}
 	\end{adjustwidth}
 \end{enumerate}

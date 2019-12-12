@@ -1,6 +1,8 @@
+%===============================================================================
+%===============================================================================
 \subsection{Agente}\label{sec:agente}
 La implementación del componente \textbf{Agente} está escrito en rutinas de \textit{Sahi} (sección \ref{sec:sahi}). Primero se exponen los puntos relevantes en la implementación de la rutina de respuesta a órdenes de reposición, y después se describe la implementación de la rutina de verificación de órdenes de reposición canceladas.
-
+%-------------------------------------------------------------------------------
 \subsubsection{Rutina para automatizar la respuesta de órdenes de reposición}\label{sec:aut-contestar}
 La rutina para automatizar la respuesta de órdenes de reposición refleja el caso de uso \textbf{CU-CONTESTAR} que se describe en la sección \ref{cu-contestar}. A continuación se muestran las secciones de código más relevantes de la rutina que realiza la ejecución del caso de uso citado, así como los subsecuentes (Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son:
 \begin{enumerate}
@@ -10,10 +12,6 @@ La rutina para automatizar la respuesta de órdenes de reposición refleja el ca
 		\item La línea 3 se envía el formulario.
 		\item La línea 4 redirige a la pantalla con el listado de órdenes de reposición.  
 	\end{enumerate}
-
-% espaciado
-\pagebreak
-% espaciado
 	\begin{adjustwidth}{\listingfixwidth}{0pt}
 	\begin{lstlisting}[language=Javascript, caption={Inicio de sesión en el \textit{Sistema de Abastecimiento}.}, captionpos=b, label={lst:sah-session}]
 _setValue(_textbox("Usuario[1]"), $user);
@@ -22,7 +20,6 @@ _click(_submit("Ingresar al Sistema"));
 _click(_image("Normal[2]"));
 	\end{lstlisting}
 	\end{adjustwidth}
-
 	\item Recolectar las órdenes de reposición listadas. El Código \ref{lst:sah-save-news} muestra un resumen de la automatización para guardar el listado de órdenes de reposición (caso de uso \textbf{CU-GUARDAR-NUEVA}):
 	\begin{enumerate}
 		\item La línea 1 muestra la declaración del ciclo para recorrer el listado de órdenes de reposición.
@@ -43,7 +40,6 @@ for(var $i = 1 + $errores; $i <= $rowCount; $i++){
 }
 	\end{lstlisting}
 	\end{adjustwidth}
-
 	\item Contestar cada orden de reposición. El Código \ref{lst:sah-respond} muestra un resumen de la automatización para contestar una orden de reposición (caso de uso \textbf{CU-RESPONDER-ORDEN}):
 	\begin{enumerate}
 		\item Las líneas 1 y 2 muestran como se redirige al explorador a la URL para responder la orden de reposición.
@@ -60,7 +56,6 @@ _click(_submit("Agregar Captura"));
 $logica.updateCantidad($contrato, $numorden, $cantidad, $idSesion);
 	\end{lstlisting}
 	\end{adjustwidth}
-
 	\item Enviar las órdenes de reposición contestadas. El Código \ref{lst:sah-send} muestra un resumen de la automatización para enviar una orden de reposición (caso de uso \textbf{CU-ENVIAR-ORDEN}):
 	\begin{enumerate}
 		\item Las líneas 1 y 2 muestran cómo se redirige el explorador a la URL para enviar la orden de reposición.
@@ -79,12 +74,11 @@ $logica.updateOrden($mapa, $idSesion);
 	\end{lstlisting}
 	\end{adjustwidth}
 \end{enumerate}
-
+%-------------------------------------------------------------------------------
 \subsubsection{Rutina para automatizar la verificación de órdenes de reposición canceladas}
 La rutina para automatizar la verificación de órdenes de reposición canceladas refleja el caso de uso \textbf{CU-VERIFICAR}, que se describe en la sección \ref{cu-verificar}. A continuación se muestran las secciones de código más relevantes de la rutina, realizan la ejecución del caso de uso citado así como los subsecuentes (Figura \ref{fig:dia-casos-uso}). Los puntos relevantes en la implementación de la rutina son los siguientes:
 \begin{enumerate}
 	\item Ingresar al \textit{Sistema de Abastecimiento}. El ingreso al sistema es idéntico a la rutina mostrada en la sección anterior (sección \ref{sec:aut-contestar}).
-
 	\item El Código \ref{lst:sah-search} muestra un resumen de la automatización de los criterios de búsqueda:
 	\begin{enumerate}
 		\item La línea 1 consulta las fechas que acotan la búsqueda.

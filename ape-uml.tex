@@ -1,7 +1,8 @@
 \chapter{Lenguaje de Modelado Unificado}
-
 El Lenguaje de Modelado Unificado (nombrado en inglés \textit{Unified Modeling Language}, UML) permite la representación de una amplia variedad de aspectos de sistemas de software como lo son requerimientos, casos de uso, estructuras de datos, procesos\cite{UMLClassroom}. En este apéndice se mostrarán los diagramas que se han utilizado en este documento, así mismo nada más se hará mención de la notación utilizada.
-
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Diagrama de casos de uso}\label{sec:uml-cu}
 El diagrama de casos de uso es un modelo de los requerimientos de un sistema a alto nivel, estos requerimientos se describen gráficamente en escenarios (o cosos de uso) que se muestran a través de un diagrama\cite{UMLClassroom, SoftwareEngineeringUML}.\\
 Un diagrama de casos uso utiliza la siguiente notación\cite{UMLClassroom, SoftwareEngineeringUML} (Figura \ref{fig:uml-nota-use-case}):
@@ -12,14 +13,18 @@ Un diagrama de casos uso utiliza la siguiente notación\cite{UMLClassroom, Softw
   \item \textbf{Asociación}: representa la interacción de un actor con el caso de uso, se representa como una línea continua.
   \item \textbf{Inclusión}: indica dependencia entre casos de uso, se representa con una flecha de línea de guiones.
 \end{enumerate}
-
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{uml-nota-use-case}
   \caption{Notación para diagramas de caso de uso\cite{SoftwareEngineeringUML}.}
   \label{fig:uml-nota-use-case}
 \end{figure}
-
+% espaciado
+\pagebreak
+% espaciado
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Diagrama de actividad}\label{sec:uml-act}
 Un diagrama de actividad modela el flujo de un proceso dentro del sistema, se compone de actividades y muestra las transiciones entre ellas, también puede ser utilizado para modelar la lógica de negocio\cite{UMLClassroom, SoftwareEngineeringUML}.\\
 Un diagrama de actividad utiliza la siguiente notación\cite{UMLClassroom, SoftwareEngineeringUML} (Figura \ref{fig:uml-nota-activity}):
@@ -33,14 +38,18 @@ Un diagrama de actividad utiliza la siguiente notación\cite{UMLClassroom, Softw
   \item \textbf{Notas}: son observaciones a ciertos aspectos del diagrama\footnote{Este símbolo es utilizado en todos los diagramas UML}, se representa con un rectángulo que tiene un triángulo en la esquina superior derecha.
   \item \textbf{Partición}: indica la ejecución de actividades del sistema por parte de componentes del sistema o actores, se representa con con un rectángulo que contiene actividades y en el encabezado el identificador del componente o actor.
 \end{enumerate}
-
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{uml-nota-activity}
   \caption{Notación para diagramas de actividad\cite{SoftwareEngineeringUML}.}
   \label{fig:uml-nota-activity}
 \end{figure}
-
+% espaciado
+\pagebreak
+% espaciado
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Diagrama de componentes}\label{sec:uml-comp}
 Un diagrama de componentes es la representación del sistema en unidades independientes del sistema\cite{UMLClassroom, SoftwareEngineeringUML}.\\
 Un diagrama de actividad utiliza la siguiente notación\cite{UMLClassroom, SoftwareEngineeringUML} (Figura \ref{fig:uml-nota-component}):
@@ -49,14 +58,18 @@ Un diagrama de actividad utiliza la siguiente notación\cite{UMLClassroom, Softw
   \item \textbf{Interfaz}: es un conjunto de operaciones que ofrece el componente, se representa con un una circunferencia y una línea que une a la circunferencia con el componente.
   \item \textbf{Acoplamiento}: indica el consumo de una interfaz, se representa con media circunferencia que envuelve a una interfaz y se conecta al componente con una línea continua.
 \end{enumerate}
-
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{uml-nota-component}
   \caption{Notación para diagramas de secuencia\cite{SoftwareEngineeringUML}.}
   \label{fig:uml-nota-component}
 \end{figure}
-
+% espaciado
+\pagebreak
+% espaciado
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Diagrama de secuencia}\label{sec:uml-seq}
 Un diagrama de secuencia describe las interacciones entre objetos para realizar una tarea, resalta la cronología de mensajes entre objetos así como la creación de éstos\cite{UMLClassroom, SoftwareEngineeringUML}.\\
 Un diagrama de secuencia utiliza la siguiente notación\cite{UMLClassroom, SoftwareEngineeringUML} (Figura \ref{fig:uml-nota-sequence}):
@@ -69,15 +82,18 @@ Un diagrama de secuencia utiliza la siguiente notación\cite{UMLClassroom, Softw
   \item \textbf{Foco de control}: indica el tiempo que el objeto está activo durante el flujo, se representa como una barra vertical.
   \item \textbf{Línea de tiempo}: sirve como referencia de tiempo, es una línea punteada vertical que acompaña a un foco de control.
 \end{enumerate}
-
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{uml-nota-sequence}
   \caption{Notación para diagramas de secuencia\cite{SoftwareEngineeringUML}.}
   \label{fig:uml-nota-sequence}
 \end{figure}
-
-
+% espaciado
+\pagebreak
+% espaciado
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Diagrama de clases}\label{sec:uml-class}
 Una diagrama de clase, como su nombre lo indica, representa la estructura y relaciones que tiene una clase\cite{UMLClassroom, SoftwareEngineeringUML}.\\
 Un diagrama de clase utiliza la siguiente notación\cite{UMLClassroom, SoftwareEngineeringUML} (Figura \ref{fig:uml-nota-class}):
@@ -100,15 +116,18 @@ Un diagrama de clase utiliza la siguiente notación\cite{UMLClassroom, SoftwareE
   \item \textbf{Herencia}: es una flecha con punta cerrada, la dirección de la flecha indica la clase de cual se hereda.
   \item \textbf{Composición}: es una flecha con punta en rombo, indica que una clase contiene referencia a otra clase.
 \end{enumerate}
-
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{uml-nota-class}
   \caption{Notación para diagramas de clase\cite{SoftwareEngineeringUML}.}
   \label{fig:uml-nota-class}
 \end{figure}
-
-
+% espaciado
+\pagebreak
+% espaciado
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Diagrama de paquetes}\label{sec:uml-package}
 El diagrama de paquetes agrupa elementos del modelo conforme a propiedades comunes, tal como la función de que realizan dentro del sistema. A menudo los paquetes son integrados por otros paquetes, a lo que se conoce como espacio de nombres\cite{UMLClassroom}.\\
 La notación utilizada dentro de un diagrama de paquetes es la siguiente\cite{UMLClassroom, SoftwareEngineeringUML}:

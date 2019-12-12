@@ -1,17 +1,22 @@
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Cumplimiento de requerimientos}
 La sección \ref{sec:req-ana} se expusieron los requerimientos funcionales y no funcionales para el sistema AutoSA. Asimismo, en la sección \ref{sec:comp-impl} se ha descrito la implementación de los componentes dando lugar al diagrama de paquetes (Apéndice \ref{sec:uml-package}) de la Figura \ref{fig:dia-package-large}. A continuación se expone el cumplimiento de los requerimientos antes mencionados.
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{dia-package-large}
 	\caption{Diagrama de paquetes del sistema AutoSA.}
 	\label{fig:dia-package-large}
 \end{figure}
-
-
+%===============================================================================
+%===============================================================================
+%espaciado
+\pagebreak
+%espaciado
 \subsection{Cumplimiento de requerimientos funcionales}
 La sección \ref{sec:req-fun} lista los requerimientos funcionales del sistema AutoSA. Se elaboraron los casos de uso donde se describen los flujos que debe seguir el sistema AutoSA para cumplir con los requerimientos. A continuación se expone la implementación del sistema que los satisface, junto con los casos de uso, y muestra la operación del usuario.
-
+%-------------------------------------------------------------------------------
 \subsubsection{Automatización de los procesos en el Sistema de Abastecimiento}
 Los requerimientos funcionales \textbf{Automatización del proceso para contestar órdenes de reposición} y \textbf{Automatización del proceso para cotejar órdenes de reposición canceladas} automatizan los procesos descritos en la sección \ref{sec:desc-general} y son reflejados en los casos de uso \textbf{CU-CONTESTAR} y \textbf{CU-VERIFICAR} (secciones \ref{cu-contestar} y \ref{cu-verificar}), mientras que su implementación es mostrada en la sección \ref{sec:agente}. El usuario puede ejecutar las automatizaciones desde la herramienta \textit{Sahi} de la siguiente forma:
 \begin{itemize}
@@ -30,11 +35,7 @@ Los requerimientos funcionales \textbf{Automatización del proceso para contesta
 		\item Iniciar la ejecución.
 	\end{enumerate}
 \end{itemize}
-
-%espaciado
-\pagebreak
-%espaciado
-
+%-------------------------------------------------------------------------------
 \subsubsection{Interfaz web para la administración de órdenes de reposición contestadas}
 La interfaz web descrita en este requerimiento fue elaborada a lo largo de la sección \ref{sec:web-portal}, en particular los servicios de acceso y autorización fueron mostrados en el apartado 1 de la sección \ref{sec:backend}. Asimismo, la pantalla de acceso fue descrita en el apartado 1 de la sección \ref{sec:frontend}.\\
 Cabe mencionar que la pantalla de acceso es la primera pantalla que muestra la interfaz web (Figura \ref{fig:ss-login}).
@@ -44,7 +45,7 @@ Cabe mencionar que la pantalla de acceso es la primera pantalla que muestra la i
 	\caption{Pantalla de acceso a la interfaz web.}
 	\label{fig:ss-login}
 \end{figure}
-
+%-------------------------------------------------------------------------------
 \subsubsection{Búsqueda de órdenes de reposición}
 La pantalla para la búsqueda de órdenes de reposición ofrece al usuario la posibilidad de buscar y visualizar órdenes de reposición, lo cual satisface al requerimiento \textbf{Búsqueda de órdenes de reposición}. La implementación de la pantalla y el comportamiento están descritos en el apartado 4 de la sección \ref{sec:frontend}. Por otra parte, la implementación de los servicios web que consume la pantalla de búsqueda de órdenes de reposición es mostrada en el apartado 2 de la sección \ref{sec:backend}.\\
 El la Figura \ref{fig:ss-search} se observa la pantalla de búsqueda de órdenes de reposición.
@@ -54,11 +55,7 @@ El la Figura \ref{fig:ss-search} se observa la pantalla de búsqueda de órdenes
 	\caption{Pantalla de búsqueda de órdenes de reposición.}
 	\label{fig:ss-search}
 \end{figure}
-
-% espaciado
-\pagebreak
-% espaciado
-
+%-------------------------------------------------------------------------------
 \subsubsection{Visualización y edición de una orden de reposición}
 Los requerimientos \textbf{Visualización de orden de reposición} y \textbf{Edición de órdenes de reposición} son plasmados en los casos de uso \textbf{CU-VISUALIZAR} y \textbf{CU-EDITAR} (secciones \ref{cu-visualizar} y \ref{cu-editar}). En la implementación y en la interfaz de usuario se utiliza la misma pantalla, como se muestra en la Figura \ref{fig:ss-edit}\footnote{Esta vista es descrita en el apartado 5 de la sección \ref{sec:frontend}. La implementación de los servicios web que consume la pantalla son mostrados en el apartado 2 de la sección \ref{sec:backend}.}.
 \begin{figure}[h]
@@ -67,7 +64,7 @@ Los requerimientos \textbf{Visualización de orden de reposición} y \textbf{Edi
 	\caption{Pantalla de búsqueda de órdenes de reposición.}
 	\label{fig:ss-edit}
 \end{figure}
-
+%-------------------------------------------------------------------------------
 \subsubsection{Generación de reportes}
 La generación de reportes cumple con los requerimientos \textbf{Generación de reporte de órdenes de reposición contestadas}, \textbf{Generación de formato de salida} y \textbf{Generación de reporte con las órdenes de reposición canceladas recientemente}, mismos que son englobados en el caso de uso \textbf{CU-GENERAR-REPORTE} (sección \ref{cu-generar-reporte}). La implementación de la generación de reportes (sección \ref{sec:gen-repport}) y, a su vez, los servicios web que exponen esta funcionalidad están en el apartado 2 de la sección \ref{sec:backend}. La vista que ofrece al usuario la generación de reportes se encuentra en el apartado 2 de la sección \ref{sec:frontend}. En la Figura \ref{fig:ss-report} se observa la pantalla para la generación de reportes\footnote{Por acuerdo de confidencialidad, no se puede mostrar el contenido de los reportes generados.}. 
 	\begin{figure}[h]
@@ -76,7 +73,7 @@ La generación de reportes cumple con los requerimientos \textbf{Generación de 
 		\caption{Pantalla de generación de reportes.}
 		\label{fig:ss-report}
 	\end{figure}
-
+%-------------------------------------------------------------------------------
 \subsubsection{Actualización de catálogos y estatus de órdenes de reposición canceladas}
 Los requerimientos \textbf{Actualización de catálogos} y \textbf{Actualización de estatus de órdenes de reposición canceladas} son modelados en el caso de uso \textbf{CU-ACTUALIZAR-CATALOGO}. La implementación de la actualización a los datos es dada en la sección \ref{sec:persistence-web}; la implementación del servicio web se encuentra en el apartado 2 de la sección \ref{sec:backend}, y la implementación de la vista está dada en el apartado 3 de la sección \ref{sec:frontend}. En la Figura \ref{fig:ss-catalog} se muestra la pantalla de la administración de catálogos\footnote{Por acuerdo de confidencialidad, no se puede mostrar el contenido de los catálogos.}.
 \begin{figure}[h]
@@ -85,14 +82,14 @@ Los requerimientos \textbf{Actualización de catálogos} y \textbf{Actualizació
 	\caption{Pantalla de administración de catálogos.}
 	\label{fig:ss-catalog}
 \end{figure}
-
-
+%===============================================================================
+%===============================================================================
 \subsection{Cumplimiento de requerimientos no funcionales}
 En la sección \ref{sec:nonfunctional-req} se enlistan los requerimientos no funcionales para el sistema AutoSA.
-
+%-------------------------------------------------------------------------------
 \subsubsection{Ejecución del Sistema AutoSA en los sistemas operativos más comunes.}
 En la sección \ref{sec:java} se menciona que el lenguaje de programación \textit{Java} es multiplataforma gracias a que el código escrito por los desarrolladores es traducido a \textit{Bytecode} y es este último el que ejecuta la Máquina Virtual de \textit{Java}. Existen implementaciones de robustas y ampliamente probadas de la Máquina Virtual de \textit{Java} para una gran variedad de sistemas operativos. Es por esta razón que se decidió utilizar a \textit{Java} como el lenguaje de programación principal.
-
+%-------------------------------------------------------------------------------
 \subsubsection{Base de datos relacional SQL}
 Al principio del proyecto, la farmacéutica estableció que de ser necesaria una base de datos, el área encargada de las bases de datos de la farmacéutica sería quien proveería tanto la infraestructura como la base de datos relacional, por lo que las rutinas DDL y DML (sección \ref{sec:impl-db}) y las consultas del módulo de persistencia (sección \ref{sec:persistence}) siguen los estándares SQL mostrados en la sección \ref{sec:bd-r}.
 
