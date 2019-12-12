@@ -1,7 +1,11 @@
 \chapter{Implementación}\label{cap4}
 El presente capítulo trata la implementación del sistema AutoSA, para el cual se han utilizado diversas tecnologías como lo son: lenguajes de programación, estándares industriales, marcos de trabajo y herramientas de software. Primero se exponen de las tecnologías utilizadas para después mostrar la implementación de la base de datos y los módulos del sistema AutoSA diseñados en el Capítulo \ref{cap3}.
-\section{Tecnologías utilizadas}
+%===============================================================================
 %-------------------------------------------------------------------------------
+%===============================================================================
+\section{Tecnologías utilizadas}
+%===============================================================================
+%===============================================================================
 \subsection{Base de datos relacional}\label{sec:bd-r}
 Una base de datos relacional es una colección de tablas relacionadas entre sí. La colección de tablas se describe a sí misma de acuerdo al significado de los datos contenidos pertenecientes a un mismo ámbito\cite{DataBaseConcepts}.\\
 Una base de datos es administrada mediante un Sistema Administrador de Bases de Datos (en inglés \textit{Database Management System}, DBMS). Un DBMS es un programa de computadora usado para crear, procesar y administrar bases de datos. El DBMS recibe peticiones escritas en el lenguaje de programación SQL (como se describe más adelante) y traduce esas peticiones en acciones dentro de la base de datos\cite{DataBaseConcepts}.\\
@@ -29,8 +33,8 @@ Las siguientes son definiciones de los conceptos más relevantes dentro de esta 
 	\item \textbf{Lenguaje de Definición de Datos}: traducción del inglés \textit{Data Definition Language}, DDL. Se refiere a las sentencias de SQL cuya función es describir la creación de estructuras tales como tablas, índices y restricciones, entre otras\cite{DataBaseConcepts}.
 	\item \textbf{Lenguaje de Modelado de Datos}: traducido del inglés \textit{Data Modeling Language}, DML. Se refiere a las sentencias SQL cuya función es describir la modificación de datos, es decir, sentencias de inserción, borrado y actualización de datos\cite{DataBaseConcepts}.  
 \end{enumerate}
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{OAuth 2.0}\label{sec:oauth}
 \begin{quote}
 	\textit{OAuth 2.0} es un protocolo que permite compartir información y recursos a distintas aplicaciones de manera segura y confiable\cite{MasteringOAuth2}.
@@ -48,7 +52,6 @@ El concepto \textit{token de acceso} está definido en el estándar de la siguie
 \begin{quote}
 	\textit{Token} de acceso\footnote{De ahora en adelante referido únicamente como \textit{token}.} es una cadena que representa la autorización dada al cliente. Usualmente la cadena no tiene un significado claro para el cliente. Los \textit{tokens} representan alcance y duración específicos otorgados por el dueño del recurso y se encuentran respaldados tanto por el servidor de recursos como por el servidor de autorizaciones.
 \end{quote}
-
 \textit{OAuth 2.0} define varios escenarios del flujo de autorización. Para fines del proyecto AutoSA, solamente se hará mención del flujo de autorización con identificador de usuario y contraseña\cite{OAuthRFC, OAuth2Identity}. El diagrama del flujo se muestra en la Figura \ref{fig:dia-seq-oauth-flow} y en éste se puede observar que:
 \begin{enumerate}
 	\item El cliente envía tanto sus credenciales y como las de dueño del recurso (en este caso, credenciales se refiere a un identificador y una contraseña).
@@ -60,16 +63,15 @@ El concepto \textit{token de acceso} está definido en el estándar de la siguie
 	\item El servidor de recursos valida el \textit{token} de la petición. 
 	\item El servidor de recursos aprueba la entrega del recurso al cliente.
 \end{enumerate}
-
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{dia-seq-oauth-flow}
+	\includegraphics[scale=0.45]{dia-seq-oauth-flow}
 	\caption{Diagrama de flujo de \textit{OAuth 2.0}.}
 	\label{fig:dia-seq-oauth-flow}
 \end{figure}
-
+%===============================================================================
+%===============================================================================
 \subsection{Derivación de clave}\label{sec:key-derivation}
-
 Una \textbf{función hash} $H$ aplicada a una cadena\footnote{La longitud de la cadena no está acotada} $M$ produce una cadena de tamaño fijo $h=H(M)$. Una buena función \textit{hash}, desde el punto de vista criptográfico, tiene la propiedad de que el resultado de aplicar dicha función a un conjunto grande de cadenas produce un conjunto de cadenas con distribución uniforme y aparentemente aleatorias\cite{CryptographyNetworkSecurity}.\\
 El tipo de funciones \textit{hash} ocupadas en seguridad son referidas como \textbf{funciones hash criptográficas}. Una función \textit{hash} $H$ se considera criptográfica si computacionalmente es imposible (con métodos determinísticos) de refutar las siguientes propiedades\cite{CryptographyNetworkSecurity}:
 \begin{itemize}
@@ -85,10 +87,9 @@ Un función de derivación de claves (traducido del inglés \textit{Key Derivati
 	\item número iteraciones: número de iteraciones que hará la función KDF.
 \end{itemize}
 La función de derivación concatena la contraseña y la cadena aleatoria, entonces aplica una función \textit{hash} criptográfica durante el número de iteraciones indicado, al resultado de esta función se le conoce como clave derivada\cite{UnderstandingCryptography, CryptographyTheoryPractice}.
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{Java}\label{sec:java}
-
 El lenguaje de programación \textit{Java} fue creado en 1991 por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan bajo el nombre \textit{Oak}, y en 1995 se cambió el nombre a \textit{Java}. El lenguaje \textit{Java} está basado en los lenguajes de programación \textit{C} y \textit{C++}. \textit{Java} es un lenguaje Orientado a Objetos, estáticamente tipado y multiplataforma\cite{JavaCompleteReference, WellGroundedJavaDeveloper}.\\
 \textit{Java} cuenta con varios componentes, de los cuales únicamente se describirán los más relevantes para el proyecto AutoSA\cite{JavaCompleteReference, WellGroundedJavaDeveloper}:
 \begin{enumerate}
@@ -97,16 +98,15 @@ El lenguaje de programación \textit{Java} fue creado en 1991 por James Gosling,
 	\item \textbf{Paquete de Desarrollo de Java}: traducido del inglés \textit{Java Development Kit}, JDK, se refiere al conjunto de herramientas utilizadas para el desarrollo de software para la Máquina Virtual de \textit{Java}.
 	\item \textbf{Ambiente de Ejecución de Java}: traducido del inglés \textit{Java Runtime Environment}, JRE, se refiere a la herramienta encargada de la creación y administración de instancias de la Máquina Virtual de \textit{Java}.
 \end{enumerate}
-
+%-------------------------------------------------------------------------------
 \subsubsection{Java Data Base Controller}\label{sec:jdbc}
 El controlador de base de datos de \textit{Java} (del inglés \textit{Java Database Controller}, JDBC) es un conjunto de API\footnote{API viene del inglés \textit{Application Programming Interface}. Es utilizado para denotar los métodos que proporciona una biblioteca.} que simplifica la conexión a bases de datos relacionales. Cabe mencionar que por medio del API JDBC también se puede tener acceso a otras fuentes de datos, como hojas cálculo, archivos de texto plano o bases de datos no relacionales\cite{JDBCRecipes, BeginingJava8APIs}.
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{Spring}\label{sec:spring}
 \begin{quote}
 	El maco de trabajo \textit{Spring} provee un modelo comprensivo de programación y configuración para aplicaciones empresariales basadas en \textit{Java} en cualquier tipo de plataforma de despliegue\cite{SpringFramework}.
 \end{quote}
-
 Las funciones principales de \textit{Spring}, mejor conocido como \textit{Spring Core}\cite{Spring5DesignPatterns, ProSpring5, WellGroundedJavaDeveloper, SpringInAction}:
 \begin{enumerate}
 	\item Inversión de control: es una técnica que externaliza y administra las dependencias entre componentes.
@@ -115,9 +115,8 @@ Las funciones principales de \textit{Spring}, mejor conocido como \textit{Spring
 
 	\item Programación Orientada a Aspectos: es una técnica que promueve la separación de funciones en un sistema de software. Un sistema de software se conforma de varios componentes. Cada uno es responsable de un conjunto de funcionalidades afines. A menudo estos componentes cargan con responsabilidades adicionales detrás de su función principal (escritura de bitácora, manejo de transacciones, funciones de autorización, etcétera), a estos servicios del sistema se les llama \textit{intersectoriales}. El objetivo de la programación Orientada a Aspectos en \textit{Spring} es ofrecer una forma de manejar estas funciones intersectoriales sin mezclarlas con el código de las funciones principales, para lo cual utiliza los patrones de diseño \textit{Decorador} y \textit{Proxy} (secciones \ref{sec:decorator} y \ref{sec:proxy}).
 \end{enumerate}
-
 Dentro del proyecto de \textit{Spring} existen proyectos que se enfocan en áreas específicas. A continuación se mencionan los proyectos que fueron utilizados para el proyecto AutoSA.
-
+%-------------------------------------------------------------------------------
 \subsubsection{Spring Boot}\label{sec:spring-boot}
 Es un proyecto de \textit{Spring} que ofrece un ambiente de desarrollo y despliegue para aplicaciones desarrolladas con \textit{Spring} y ofrece las siguientes características\cite{SpringBootInAction}:
 \begin{enumerate}
@@ -125,30 +124,27 @@ Es un proyecto de \textit{Spring} que ofrece un ambiente de desarrollo y desplie
 	\item Auto-configuración: alivia la carga de configuración estableciendo valores por defecto, soportando configuración condicional.
 	\item Solenoide: agrega características de administración a las aplicaciones.
 \end{enumerate}
-
+%-------------------------------------------------------------------------------
 \subsubsection{Spring Security}\label{sec:spring-security}
 \begin{quote}
 	La Seguridad de \textit{Spring} (\textit{Spring Security}) es un marco de trabajo poderoso y altamente adaptable para procesos de autentificación y control de acceso. Es el estándar de seguridad para aplicaciones basadas en \textit{Spring}. Está enfocado en proveer a aplicaciones de \textit{Java} funciones de autentificación y autorización\cite{SpringSecurity}.
 \end{quote}
-
 \begin{quote}
 	El modelo de interceptación de seguridad de \textit{Spring Security} se puede aplicar a dos áreas principales en una aplicación: URL y llamados a métodos. \textit{Spring Security} engloba estos dos puntos de entrada de la aplicación, permitiendo el acceso cuando las restricciones de seguridad son cumplidas. Tanto la llamada a métodos como la cadena de filtros de seguridad, dependen de la instancia de \texttt{SecurityInterceptor}, donde la lógica principal reside en tomar la decisión de conceder o no el acceso\cite{ProSpringSecurity}.
 \end{quote}
 En al Figura \ref{fig:dia-spring-security} se muestra un diagrama del manejo que \textit{Spring Security} brinda a las peticiones al sistema.
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.4]{dia-spring-security}
 	\caption{Diagrama de manejo de peticiones de \textit{Spring Security}\cite{ProSpringSecurity}.}
 	\label{fig:dia-spring-security}
 \end{figure}
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{MyBatis}\label{sec:mybatis}
 \begin{quote}
 \textit{MyBatis} es un marco de trabajo para manejar la persistencia con soporte para sentencias SQL personalizadas, procedimientos almacenados y conversión avanzada de datos. \textit{MyBatis} elimina casi todo el código de JDBC, la configuración manual de parámetros y la recuperación de resultados\cite{MyBatis}.
 \end{quote}
-
 Los beneficios de \textit{MyBatis} sobre otros marcos de trabajo para persistencia son\cite{PersistenceWithMyBatis}:
 \begin{quote}
 	\begin{itemize}
@@ -161,37 +157,35 @@ Los beneficios de \textit{MyBatis} sobre otros marcos de trabajo para persistenc
 		\item Induce mejoras en el rendimiento.
 	\end{itemize}
 \end{quote}
-
 El uso de \textit{MyBatis} se resume principalmente en lo siguientes puntos\cite{PersistenceWithMyBatis}:
 \begin{enumerate}
 	\item Crear un archivo de configuración que contiene las sentencias SQL y conversiones de resultados a objetos de \textit{Java}.
 	\item Crear una interfaz de \textit{Java} cuyos métodos correspondan a las sentencias SQL del archivo de configuración.
 	\item Crear un objeto \texttt{SqlSession}, del cual se obtiene una instancia de la interfaz. Por medio de tal instancia se realizan las operaciones a la base de datos.
 \end{enumerate}
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{Velocity}\label{sec:velocity}
 \begin{quote}
 	\textit{Velocity} es un lenguaje de plantillas diseñado para ofrecer a los diseñadores web una forma fácil de presentar información dinámica a los usuarios de un sitio web o aplicación. Para soportar el lenguaje se utiliza una colección de clases de \textit{Java} como puente entre el modelo y la vista\cite{MasteringApacheVelocity} (Apéndice \ref{sec:mvc}).
 \end{quote}
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{Flying Saucer}\label{sec:flying-saucer}
 \begin{quote}
 	\textit{Flying Saucer} es una biblioteca escrita en \textit{Java} para traducir documentos XML\footnote{Lenguaje Marcado Extensible, traducido del inglés\textit{Extensible Markup Language}.} o XHTML\footnote{Lenguaje Marcado Extensible de Hipertexto, traducido del inglés\textit{Extensible HyperText Markup Language}.} con CSS\footnote{Hoja de estilos en cascada, traducido del inglés\textit{Cascading Style Sheets}.} a formatos de gráficos de \textit{Java}, PDF e imágenes\cite{FlyingSaucer}.
 \end{quote}
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{Javascript}\label{sec:javascript}
 \textit{Javascript} es un lenguaje de programación de rutinas. En un principio fue diseñado para utilizarse en exploradores de internet, se le ha dado otro tipo de aplicaciones, como es el desarrollo de aplicaciones de escritorio y servidores de aplicaciones. Un programa desarrollado con \textit{Javascript} no depende de un compilador ya que un intérprete de \textit{Javascript} ejecuta el código tal y como está escrito\cite{LearningWebDesign}.
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{AngularJS}\label{sec:angularjs}
-
 \begin{quote}
 	\textit{AngularJS} es un marco de trabajo escrito en \textit{Javascript} para desarrollar aplicaciones web, mantenida por \textit{Google}. Es un marco de trabajo de código abierto, el cual se enfoca en los retos de aplicaciones de una página. Una aplicación web basada en \textit{AngularJS} sigue el Patrón MVC, facilitando las tareas de extensión, mantenimiento, ejecución de pruebas y seguimiento de estándares\cite{FullStackAngularJS}.
 \end{quote}
-
+%-------------------------------------------------------------------------------
 \subsubsection{Componentes básicos de AngularJS}
 Al seguir el Patrón MVC, \textit{AngularJS} permite dividir la aplicación en componentes. A continuación se enlistan los componentes más importantes utilizados para el desarrollo del proyecto AutoSA\cite{FullStackAngularJS, LearningAngularJS, AngularJSEssentials}:
 \begin{enumerate}
@@ -207,31 +201,27 @@ Al seguir el Patrón MVC, \textit{AngularJS} permite dividir la aplicación en c
 	\item Servicio \textit{(service)}: son objetos que siguen el Patrón \textit{Singleton} y proveen funcionalidad específica a la aplicación web.
 	\item Inyección de dependencias \textit{(dependency injection)}: es el proceso para inyectar dependencias en tiempo de ejecución, como lo es establecer los servicios a los controladores.
 \end{enumerate}
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{Sahi}\label{sec:sahi}
 \begin{quote}
 	\textit{Sahi} es una herramienta enfocada en la automatización de pruebas para servicios web, plataformas web, móviles, escritorio de \textit{Windows}\textsuperscript{\textcopyright} o de \textit{Unix} y ambientes de desarrollo \textit{Java}\cite{SahiPro}.
 \end{quote}
-
 \textit{Sahi} incluye un modo de operación que permite ejecutar rutinas automatizadas sobre exploradores de internet. La forma en que \textit{Sahi} logra la ejecución de rutinas es actuando como \textit{proxy}\footnote{Un \textit{proxy} es un intermediario entre el cliente (explorador) y el servidor (página web)\cite{BeginningUbuntuLinux}.} entre el sitio web y el explorador de internet como se muestra en la Figura \ref{fig:dia-sahi-arq}. Cada vez que el explorador hace una petición al sitio web, \textit{Sahi} intercepta la comunicación entre estos e inserta código de \textit{Javascript} que ejecuta la rutina automatizada\cite{WebEng9IntConf, SahiPro}.
-
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.4]{dia-sahi-arq}
 \caption{Diagrama de flujo de \textit{Sahi}\cite{SahiPro}.}
 \label{fig:dia-sahi-arq}
 \end{figure}
-
-%================================================================================
-%
-%================================================================================
-
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Implementación de base de datos}\label{sec:impl-db}
 El sistema AutoSA utiliza una base de datos relacional\footnote{Por confidencialidad, no se hace mención específica del nombre y versión del sistema administrador de bases de datos.} para almacenar la información requerida en los casos de uso.\\
 La implementación de la base de datos se ve reflejada en las rutinas con sentencias SQL donde se definen los objetos de la base de datos. Tales rutinas se separan en dos grupos, las rutinas DDL y las rutinas DML.
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{Rutinas de definición de datos}
 Estas rutinas contienen las sentencias DDL para la creación de tablas, llaves primarias y foráneas, índices y restricciones. En el Código \ref{lst:sql-create-table} se muestra un ejemplo de la creación de la tabla \textit{ordenes\_is}.
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear una tabla.}, captionpos=b, label={lst:sql-create-table}]
@@ -245,31 +235,25 @@ CREATE TABLE ordenes_is(
    estatus_sap numeric(2,0)
 );
 \end{lstlisting}
-
 La generación de reportes que se menciona en el caso de uso \textbf{CU-GENERAR-REPORTE} (sección \ref{cu-generar-reporte}) utiliza una vista para la definición de la consulta de los datos del reporte como se muestra en el Código \ref{lst:sql-create-view}. Además se han implementado índices para agilizar tales consultas, como se puede ver en el Código \ref{lst:sql-create-index}.
-
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear una vista.}, captionpos=b, label={lst:sql-create-view}]
 CREATE VIEW ordenes_contestadas AS
      SELECT * FROM ordenes_is
       WHERE id_sesion_estatus = :sesion AND estatus = 3
 \end{lstlisting}
-
 \begin{lstlisting}[language=SQL, caption={Sentencia para crear un índice.}, captionpos=b, label={lst:sql-create-index}]
 CREATE INDEX ordenes_contetadas_idx ON ordenes_is(id_sesion_estatus, estatus);
 \end{lstlisting}
-
-%-------------------------------------------------------------------------------
+%===============================================================================
+%===============================================================================
 \subsection{Rutinas de modelado de datos}
 Estas rutinas contienen la sentencias DML para insertar la información necesaria durante la ejecución del sistema, como son los estados posibles de las órdenes de reposición (Figura \ref{fig:dia-estados-orden}). En el Código \ref{lst:sql-insert} se muestra un ejemplo de la sentencia DML para insertar un registro.
-
 \begin{lstlisting}[language=SQL, caption={Sentencia insertar un registro.}, captionpos=b, label={lst:sql-insert}]
 INSERT INTO cat_estatus_orden (id,nombre) VALUES (1,'NUEVA');
 \end{lstlisting}
-
-%================================================================================
-%
-%================================================================================
-
+%===============================================================================
+%-------------------------------------------------------------------------------
+%===============================================================================
 \section{Implementación de los componentes}\label{sec:comp-impl}
 \input{capitulo4-2-1-agent}
 \input{capitulo4-2-2-logic}

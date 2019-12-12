@@ -1,4 +1,4 @@
-\documentclass[letterpaper,11pt]{report}
+\documentclass[letterpaper]{book}
 
 % Grupo de caracteres de entrada
 \usepackage[utf8]{inputenc}
@@ -33,18 +33,22 @@
 
 % Espacio de interlineado
 \usepackage{setspace}
-\doublespacing
-%\onehalfspacing
+%\doublespacing
+\onehalfspacing
+%\setlength{\parindent}{4em}
+\setlength{\parskip}{0pt}
 
 % Márgenes
-\usepackage[left=1.0in, right=1.0in]{geometry}
+\usepackage[left=2.5cm, right=2.5cm, bottom=2.5cm, top=2.5cm]{geometry}
 \usepackage{layout}
+\addtolength{\oddsidemargin}{1cm}
+\addtolength{\evensidemargin}{-1cm}
 \setlength{\marginparwidth}{0pt}
 \setlength{\marginparsep}{0pt}
-\setlength{\textheight}{640pt}
+%\setlength{\textheight}{640pt}
 
 % Mostrar los márgenes
-%\usepackage{showframe}
+\usepackage{showframe}
 
 % margen para casos especiales
 \usepackage{changepage}
@@ -116,7 +120,7 @@
 \usepackage{bookmark}
 
 \begin{document}
-%\layout
+\layout
 
 %-------------------------------------------------------------------------------
 \pagenumbering{alph}
@@ -125,9 +129,10 @@
 \includepdf[pages={1}]{portada.pdf}
 \bookmark[page=1,level=0]{Portada}
 \clearpage
-
+\thispagestyle{empty}
 %-------------------------------------------------------------------------------
-\include{datos}
+%\include{datos}
+\include{sinodo}
 % Prefacio
 \include{prefacio}
 
@@ -135,13 +140,16 @@
 \pagenumbering{roman}
 
 % Índice general
-\pdfbookmark[0]{\contentsname}{contents}
+\thispagestyle{empty}
 \tableofcontents
+\pdfbookmark[0]{\contentsname}{contents}
 \clearpage
+\thispagestyle{empty}
 
 % Índice de figuras
 \listoffigures
 \clearpage
+\thispagestyle{empty}
 
 % Índice de tablas
 %\listoftables
@@ -150,6 +158,7 @@
 % Índice de códigos
 \lstlistoflistings
 \clearpage
+\thispagestyle{empty}
 
 %-------------------------------------------------------------------------------
 % Capítulos
